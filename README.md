@@ -1,6 +1,18 @@
 # Overdose Wiki
 
-像素维基、复演与药箱构筑组成的视觉小说前端。完整剧情、美术、音乐和代码都随本仓库公开。
+像素维基、复演与药箱构筑组成的视觉小说 demo。**这是一个快速演示版本，不是完整游戏。**
+
+## Demo 范围
+
+本仓库用于演示世界观、阅读流程和界面风格，没有完成完整游戏内容：
+
+- 不含 DLC《稍尽春风》
+- 不含支线剧情
+- 不含战斗系统；相关代码仅归档在 `hidden/battle/`，`/battle/:id` 会重定向到首页
+- 玩法没有细化：药箱、复演、文档编写等系统只做了最小可演示流程
+- 主线章节可读，但不代表完整玩法、平衡性和后续内容已经完成
+
+如果你期待完整游戏，请把当前版本当作一个可运行的 demo。
 
 ## 运行
 
@@ -11,15 +23,15 @@ npm run typecheck
 npm test           # Vitest
 npm run e2e        # Playwright（先 npx playwright install）
 npm run build      # sample demo
-npm run build:private  # 完整游戏（当前公开部署使用这个）
+npm run build:private  # 带主线内容的 demo（当前公开部署使用这个）
 ```
 
 ## 当前状态
 
 - 480×270 逻辑画布，自动取 1–4 整数倍。
-- 章节、报告、复演、档案、效果、药箱、番外、历史、讨论均已接入。
+- 章节、报告、复演、档案、效果、药箱、历史、讨论有基础页面；DLC、支线、战斗未接入。
 - 章节/报告/效果按需加载；章节/报告/散页解锁门槛；音频管理器、BGM/SFX、弹层焦点陷阱、报告段切换、字体+/高对比、480/960/1440 视觉回归。
-- 战斗系统暂时归档到 `hidden/battle/`，不参与构建；`/battle/:id` 重定向首页。
+- 战斗系统没有实现，只把旧代码归档到 `hidden/battle/`，不参与构建；`/battle/:id` 重定向首页。
 - 像素字体使用 Fusion Pixel 8/10/12 与 Cubic 11，字体子集约 254KB。
 - `npm run content:check` 检查场景图、断链和缺字段。
 
@@ -29,7 +41,7 @@ npm run build:private  # 完整游戏（当前公开部署使用这个）
 src/app       路由、窗口壳、缩放、知情守卫
 src/ui        窗口/维基/复演/构筑组件
 src/game      存档、设置、路由辅助、历史、牌组校验
-src/content   schema、sample 与完整游戏内容
+src/content   schema、sample 与主线内容
 src/styles    tokens/base/motion
 src/pages     各路由页面
 tests/e2e     Playwright
@@ -38,14 +50,14 @@ hidden/battle 战斗归档，不参与编译与打包
 
 ## 内容与构建
 
-`src/content/private/` 是历史命名，现在存放完整剧情、报告和效果；这些内容随公开仓库发布。`src/content/sample.ts` 是公开 sample。
+`src/content/private/` 是历史命名，现在存放主线剧情、报告和效果；这些内容随公开仓库发布。`src/content/sample.ts` 是公开 sample。当前版本不包含 DLC、支线和战斗。
 
-- `npm run build:private`：完整游戏，当前 GitHub Pages 使用这个
+- `npm run build:private`：带主线内容的 demo 构建，当前 GitHub Pages 使用这个
 - `npm run build`：sample demo，只用于公开示例
 
-## 战斗归档
+## 战斗（未实现）
 
-战斗系统暂时下线，页面、引擎和测试在 `hidden/battle/`，不参与 `tsc` 与构建；牌组校验保留在 `src/game/deck.ts`。恢复步骤见 `hidden/battle/README.md`。
+战斗系统没有实现，页面、引擎和测试仅归档在 `hidden/battle/`，不参与 `tsc` 与构建；牌组校验保留在 `src/game/deck.ts`。这里不是可玩的战斗模块。
 
 ## 部署
 

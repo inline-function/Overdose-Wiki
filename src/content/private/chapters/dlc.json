@@ -1,0 +1,425 @@
+{
+  "id": "dlc",
+  "title": "稍尽春风",
+  "scenes": [
+    {
+      "id": "dlc.s01",
+      "chapterId": "dlc",
+      "order": 1,
+      "title": "寻踪",
+      "summary": "二〇二四年五月七日，后藤发推：我真的疯了，前天彩加死，昨天去线下找Spr风下落，今天起来一看，我去精二！",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_school_gate",
+        "bust": {
+          "speaker": "春风",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二〇二四年五月七日，后藤发推：我真的疯了，前天彩加死，昨天去线下找Spr风下落，今天起来一看，我去精二！"
+        },
+        {
+          "type": "narration",
+          "text": "我要开始找境了。"
+        },
+        {
+          "type": "narration",
+          "text": "他去找春风的踪迹。有人后来指认：那是去某大学追随spring风\"幻化成风\"的踪迹。"
+        },
+        {
+          "type": "narration",
+          "text": "春风已经死了一年多，但后藤还在找他。DLC 由这次寻踪框起：一个活着的人，回望一个死去的指路人。"
+        }
+      ],
+      "next": "dlc.s02"
+    },
+    {
+      "id": "dlc.s02",
+      "chapterId": "dlc",
+      "order": 2,
+      "title": "草稿纸",
+      "summary": "二〇二二年六月四日十八点十七分，春风发送了他的第一条推文：没有自我介绍，你觉得我是怎么样就怎么样。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_classroom",
+        "bust": {
+          "speaker": "春风",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二〇二二年六月四日十八点十七分，春风发送了他的第一条推文：没有自我介绍，你觉得我是怎么样就怎么样。"
+        },
+        {
+          "type": "narration",
+          "text": "取决于你不是取决于我。"
+        },
+        {
+          "type": "narration",
+          "text": "次日，草稿纸上。他写四种麻黄碱制取冰毒法；"
+        },
+        {
+          "type": "narration",
+          "text": "比较色胺类与苯丙胺类的化学结构——血清素、DMT、冰毒、卡西酮——并以此推断出一些策划药；"
+        },
+        {
+          "type": "narration",
+          "text": "说明单胺氧化酶抑制剂的性质，讲述咖啡因的精神作用。"
+        },
+        {
+          "type": "narration",
+          "text": "他写：由于肥吐效应，单胺类物质上升到一定地步会达到上限……插上甲基变成苯丙胺绕过氧化。"
+        },
+        {
+          "type": "narration",
+          "text": "他写：兴奋剂加致幻剂约等于MDMA。"
+        },
+        {
+          "type": "narration",
+          "text": "一个高中生，在草稿纸上把药理学推演成自己的宇宙。智识是他的骄傲，也是后来杀死他的东西的入口。"
+        }
+      ],
+      "next": "dlc.s03"
+    },
+    {
+      "id": "dlc.s03",
+      "chapterId": "dlc",
+      "order": 3,
+      "title": "指路人",
+      "summary": "他以化学、药理学能力成为第一代od指路人。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_summer_street",
+        "bust": {
+          "speaker": "春风",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "他以化学、药理学能力成为第一代od指路人。"
+        },
+        {
+          "type": "narration",
+          "text": "他给想要尝试od右美沙芬的人写大体的使用体验和副作用介绍：六片视觉提升听力提升注意力专注；"
+        },
+        {
+          "type": "narration",
+          "text": "十二片漂浮感头晕焦虑烦躁；二十四片反胃嘴干涩嘴发苦。"
+        },
+        {
+          "type": "narration",
+          "text": "他写自己的经历：最后一次吃了一盒没效果又吃一盒，之后一段时间莫名其妙进入od的感觉，漂浮感走不稳瞳孔放大，"
+        },
+        {
+          "type": "narration",
+          "text": "十多分钟消除——好像是叫闪回症状吧。"
+        },
+        {
+          "type": "narration",
+          "text": "然后他劝退。重要的事情说三遍：不要经常OD右美沙芬，不要经常OD右美沙芬，不要经常OD右美沙芬。"
+        },
+        {
+          "type": "narration",
+          "text": "如果你觉得我很幼稚那不妨可以直接拉黑。但是我个人觉得这些对药物滥用的人有些好处吧。"
+        },
+        {
+          "type": "narration",
+          "text": "再然后：打死也不OD右美沙芬了，整个人都像是傻掉了一样。"
+        },
+        {
+          "type": "narration",
+          "text": "也奉劝正在或者是想要OD右美沙芬的人，吃多了真的人会傻掉，哪怕你去OD咖啡因或者是精神药物都不要OD这个。"
+        },
+        {
+          "type": "narration",
+          "text": "可六月十四日，他又写：攢的零花費去買點咖啡因含片玩玩？Overdose 好耶。还没写完，嗯，我先去吃饭去了。"
+        },
+        {
+          "type": "narration",
+          "text": "知与行的撕裂。他一边劝退别人一边自己探药。这不是虚伪，是一个聪明人还没学会怕。"
+        }
+      ],
+      "next": "dlc.s04"
+    },
+    {
+      "id": "dlc.s04",
+      "chapterId": "dlc",
+      "order": 4,
+      "title": "自知与不自知",
+      "summary": "他有智力诚实。最开始我说过一句，吸冰毒那些成瘾的都是傻逼。现在我发现我错了。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_classroom",
+        "bust": {
+          "speaker": "春风",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "他有智力诚实。最开始我说过一句，吸冰毒那些成瘾的都是傻逼。现在我发现我错了。"
+        },
+        {
+          "type": "narration",
+          "text": "当时我很瞧不起吸冰毒的人，觉得吸冰毒干嘛，还不如致幻剂。深入研究之后我开始幻想如果溜冰能获得的愉悦感是怎么样。"
+        },
+        {
+          "type": "narration",
+          "text": "现在我才发现我是小丑。"
+        },
+        {
+          "type": "narration",
+          "text": "他对阿片类有敬畏：阿片类我碰了我可能这辈子不是去重开了就是去戒毒所了，阿片类戒断要终身都去用美沙酮了，"
+        },
+        {
+          "type": "narration",
+          "text": "之后一旦戒断我怕到时候全身都感觉蚂蚁爬。"
+        },
+        {
+          "type": "narration",
+          "text": "但他对致幻剂与兴奋剂的组合不敬畏。"
+        },
+        {
+          "type": "narration",
+          "text": " 这条边界画错了地方：他怕阿片类的戒断，却不怕 MAOI 加麻黄碱加死藤水的血压与混乱。死因的伏笔在此埋下。"
+        },
+        {
+          "type": "narration",
+          "text": "他也有失控。犯躁狂的时候忍不住想骂人发泄想去破坏什么东西想砸东西，一直安静不下来。"
+        },
+        {
+          "type": "narration",
+          "text": "正好犯躁狂的时候又正好突然想到要不就去remake吧——虽然说我真的不是很喜欢自己说出remake这种话，"
+        },
+        {
+          "type": "narration",
+          "text": "因为我曾经和自己说过好死不如活赖着。"
+        },
+        {
+          "type": "narration",
+          "text": "当时就开车到江边准备remake了，最后情绪就莫名跟过山车一样下坡了，就感觉像是什么都没有发生的感觉，"
+        },
+        {
+          "type": "narration",
+          "text": "自己也很茫然的感觉，然后我就开车回去了草。我现在回想起来还是觉得很草。"
+        },
+        {
+          "type": "narration",
+          "text": "求生本能与失控同体。江边那次他自己也茫然：为什么没跳？他不知道。读者也不知道。"
+        },
+        {
+          "type": "narration",
+          "text": "这种\"不知道\"正是后来那一夜的反面——那一夜他太\"知道\"了，知道得太自信。"
+        }
+      ],
+      "next": "dlc.s05"
+    },
+    {
+      "id": "dlc.s05",
+      "chapterId": "dlc",
+      "order": 5,
+      "title": "温柔",
+      "summary": "被忽略的一面。好对不起朋友，明明和他做了承诺我自己却没有做到。还惹得他生气了，感觉自己想说一万个对不起。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_noodle_shop",
+        "bust": {
+          "speaker": "春风",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "被忽略的一面。好对不起朋友，明明和他做了承诺我自己却没有做到。还惹得他生气了，感觉自己想说一万个对不起。"
+        },
+        {
+          "type": "narration",
+          "text": "他专门因为我性格问题浪费时间给我写了个纸条，结果我却是连他的约定都没有做到。"
+        },
+        {
+          "type": "narration",
+          "text": "我和他道歉他没有生气，反而是觉得悲哀，好难受。好想一头撞在墙上晕过去，他为我做了那么多我却甚至没有做到约定。"
+        },
+        {
+          "type": "narration",
+          "text": "他想要独处。真希望能自己独处，如果要我说在家里什么时候是最开心的时候我肯定会毫不犹豫的说是自己在家的时候。"
+        },
+        {
+          "type": "narration",
+          "text": "我如果玩游戏被听见了就要我去做各种事情，我如果不想去做还要被骂说是整天就玩游戏。"
+        },
+        {
+          "type": "narration",
+          "text": "估计等一会就忘了，我真是管不住情绪的傻逼来的。"
+        },
+        {
+          "type": "narration",
+          "text": "还好我记不住东西，如果记得住东西了我指不定哪天爆发了直接remake了哈哈。"
+        },
+        {
+          "type": "narration",
+          "text": "还有中考。"
+        },
+        {
+          "type": "narration",
+          "text": "朋友回忆：二二年中考时，春风在手机上顶着一个右美药盒过来和他打招呼，连带着咖啡因含片磕着右美便进去考试了。"
+        },
+        {
+          "type": "narration",
+          "text": "我们至今仍然不知道Spring风在英语考试听力中听见了什么。"
+        },
+        {
+          "type": "narration",
+          "text": "温柔打招呼与鲁莽磕药交织在同一帧。这是一个会对朋友说一万个对不起、会在中考考场顶着药盒打招呼的少年。"
+        },
+        {
+          "type": "narration",
+          "text": "他不是符号，是人。"
+        }
+      ],
+      "next": "dlc.s06"
+    },
+    {
+      "id": "dlc.s06",
+      "chapterId": "dlc",
+      "order": 6,
+      "title": "死藤水之夜",
+      "summary": "二〇二三年一月八日。逐环鲁莽，每一环都可避免：",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_chunfeng_room",
+        "bust": {
+          "speaker": "春风",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二〇二三年一月八日。逐环鲁莽，每一环都可避免："
+        },
+        {
+          "type": "narration",
+          "text": "六点十五分，煮下骆驼蓬碱。中午，拿到从咸鱼买到的相思树树皮。十四点三十三分，吞下哮喘片（麻黄碱）。"
+        },
+        {
+          "type": "narration",
+          "text": "十七点二十六分，不慎弄湿树皮，重新取出一份徒手掰碎，疲累不堪，掰得掰手出血。"
+        },
+        {
+          "type": "narration",
+          "text": "十九点四十七分，一饮而下那扔进锅里熬了一个半小时多的死藤水。二十点十一分，剧烈变形。"
+        },
+        {
+          "type": "narration",
+          "text": "叠加因素：相思树树皮中同时富含混乱不堪的5-MeO-DMT\"蟾蜍毒素\"，死藤水熬太久了让他陷入混乱；"
+        },
+        {
+          "type": "narration",
+          "text": "麻黄碱的高血压联合骆驼蓬碱，让血管破裂、脑出血、器官破裂、心力衰竭；"
+        },
+        {
+          "type": "narration",
+          "text": "树皮估计早被植保员打上了各种农药，让他中毒而加速死亡；"
+        },
+        {
+          "type": "narration",
+          "text": "抑不收好刀具——临终前恐惧与痛苦的幻觉中，那墙上喷溅的都是他自残割出来的血。"
+        },
+        {
+          "type": "narration",
+          "text": "风父察觉不对劲冲进屋中。抢救了很久，终究回天乏术。最终死因是中毒导致的全器官衰竭。"
+        },
+        {
+          "type": "narration",
+          "text": "不是为理想献身。是一个聪明人把太多可避免的环叠在一起，然后每一环都兑现了。"
+        }
+      ],
+      "next": "dlc.s07"
+    },
+    {
+      "id": "dlc.s07",
+      "chapterId": "dlc",
+      "order": 7,
+      "title": "风父",
+      "summary": "疯掉的风父痛失爱子，认定了Spring风主动自杀，向风的同学质问Spring风是不是在学校受欺负了，为什么要自杀，",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_school_gate",
+        "bust": {
+          "speaker": "春风",
+          "expr": "intense"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "疯掉的风父痛失爱子，认定了Spring风主动自杀，向风的同学质问Spring风是不是在学校受欺负了，为什么要自杀，"
+        },
+        {
+          "type": "narration",
+          "text": "却终无所得。"
+        },
+        {
+          "type": "narration",
+          "text": "Spring风的葬礼举办于二〇二三年二月。"
+        },
+        {
+          "type": "narration",
+          "text": "父亲的无解之问与记录的明确死因并置：他想知道\"为什么\"，而记录只能回答\"怎么\"。"
+        },
+        {
+          "type": "narration",
+          "text": "为什么一个会对朋友说一万个对不起的少年会把自己熬死？记录不回答为什么，只留下怎么——和那个永远问不到的为什么。"
+        }
+      ],
+      "next": "dlc.s08"
+    },
+    {
+      "id": "dlc.s08",
+      "chapterId": "dlc",
+      "order": 8,
+      "title": "稍尽春风",
+      "summary": "稍尽春风。春风吹尽了。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_summer_street",
+        "bust": {
+          "speaker": "春风",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "稍尽春风。春风吹尽了。"
+        },
+        {
+          "type": "narration",
+          "text": "但指路人留下过劝退的三遍重复，留下过草稿纸上的推演，留下过对朋友的一万个对不起，留下过中考考场顶着的药盒。"
+        },
+        {
+          "type": "narration",
+          "text": "这些不是殉道的证据，是一个活过的人的证据。"
+        }
+      ]
+    }
+  ]
+}

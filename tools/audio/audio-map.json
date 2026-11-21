@@ -1,0 +1,90 @@
+{
+  "tracks": [
+    {
+      "slug": "title",
+      "file": "标题音乐.wav",
+      "loop": true
+    },
+    {
+      "slug": "archive",
+      "file": "GIN.wav",
+      "loop": true
+    },
+    {
+      "slug": "ch01",
+      "file": "流亡.wav",
+      "loop": true
+    },
+    {
+      "slug": "afterglow",
+      "file": "1：0.618(loop).wav",
+      "loop": true
+    },
+    {
+      "slug": "ch02-early",
+      "file": "Cute Jump.wav",
+      "loop": true
+    },
+    {
+      "slug": "ch02-late",
+      "file": "情人节的酸柠檬.wav",
+      "loop": true
+    },
+    {
+      "slug": "morning",
+      "file": "Scorching Sun.wav",
+      "loop": false
+    },
+    {
+      "slug": "ch03",
+      "file": "柏拉图式爱情.wav",
+      "loop": true
+    },
+    {
+      "slug": "disappear",
+      "file": "Lantern.wav",
+      "loop": false
+    },
+    {
+      "slug": "separation",
+      "file": "流亡.wav",
+      "loop": false,
+      "note": "Your Highness.wav not present in the pack; use 流亡 as a reprise"
+    },
+    {
+      "slug": "dlc-summer",
+      "file": "夏日布丁.wav",
+      "loop": true
+    },
+    {
+      "slug": "night-market",
+      "file": "优哉游哉(loop).wav",
+      "loop": true
+    },
+    {
+      "slug": "tragedy",
+      "file": "缧绁.wav",
+      "loop": false
+    },
+    {
+      "slug": "battle",
+      "file": "Start the battle.wav",
+      "loop": true
+    },
+    {
+      "slug": "tension",
+      "file": "通讯塔.wav",
+      "loop": true
+    },
+    {
+      "slug": "credits",
+      "file": "粉色血液.wav",
+      "loop": false
+    },
+    {
+      "slug": "extras",
+      "file": "皮卡皮卡.wav",
+      "loop": false
+    }
+  ]
+}

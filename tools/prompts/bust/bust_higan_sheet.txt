@@ -1,0 +1,8 @@
+PIXEL ART character expression sheet. Four identical bust panels in one horizontal row, same character in every panel. A 20-year-old slim young woman, dark chin-length bob hair with a short fringe, pale skin, a modest river-blue long dress with a high neckline, hands folded in front of her chest. Bust framing from chest up, facing the camera, identical clothing, identical lighting, identical framing in all four panels; only the face changes.
+
+Panel 1: polite, level gaze, soft brows, small closed mouth, chin lowered 2 pixels.
+Panel 2: worshipful, pupils shifted up 1 pixel, brows raised, mouth slightly open, head lifted 1 pixel, hands clasped tighter.
+Panel 3: delirious, pupils misaligned by 1 pixel, one brow lower, mouth asymmetric, head tilted 3 pixels, looking past the camera; unsettled but not horrific.
+Panel 4: distant farewell, eyes looking past the camera, mouth a 1-pixel line, calm; edges of the face beginning to break into ordered dither.
+
+Flat solid magenta background #FF00FF behind every panel, no shadow, no border, no labels. 1px near-black outline, chunky square pixels, hard edges, ordered dithering only, no anti-aliasing, no gradients, no text, no logos, no horror effects, no blood. Strict limited palette: ink, river blue, slate blue, skin, magenta background.

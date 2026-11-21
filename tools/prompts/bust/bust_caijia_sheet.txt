@@ -1,0 +1,8 @@
+PIXEL ART character expression sheet. Four identical bust panels in one horizontal row, same character in every panel. A 16-year-old girl, tall and slim, black chin-length bob hair with a short straight fringe, pale skin, an oversized gray hoodie with the sleeves covering her hands, a white T-shirt collar just visible at the neck, dark jeans. Modest, neutral posture, fully clothed, loose clothing, no body emphasis, child-safe. Bust framing from chest up, facing the camera, identical clothing, identical lighting, identical framing in all four panels; only the face changes.
+
+Panel 1: big friendly smile, eyes squeezed into shallow crescents, head tilted 2 pixels.
+Panel 2: sleepy, upper eyelids half lowered, small flat mouth, head leaning toward her shoulder.
+Panel 3: excited, wide eyes with a 1-pixel highlight, brows raised, open smile.
+Panel 4: blank and frightened, eyes wide with tiny 1-pixel pupils, inner brows raised, mouth slightly open; face still, not screaming.
+
+Flat solid magenta background #FF00FF behind every panel, no shadow, no border, no labels. 1px near-black outline, chunky square pixels, hard edges, ordered dithering only, no anti-aliasing, no gradients, no text, no logos, no blush, no sexualization. Strict limited palette: black, gray, white, skin, magenta background.

@@ -1,0 +1,17 @@
+node_modules
+dist
+dist-ssr
+*.local
+playwright-report
+test-results
+.DS_Store
+src/content/generated.ts
+art/
+
+# local probes / screenshots
+/tmp-*.mjs
+/*.png
+
+# python cache
+__pycache__/
+*.pyc

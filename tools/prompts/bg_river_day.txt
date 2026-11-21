@@ -1,0 +1,3 @@
+PIXEL ART ONLY. A 16-bit SNES-era video game background. Flat color blocks, chunky square pixels, hard 1-pixel edges, ordered dithering, no anti-aliasing, no gradients, no photographic texture, no blur, no text. Wide landscape, camera at eye level.
+
+Layout: horizon at 55 percent height. Top half is a pale blue afternoon sky with flat angular clouds and a low amber sun on the right. A distant city skyline and one low bridge sit on the horizon. Bottom right is a wide river with amber sun glitter. Bottom left has a stone embankment, broad steps, a pale concrete railing and green weeds. One unlit streetlamp in the left third. No people, no signage. Strict 20-color palette: pale blue, slate blue, cold gray, bone, amber, olive green, near-black.

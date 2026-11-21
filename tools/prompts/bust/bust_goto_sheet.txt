@@ -1,0 +1,8 @@
+PIXEL ART character expression sheet. Four identical bust panels in one horizontal row, same character in every panel. A 22-year-old androgynous young woman, slim, tired; deep blue chin-length bob hair with a short parted fringe that leaves the eyebrows visible; pale skin, dark circles under the eyes; an oversized, boxy, wrinkled white button-up shirt with a straight loose cut, collar open one button, sleeves rolled to the elbows; dark trousers; rounded shoulders, one hand in pocket. Bust framing from chest up, facing the camera, identical clothing, identical lighting, identical framing in all four panels; only the face changes.
+
+Panel 1: calm, half-lidded level stare, flat brows, straight small mouth.
+Panel 2: wry half-smile, one eyebrow raised 1 pixel, one mouth corner up.
+Panel 3: exhausted, upper eyelids lowered, visible dark circles, slack mouth, shoulders dropped.
+Panel 4: unsettling preaching stare, eyes wider, brows pressed down at the inner ends, mouth open as if speaking; looks slightly off, not heroic.
+
+Flat solid magenta background #FF00FF behind every panel, no shadow, no border, no labels. 1px near-black outline, chunky square pixels, hard edges, ordered dithering only, no anti-aliasing, no gradients, no text, no logos, no body emphasis. Strict limited palette: deep blue, white, ink, skin, magenta background.

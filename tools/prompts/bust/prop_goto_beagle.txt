@@ -1,0 +1,4 @@
+PIXEL ART cute animal avatar bust, chibi, ONE character centered and filling the frame. Anime / JRPG portrait style, NOT realistic, NO fur texture. Head and shoulders only, cut off at the chest, no legs, no paws, no tail. HUGE round anime eyes, each eye about one quarter of the face width, with a 1-pixel white highlight; round head, small triangular nose, tiny mouth.
+Breed: beagle puppy with long floppy ears hanging down past the jaw. Tan patches around both eyes, dark brown saddle over the top of the head, white muzzle with a dark nose, white chest, tan floppy ears.
+Flat solid magenta background #FF00FF, no shadow, no border, no text, no labels. 1px near-black outline, chunky square pixels, hard edges, flat 2-tone shading only, no anti-aliasing, no gradients, no dithering, no highlights except the eyes.
+Strict limited palette: near-black #17151f, paper white #e8e0cc, tan #d9a441, dark brown #5a5448, rose #9c4f5e, magenta background.

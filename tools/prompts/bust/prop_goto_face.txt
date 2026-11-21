@@ -1,0 +1,7 @@
+PIXEL ART kawaii chibi dog FACE close-up, ONE character, extreme close-up cropped at the top of the ears and just below the chin: no shoulders, no chest, no body. The face fills the entire canvas. Cute anime chibi face, not a realistic dog.
+
+HUGE glossy round eyes: each eye is about 45 percent of the face width, nearly touching each other and the cheeks; solid dark round eyes with two big white highlights each and a soft eyelash line on top. Round puffy cheeks with soft pink blush, tiny round black nose between the lower eye edges, tiny omega-shaped mouth, two soft dark charcoal ears hanging at the left and right edges of the face. White blaze down the middle of the forehead. NO protruding muzzle, no wrinkles, no fur texture, no whiskers, no realism.
+
+Flat solid magenta background #FF00FF, no shadow, no border, no text. Thick soft 2px dark-brown outline #17151f, chunky square pixels, hard edges, flat 2-tone shading, no anti-aliasing, no gradients, no dithering. Very cute, adorable, kawaii sticker style.
+
+Strict limited palette: charcoal #2a2a32, near-black #17151f, paper white #e8e0cc, pale #f3ead8, soft pink #d98f9b, magenta background.

@@ -1,0 +1,106 @@
+.guide {
+  position: absolute;
+  right: calc(10 * var(--u));
+  bottom: calc(24 * var(--u));
+  z-index: 34;
+  width: calc(118 * var(--u));
+  border: var(--bw-2) solid var(--c-line);
+  background: var(--c-paper);
+  color: var(--c-ink);
+  box-shadow: calc(3 * var(--u)) calc(3 * var(--u)) 0 rgba(23, 21, 31, 0.35);
+  padding: calc(2 * var(--u)) calc(3 * var(--u)) calc(3 * var(--u));
+  font-family: var(--font-10);
+  font-size: var(--fs-8);
+  line-height: var(--lh-8);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: calc(1 * var(--u)) dotted var(--c-line);
+  padding-bottom: calc(2 * var(--u));
+  margin-bottom: calc(2 * var(--u));
+}
+
+.kicker {
+  color: var(--c-muted);
+  letter-spacing: 0.08em;
+}
+
+.toggle {
+  border: none;
+  background: none;
+  color: var(--c-muted);
+  cursor: pointer;
+  font: inherit;
+  padding: 0 calc(1 * var(--u));
+}
+
+.toggle:hover {
+  color: var(--c-ink);
+}
+
+.title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(2 * var(--u));
+  font-size: var(--fs-10);
+  font-family: var(--font-10);
+}
+
+.count {
+  color: var(--c-muted);
+  font-size: var(--fs-8);
+}
+
+.step {
+  margin: calc(2 * var(--u)) 0 calc(3 * var(--u));
+  color: var(--c-ink);
+}
+
+.action {
+  display: inline-block;
+  border: var(--bw-2) solid var(--c-ink);
+  background: var(--c-amber);
+  color: var(--c-night);
+  padding: calc(1 * var(--u)) calc(3 * var(--u));
+  text-decoration: none;
+  font-size: var(--fs-8);
+}
+
+.action:hover {
+  background: var(--c-amber-bright);
+}
+
+.collapsed {
+  position: absolute;
+  right: calc(10 * var(--u));
+  bottom: calc(24 * var(--u));
+  z-index: 34;
+  display: flex;
+  align-items: center;
+  gap: calc(2 * var(--u));
+  max-width: calc(130 * var(--u));
+  border: var(--bw-2) solid var(--c-line);
+  background: var(--c-paper);
+  color: var(--c-ink);
+  padding: calc(1 * var(--u)) calc(3 * var(--u));
+  font-family: var(--font-10);
+  font-size: var(--fs-8);
+  cursor: pointer;
+  box-shadow: calc(2 * var(--u)) calc(2 * var(--u)) 0 rgba(23, 21, 31, 0.3);
+}
+
+.collapsedTag {
+  flex: none;
+  color: var(--c-muted);
+}
+
+.collapsedStep {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

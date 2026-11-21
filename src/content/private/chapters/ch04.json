@@ -1,0 +1,1302 @@
+{
+  "id": "ch04",
+  "title": "人们将往何处去",
+  "scenes": [
+    {
+      "id": "ch04.s01",
+      "chapterId": "ch04",
+      "order": 1,
+      "title": "建站三说",
+      "summary": "二〇二四年一月，旧 odw 建起来。后藤和鸡哥一起建的。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_plateau",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "archive",
+      "transition": "slide",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二〇二四年一月，旧 odw 建起来。后藤和鸡哥一起建的。"
+        },
+        {
+          "type": "narration",
+          "text": "后藤想搞减害。他初入高原时信息闭塞，指南不全还破而碎，吃惨了也不知道怎么反制。他就是其中一员。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "odw 实际上成了减害站点以及我想象力的地方，而不是为了 od。"
+        }
+      ],
+      "next": "ch04.s02"
+    },
+    {
+      "id": "ch04.s02",
+      "chapterId": "ch04",
+      "order": 2,
+      "title": "自由派与减害派",
+      "summary": "鸡哥是自由派，后藤要减害。发展自由与发展减害，如同死对头。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_tunnel",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "archive",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "可鸡哥是自由派。旧编辑组哪个派别都有，几乎就靠一个后藤强制拉拢起来。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "从根基上就埋了地雷于内斗分裂。"
+        },
+        {
+          "type": "narration",
+          "text": "鸡哥要用官号发癫、跟地雷女撩骚，后藤不许。后藤要减害。"
+        },
+        {
+          "type": "narration",
+          "text": "保守控制派提出 od 不扩散，想把圈子整个封起来，护它免受铁拳，让它内部自我消化。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "发展自由与发展减害，如同死对头。"
+        }
+      ],
+      "next": "ch04.s03"
+    },
+    {
+      "id": "ch04.s03",
+      "chapterId": "ch04",
+      "order": 3,
+      "title": "紧急事故",
+      "summary": "一份「紧急事故」公告：账号、站点回鸡哥控制。圈子裂成两摊。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_night_street",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "transition": "glitch",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二〇二四年六月二十九日，一份「紧急事故」公告：管理人员 S.G 放弃站点权限，账号、站点回鸡哥控制。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "你赢了……接下来是你的天地了。"
+        },
+        {
+          "type": "narration",
+          "text": "直接原因，是后藤不许鸡哥用官号发癫撩骚，鸡哥核震慑要回账号。"
+        },
+        {
+          "type": "narration",
+          "text": "圈子裂成两摊：鸡哥有官号，后藤有域名。原编辑组重组藤控官号。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "藤 odw 发展减害派、鸡 odw 自由派，大乱斗起来了，场面既没逻辑又没道理。"
+        }
+      ],
+      "next": "ch04.s04"
+    },
+    {
+      "id": "ch04.s04",
+      "chapterId": "ch04",
+      "order": 4,
+      "title": "伪藤",
+      "summary": "「伪藤」事件。名字本身成了武器，批斗的议题也攒起来了。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "七月十九到二十一日，「伪藤」事件。后藤预警鸡控 od-wiki 在伪装自己。",
+          "fx": "static"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "语言很僵硬，言灵有阴暗的气息，会去主动找你。"
+        },
+        {
+          "type": "narration",
+          "text": "名字本身成了武器。批斗的议题也攒起来了：多奈哌齐事件、odw 是否有用、odw 归属权。"
+        },
+        {
+          "type": "narration",
+          "text": "后藤想跟鸡哥好好谈。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我和他好好谈时，他要么直接动核武器，要么装傻发防伪标识，根本无法沟通。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "最后他直接开了核武器。"
+        }
+      ],
+      "next": "ch04.s05"
+    },
+    {
+      "id": "ch04.s05",
+      "chapterId": "ch04",
+      "order": 5,
+      "title": "核武器",
+      "summary": "「核武器」是开盒——捏着对方的私密信息，威胁公开。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_rooftop_dusk",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "intense"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "「核武器」是开盒——捏着对方的私密信息，威胁公开。"
+        },
+        {
+          "type": "narration",
+          "text": "八月二十九到三十一日，后藤崩溃了。",
+          "fx": "shake"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "减害我减你妈……不是被鸡哥抓就是被你们强……直接高原起纯精分我来陪你们玩他妈的。",
+          "fx": "static",
+          "emotion": "rage"
+        },
+        {
+          "type": "narration",
+          "text": "九月三日，高三开学，他留了一首打油诗，离去。退圈。"
+        }
+      ],
+      "next": "ch04.s06"
+    },
+    {
+      "id": "ch04.s06",
+      "chapterId": "ch04",
+      "order": 6,
+      "title": "退圈",
+      "summary": "九月三日，高三开学。他留了一首打油诗，离去。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_goto_room",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "tragedy",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "九月二十一日，冷却报告接触了已经退圈的后藤，了解 od 的基本情况。后藤在那的作用，只是挂上了名字。"
+        }
+      ],
+      "next": "ch04.s07"
+    },
+    {
+      "id": "ch04.s07",
+      "chapterId": "ch04",
+      "order": 7,
+      "title": "圣诞批斗",
+      "summary": "十二月二十五日，视频发布。批斗从私德上升到减害主义本身。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_night_street",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "十二月二十五日，视频发布。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "冷却报告",
+          "text": "我们联系到了一位已经退圈了 oder「后藤」，了解到……"
+        },
+        {
+          "type": "narration",
+          "text": "批斗起来了。一个吃普瑞巴林吃疯的保守派精神病拱火造谣，说后藤主动找上媒体。"
+        },
+        {
+          "type": "narration",
+          "text": "鸡哥和另一个人过来添油加醋，补了一句「后藤要专门定点爆破 od 圈」。"
+        },
+        {
+          "type": "narration",
+          "text": "这触碰了所有高原人的利益。批斗从个人公德私德，上升到批判发展减害意识形态，再到批判减害主义本身。"
+        }
+      ],
+      "next": "ch04.s08"
+    },
+    {
+      "id": "ch04.s08",
+      "chapterId": "ch04",
+      "order": 8,
+      "title": "批斗余波",
+      "summary": "鸡哥放了半年前没放的核武器——开盒。后藤进了埋葬场。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "鸡哥放了半年前没放的核武器——开盒。",
+          "fx": "gloom"
+        },
+        {
+          "type": "narration",
+          "text": "后藤和他的减害主义，一起进了高原的埋葬场。"
+        },
+        {
+          "type": "narration",
+          "text": "后藤直到批斗开始才知道视频出来，快结束才知道闹事。他回去跟冷却报告说只能修改视频。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我相当逃避心理，自以为只要彻底退圈，这一切与自己都无关，也不愿意回去解释了。"
+        }
+      ],
+      "next": "ch04.s09"
+    },
+    {
+      "id": "ch04.s09",
+      "chapterId": "ch04",
+      "order": 9,
+      "title": "反减害论",
+      "summary": "反减害论、策划药、受害者叙事，以及一种投降主义。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_plateau",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "intense"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "随之而来的是反减害论、策划药、受害者叙事，以及一种投降主义。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "反藤者",
+          "text": "减害就是背叛 od、扩散 od、害更多 oder，唯有继续 od 才是正途。"
+        }
+      ],
+      "next": "ch04.s10"
+    },
+    {
+      "id": "ch04.s10",
+      "chapterId": "ch04",
+      "order": 10,
+      "title": "罗生门展开",
+      "summary": "后藤说：我们共同的敌人，是高原上的投降分子与反动派。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_tunnel",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "intense"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "高原上有很多家伙呀，打着正义的旗号搞反动腐败，自私自利满脑子都是自己，倒是让许多想逃的 oders 都没有退路了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "反动派说着我方法多么错误，然而他们自己却拿不出什么方法来帮助人，也从未有任何成效。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我们共同的敌人就是高原上这些投降分子与反动派！"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "群友",
+          "text": "唉，牢藤，要不你回来吧，戒 o 的人需要你啊。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "最初我加入旧 odw 项目，是为方便我搞减害。可惜鸡哥不是个正常的合伙人，结果就这样了。"
+        },
+        {
+          "type": "narration",
+          "text": "罗生门在此完整展开。"
+        }
+      ],
+      "next": "ch04.s11"
+    },
+    {
+      "id": "ch04.s11",
+      "chapterId": "ch04",
+      "order": 11,
+      "title": "声音一 · 反藤者",
+      "summary": "他早在与前女友分手时崩溃企图自杀，顺带说要爆破 od。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_residential_path",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "反藤者",
+          "text": "他早在与前女友分手时崩溃企图自杀，顺带说要爆破 od，不久后便在 odwiki 群里拉人采访，现在想想就是这个视频。"
+        }
+      ],
+      "next": "ch04.s12"
+    },
+    {
+      "id": "ch04.s12",
+      "chapterId": "ch04",
+      "order": 12,
+      "title": "声音二 · 后藤",
+      "summary": "“我在那的作用只是挂上了名字。”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_river_night",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "如果没有那两位的迫害，或许我不至于被污蔑诋毁拉踩成这样。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "那所谓采访比不上后来听说涌现的一大堆采访，我在那的作用只是挂上了名字。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "加上我退圈没法反击，以及鸡哥开盒助力，我被塑造成以减害名义扩散 od 的傻屌。"
+        }
+      ],
+      "next": "ch04.s13"
+    },
+    {
+      "id": "ch04.s13",
+      "chapterId": "ch04",
+      "order": 13,
+      "title": "声音三 · 沐雨",
+      "summary": "“我没有钱我缺钱我圈钱怎么了？”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_night_market",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "沐雨",
+          "text": "我参加了采访是没错，所以怎么了？我没有钱我缺钱我圈钱怎么了？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "沐雨",
+          "text": "我的目的是毁灭 od 圈，建立真正意义上的药圈，让大家普遍了解一些滥用药物和新精神活性物质的知识，以求最大程度的自保。"
+        }
+      ],
+      "next": "ch04.s14"
+    },
+    {
+      "id": "ch04.s14",
+      "chapterId": "ch04",
+      "order": 14,
+      "title": "四十六分钟",
+      "summary": "四十六分四十八秒。「5555」是沐雨，矛头指向 odw 的小五。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_convenience",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "transition": "glitch",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "三个声部，各执一词。"
+        },
+        {
+          "type": "narration",
+          "text": "二〇二五年六月二十六日，一个视频发布。四十六分四十八秒，接受露脸跟踪采访的人自称「5555」——真实身份是沐雨。矛头指向 odw 的小五。",
+          "fx": "static"
+        },
+        {
+          "type": "narration",
+          "text": "退圈的小五瞬间被骂爆破，私信被冲爆。"
+        },
+        {
+          "type": "narration",
+          "text": "小五需要反击，但他只想拥有他的平静生活。于是他让后藤接手代管账号交流。"
+        }
+      ],
+      "next": "ch04.s15"
+    },
+    {
+      "id": "ch04.s15",
+      "chapterId": "ch04",
+      "order": 15,
+      "title": "代管",
+      "summary": "后藤代管小五号。九月三日，反击开始。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_goto_room",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "intense"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "后藤也有自己的想法：他想让自己身后名没那么难堪——自己仅仅在视频里挂个名就被批斗到死，而沐雨露脸咋呼还能活蹦乱跳卖策划药。"
+        },
+        {
+          "type": "narration",
+          "text": "八月三十一到九月六日，后藤代管小五号交流。九月三日，反击开始，后藤以 odw 官号写大批沐雨和鸡哥的罪证。"
+        }
+      ],
+      "next": "ch04.s16"
+    },
+    {
+      "id": "ch04.s16",
+      "chapterId": "ch04",
+      "order": 16,
+      "title": "反击开始",
+      "summary": "几乎所有 oder 官号帖子都是后藤发的，只不过以 odw 官号之名。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_night_street",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "intense"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "实际上几乎所有 oder 官号帖子都是后藤发的，只不过以 odw 官号之名。"
+        },
+        {
+          "type": "narration",
+          "text": "九月二十一日，打倒后藤的主力、某位批斗员，对小五和后藤开战了。"
+        }
+      ],
+      "next": "ch04.s17"
+    },
+    {
+      "id": "ch04.s17",
+      "chapterId": "ch04",
+      "order": 17,
+      "title": "批斗员开战",
+      "summary": "「小五在复活后藤，所以双打小五。」",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_tunnel",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "批斗员",
+          "text": "小五在复活后藤，所以双打小五。"
+        },
+        {
+          "type": "narration",
+          "text": "批斗员拉拢了一群人，联合攻打，并暗中毁掉小五的生活。"
+        },
+        {
+          "type": "narration",
+          "text": "按照批斗员的思想，沐雨本更该被批倒，结果批斗员只是在搞后藤——后来批斗员自己也成了一个新的沐雨。"
+        }
+      ],
+      "next": "ch04.s18"
+    },
+    {
+      "id": "ch04.s18",
+      "chapterId": "ch04",
+      "order": 18,
+      "title": "假退圈",
+      "summary": "沐雨用假退圈逃避。小五的生活被近乎完全毁掉。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_residential_path",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "九月二十四日，沐雨选择用假退圈逃避。小五认为结束了，然而似乎晚了。"
+        },
+        {
+          "type": "narration",
+          "text": "小五的生活被近乎完全毁掉，他一直在谴责后藤来晚了。"
+        }
+      ],
+      "next": "ch04.s19"
+    },
+    {
+      "id": "ch04.s19",
+      "chapterId": "ch04",
+      "order": 19,
+      "title": "假死",
+      "summary": "沐雨假死回归。五沐交战停止了，小五的生活已经一团糟。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "tragedy",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "之后是十月二十一日沐雨假死回归、十一月二十五日沐雨其他狗叫。五沐交战算是停止了，可是小五的生活已经一团糟。",
+          "fx": "gloom"
+        },
+        {
+          "type": "narration",
+          "text": "他们最终都没有守卫住平静的安宁生活。"
+        }
+      ],
+      "next": "ch04.s20"
+    },
+    {
+      "id": "ch04.s20",
+      "chapterId": "ch04",
+      "order": 20,
+      "title": "公开文档",
+      "summary": "二〇二五年十二月七日，后藤公开这份文档，署名超级后后后藤。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "tragedy",
+      "transition": "glitch",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "后藤后来公开这份文档，署名超级后后后藤，二〇二五年十二月七日。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我知道公开这个文件其实已经没什么价值了……但这是小五的执念。他想要证明些什么，我便公开了此文档。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "但是意义似乎已经不重要了。"
+        }
+      ],
+      "next": "ch04.s21"
+    },
+    {
+      "id": "ch04.s21",
+      "chapterId": "ch04",
+      "order": 21,
+      "title": "FreeODwiki",
+      "summary": "另一拨人看不惯后藤，也看不惯鸡哥，自己建了个 FreeODwiki。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_plateau",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "archive",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "藤鸡打得不可开交的时候，另一拨人看不惯后藤，也看不惯鸡哥，自己建了个 FreeODwiki。"
+        },
+        {
+          "type": "narration",
+          "text": "他们不喜欢后藤，但更讨厌鸡哥。牵头的是鼠尾草。那本 od 史编年，就是鼠尾草和 FreeODwiki 的人写的。"
+        }
+      ],
+      "next": "ch04.s22"
+    },
+    {
+      "id": "ch04.s22",
+      "chapterId": "ch04",
+      "order": 22,
+      "title": "爱德华",
+      "summary": "爱德华也是这边的人，后来吃 1161 死了。后藤骂过他。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "archive",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "爱德华也是这边的人，后来吃 1161 死了，镇音是他的看护者。后藤骂过他。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "当年爱德华是自己把自己盒发出来的，被骂那确实是我干的事。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "你只看到我骂他，便谬论归为我们有所谓迫害。"
+        }
+      ],
+      "next": "ch04.s23"
+    },
+    {
+      "id": "ch04.s23",
+      "chapterId": "ch04",
+      "order": 23,
+      "title": "方针之争",
+      "summary": "二〇二五年十一月二十一日，鼠尾草批 odw 的原方针。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二〇二五年十一月二十一日，鼠尾草批 odw 的原方针。odw 写着「必须让人看后产生的是忌讳和厌恶」。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "鼠尾草",
+          "text": "原来整个 odw 的方针就是错的，对 oder 无益的，那还何必费力弄什么 wiki 呢，直接学官方一直复读「珍爱生命，远离毒品」得了。"
+        }
+      ],
+      "next": "ch04.s24"
+    },
+    {
+      "id": "ch04.s24",
+      "chapterId": "ch04",
+      "order": 24,
+      "title": "苏镁条目",
+      "summary": "“odw 的文章视角不仅是主观的，还是强烈地道德化的了。”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "鼠尾草",
+          "text": "为什么苏镁的条目不符合呢？odw 的文章视角不仅是主观的，还是强烈地道德化的了。"
+        }
+      ],
+      "next": "ch04.s25"
+    },
+    {
+      "id": "ch04.s25",
+      "chapterId": "ch04",
+      "order": 25,
+      "title": "后藤回应",
+      "summary": "“Oders 的安全与未来不是你荒谬思想的牺牲陪葬品。”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_tunnel",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "intense"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "Oders 的安全与未来不是你荒谬思想的牺牲陪葬品。",
+          "fx": "sharpen"
+        }
+      ],
+      "next": "ch04.s26"
+    },
+    {
+      "id": "ch04.s26",
+      "chapterId": "ch04",
+      "order": 26,
+      "title": "鼠尾草反驳",
+      "summary": "“我反而怀疑其他 oder 的安全和未来是你的思想的牺牲品。”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_plateau",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "鼠尾草",
+          "text": "我反而怀疑其他 oder 的安全和未来是你的思想的牺牲品。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "鼠尾草",
+          "text": "比如近期的 n55，还有其他 o 进 icu 的人，你觉得你的 odw 对他们被伤害有多大的责任呢？"
+        }
+      ],
+      "next": "ch04.s27"
+    },
+    {
+      "id": "ch04.s27",
+      "chapterId": "ch04",
+      "order": 27,
+      "title": "知识论",
+      "summary": "二〇二六年四月二十日。真正的困境，出在两面性的知识上。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_classroom",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二〇二六年四月二十日，鼠尾草讲减害知识论。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "鼠尾草",
+          "text": "「舍曲林等抗抑郁药不能用于 od」是药圈常识，这是知识可以减害的典型例子。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "鼠尾草",
+          "text": "可并非所有知识都能减害，最经典的就是「『盐』可以用来紫砂」。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "鼠尾草",
+          "text": "真正的 OD 不扩散困境，不出在这些非黑即白的知识上，而出在两面性的知识上——既可以用于减害，又可以让人遭害。",
+          "fx": "sharpen"
+        }
+      ],
+      "next": "ch04.s28"
+    },
+    {
+      "id": "ch04.s28",
+      "chapterId": "ch04",
+      "order": 28,
+      "title": "付费采访",
+      "summary": "二〇二六年十一月，沐雨死前又接受采访。视频收费才能观看。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_night_market",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二〇二六年十一月，沐雨死前又接受了一个 up 主的采访，再次曝光、扭曲药圈。视频收费才能观看。",
+          "fx": "static"
+        },
+        {
+          "type": "narration",
+          "text": "up 主以玩乐的心态逗趣药圈的事情，抖出了更多更阴暗的事情。药圈的故事被曲解成畸形秀给外人博流量看。"
+        }
+      ],
+      "next": "ch04.s29"
+    },
+    {
+      "id": "ch04.s29",
+      "chapterId": "ch04",
+      "order": 29,
+      "title": "南鸢",
+      "summary": "二〇二六年十一月十八日。右美沙芬列管功过，从三七开变成一九开。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_river_night",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "archive",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二〇二六年十一月十八日。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "南鸢",
+          "text": "去年夏天的一个雨夜，我同硅硅和 Misako 讨论右美沙芬列管功过几几开，那时候我觉得是三七开。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "南鸢",
+          "text": "现在一看，墙外 1161 酸奶葡萄遍地跑，击杀案例数不胜数；墙内精神小伙小妹氨酚烷胺和碘酒耍起，icu 直呼受不了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "南鸢",
+          "text": "我向来做人留一线，所以我现在认为右美沙芬列管功过一九开。"
+        }
+      ],
+      "next": "ch04.s30"
+    },
+    {
+      "id": "ch04.s30",
+      "chapterId": "ch04",
+      "order": 30,
+      "title": "列管倒计时",
+      "summary": "随着右美沙芬、愈美片、普瑞巴林被列管，药圈迎来倒计时。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_goto_room",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "disappear",
+      "transition": "glitch",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "随着右美沙芬、愈美片、普瑞巴林被列管，药圈迎来倒计时。",
+          "fx": "gloom"
+        },
+        {
+          "type": "narration",
+          "text": "减害派的人因为无药可 o：少部分的确成功逃离了高原；大部分则遭受精神障碍与传统精神科药品的折磨，有些减害派甚至自杀了，或者转换了自己的派别。"
+        }
+      ],
+      "next": "ch04.s31"
+    },
+    {
+      "id": "ch04.s31",
+      "chapterId": "ch04",
+      "order": 31,
+      "title": "自由的代价",
+      "summary": "转自由派的人死于不敬畏策划药。盲目派开始乱吃药。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_hospital_ward",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "有的转成自由派，结果死于不敬畏策划药——阿片类、苯二氮卓类等呼吸抑制死去的人比比皆是。"
+        },
+        {
+          "type": "narration",
+          "text": "盲目派发现常见滥用药物买不到之后开始乱吃药：舍曲林、感康、甚至布洛芬、碘伏这种毫无精神效果的药。"
+        }
+      ],
+      "next": "ch04.s32"
+    },
+    {
+      "id": "ch04.s32",
+      "chapterId": "ch04",
+      "order": 32,
+      "title": "来信",
+      "summary": "“老师，以后愈美片会不会也会被管制？”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_goto_room",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "来信者",
+          "text": "老师，以后愈美片会不会也会被管制？休学之后的生活还是好糟糕。我怕以后某天我又需要它的时候发现它被管制了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "绝对。至少你还有粮食。多出门转总归是有趣的事。当然，取决于有没有风景。"
+        }
+      ],
+      "next": "ch04.s33"
+    },
+    {
+      "id": "ch04.s33",
+      "chapterId": "ch04",
+      "order": 33,
+      "title": "家长断药",
+      "summary": "“别 o 了，用美托洛尔压。看海。”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_goto_room",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "来信者",
+          "text": "如果不 od，我家长估计要断我的药了。老师，怎么 od 能安全又开心地撑过这四周？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "别 o 了，用美托洛尔压，顺便压压成瘾。看海。不过你还是遵医嘱吃了它吧。"
+        }
+      ],
+      "next": "ch04.s34"
+    },
+    {
+      "id": "ch04.s34",
+      "chapterId": "ch04",
+      "order": 34,
+      "title": "药圈唾骂",
+      "summary": "药圈成为了人人唾骂的地方。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_night_street",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "药圈成为了人人唾骂的地方。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "路人",
+          "text": "你知道那个右美沙芬吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "朋友",
+          "text": "你说那个毒品呀，真不知道他们人是怎么想的。"
+        }
+      ],
+      "next": "ch04.s35"
+    },
+    {
+      "id": "ch04.s35",
+      "chapterId": "ch04",
+      "order": 35,
+      "title": "精神障碍患者",
+      "summary": "“要不是右美沙芬和普瑞巴林，我早就跳楼了。”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_night_street"
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "精神障碍患者",
+          "text": "五朵金花对我压根没有用，它广泛用在精神科只是因为它吃起来不会让人开心，仅此而已，所谓的抗抑郁效果更是放屁！"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "精神障碍患者",
+          "text": "要不是右美沙芬和普瑞巴林，我早就跳楼了！是它们让我变成一个健全人！"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "精神障碍患者",
+          "text": "国家列管那些药品只是盲目地追求社会稳定，可我们呢？到底谁能解决这个社会该死的心理疾病？"
+        }
+      ],
+      "next": "ch04.s36"
+    },
+    {
+      "id": "ch04.s36",
+      "chapterId": "ch04",
+      "order": 36,
+      "title": "评论",
+      "summary": "“你们精神有病的不就是自己心里脆弱吗？”这条评论被大量点赞。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive"
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "评论",
+          "text": "你们精神有病的不就是自己心里脆弱吗？早点死了算了，不要浪费国家资源。"
+        },
+        {
+          "type": "narration",
+          "text": "这条评论被大量点赞。",
+          "fx": "gloom"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "评论",
+          "text": "不就是一群嗑药寻乐的毒虫吗。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "评论",
+          "text": "脖子吃醋咯~"
+        }
+      ],
+      "next": "ch04.s37"
+    },
+    {
+      "id": "ch04.s37",
+      "chapterId": "ch04",
+      "order": 37,
+      "title": "药圈分崩离析",
+      "summary": "监控最多的街空着。付费畸形秀还在更新。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_night_street"
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "o 不扩成为废纸一张。监控最多的街空着。付费畸形秀还在更新。药圈分崩离析，墙外的人却只认得一个「毒」字。",
+          "fx": "gloom"
+        },
+        {
+          "type": "narration",
+          "text": "后藤还在答疑。私信还在响。"
+        }
+      ],
+      "next": "ch04.s38"
+    },
+    {
+      "id": "ch04.s38",
+      "chapterId": "ch04",
+      "order": 38,
+      "title": "后藤还在答疑",
+      "summary": "“别。”“看海。”“至少你还有粮食。”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_goto_room",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "别。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "看海。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "至少你还有粮食。"
+        }
+      ],
+      "next": "ch04.s39"
+    },
+    {
+      "id": "ch04.s39",
+      "chapterId": "ch04",
+      "order": 39,
+      "title": "oder的出路",
+      "summary": "oder 们的出路是什么呢？",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_residential_path"
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "oder 们的出路是什么呢？"
+        }
+      ],
+      "next": "ch04.s40"
+    },
+    {
+      "id": "ch04.s40",
+      "chapterId": "ch04",
+      "order": 40,
+      "title": "没有人知道",
+      "summary": "没有人知道。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_night_street"
+      },
+      "cue": "credits",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "没有人知道。",
+          "fx": "vignette"
+        }
+      ]
+    }
+  ]
+}

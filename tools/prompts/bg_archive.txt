@@ -1,0 +1,3 @@
+PIXEL ART ONLY. A 16-bit SNES-era video game background. Flat color blocks, chunky square pixels, hard 1-pixel edges, ordered dithering, no anti-aliasing, no gradients, no photographic texture, no blur, no text. Wide landscape, camera at eye level, one-point perspective.
+
+Scene: a cramped institutional archive room. Layout: tall metal shelves on the left and right filled with beige folders, binders and cardboard boxes; a narrow aisle in the center leading to a desk at the back with a small green-shaded lamp and stacks of paper; a high narrow window with pale gray light; tiled floor; a rolling ladder leaning on the left shelves. Muted beige, ink and cold gray palette with one warm lamp. No people, no readable labels. Strict 20-color palette.

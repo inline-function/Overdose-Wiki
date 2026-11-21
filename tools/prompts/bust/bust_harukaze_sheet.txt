@@ -1,0 +1,8 @@
+PIXEL ART character expression sheet. Four identical bust panels in one horizontal row, same character in every panel. A 19-year-old androgynous young woman with a boyish, slightly hunched otaku posture; long faded-pink hair reaching the chest, pale skin, a washed-out pink jacket over a white T-shirt, a blue-and-white school track jacket draped over one shoulder, holding a plain white medicine box with no label. Bust framing from chest up, facing the camera, identical clothing, identical lighting, identical framing in all four panels; only the face changes.
+
+Panel 1: bright, wide eyes, raised brows, open smile, chin up 1 pixel.
+Panel 2: smug, one eyebrow raised, one mouth corner up, half-lidded eyes, chin lifted.
+Panel 3: restless, pupils darting to one side, uneven brows, tight small mouth, shoulders tense.
+Panel 4: tired and gentle, lowered eyelids, soft brows, small closed smile, head tilted 2 pixels.
+
+Flat solid magenta background #FF00FF behind every panel, no shadow, no border, no labels. 1px near-black outline, chunky square pixels, hard edges, ordered dithering only, no anti-aliasing, no gradients, no text, no logos, no glossy idol styling; the pink must look washed out and worn. Strict limited palette: dusty pink, white, navy blue, ink, skin, magenta background.

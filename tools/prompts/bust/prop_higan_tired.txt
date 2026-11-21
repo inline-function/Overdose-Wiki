@@ -1,0 +1,5 @@
+PIXEL ART kawaii chibi jellyfish avatar, ONE character centered, the whole bell dome and a few short tentacles, no body, no arms, no legs. Cute anime chibi style, not realistic: HUGE glossy round eyes on the bell, each eye about one quarter of the bell width, dark eyes with one large white highlight and one small highlight, looking straight at the viewer; tiny round mouth; soft translucent pale bell with a cool blue rim; a small dark-red glowing core inside the bell; four short wavy tentacles hanging down, evenly spaced.
+Expression: tired. Upper eyelids lowered, eyes half closed, faint dark rings under the eyes, mouth slightly down, tentacles drooping lower.
+Flat solid magenta background #FF00FF, no shadow, no border, no text. Thick soft 2px dark outline, chunky square pixels, hard edges, flat 2-tone shading, no anti-aliasing, no gradients, no dithering, no bubbles, no water. Very cute, adorable, kawaii, soft rounded shapes, sticker style.
+
+Strict limited palette: paper white #e8e0cc, pale #f3ead8, cool blue #8fa8b8, deep blue #27445a, dark red #721a14, near-black #17151f, magenta background.

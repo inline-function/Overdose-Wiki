@@ -1,0 +1,10 @@
+PIXEL ART Japanese anime character expression sheet. Four identical bust panels in one horizontal row, same cute anime girl avatar in every panel. 1990s visual novel / JRPG portrait style: large gentle anime eyes with 1-pixel highlights, soft rounded cheeks, tiny nose, small mouth, cel-shaded hair with a short fringe; bust from the chest up, head-and-shoulders proportions, not chibi.
+
+Character: a 20-year-old cute anime girl, slim, dark chin-length bob (one head long), pale skin; a modest river-blue long dress with a high neckline, hands folded in front of her chest. Gentle, polite, slightly melancholic.
+
+Panel 1: polite soft smile, level gaze, chin lowered 2 pixels.
+Panel 2: worshipful, eyes looking up with a highlight, brows raised, small open mouth, hands clasped tighter.
+Panel 3: delirious, pupils misaligned by 1 pixel, one brow lower, asymmetric small smile, head tilted 3 pixels, looking past the camera; unsettled but not horrific.
+Panel 4: distant farewell, eyes looking past the camera, mouth a 1-pixel line, calm and soft.
+
+Flat solid magenta background #FF00FF behind every panel, no shadow, no border, no labels. 1px near-black outline, chunky square pixels, hard edges, ordered dithering only, no anti-aliasing, no gradients, no text, no logos, no horror effects, no blood, no sexualization. Strict limited palette: ink, river blue, slate blue, skin, dusty pink highlight, magenta background.

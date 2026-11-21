@@ -1,0 +1,112 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--c-void);
+  color: var(--c-paper);
+  font-family: var(--font-pixel);
+  font-size: var(--fs-10);
+  font-family: var(--font-10);
+  line-height: var(--lh-10);
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: var(--c-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--c-blue2);
+}
+
+::selection {
+  color: var(--c-paper3);
+  background: var(--c-red);
+}
+
+:focus-visible {
+  outline: var(--bw-2) solid var(--c-yellow);
+  outline-offset: var(--bw-2);
+  box-shadow: 0 0 0 var(--bw-2) var(--c-ink);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
+.scroll {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-line) var(--c-paper2);
+}
+
+.scroll::-webkit-scrollbar {
+  width: calc(4 * var(--u));
+  height: calc(4 * var(--u));
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: var(--c-paper2);
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: var(--c-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0ms !important;
+  }
+}
+
+[data-motion="reduce"] *,
+[data-motion="reduce"] *::before,
+[data-motion="reduce"] *::after {
+  animation-duration: 0ms !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0ms !important;
+}

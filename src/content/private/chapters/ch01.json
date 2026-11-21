@@ -1,0 +1,447 @@
+{
+  "id": "ch01",
+  "title": "虚数根",
+  "scenes": [
+    {
+      "id": "ch01.s01",
+      "chapterId": "ch01",
+      "order": 1,
+      "title": "落榜中考生",
+      "summary": "南方城市。一个立志当化学工程师的落榜中考生，把一切希望押在一件事上。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_summer_street",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "ch01",
+      "transition": "slide",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "在南方的一个城市里，有一个立志当化学工程师的落榜中考生。"
+        },
+        {
+          "type": "narration",
+          "text": "那时他还不叫后藤。"
+        },
+        {
+          "type": "narration",
+          "text": "他沮丧至极，用游戏麻痹他自己不要想太多。"
+        }
+      ],
+      "next": "ch01.s02"
+    },
+    {
+      "id": "ch01.s02",
+      "chapterId": "ch01",
+      "order": 2,
+      "title": "挫败的房间",
+      "summary": "游戏麻痹一阵，清醒一阵，再麻痹一阵。痛苦往内长，长成一个念头。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_goto_room",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "ch01",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "游戏麻痹一阵，清醒一阵，再麻痹一阵。"
+        },
+        {
+          "type": "narration",
+          "text": "信心没有回来，那件事的阴影也没有过去。"
+        },
+        {
+          "type": "narration",
+          "text": "一年过去，他没有好起来，只是越来越安静。"
+        },
+        {
+          "type": "narration",
+          "text": "痛苦没有出口，就往内长，长成一个越来越清楚的念头。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "也许只有......能让它停下来。",
+          "fx": "vignette"
+        }
+      ],
+      "next": "ch01.s03"
+    },
+    {
+      "id": "ch01.s03",
+      "chapterId": "ch01",
+      "order": 3,
+      "title": "站在楼上",
+      "summary": "四周没有灯，风从领口灌进来。他吞下第一板右美沙芬。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_rooftop_dusk",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "他感觉站在了楼上了，四周没有灯，风从领口灌进来，往前一步就不必再痛的楼。"
+        },
+        {
+          "type": "narration",
+          "text": "这是他第一次od——他吞下了一板右美沙芬。"
+        },
+        {
+          "type": "narration",
+          "text": "药片很苦，但生活更苦。"
+        },
+        {
+          "type": "narration",
+          "text": "他分不清自己在哪，是在那阴暗的房间里？还是在冷寂的高楼上？还是......",
+          "fx": "blur"
+        }
+      ],
+      "next": "ch01.s04"
+    },
+    {
+      "id": "ch01.s04",
+      "chapterId": "ch01",
+      "order": 4,
+      "title": "余晖",
+      "summary": "过去的春节、晚会、烟花一起涌上来。他第一次看见“余晖”。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_spring_festival",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "smile"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "突然他看到了自己的过去，曾经喜气洋洋的春节、热闹的晚会、绚烂的烟花.....无数美好的念头涌上脑海。",
+          "fx": "glow"
+        },
+        {
+          "type": "narration",
+          "text": "他的瞳孔仿佛散发着辉光，充满了对生活的向往。"
+        },
+        {
+          "type": "narration",
+          "text": "他开始感到整个世界都太有意思了，他很幸福。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "那时的我是真的想去死了的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "可是在这一次od后，我逆转了那种想法……"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我称它为“余晖”，我至今都想再来一次。"
+        },
+        {
+          "type": "narration",
+          "text": "他意识到，如果能稳定触发“余晖”，那么他就可以救更多像他一样濒临自杀的人。"
+        },
+        {
+          "type": "narration",
+          "text": "不久，他开始寻找稳定触发“余晖”的方法。"
+        }
+      ],
+      "next": "ch01.s05"
+    },
+    {
+      "id": "ch01.s05",
+      "chapterId": "ch01",
+      "order": 5,
+      "title": "复刻失败的日子",
+      "summary": "烧水壶、茶叶、谵妄。金刚烷胺没有带来余晖，只带来失败。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_goto_room",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "ch01",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "或许我应该去烧个水。烧水壶在哪里？为什么水会在烧水壶里而不是在杯子里......茶叶...茶叶...茶叶是干什么的来着？"
+        },
+        {
+          "type": "narration",
+          "text": "服用金刚烷胺并不会带来“余晖”，而是谵妄。“余晖”的复现失败了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "为了弄清楚“余晖”的触发方法，我开始一直实验。我那时已经分不清我到底是为了解决自己的抑郁症还是单纯想爽了。"
+        }
+      ],
+      "next": "ch01.s06"
+    },
+    {
+      "id": "ch01.s06",
+      "chapterId": "ch01",
+      "order": 6,
+      "title": "第五高原",
+      "summary": "五感消融，时间扭曲，自我认知剥离。字像虫子一样扭动。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_plateau",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "transition": "glitch",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "接着，他借助右美沙芬来到了“第五高原”，五感消融，时间扭曲，自我认知剥离......"
+        },
+        {
+          "type": "narration",
+          "text": "是解离性麻醉，后藤看着手机上的字变得模糊，甚至开始像小虫子一样开始扭动。",
+          "fx": "blur"
+        },
+        {
+          "type": "narration",
+          "text": "“余晖”真的存在吗？他不敢回答......",
+          "fx": "vignette"
+        }
+      ],
+      "next": "ch01.s07"
+    },
+    {
+      "id": "ch01.s07",
+      "chapterId": "ch01",
+      "order": 7,
+      "title": "贴吧纠错",
+      "summary": "愈创木酚甘油醚不是甘油。找他问的人多了，他开始琢磨减害。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "intense"
+        }
+      },
+      "cue": "archive",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "一派胡言！什么叫做“愈美里面有甘油”？",
+          "fx": "sharpen"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "那是愈创木酚甘油醚！愈创木酚甘油醚不是甘油！"
+        },
+        {
+          "type": "narration",
+          "text": "他熟知药理，经常掺和解疑答惑。慢慢找他问的人多了，他开始琢磨减害。"
+        }
+      ],
+      "next": "ch01.s08"
+    },
+    {
+      "id": "ch01.s08",
+      "chapterId": "ch01",
+      "order": 8,
+      "title": "贴吧答疑的日常",
+      "summary": "普瑞巴林不能联用金刚烷胺。美金刚会导致大脑空洞。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "archive",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "“普瑞巴林不能联用金刚烷胺！”"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "“美金刚会导致大脑空洞！”"
+        }
+      ],
+      "next": "ch01.s09"
+    },
+    {
+      "id": "ch01.s09",
+      "chapterId": "ch01",
+      "order": 9,
+      "title": "欧d群聊天窗",
+      "summary": "舍曲林不能o。群里的人开始叫他“后藤”。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "archive",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "群友",
+          "text": "老师老师，请问舍曲林可以o吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "不能，舍曲林不能o，血清素综合征会让你痛不欲生。"
+        },
+        {
+          "type": "narration",
+          "text": "他的微信名叫做“后藤一里”，因此大伙们就叫他“后藤”了。"
+        }
+      ],
+      "next": "ch01.s10"
+    },
+    {
+      "id": "ch01.s10",
+      "chapterId": "ch01",
+      "order": 10,
+      "title": "一个贴吧陌生人发来邀请：写他",
+      "summary": "Sakura 从贴吧来，邀请他加入 OverdoseWiki 编辑组。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "archive",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "后来有一个叫Sakura的人从贴吧过来找他，邀请他加入OverdoseWiki的编辑组。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "一个个答太浪费时间了，如果建立一个网站，大伙们一看就好了，多方便啊！更能减害了不是嘛？"
+        },
+        {
+          "type": "narration",
+          "text": "之后，后藤撰写了很多减害文章。他的努力有了回报，大量oder都开始关注ODW，他也在药圈里获得了一定的地位。"
+        }
+      ],
+      "next": "ch01.s11"
+    },
+    {
+      "id": "ch01.s11",
+      "chapterId": "ch01",
+      "order": 11,
+      "title": "恢复术",
+      "summary": "他写下三命题，又拿自己的记录走一遍。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "analysis",
+          "caseId": "dxm",
+          "label": "病例：右美神经症"
+        }
+      ],
+      "next": "ch01.s14"
+    },
+    {
+      "id": "ch01.s14",
+      "chapterId": "ch01",
+      "order": 14,
+      "title": "报告七后记",
+      "summary": "他不再需要右美沙芬维持生活。可他问：oder，你想逃出高原吗？",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_goto_room",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我也不知道之后会不会再去od了，但至少有一点是确定的：我不再需要右美沙芬来维持我的生活了，我大抵逃离高原了吧。"
+        },
+        {
+          "type": "quote",
+          "text": "“oder，你想逃出高原吗？”"
+        },
+        {
+          "type": "choice",
+          "id": "ch01.s14.choice",
+          "prompt": "选择",
+          "options": [
+            {
+              "id": "o1",
+              "label": "继续读下去",
+              "targetScene": "ch02.s01"
+            },
+            {
+              "id": "o2",
+              "label": "先把档案合上",
+              "note": "档案留在这里，随时可以再读",
+              "targetScene": "ch02.s01"
+            }
+          ]
+        }
+      ],
+      "next": "ch02.s01"
+    }
+  ]
+}

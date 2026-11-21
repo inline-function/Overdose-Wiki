@@ -1,0 +1,52 @@
+{
+  "name": "odw-game",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node tools/use-sample.mjs && tsc --noEmit && node tools/audio/check-audio.mjs && vite build && node tools/strip-private-assets.mjs",
+    "preview": "vite preview",
+    "typecheck": "node tools/use-private-if-exists.mjs && tsc --noEmit",
+    "test": "vitest run --pool=threads --no-isolate --fileParallelism=false",
+    "test:watch": "vitest",
+    "e2e": "playwright test",
+    "content:check": "node tools/validate-content.mjs",
+    "build:demo": "npm run build",
+    "build:private": "node tools/require-private.mjs && node tools/use-private.mjs && node tools/validate-content.mjs && tsc --noEmit && node tools/audio/check-audio.mjs && vite build",
+    "predev": "node tools/use-private-if-exists.mjs",
+    "content:use-private": "node tools/use-private.mjs",
+    "content:use-sample": "node tools/use-sample.mjs",
+    "import:ch01": "node tools/import-ch01.mjs",
+    "import:chapters": "node tools/import-ch01.mjs",
+    "import:reports": "node tools/import-reports.mjs",
+    "import:effects": "node tools/import-effects.mjs",
+    "import:side": "node tools/import-side.mjs",
+    "audio:build": "python tools/audio/build-audio.py",
+    "audio:check": "node tools/audio/check-audio.mjs",
+    "fonts:build": "python tools/subset-fonts.py && python tools/build-font-patch.py",
+    "fonts:check": "python tools/check-font-coverage.py",
+    "deploy:check": "node tools/check-private-build.mjs"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.12",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "jsdom": "^31.0.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  },
+  "license": "MIT"
+}

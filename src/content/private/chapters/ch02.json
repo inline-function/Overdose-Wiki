@@ -1,0 +1,1056 @@
+{
+  "id": "ch02",
+  "title": "苦涩的颜料",
+  "scenes": [
+    {
+      "id": "ch02.s01",
+      "chapterId": "ch02",
+      "order": 1,
+      "title": "好友申请",
+      "summary": "彩加从贴吧找过来。两个病人在屏幕两端确认彼此是同类。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "smile"
+        }
+      },
+      "cue": "ch02-early",
+      "transition": "slide",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "大大你居然就是后藤老师！"
+        },
+        {
+          "type": "narration",
+          "text": "后藤那时已经被人叫老师了，叫的人多了，他差点真以为自己救得了谁。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "呃啊，胃炎又犯了，这辈子就是被od害了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我也有鼻炎，发炎是真的不好受。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我也有鼻炎！"
+        },
+        {
+          "type": "narration",
+          "text": "她想找和她一样的人，确认彼此是同类。"
+        }
+      ],
+      "next": "ch02.s02"
+    },
+    {
+      "id": "ch02.s02",
+      "chapterId": "ch02",
+      "order": 2,
+      "title": "分不清梦与现实",
+      "summary": "她说自己动不了，像躺在深渊里。后藤问：那是不是一个黑色的空洞？",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "blank"
+        }
+      },
+      "cue": "ch02-early",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "老师，我有点分不清自己是在做梦还是在现实里了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我经历过很多次，自以为醒来，结果突然发觉自己还在睡觉。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我好像动不了，只能躺着，感觉自己在深渊里面。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "你所描述的深渊，是不是一个黑色的空洞？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "是的！"
+        },
+        {
+          "type": "narration",
+          "text": "是K洞......",
+          "fx": "blur"
+        }
+      ],
+      "next": "ch02.s03"
+    },
+    {
+      "id": "ch02.s03",
+      "chapterId": "ch02",
+      "order": 3,
+      "title": "确认同类",
+      "summary": "胃炎、心悸、犯困。人格解体与现实解体正在一步步蚕食她的意识。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "tired"
+        }
+      },
+      "cue": "ch02-early",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "现在还好吗？我有点担心你耶。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "呜呜，抱抱波奇酱。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "身体情况怎么样？还有心理情况。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "胃炎又犯了，经常心悸，犯困，情绪怪怪的。"
+        },
+        {
+          "type": "narration",
+          "text": "od解离剂导致的人格解体与现实解体正在一步步蚕食彩加的意识......",
+          "fx": "blur"
+        }
+      ],
+      "next": "ch02.s04"
+    },
+    {
+      "id": "ch02.s04",
+      "chapterId": "ch02",
+      "order": 4,
+      "title": "出院四十八小时",
+      "summary": "她问喹硫平与酒的反应。后藤答完才想起问：你问这个干什么？",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "blank"
+        }
+      },
+      "cue": "ch02-early",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "可以讲讲喹硫平与酒的反应吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "这两个在一起一般是用来自杀的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "不对...你问这个干什么？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "这样啊，大概...理解了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我真应该回答问题之前先问意图......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "快告诉我想错了，我不想变成杀人犯......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "抱歉，你没有做错事，不要给自己增加心理负担。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "波奇...药师...杀人犯...“哎那个波奇教人自杀耶”。"
+        }
+      ],
+      "next": "ch02.s05"
+    },
+    {
+      "id": "ch02.s05",
+      "chapterId": "ch02",
+      "order": 5,
+      "title": "求一个解法",
+      "summary": "她说自己在纠结要不要死，又说：没有人知道是你教我的。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "tired"
+        }
+      },
+      "cue": "ch02-late",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我在纠结要不要死。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "不要......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "没事的，没有人知道是你教我的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "谢谢你，你对我很好，波奇酱，你还记得吗？那个我在推特上说的，总要有个人信任，那么我可以信任你吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "喹硫平加酒的自杀术，只是一个笑话。我自己都记不清了。"
+        },
+        {
+          "type": "narration",
+          "text": "不知道是药片还是现实让她产生了这个念头。"
+        }
+      ],
+      "next": "ch02.s06"
+    },
+    {
+      "id": "ch02.s06",
+      "chapterId": "ch02",
+      "order": 6,
+      "title": "不是情感麻木",
+      "summary": "她听见很多声音，腿自己在飘。阳性精神病症状已经很明显了。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "blank"
+        }
+      },
+      "cue": "ch02-late",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "波奇，抱紧我，我听见了好多声音。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "好奇怪，感觉腿自己在飘动，有怕管道，电流，还有我不知道的声音。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "心脏跳的好快。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "你又od了吗？"
+        },
+        {
+          "type": "narration",
+          "text": "非常明显的阳性精神病症状。",
+          "fx": "tear"
+        }
+      ],
+      "next": "ch02.s07"
+    },
+    {
+      "id": "ch02.s07",
+      "chapterId": "ch02",
+      "order": 7,
+      "title": "隧道与幻觉",
+      "summary": "第一次自杀被救回来。出院四十八小时，她又吞了六十片右美沙芬。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_tunnel",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "彩加第一次自杀被救了回来，然而出院后48小时又因为别人的刺激又吞了60t右美沙芬。",
+          "fx": "gloom"
+        },
+        {
+          "type": "narration",
+          "text": "很冲动且笨蛋的做法。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "60t右美沙芬报告：头疼、恶心......感情麻木。"
+        }
+      ],
+      "next": "ch02.s08"
+    },
+    {
+      "id": "ch02.s08",
+      "chapterId": "ch02",
+      "order": 8,
+      "title": "墙上的颜色",
+      "summary": "她想用右美沙芬把自己的人格解离掉，这样就不必在意情感了。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "blank"
+        }
+      },
+      "cue": "ch02-late",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "感情麻木是人格解体的症状，右美沙芬导致的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我不是对别人的情感有过分苛刻的要求吗？所以我可以通过服用右美沙芬以达到人格解体来让我不在意情感吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "不要这样......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我现在不仅人格解体，还听到好多不知道哪来的声音。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "是精神分裂...精神分裂的阳性症状......"
+        }
+      ],
+      "next": "ch02.s09"
+    },
+    {
+      "id": "ch02.s09",
+      "chapterId": "ch02",
+      "order": 9,
+      "title": "昏迷与失忆",
+      "summary": "连续几天没睡，困到不行突然昏过去。世界正在腐烂。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_hospital_ward",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "tired"
+        }
+      },
+      "cue": "ch02-late",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "呃，救救我，波奇，我已经连续好几天没睡着觉了，每次都是困到不行突然昏过去的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我现在总是听到不存在的声音，感觉世界正在腐烂，好难受......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "这是精神分裂、抑郁症、人格解体。喹硫平可以解决精神分裂。"
+        },
+        {
+          "type": "narration",
+          "text": "但是喹硫平会加剧抑郁症与人格解体。"
+        }
+      ],
+      "next": "ch02.s10"
+    },
+    {
+      "id": "ch02.s10",
+      "chapterId": "ch02",
+      "order": 10,
+      "title": "群里的她",
+      "summary": "苏糖酸镁的钱拿去买右美沙芬了。后藤说：你这是自作自受。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "tired"
+        }
+      },
+      "cue": "ch02-late",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "你的苏糖酸镁拿到了没有？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "没钱喵，钱都拿去买右美沙芬了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "哎你这人...哎...苏糖酸镁比右美沙芬好多了你不要，你非得...哎我心脏疼不和你说了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "波奇波奇，请不要讨厌我嘛。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "虽然我不讨厌你，但你这是在自作自受。"
+        }
+      ],
+      "next": "ch02.s11"
+    },
+    {
+      "id": "ch02.s11",
+      "chapterId": "ch02",
+      "order": 11,
+      "title": "对不起的循环",
+      "summary": "慢性解离让她无法认识自己的错误。苏糖酸镁的钱又变成了酒。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "blank"
+        }
+      },
+      "cue": "ch02-late",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "什么意思？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "慢性解离症，它让你无法认识自己的错误，右美沙芬会让你一直蒙蔽你对现实的认知的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "那我吃了苏糖酸镁是不是就好了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "是。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "救世主波奇，波奇大夫，救救我。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "让你购买苏糖酸镁试一下。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "结果你那个钱就继续买醉去了。"
+        }
+      ],
+      "next": "ch02.s12"
+    },
+    {
+      "id": "ch02.s12",
+      "chapterId": "ch02",
+      "order": 12,
+      "title": "回光返照",
+      "summary": "“知道错了，别骂了别骂了。”右美沙芬的认知篡改有多恐怖。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "tired"
+        }
+      },
+      "cue": "ch02-late",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我是傻逼。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "有钱拿去买醉，钥匙在这铺好路子你不去。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "知道错了，别骂了别骂了。"
+        },
+        {
+          "type": "narration",
+          "text": "右美沙芬的认知篡改究竟有多么恐怖。"
+        }
+      ],
+      "next": "ch02.s13"
+    },
+    {
+      "id": "ch02.s13",
+      "chapterId": "ch02",
+      "order": 13,
+      "title": "虫子",
+      "summary": "她问有没有毁灭自己的好办法，又梦见后藤坐在她旁边上化学课。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "波奇，有什么毁灭自己的好办法？吃点金刚烷胺怎么样？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我昨天晚上梦到你了波奇酱，梦到你跑到我们学校，你是我的同桌，在上化学课的时候和我聊OverdoseWiki。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "波奇，我感觉我真的没救了，自杀一年比以前都要强烈，好焦虑好痛苦好难受，而要试一下你说的喹硫平配酒了，这大概是我最后一份报告了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "波奇，我吃了一堆氯硝西泮，我要再吃右美沙芬。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "自作主张......"
+        }
+      ],
+      "next": "ch02.s14"
+    },
+    {
+      "id": "ch02.s14",
+      "chapterId": "ch02",
+      "order": 14,
+      "title": "无人接听",
+      "summary": "她问会不会成为 ODW 上的一份死亡报告。后藤说：下一个案例绝不是你。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "blank"
+        }
+      },
+      "cue": "ch02-late",
+      "transition": "glitch",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "会吃死吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "帮帮我，求你了......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "帮你什么？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "帮我证明，我的恢复术有效......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "波奇，我会成为ODW上的一份死亡报告吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "不可能！下一个案例绝不是你！",
+          "fx": "shake",
+          "emotion": "rage"
+        },
+        {
+          "type": "narration",
+          "text": "我确信......",
+          "fx": "gloom"
+        }
+      ],
+      "next": "ch02.s15"
+    },
+    {
+      "id": "ch02.s15",
+      "chapterId": "ch02",
+      "order": 15,
+      "title": "照顾者",
+      "summary": "照顾者说彩加又吃了好多药。后藤越想越气：她什么都知道。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive"
+      },
+      "cue": "ch02-late",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "后藤老师，彩加这个笨蛋最近吃了好多金刚烷胺和右美沙芬。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "这个案例我越想越气，知道为什么吗？她什么都知道，但她就是不肯逃离高原。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我真废物啊，全都是我的问题......"
+        }
+      ],
+      "next": "ch02.s16"
+    },
+    {
+      "id": "ch02.s16",
+      "chapterId": "ch02",
+      "order": 16,
+      "title": "不会死",
+      "summary": "“你不是废物，你是药师波奇，你救了我。”她一遍遍说不会死。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "smile"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我不会死，你不是废物，你是药师波奇，你救了我。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我不会死、我不会死、我不会死......"
+        },
+        {
+          "type": "narration",
+          "text": "她什么都知道......"
+        }
+      ],
+      "next": "ch02.s17"
+    },
+    {
+      "id": "ch02.s17",
+      "chapterId": "ch02",
+      "order": 17,
+      "title": "回头来得及吗",
+      "summary": "她说害怕了，问现在回头还来不来得及。后藤说：来得及。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "blank"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "波奇，我是不是很笨。我害怕了，我现在回头还来得及吗？我知道好对不起、对不起....."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "波奇，我下定决心从现在开始好好服用抗抑郁药了，绝不od了，我真的太惭愧了，我简直就是个笨蛋......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "来得及、来得及......"
+        },
+        {
+          "type": "narration",
+          "text": "我多么希望来得及呀......",
+          "fx": "gloom"
+        }
+      ],
+      "next": "ch02.s18"
+    },
+    {
+      "id": "ch02.s18",
+      "chapterId": "ch02",
+      "order": 18,
+      "title": "余晖",
+      "summary": "她又od了。2t金刚烷胺，48t右美沙芬，她说自己变得很健全。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room",
+        "bust": {
+          "speaker": "彩加",
+          "expr": "smile"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "波奇，在吗？我想问问“余晖”是什么？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "“余晖”的感觉就像是感觉自己的精神病都好了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加",
+          "text": "我od完2t金刚烷胺和48t右美沙芬之后感觉自己变得很健全了，回忆起来以前的事情，感觉很幸福。",
+          "fx": "glow"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "是“余晖”。"
+        },
+        {
+          "type": "narration",
+          "text": "彩加怎么又od了......"
+        }
+      ],
+      "next": "ch02.s19"
+    },
+    {
+      "id": "ch02.s19",
+      "chapterId": "ch02",
+      "order": 19,
+      "title": "看医生",
+      "summary": "看一半她跑了。马桶里已经倒掉五瓶金刚烷胺。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive"
+      },
+      "cue": "ch02-late",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "哎，我带彩加去看医生，结果看一半她跑了......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "彩加背着我买金刚烷胺，为什么要吃这种垃圾药？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "我把这破药倒马桶了，迄今为止我家马桶已经吃了五瓶金刚烷胺了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "彩加吃金刚烷胺还吃出精神分裂了，说我房间有好多彩色的虫子。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "还说听见我在哭在叫，脑袋坏了呀这是。"
+        },
+        {
+          "type": "narration",
+          "text": "为什么她要吃那垃圾药......",
+          "fx": "gloom"
+        }
+      ],
+      "next": "ch02.s20"
+    },
+    {
+      "id": "ch02.s20",
+      "chapterId": "ch02",
+      "order": 20,
+      "title": "坠楼",
+      "summary": "“抱歉各位，彩加她......她坠楼自杀了。”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room"
+      },
+      "cue": "tragedy",
+      "transition": "glitch",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "抱歉各位，彩加她......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "她坠楼自杀了......",
+          "fx": "gloom"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "我醒来的时候，她已经不见了......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "抱歉，我没有照顾好她......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "我猜...她可能早就想死了...刑警告诉我，她今天不死，明天也会死，明天不死，后天也会死。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "她就是想死...拦不住...我真的...尽力了......"
+        }
+      ],
+      "next": "ch02.s21"
+    },
+    {
+      "id": "ch02.s21",
+      "chapterId": "ch02",
+      "order": 21,
+      "title": "最后一天",
+      "summary": "前一天她被送去派出所，照顾者把她领回家。结果就是今天。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room"
+      },
+      "cue": "tragedy",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "昨天她因为衣衫不整在外面游荡，被人发现送去了派出所，我把她领回了家，结果今天就......"
+        },
+        {
+          "type": "narration",
+          "text": "精神分裂是多么恐怖......",
+          "fx": "gloom"
+        }
+      ],
+      "next": "ch02.s22"
+    },
+    {
+      "id": "ch02.s22",
+      "chapterId": "ch02",
+      "order": 22,
+      "title": "母亲",
+      "summary": "母亲问：你不是信誓旦旦说能照顾好她吗？",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room"
+      },
+      "cue": "tragedy",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加母亲",
+          "text": "两个人在一起好好的，为什么她会一直想死？你不是信誓旦旦的说能照顾好她吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "对不起...对不起...她的精神分裂实在是太严重了..."
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加母亲",
+          "text": "你为什么不让我接她回家？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "彩加害怕你......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彩加母亲",
+          "text": "......"
+        }
+      ],
+      "next": "ch02.s23"
+    },
+    {
+      "id": "ch02.s23",
+      "chapterId": "ch02",
+      "order": 23,
+      "title": "好好活着",
+      "summary": "“孩子，你要好好活着。”“我会的。”",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_caijia_room"
+      },
+      "cue": "morning",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彩加母亲",
+          "text": "孩子，你要好好活着......"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "照顾者",
+          "text": "我会的。"
+        }
+      ],
+      "next": "ch02.s24"
+    },
+    {
+      "id": "ch02.s24",
+      "chapterId": "ch02",
+      "order": 24,
+      "title": "五彩的画未干",
+      "summary": "“妹妹，你说句话呀。”她再也不能回应了。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive"
+      },
+      "cue": "morning",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "当时照顾者看到彩加坠楼后，哭着喊着：“妹妹，你说句话呀”。可惜，彩加再也不能回应她了。"
+        },
+        {
+          "type": "narration",
+          "text": "有没有什么大遗忘术可以让我忘掉这些记忆呢？"
+        },
+        {
+          "type": "narration",
+          "text": "那些沉重的事情，无论多久我都记得。"
+        },
+        {
+          "type": "narration",
+          "text": "她的事情成为了一个梦魇，无时无刻地缠绕着我。"
+        },
+        {
+          "type": "choice",
+          "id": "ch02.s24.choice",
+          "prompt": "选择",
+          "options": [
+            {
+              "id": "o1",
+              "label": "继续读下去",
+              "targetScene": "ch03.s01"
+            },
+            {
+              "id": "o2",
+              "label": "先把档案合上",
+              "note": "档案留在这里，随时可以再读",
+              "targetScene": "ch03.s01"
+            }
+          ]
+        }
+      ],
+      "next": "ch03.s01"
+    }
+  ]
+}

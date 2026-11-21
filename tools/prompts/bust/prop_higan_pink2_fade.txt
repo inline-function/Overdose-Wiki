@@ -1,0 +1,11 @@
+PIXEL ART kawaii chibi jellyfish avatar, ONE character centered and filling the frame. A LARGE plump pink bell dome taking up about 80 percent of the image: wide, round, slightly squashed, like a soft marshmallow, wider than it is tall. Below the bell only FOUR VERY SHORT stubby wavy tentacles, each no longer than one tenth of the bell height, tucked close under the bell. No body, no arms, no legs, no long tentacles.
+
+The bell is SATURATED CANDY PINK, clearly pink, not cream and not white: bright bubblegum pink #f4a3b6 over most of the bell, deep rose pink #e0708a for the shading, raspberry #c2506b for the lower rim, a small glowing crimson #b8425a core inside the bell, and cream #f3ead8 only for two small highlights on the top of the bell.
+
+Huge glossy round eyes on the bell, each eye about one quarter of the bell width, dark rose-brown eyes with one large white highlight and one small highlight, looking straight at the viewer.
+
+ABSOLUTELY NO MOUTH. No mouth, no lips, no nose, no nostrils, no dots under the eyes, no blush marks, no cheek dots, no facial markings of any kind below the eyes. The area under the eyes must be completely blank pink.
+Expression: fading away, almost transparent. Liquid pale pink, much lighter: the bell drawn with a very light pink outline instead of the dark outline, all colors washed out, the crimson core dim and a third faded, eyes soft and almost closed with only one small highlight.
+Flat solid magenta background #FF00FF, no shadow, no border, no text. 2px deep rose-brown outline #8c3a4e, chunky square pixels, hard edges, flat 2-tone shading, no anti-aliasing, no gradients, no dithering, no bubbles, no water. Very cute, adorable, kawaii, soft rounded shapes, sticker style.
+
+Strict limited palette: bubblegum pink #f4a3b6, deep rose #e0708a, raspberry #c2506b, crimson #b8425a, cream #f3ead8, rose-brown outline #8c3a4e, magenta background.

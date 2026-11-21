@@ -1,0 +1,157 @@
+{
+  "id": "dxm",
+  "order": 1,
+  "title": "右美神经症 · 后藤的自我病例",
+  "subtitle": "后藤的自我病例",
+  "intro": "后藤把光标停在自己的记录上，往后靠了靠。“这次你来。别急着说我在 od——先看我给自己编了什么。”",
+  "report": {
+    "title": "《恢复术》草稿 · 病例二（后藤）",
+    "paragraphs": [
+      "吃右美的那阵子，我常头痛、咳嗽、呕吐、恶心。我告诉自己：这是治病的代价，是药在起作用。",
+      "可我心里清楚，我“就是想 od”。这个念头一冒出来，就被什么东西按下去：od 有罪、不体面、会让所有人失望。这就是超我的审查。",
+      "于是我换了个说法：吃优米是让自己好受，是治病，不是 od。这样想的时候，头痛咳嗽呕吐恶心，好像都说得通了。",
+      "后藤在页边写：这一段跳步很大，是极为粗糙的说法。"
+    ]
+  },
+  "keywords": [
+    {
+      "text": "头痛",
+      "blockId": "symptom"
+    },
+    {
+      "text": "咳嗽",
+      "blockId": "symptom"
+    },
+    {
+      "text": "呕吐",
+      "blockId": "symptom"
+    },
+    {
+      "text": "恶心",
+      "blockId": "symptom"
+    },
+    {
+      "text": "超我",
+      "blockId": "cognition"
+    },
+    {
+      "text": "审查",
+      "blockId": "cognition"
+    },
+    {
+      "text": "让自己好受",
+      "blockId": "benefit"
+    },
+    {
+      "text": "优米",
+      "blockId": "cause"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "symptom",
+      "kind": "症状",
+      "text": "头痛 · 咳嗽 · 呕吐 · 恶心（躯体化）"
+    },
+    {
+      "id": "decoy-benefit-1",
+      "kind": "好处",
+      "text": "吃完能睡一个整觉"
+    },
+    {
+      "id": "cause",
+      "kind": "病因",
+      "text": "想 od 的意图被超我审查筛掉"
+    },
+    {
+      "id": "decoy-cognition-1",
+      "kind": "认知",
+      "text": "只是好奇，试一次不会怎么样"
+    },
+    {
+      "id": "decoy-symptom-1",
+      "kind": "症状",
+      "text": "手抖 · 失眠 · 心慌（像戒断）"
+    },
+    {
+      "id": "cognition",
+      "kind": "认知",
+      "text": "观念：od 有罪 / 不好（超我的审查）"
+    },
+    {
+      "id": "decoy-cause-1",
+      "kind": "病因",
+      "text": "最近压力太大，和 od 没关系"
+    },
+    {
+      "id": "benefit",
+      "kind": "好处",
+      "text": "“吃优米是治病、是让自己好受，不是 od”"
+    },
+    {
+      "id": "decoy-benefit-2",
+      "kind": "好处",
+      "text": "能暂时忘掉成绩和家里的事"
+    },
+    {
+      "id": "decoy-cognition-2",
+      "kind": "认知",
+      "text": "只要控制住，就不算 od"
+    },
+    {
+      "id": "decoy-symptom-2",
+      "kind": "症状",
+      "text": "记性变差 · 反应变慢 · 不想说话"
+    },
+    {
+      "id": "decoy-cause-2",
+      "kind": "病因",
+      "text": "身边的朋友都在用"
+    }
+  ],
+  "slots": [
+    {
+      "id": "main-symptom",
+      "chain": "main",
+      "accepts": [
+        "symptom"
+      ],
+      "hint": "先把反复出现的身体反应钉住。"
+    },
+    {
+      "id": "main-cause",
+      "chain": "main",
+      "accepts": [
+        "cause"
+      ],
+      "hint": "这些反应在替什么打掩护？"
+    },
+    {
+      "id": "main-cognition",
+      "chain": "main",
+      "accepts": [
+        "cognition"
+      ],
+      "hint": "那个把念头按下去的东西，是什么？"
+    },
+    {
+      "id": "branch-benefit",
+      "chain": "branch",
+      "accepts": [
+        "benefit"
+      ],
+      "hint": "他靠什么说法，让自己相信这不是 od？"
+    }
+  ],
+  "reveal": {
+    "quote": "我就不是 od 出毛病了，我 tm 就是想 od。头痛咳嗽呕吐，全是毫无用处的。",
+    "paragraphs": [
+      "点破压抑之后，躯体化失去了要保护的东西。",
+      "恢复：接住病因，直面意图，而不是继续吃药把症状按回去。"
+    ]
+  },
+  "restore": {
+    "text": "恢复的终点不是“磕得更欢”，是“不再需要”。",
+    "annotation": "后藤自注：偏向精神分析，存在大量跳步，是极为粗糙的说法。药理注：优米不应当造成这四个症状，这只是心理作用。以上是后藤的框架，不是真理。"
+  }
+}

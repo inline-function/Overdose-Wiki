@@ -1,0 +1,58 @@
+.viewport {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  overflow: auto;
+  padding: 0;
+  background: var(--c-void);
+}
+
+.stage {
+  position: relative;
+  flex: 0 0 auto;
+  width: calc(480 * var(--u));
+  height: calc(270 * var(--u));
+  margin: auto;
+  color: var(--c-ink);
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.05) 0 calc(1 * var(--u)),
+    transparent calc(1 * var(--u)) calc(4 * var(--u))
+  );
+}
+
+.stage[data-scanlines="off"] .scanlines {
+  display: none;
+}
+
+.loading {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-muted);
+  font-size: var(--fs-10);
+  font-family: var(--font-10);
+  line-height: var(--lh-10);
+}
+
+.hint {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--sp-2);
+  z-index: 40;
+  text-align: center;
+  color: var(--c-sky);
+  font-size: var(--fs-8);
+  font-family: var(--font-8);
+  line-height: var(--lh-8);
+  pointer-events: none;
+}

@@ -1,0 +1,5009 @@
+[
+  {
+    "kind": "drug",
+    "id": "ethanol",
+    "name": "乙醇",
+    "aliases": [],
+    "klass": "other",
+    "tags": [
+      "镇静剂",
+      "其他"
+    ],
+    "summary": "短暂的放松，随后是反跳。",
+    "description": "最常见的镇静剂。单次使用时只换到很短的放松；过量会压住呼吸，停药后出现戒断。",
+    "neuro": {
+      "GABA": 6,
+      "内啡肽": 3
+    },
+    "substrates": [
+      "CYP2E1"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 0.2,
+    "bioavailability": 0.5,
+    "effectLine": 1,
+    "concentrationPerDose": 0.5,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 0.5,
+        "unit": "g",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      },
+      {
+        "name": "呼吸抑制",
+        "threshold": 1.5,
+        "unit": "g",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "damage",
+          "target": "self",
+          "track": "phys",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "GABA",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "内啡肽",
+          "amount": 3
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "GABA",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "呼吸抑制",
+          "stacks": 1
+        }
+      ]
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "酒精的戒断反跳开始。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "nicotine",
+    "name": "尼古丁",
+    "aliases": [],
+    "klass": "other",
+    "tags": [
+      "兴奋剂",
+      "其他"
+    ],
+    "summary": "短促的清醒，很快回落。",
+    "description": "烟草中的兴奋剂。单次使用时给一点行动力；过量带来心悸与激越。",
+    "neuro": {
+      "多巴胺": 6,
+      "去甲肾上腺素": 4
+    },
+    "substrates": [
+      "CYP2A6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 2,
+    "bioavailability": 0.5,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "激越",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 4
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 20
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "激越",
+          "stacks": 2
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 12
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 10
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "激越",
+          "stacks": 1
+        }
+      ]
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "尼古丁戒断开始。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "arecoline",
+    "name": "槟榔碱",
+    "aliases": [],
+    "klass": "other",
+    "tags": [
+      "兴奋剂",
+      "植物成分"
+    ],
+    "summary": "槟榔里的兴奋性生物碱。",
+    "description": "单次使用时给一点行动力；过量会走向胆碱能过载与激越。",
+    "neuro": {
+      "多巴胺": 6,
+      "去甲肾上腺素": 4
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 0.1,
+    "bioavailability": 0.5,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "激越",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 4
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 20
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "激越",
+          "stacks": 2
+        },
+        {
+          "op": "damage",
+          "target": "self",
+          "track": "phys",
+          "amount": 3
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "激越",
+          "stacks": 2
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "caffeine",
+    "name": "咖啡因",
+    "aliases": [],
+    "klass": "other",
+    "tags": [
+      "兴奋剂",
+      "黄嘌呤类"
+    ],
+    "summary": "最常用的兴奋剂。",
+    "description": "单次使用时换 1 点行动力；过量会心悸、焦虑，之后是耐受与戒断。",
+    "neuro": {
+      "多巴胺": 6,
+      "去甲肾上腺素": 4
+    },
+    "substrates": [
+      "CYP1A2"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 5,
+    "bioavailability": 0.5,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "激越",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 4
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 20
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "激越",
+          "stacks": 2
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 10
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 8
+        }
+      ]
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "咖啡因戒断：头痛与疲倦。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "magnesium_threonate",
+    "name": "苏糖酸镁",
+    "aliases": [],
+    "klass": "other",
+    "tags": [
+      "抗解离剂",
+      "镁补充剂"
+    ],
+    "summary": "左苏；反解离与恢复术的一部分。",
+    "description": "单次使用时清除一点解离，让谷氨酸往基线回落。重复使用不会触发额外追加效应。",
+    "neuro": {
+      "谷氨酸": 4
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 4,
+    "bioavailability": 0.5,
+    "effectLine": 2,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "解离",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "谷氨酸",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 2
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "diphenhydramine",
+    "name": "苯海拉明",
+    "aliases": [],
+    "klass": "otc",
+    "tags": [
+      "抗组胺",
+      "OTC"
+    ],
+    "summary": "抗组胺与镇静。",
+    "description": "单次使用时帮助入睡、压住一点激越；过量会抗胆碱能、意识混浊。",
+    "neuro": {
+      "组胺": -6
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {
+      "CYP2D6": "weak"
+    },
+    "inducers": [],
+    "halfLife": 6,
+    "bioavailability": 0.6,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      },
+      {
+        "name": "抗胆碱能",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "组胺",
+          "amount": -6
+        }
+      ],
+      "over": [
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "组胺",
+          "amount": -20
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "抗胆碱能",
+          "stacks": 2
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "dimenhydrinate",
+    "name": "茶苯海明",
+    "aliases": [],
+    "klass": "otc",
+    "tags": [
+      "抗组胺",
+      "OTC"
+    ],
+    "summary": "晕车药，也是镇静剂。",
+    "description": "单次使用时压住恶心与激越；过量会谵妄、抗胆碱能。",
+    "neuro": {
+      "组胺": -6
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 6,
+    "bioavailability": 0.6,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      },
+      {
+        "name": "抗胆碱能",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "组胺",
+          "amount": -6
+        }
+      ],
+      "over": [
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "组胺",
+          "amount": -20
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "抗胆碱能",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "谵妄",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "omeprazole",
+    "name": "奥美拉唑",
+    "aliases": [],
+    "klass": "otc",
+    "tags": [
+      "质子泵抑制剂",
+      "OTC"
+    ],
+    "summary": "胃黏膜保护。",
+    "description": "单次使用时让身体舒服一点；它不直接改变心理，但会拖慢部分药物的代谢。",
+    "neuro": {},
+    "substrates": [],
+    "inhibitors": {
+      "CYP2C19": "moderate"
+    },
+    "inducers": [],
+    "halfLife": 1,
+    "bioavailability": 0.6,
+    "effectLine": 2,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "phys",
+          "amount": 2
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "melatonin",
+    "name": "褪黑素",
+    "aliases": [],
+    "klass": "otc",
+    "tags": [
+      "催眠剂",
+      "OTC"
+    ],
+    "summary": "睡眠节律。",
+    "description": "单次使用时帮助入睡、恢复一点心理；过量只会更困。",
+    "neuro": {
+      "组胺": -2
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 1,
+    "bioavailability": 0.6,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "组胺",
+          "amount": -2
+        }
+      ],
+      "over": [
+        {
+          "op": "status",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "amantadine",
+    "name": "金刚烷胺",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "抗病毒药",
+      "谵妄剂"
+    ],
+    "summary": "抗病毒与抗帕金森药；过量时谵妄。",
+    "description": "单次使用时给一点行动力；过量会抗胆碱能、谵妄。",
+    "neuro": {
+      "多巴胺": 6,
+      "去甲肾上腺素": 4
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 15,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "抗胆碱能",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "激越",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "去甲肾上腺素",
+          "amount": 4
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 20
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "去甲肾上腺素",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "激越",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "谵妄",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "抗胆碱能",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "memantine",
+    "name": "美金刚",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "解离剂",
+      "抗痴呆药"
+    ],
+    "summary": "NMDA 拮抗剂；被误用作解离。",
+    "description": "单次使用时让谷氨酸回落、清除一点解离；过量会解离与谵妄。",
+    "neuro": {
+      "谷氨酸": -8,
+      "多巴胺": 4
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 60,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "positive"
+      },
+      {
+        "name": "解离",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "解离",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "谷氨酸",
+          "amount": -8
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "谷氨酸",
+          "amount": -18
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 10
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "解离",
+          "stacks": 2
+        },
+        {
+          "op": "damage",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "谵妄",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "nefopam",
+    "name": "奈福泮",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "镇痛药",
+      "抗胆碱能剂"
+    ],
+    "summary": "非阿片镇痛药，带抗胆碱能副作用。",
+    "description": "单次使用时缓解身体疼痛；过量会抗胆碱能与激越。",
+    "neuro": {
+      "去甲肾上腺素": 3
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 4,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      },
+      {
+        "name": "激越",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "抗胆碱能",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 2
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "去甲肾上腺素",
+          "amount": 3
+        }
+      ],
+      "over": [
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "抗胆碱能",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "激越",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "fluoxetine",
+    "name": "氟西汀",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "SSRI",
+      "五朵金花"
+    ],
+    "summary": "五朵金花之一；长效 SSRI。",
+    "description": "单次使用时建立 SSRI 疗程；过量会把血清素推过阈值。它同时抑制 CYP2D6。",
+    "neuro": {
+      "血清素": 3
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {
+      "CYP2D6": "strong"
+    },
+    "inducers": [],
+    "halfLife": 96,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "血清素综合征",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 3
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "血清素综合征",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "SSRI",
+        "name": "SSRI 疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "psy",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "SSRI 停药反跳。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "sertraline",
+    "name": "舍曲林",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "SSRI",
+      "五朵金花"
+    ],
+    "summary": "五朵金花之一。",
+    "description": "单次使用时建立 SSRI 疗程；过量会把血清素推过阈值。",
+    "neuro": {
+      "血清素": 3
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {
+      "CYP2D6": "moderate"
+    },
+    "inducers": [],
+    "halfLife": 26,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "血清素综合征",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 3
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "血清素综合征",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "SSRI",
+        "name": "SSRI 疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "psy",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "SSRI 停药反跳。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "paroxetine",
+    "name": "帕罗西汀",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "SSRI",
+      "五朵金花"
+    ],
+    "summary": "五朵金花之一；停药反应明显。",
+    "description": "单次使用时建立 SSRI 疗程；过量会把血清素推过阈值。",
+    "neuro": {
+      "血清素": 3
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {
+      "CYP2D6": "strong"
+    },
+    "inducers": [],
+    "halfLife": 21,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "血清素综合征",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 3
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "血清素综合征",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "SSRI",
+        "name": "SSRI 疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "psy",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "帕罗西汀停药反跳明显。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "fluvoxamine",
+    "name": "氟伏沙明",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "SSRI",
+      "五朵金花"
+    ],
+    "summary": "五朵金花之一；CYP 抑制谱较宽。",
+    "description": "单次使用时建立 SSRI 疗程；过量会把血清素推过阈值。",
+    "neuro": {
+      "血清素": 3
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {
+      "CYP1A2": "strong",
+      "CYP2C19": "strong"
+    },
+    "inducers": [],
+    "halfLife": 15,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "血清素综合征",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 3
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "血清素综合征",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "SSRI",
+        "name": "SSRI 疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "psy",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "SSRI 停药反跳。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "citalopram",
+    "name": "西酞普兰",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "SSRI",
+      "五朵金花"
+    ],
+    "summary": "五朵金花之一。",
+    "description": "单次使用时建立 SSRI 疗程；过量会把血清素推过阈值。",
+    "neuro": {
+      "血清素": 3
+    },
+    "substrates": [
+      "CYP2C19"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 35,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "血清素综合征",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 3
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "血清素综合征",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "SSRI",
+        "name": "SSRI 疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "psy",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "SSRI 停药反跳。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "venlafaxine",
+    "name": "文拉法辛",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "SNRI",
+      "抗抑郁药"
+    ],
+    "summary": "SNRI；停药反应明显。",
+    "description": "单次使用时建立 SNRI 疗程；过量会把血清素与去甲肾上腺素一起推高。",
+    "neuro": {
+      "去甲肾上腺素": 4,
+      "血清素": 2
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 5,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "激越",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "血清素综合征",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 4
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 2
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 3
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 15
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 10
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "血清素综合征",
+          "stacks": 1
+        }
+      ],
+      "course": {
+        "id": "SNRI",
+        "name": "SNRI 疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "psy",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "SNRI 停药反跳。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "duloxetine",
+    "name": "度洛西汀",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "SNRI",
+      "抗抑郁药",
+      "镇痛药"
+    ],
+    "summary": "SNRI；也用于神经痛。",
+    "description": "单次使用时建立 SNRI 疗程；过量会把血清素与去甲肾上腺素一起推高。",
+    "neuro": {
+      "去甲肾上腺素": 4,
+      "血清素": 2
+    },
+    "substrates": [
+      "CYP2D6",
+      "CYP1A2"
+    ],
+    "inhibitors": {
+      "CYP2D6": "moderate"
+    },
+    "inducers": [],
+    "halfLife": 12,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "激越",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "血清素综合征",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 4
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 2
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 3
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 15
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 10
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "血清素综合征",
+          "stacks": 1
+        }
+      ],
+      "course": {
+        "id": "SNRI",
+        "name": "SNRI 疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "psy",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "SNRI 停药反跳。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "bupropion",
+    "name": "安非他酮",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "NDRI",
+      "抗抑郁药",
+      "兴奋剂"
+    ],
+    "summary": "NDRI 抗抑郁药，带兴奋作用。",
+    "description": "单次使用时给一点行动力与心理；过量会激越、心悸。",
+    "neuro": {
+      "多巴胺": 6,
+      "去甲肾上腺素": 4
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {
+      "CYP2D6": "strong"
+    },
+    "inducers": [],
+    "halfLife": 21,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      },
+      {
+        "name": "激越",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 4
+        }
+      ],
+      "over": [
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 20
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "激越",
+          "stacks": 2
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "quetiapine",
+    "name": "喹硫平",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "非典型抗精神病药",
+      "镇静剂"
+    ],
+    "summary": "非典型抗精神病药；低剂量常用于睡眠。",
+    "description": "单次使用时压住谵妄与激越；过量会镇静、抗胆碱能。",
+    "neuro": {
+      "多巴胺": -6
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 7,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "抗胆碱能",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "谵妄",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": -6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": -20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "抗胆碱能",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "组胺",
+          "amount": -12
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "naloxone",
+    "name": "纳洛酮",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "拮抗剂",
+      "阿片类拮抗剂"
+    ],
+    "summary": "阿片类拮抗剂。",
+    "description": "单次使用时清除呼吸抑制，并把内啡肽拉回；重复使用不会触发额外追加效应。",
+    "neuro": {
+      "内啡肽": -15
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 1,
+    "bioavailability": 0.7,
+    "effectLine": 2,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 2
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": -15
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 4
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "flumazenil",
+    "name": "氟马西尼",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "拮抗剂",
+      "苯二氮卓拮抗剂"
+    ],
+    "summary": "苯二氮卓拮抗剂。",
+    "description": "单次使用时清除镇静；重复使用不会触发额外追加效应。",
+    "neuro": {
+      "GABA": -8
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 1,
+    "bioavailability": 0.7,
+    "effectLine": 2,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "GABA",
+          "amount": -8
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "trihexyphenidyl",
+    "name": "苯海索",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "抗胆碱能剂"
+    ],
+    "summary": "抗胆碱能药。",
+    "description": "单次使用时缓解身体僵硬；过量会谵妄与抗胆碱能。",
+    "neuro": {},
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 10,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "抗胆碱能",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "phys",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "解离",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "status",
+          "target": "self",
+          "status": "谵妄",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "抗胆碱能",
+          "stacks": 2
+        },
+        {
+          "op": "damage",
+          "target": "self",
+          "track": "phys",
+          "amount": 2
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "promethazine",
+    "name": "异丙嗪",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "抗组胺",
+      "镇静剂"
+    ],
+    "summary": "抗组胺与镇静。",
+    "description": "单次使用时压住激越；过量会抗胆碱能与谵妄。",
+    "neuro": {
+      "组胺": -6
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {
+      "CYP2D6": "moderate"
+    },
+    "inducers": [],
+    "halfLife": 12,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      },
+      {
+        "name": "抗胆碱能",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "组胺",
+          "amount": -6
+        }
+      ],
+      "over": [
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "组胺",
+          "amount": -20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "抗胆碱能",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "谵妄",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "tramadol",
+    "name": "曲马多",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "阿片类药品",
+      "镇痛药"
+    ],
+    "summary": "弱阿片类镇痛药，也影响血清素与去甲肾上腺素。",
+    "description": "单次使用时缓解身体疼痛；过量会呼吸抑制，并推高血清素。",
+    "neuro": {
+      "内啡肽": 8
+    },
+    "substrates": [
+      "CYP2D6",
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 6,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "呼吸抑制",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 8
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 2
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "血清素",
+          "amount": 10
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "mirtazapine",
+    "name": "米氮平",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "抗抑郁药",
+      "镇静剂"
+    ],
+    "summary": "抗抑郁药，明显镇静。",
+    "description": "单次使用时恢复心理与睡眠；过量会镇静与体重/代谢负担。",
+    "neuro": {
+      "组胺": -8,
+      "去甲肾上腺素": 2
+    },
+    "substrates": [
+      "CYP3A4",
+      "CYP2D6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 20,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "组胺",
+          "amount": -8
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 2
+        }
+      ],
+      "over": [
+        {
+          "op": "status",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 2
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "trazodone",
+    "name": "曲唑酮",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "抗抑郁药",
+      "催眠剂"
+    ],
+    "summary": "抗抑郁药，低剂量常用于睡眠。",
+    "description": "单次使用时帮助入睡；过量会镇静与血清素负荷。",
+    "neuro": {
+      "组胺": -5,
+      "血清素": 2
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 8,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "组胺",
+          "amount": -5
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 2
+        }
+      ],
+      "over": [
+        {
+          "op": "status",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "血清素",
+          "amount": 10
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "gabapentin",
+    "name": "加巴喷丁",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "抗癫痫药",
+      "镇静剂"
+    ],
+    "summary": "抗癫痫与神经痛药。",
+    "description": "单次使用时降低焦虑；过量会镇静。",
+    "neuro": {
+      "GABA": 4
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 6,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "GABA",
+          "amount": 4
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "激越",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "status",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "olanzapine",
+    "name": "奥氮平",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "非典型抗精神病药",
+      "镇静剂"
+    ],
+    "summary": "非典型抗精神病药。",
+    "description": "单次使用时压住激越与谵妄；过量会镇静、抗胆碱能。",
+    "neuro": {
+      "多巴胺": -6
+    },
+    "substrates": [
+      "CYP1A2"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 33,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "抗胆碱能",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "谵妄",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": -6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": -20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "抗胆碱能",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "haloperidol",
+    "name": "氟哌啶醇",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "抗精神病药",
+      "镇静剂"
+    ],
+    "summary": "典型抗精神病药。",
+    "description": "单次使用时压住谵妄；过量会镇静与锥体外系负担。",
+    "neuro": {
+      "多巴胺": -6
+    },
+    "substrates": [
+      "CYP2D6",
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 18,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "抗胆碱能",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "谵妄",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": -6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": -20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "抗胆碱能",
+          "stacks": 1
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "scopolamine",
+    "name": "东莨菪碱",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "抗胆碱能剂"
+    ],
+    "summary": "抗胆碱能药。",
+    "description": "单次使用时缓解恶心与晕动；过量会谵妄与抗胆碱能。",
+    "neuro": {},
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 4,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "抗胆碱能",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "phys",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "解离",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "status",
+          "target": "self",
+          "status": "谵妄",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "抗胆碱能",
+          "stacks": 2
+        },
+        {
+          "op": "damage",
+          "target": "self",
+          "track": "phys",
+          "amount": 2
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "谵妄",
+          "stacks": 2
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "lithium",
+    "name": "碳酸锂",
+    "aliases": [],
+    "klass": "rx",
+    "tags": [
+      "心境稳定剂"
+    ],
+    "summary": "心境稳定剂，治疗窗很窄。",
+    "description": "单次使用时稳定心理；过量会毒性、谵妄与生理损伤。",
+    "neuro": {},
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 24,
+    "bioavailability": 0.7,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "镇静",
+        "threshold": 1,
+        "unit": "mg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "neutral"
+      },
+      {
+        "name": "抗胆碱能",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 1,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "激越",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "damage",
+          "target": "self",
+          "track": "phys",
+          "amount": 6
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "谵妄",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "抗胆碱能",
+          "stacks": 1
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "dextromethorphan",
+    "name": "右美沙芬",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "解离剂",
+      "镇咳药"
+    ],
+    "summary": "镇咳药；高剂量下解离。",
+    "description": "单次使用时让谷氨酸回落；过量会强解离，并反噬自己。",
+    "neuro": {
+      "谷氨酸": -8,
+      "多巴胺": 4
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 4,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "positive"
+      },
+      {
+        "name": "解离",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "解离",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "谷氨酸",
+          "amount": -8
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "谷氨酸",
+          "amount": -18
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 10
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "解离",
+          "stacks": 2
+        },
+        {
+          "op": "damage",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 0
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "pregabalin",
+    "name": "普瑞巴林",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "镇静剂",
+      "抗癫痫药",
+      "抗焦虑药"
+    ],
+    "summary": "抗癫痫与抗焦虑；断药反应强烈。",
+    "description": "单次使用时压住激越；过量会镇静与呼吸抑制。",
+    "neuro": {
+      "GABA": 6
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 6,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "呼吸抑制",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "GABA",
+          "amount": 6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 3
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "GABA",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "呼吸抑制",
+          "stacks": 1
+        }
+      ],
+      "course": {
+        "id": "BZD",
+        "name": "苯二氮卓疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "clearStatus",
+            "target": "self",
+            "status": "激越",
+            "stacks": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "普瑞巴林断药反应。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "alprazolam",
+    "name": "阿普唑仑",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "苯二氮卓类药品",
+      "镇静剂",
+      "催眠剂"
+    ],
+    "summary": "短效苯二氮卓。",
+    "description": "单次使用时压住激越；过量会镇静与呼吸抑制。",
+    "neuro": {
+      "GABA": 6
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 11,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "呼吸抑制",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "GABA",
+          "amount": 6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 3
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "GABA",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 1
+        }
+      ],
+      "course": {
+        "id": "BZD",
+        "name": "苯二氮卓疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "clearStatus",
+            "target": "self",
+            "status": "激越",
+            "stacks": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "苯二氮卓戒断。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "clonazepam",
+    "name": "氯硝西泮",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "苯二氮卓类药品",
+      "镇静剂",
+      "抗癫痫药"
+    ],
+    "summary": "长效苯二氮卓。",
+    "description": "单次使用时压住激越；过量会镇静与呼吸抑制。",
+    "neuro": {
+      "GABA": 6
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 34,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "呼吸抑制",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "GABA",
+          "amount": 6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 3
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "GABA",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 1
+        }
+      ],
+      "course": {
+        "id": "BZD",
+        "name": "苯二氮卓疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "clearStatus",
+            "target": "self",
+            "status": "激越",
+            "stacks": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "苯二氮卓戒断。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "zolpidem",
+    "name": "唑吡坦",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "催眠剂",
+      "迷幻剂",
+      "梦境增强剂"
+    ],
+    "summary": "催眠药；梦境增强与梦游报告常见。",
+    "description": "单次使用时帮助入睡；过量会镇静、谵妄。",
+    "neuro": {
+      "GABA": 6
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 2.5,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "谵妄",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "呼吸抑制",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "GABA",
+          "amount": 6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 3
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "GABA",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "呼吸抑制",
+          "stacks": 1
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "谵妄",
+          "stacks": 1
+        }
+      ]
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "唑吡坦反跳性失眠。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "esketamine",
+    "name": "艾司氯胺酮",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "解离剂",
+      "迷幻剂",
+      "抗抑郁药"
+    ],
+    "summary": "解离剂；近年用于难治性抑郁。",
+    "description": "单次使用时短暂解离并恢复心理；过量会强解离与反噬。",
+    "neuro": {
+      "谷氨酸": -8,
+      "多巴胺": 4
+    },
+    "substrates": [
+      "CYP3A4",
+      "CYP2B6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 5,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "positive"
+      },
+      {
+        "name": "解离",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "解离",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "谷氨酸",
+          "amount": -8
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "谷氨酸",
+          "amount": -18
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 10
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "解离",
+          "stacks": 2
+        },
+        {
+          "op": "damage",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "ketamine",
+    "name": "氯胺酮",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "解离剂",
+      "迷幻剂"
+    ],
+    "summary": "解离剂。",
+    "description": "单次使用时短暂解离；过量会强解离与心理反噬。",
+    "neuro": {
+      "谷氨酸": -8,
+      "多巴胺": 4
+    },
+    "substrates": [
+      "CYP3A4",
+      "CYP2B6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 3,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "positive"
+      },
+      {
+        "name": "解离",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      },
+      {
+        "name": "谵妄",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "解离",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "谷氨酸",
+          "amount": -8
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "谷氨酸",
+          "amount": -18
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "多巴胺",
+          "amount": 10
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "解离",
+          "stacks": 2
+        },
+        {
+          "op": "damage",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        }
+      ]
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "diazepam",
+    "name": "地西泮",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "苯二氮卓类药品",
+      "镇静剂"
+    ],
+    "summary": "长效苯二氮卓。",
+    "description": "单次使用时压住激越；过量会镇静与呼吸抑制。",
+    "neuro": {
+      "GABA": 6
+    },
+    "substrates": [
+      "CYP3A4",
+      "CYP2C19"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 48,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "呼吸抑制",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "GABA",
+          "amount": 6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 3
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "GABA",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 1
+        }
+      ],
+      "course": {
+        "id": "BZD",
+        "name": "苯二氮卓疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "clearStatus",
+            "target": "self",
+            "status": "激越",
+            "stacks": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "苯二氮卓戒断。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "lorazepam",
+    "name": "劳拉西泮",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "苯二氮卓类药品",
+      "镇静剂"
+    ],
+    "summary": "中效苯二氮卓。",
+    "description": "单次使用时压住激越；过量会镇静与呼吸抑制。",
+    "neuro": {
+      "GABA": 6
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 14,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "呼吸抑制",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "chosen",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "GABA",
+          "amount": 6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 3
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "GABA",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 1
+        }
+      ],
+      "course": {
+        "id": "BZD",
+        "name": "苯二氮卓疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "clearStatus",
+            "target": "self",
+            "status": "激越",
+            "stacks": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "苯二氮卓戒断。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "zopiclone",
+    "name": "右佐匹克隆",
+    "aliases": [],
+    "klass": "c2",
+    "tags": [
+      "催眠剂"
+    ],
+    "summary": "催眠药。",
+    "description": "单次使用时帮助入睡；过量会镇静与谵妄。",
+    "neuro": {
+      "GABA": 6
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 6,
+    "bioavailability": 0.8,
+    "effectLine": 1,
+    "concentrationPerDose": 1,
+    "concentrationEffects": [
+      {
+        "name": "谵妄",
+        "threshold": 3,
+        "unit": "mg",
+        "weight": 3,
+        "severity": "medium",
+        "valence": "negative"
+      },
+      {
+        "name": "呼吸抑制",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      },
+      {
+        "name": "镇静",
+        "threshold": 6,
+        "unit": "mg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "neutral"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 2
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "激越",
+          "stacks": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "GABA",
+          "amount": 6
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 3
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "GABA",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 2
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "呼吸抑制",
+          "stacks": 1
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "谵妄",
+          "stacks": 1
+        }
+      ]
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "催眠药反跳。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "methylphenidate",
+    "name": "哌甲酯",
+    "aliases": [],
+    "klass": "c1",
+    "tags": [
+      "兴奋剂",
+      "注意力缺陷治疗药"
+    ],
+    "summary": "兴奋剂，用于注意力缺陷。",
+    "description": "单次使用时给 1 点行动力；过量会激越、心悸。",
+    "neuro": {
+      "多巴胺": 6,
+      "去甲肾上腺素": 4
+    },
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 3,
+    "bioavailability": 0.9,
+    "effectLine": 1,
+    "concentrationPerDose": 10,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 10,
+        "unit": "mcg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "激越",
+        "threshold": 60,
+        "unit": "mcg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 4
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 20
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "激越",
+          "stacks": 2
+        }
+      ]
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "兴奋剂反跳。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "modafinil",
+    "name": "莫达非尼",
+    "aliases": [],
+    "klass": "c1",
+    "tags": [
+      "兴奋剂",
+      "觉醒促进剂"
+    ],
+    "summary": "觉醒促进剂。",
+    "description": "单次使用时给 1 点行动力；过量会激越、失眠。",
+    "neuro": {
+      "多巴胺": 6,
+      "去甲肾上腺素": 4
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 15,
+    "bioavailability": 0.9,
+    "effectLine": 1,
+    "concentrationPerDose": 10,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 10,
+        "unit": "mcg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "激越",
+        "threshold": 60,
+        "unit": "mcg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 2,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 4
+        },
+        {
+          "op": "clearStatus",
+          "target": "self",
+          "status": "镇静",
+          "stacks": 1
+        }
+      ],
+      "over": [
+        {
+          "op": "ap",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "多巴胺",
+          "amount": 20
+        },
+        {
+          "op": "neuro",
+          "target": "self",
+          "neuro": "去甲肾上腺素",
+          "amount": 15
+        },
+        {
+          "op": "status",
+          "target": "self",
+          "status": "激越",
+          "stacks": 2
+        }
+      ]
+    },
+    "classNote": "国内按第一类精神药品管理。"
+  },
+  {
+    "kind": "drug",
+    "id": "dihydrocodeine",
+    "name": "二氢可待因",
+    "aliases": [],
+    "klass": "narcotic",
+    "tags": [
+      "阿片类药品",
+      "镇痛药",
+      "镇咳药"
+    ],
+    "summary": "弱阿片类镇痛与镇咳。",
+    "description": "单次使用时缓解身体疼痛；过量会呼吸抑制。",
+    "neuro": {
+      "内啡肽": 8
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 4,
+    "bioavailability": 0.95,
+    "effectLine": 1,
+    "concentrationPerDose": 10,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 10,
+        "unit": "mcg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "呼吸抑制",
+        "threshold": 60,
+        "unit": "mcg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 8
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "OPIOID",
+        "name": "阿片类疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "phys",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "阿片类戒断。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "morphine",
+    "name": "吗啡",
+    "aliases": [],
+    "klass": "narcotic",
+    "tags": [
+      "阿片类药品",
+      "镇痛药"
+    ],
+    "summary": "强阿片类镇痛药。",
+    "description": "单次使用时压住疼痛；过量会呼吸抑制。",
+    "neuro": {
+      "内啡肽": 8
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 2,
+    "bioavailability": 0.95,
+    "effectLine": 1,
+    "concentrationPerDose": 10,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 10,
+        "unit": "mcg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "呼吸抑制",
+        "threshold": 60,
+        "unit": "mcg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 8
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "OPIOID",
+        "name": "阿片类疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "phys",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "阿片类戒断。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "codeine",
+    "name": "可待因",
+    "aliases": [],
+    "klass": "narcotic",
+    "tags": [
+      "阿片类药品",
+      "镇痛药",
+      "镇咳药"
+    ],
+    "summary": "阿片类镇咳与镇痛药。",
+    "description": "单次使用时压住疼痛；过量会呼吸抑制。",
+    "neuro": {
+      "内啡肽": 8
+    },
+    "substrates": [
+      "CYP2D6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 3,
+    "bioavailability": 0.95,
+    "effectLine": 1,
+    "concentrationPerDose": 10,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 10,
+        "unit": "mcg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "呼吸抑制",
+        "threshold": 60,
+        "unit": "mcg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 8
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "OPIOID",
+        "name": "阿片类疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "phys",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "阿片类戒断。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "fentanyl",
+    "name": "芬太尼",
+    "aliases": [],
+    "klass": "narcotic",
+    "tags": [
+      "阿片类药品",
+      "镇痛药"
+    ],
+    "summary": "强阿片类镇痛药。",
+    "description": "单次使用时压住疼痛；过量会迅速呼吸抑制。",
+    "neuro": {
+      "内啡肽": 8
+    },
+    "substrates": [
+      "CYP3A4"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 4,
+    "bioavailability": 0.95,
+    "effectLine": 1,
+    "concentrationPerDose": 10,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 10,
+        "unit": "mcg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "呼吸抑制",
+        "threshold": 60,
+        "unit": "mcg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 8
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "OPIOID",
+        "name": "阿片类疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "phys",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "阿片类戒断。"
+    }
+  },
+  {
+    "kind": "drug",
+    "id": "methadone",
+    "name": "美沙酮",
+    "aliases": [],
+    "klass": "narcotic",
+    "tags": [
+      "阿片类药品",
+      "镇痛药"
+    ],
+    "summary": "长半衰期阿片类。",
+    "description": "单次使用时压住疼痛与戒断；过量会呼吸抑制。",
+    "neuro": {
+      "内啡肽": 8
+    },
+    "substrates": [
+      "CYP3A4",
+      "CYP2B6"
+    ],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 24,
+    "bioavailability": 0.95,
+    "effectLine": 1,
+    "concentrationPerDose": 10,
+    "concentrationEffects": [
+      {
+        "name": "欣快",
+        "threshold": 10,
+        "unit": "mcg",
+        "weight": 1,
+        "severity": "light",
+        "valence": "positive"
+      },
+      {
+        "name": "呼吸抑制",
+        "threshold": 60,
+        "unit": "mcg",
+        "weight": 6,
+        "severity": "heavy",
+        "valence": "negative"
+      }
+    ],
+    "tolerance": 3,
+    "card": {
+      "targets": "both",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 4
+        },
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "psy",
+          "amount": 1
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 8
+        }
+      ],
+      "over": [
+        {
+          "op": "heal",
+          "target": "chosen",
+          "track": "phys",
+          "amount": 6
+        },
+        {
+          "op": "neuro",
+          "target": "chosen",
+          "neuro": "内啡肽",
+          "amount": 20
+        },
+        {
+          "op": "status",
+          "target": "chosen",
+          "status": "呼吸抑制",
+          "stacks": 2
+        }
+      ],
+      "course": {
+        "id": "OPIOID",
+        "name": "阿片类疗程",
+        "turns": 3,
+        "grace": 2,
+        "ops": [
+          {
+            "op": "heal",
+            "target": "self",
+            "track": "phys",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    "withdrawal": {
+      "status": "戒断",
+      "log": "阿片类戒断。"
+    }
+  },
+  {
+    "kind": "action",
+    "id": "breathe",
+    "name": "呼吸",
+    "aliases": [],
+    "klass": "other",
+    "tags": [
+      "现实检验"
+    ],
+    "summary": "心理 +4。",
+    "description": "把注意力放回呼吸。",
+    "neuro": {},
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 0,
+    "tolerance": 0,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        }
+      ],
+      "storyOnly": true
+    }
+  },
+  {
+    "kind": "action",
+    "id": "window",
+    "name": "看窗外",
+    "aliases": [],
+    "klass": "other",
+    "tags": [
+      "现实检验"
+    ],
+    "summary": "心理 +3。",
+    "description": "确认窗外仍然是同一棵树。",
+    "neuro": {},
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 0,
+    "tolerance": 0,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 3
+        }
+      ],
+      "storyOnly": true
+    }
+  },
+  {
+    "kind": "action",
+    "id": "ask",
+    "name": "问自己",
+    "aliases": [],
+    "klass": "other",
+    "tags": [
+      "现实检验"
+    ],
+    "summary": "心理 +4。",
+    "description": "问自己：这是被害妄想吗？",
+    "neuro": {},
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 0,
+    "tolerance": 0,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 4
+        }
+      ],
+      "storyOnly": true
+    }
+  },
+  {
+    "kind": "action",
+    "id": "message",
+    "name": "给朋友发消息",
+    "aliases": [],
+    "klass": "other",
+    "tags": [
+      "现实检验"
+    ],
+    "summary": "心理 +5。",
+    "description": "把此刻发给一个真实的人。",
+    "neuro": {},
+    "substrates": [],
+    "inhibitors": {},
+    "inducers": [],
+    "halfLife": 0,
+    "tolerance": 0,
+    "card": {
+      "targets": "self",
+      "proper": [
+        {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 5
+        }
+      ],
+      "storyOnly": true
+    }
+  }
+]

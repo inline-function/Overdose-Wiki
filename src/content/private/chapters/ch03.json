@@ -1,0 +1,1216 @@
+{
+  "id": "ch03",
+  "title": "从此再也不见",
+  "scenes": [
+    {
+      "id": "ch03.s01",
+      "chapterId": "ch03",
+      "order": 1,
+      "title": "索死法",
+      "summary": "她问金刚烷胺配酒会怎么样。她说自己已经自杀失败七次了。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "blank"
+        }
+      },
+      "cue": "ch03",
+      "transition": "slide",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "老师，金刚烷胺配酒会怎么样？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "去世。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "会很难受吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我希望能在无意识中去世。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "如果老师可以给我开价格，能告诉我无意识中去世的配方，我也愿意买。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "而且我不会告诉别人。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我已经自杀失败七次了。"
+        }
+      ],
+      "next": "ch03.s02"
+    },
+    {
+      "id": "ch03.s02",
+      "chapterId": "ch03",
+      "order": 2,
+      "title": "求死的同一分钟",
+      "summary": "她求最好的方法，什么条件都可以给。后藤说：那会痛苦死的。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "tired"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "老师求你能不能把最好的方法告诉我，什么条件我都可以给你。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我现在身体又安然无恙地恢复过来了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "别诶诶，那会痛苦死的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "先按我说的去吃苏糖酸镁。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "快购买苏糖酸镁与茶氨酸吧。"
+        }
+      ],
+      "next": "ch03.s03"
+    },
+    {
+      "id": "ch03.s03",
+      "chapterId": "ch03",
+      "order": 3,
+      "title": "撤离点",
+      "summary": "别人教她走撤离点「死亡」。后藤说：我教你另一个撤离点——「再来」。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "calm"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "老师，经历了那些之后，你是怎么走出来的？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我做了某事，并且投身于恢复术。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "现在，我要告诉你应该如何恢复。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "就是要吃苏糖酸镁吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "还要用茶氨酸。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "茶氨酸可以镇静，还不会影响情绪。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "反正你的目的是从痛苦中脱出。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "别人教会你去走撤离点「死亡」。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我现在要教你另一个撤离点——「再来」。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "认清自己的目的！"
+        }
+      ],
+      "next": "ch03.s04"
+    },
+    {
+      "id": "ch03.s04",
+      "chapterId": "ch03",
+      "order": 4,
+      "title": "组合测试",
+      "summary": "苏糖酸镁、茶氨酸、舍曲林、右美沙芬，组合测试。她睡得很舒服。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "smile"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "苏糖酸镁、茶氨酸、舍曲林、右美沙芬，组合测试。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我现在感觉有些放松，心里静了下来，没那么多躁动。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "睡着了，睡得很舒服，又有点记忆回闪了。",
+          "fx": "glow"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "好舒服。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "听歌欣快感。好爽。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "好开心好开心。听着老师的歌。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "舒服死了，像夏天的舒爽的微风轻轻抚过身体。"
+        }
+      ],
+      "next": "ch03.s05"
+    },
+    {
+      "id": "ch03.s05",
+      "chapterId": "ch03",
+      "order": 5,
+      "title": "汉堡",
+      "summary": "她的体重一直在九十斤到一百斤出头浮动。汉堡是这辈子吃过最好吃的。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_dlc_noodle_shop",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "smile"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "她的体重一直在九十斤到一百斤出头一点的地方浮动。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "这汉堡是我这辈子吃过最好吃的。"
+        }
+      ],
+      "next": "ch03.s06"
+    },
+    {
+      "id": "ch03.s06",
+      "chapterId": "ch03",
+      "order": 6,
+      "title": "童年的回闪",
+      "summary": "童年、新年、游玩、过节、回老家。他试过回想糟糕的事，却根本无法回想。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_wheat_dusk",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "smile"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "童年，新年，游玩，过节，回老家……",
+          "fx": "glow"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我那时尝试回想一个糟糕的事情，却发现我根本无法回想。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我相信，余晖能拦截自杀者。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "就算是余晖之后，我的心情也很好很好。"
+        }
+      ],
+      "next": "ch03.s07"
+    },
+    {
+      "id": "ch03.s07",
+      "chapterId": "ch03",
+      "order": 7,
+      "title": "荒唐的世界",
+      "summary": "她说人生的每一刻都在眼前。她也想成为波奇老师的助手。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "smile"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "天哪，这么多，人生的每一刻。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "老师，我也有变成健全人的经历。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "如果可以，我很想成为波奇老师的助手。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "你可以。"
+        }
+      ],
+      "next": "ch03.s08"
+    },
+    {
+      "id": "ch03.s08",
+      "chapterId": "ch03",
+      "order": 8,
+      "title": "人生的每一刻",
+      "summary": "她说不止是老师，是信仰一般的崇拜。人生意义不只是爱一个人。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "smile"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我是你的助手哦老师，我会听你的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我现在对你已经不止是老师那样看待了，而是信仰一般的崇拜你。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我人生的意义就可以不只是爱着某个人了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "也可以是做了什么有意义的事，拯救到其他人的事情。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "那次余晖就像神给了波奇老师唯一一次的赐福。"
+        }
+      ],
+      "next": "ch03.s09"
+    },
+    {
+      "id": "ch03.s09",
+      "chapterId": "ch03",
+      "order": 9,
+      "title": "助手",
+      "summary": "普罗米修斯把火种带到人间。她说：我们一起来吧。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "smile"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "而老师像普罗米修斯一样，想把这个火种带到人间。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我们一起来把这个火种带到人间吧。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "如果能找到，这将可以造福全人类。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我姐姐我身边的所有人都能被拯救。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "包括我。"
+        }
+      ],
+      "next": "ch03.s10"
+    },
+    {
+      "id": "ch03.s10",
+      "chapterId": "ch03",
+      "order": 10,
+      "title": "洁净",
+      "summary": "有人找她接非绿。她说：卖淫就卖淫，哪来的圆角。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "intense"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "有人找她接非绿。她思来想去，还是反感。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我做不来。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我一直在维持自身的洁净。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "嫖娼变成援交，援交变成非绿，借口真的多，无非就是想性交。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我很讨厌这种润饰。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "卖淫就卖淫，哪来的圆角。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "这是一个伦理学落魄的时代。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "上次还有个上来就要我涩图跟撩骚的，我把他直接删了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "还说什么想结婚谈恋爱那种，一下就现出原形本性。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "什么玩意。我回忆都好恶心。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "刚刚被人表白了，呃…累了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我没说啥。反正我不接受。"
+        }
+      ],
+      "next": "ch03.s11"
+    },
+    {
+      "id": "ch03.s11",
+      "chapterId": "ch03",
+      "order": 11,
+      "title": "拒绝表白",
+      "summary": "后藤说：有些人不是想卖，是想活。援交对她们不是堕落，是存活。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "blank"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "你别骂她们。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "有些人不是想卖，是想活。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "个性表达跟家庭冲突，被断供被赶出来，没有工作没有学历没有家。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "社会又排斥 oder，正经渠道不要她们。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "她们只能走阴影下的方式谋生。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "援交对她们不是堕落，是存活。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "社会把 oder 排挤到见不得光的地方，然后回头骂她们见不得光。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "她们只是想活下来，仅此而已。"
+        },
+        {
+          "type": "narration",
+          "text": "境沉默。"
+        }
+      ],
+      "next": "ch03.s12"
+    },
+    {
+      "id": "ch03.s12",
+      "chapterId": "ch03",
+      "order": 12,
+      "title": "陌陌",
+      "summary": "陌陌的苏糖酸镁跟茶氨酸到了。情况不太好，今晚她想要右美沙芬。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "calm"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "老师，陌陌她的苏糖酸镁跟茶氨酸到了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我让她吃苏糖酸镁跟茶氨酸、舍曲林、右美沙芬。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "情况不太好，刚刚开始舒服现在又抑郁有想不开念头。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "很奇怪，个体差异似乎很大。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "今晚我要右美沙芬。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "感觉茶氨酸跟苏糖酸镁的测试也差不多了吧老师。"
+        }
+      ],
+      "next": "ch03.s13"
+    },
+    {
+      "id": "ch03.s13",
+      "chapterId": "ch03",
+      "order": 13,
+      "title": "苏镁测试",
+      "summary": "能抗焦虑、心情平稳、安眠。但没有右美沙芬那种失去理智的感觉。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "calm"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "能抗焦虑抑郁、心情平稳、安眠。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "但是没有右美沙芬那种把脑子卷得天翻地覆、失去理智的感觉。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "起码苏糖酸镁和茶氨酸可以让人保持清醒的理智。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "感觉余晖的主力可能还是离不开右美沙芬。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "接下来我要怎么 o 呢老师？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "还有什么要实验的吗，请务必让我来点右美沙芬。"
+        }
+      ],
+      "next": "ch03.s14"
+    },
+    {
+      "id": "ch03.s14",
+      "chapterId": "ch03",
+      "order": 14,
+      "title": "过载",
+      "summary": "十二勺。陌陌的案例出现了反作用，一两个小时后反而有强烈的紫砂欲望。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "tired"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "你想想目前为止吃了多久苏糖酸镁。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "12 勺。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "会有耐受吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "陌陌的这个案例出现了反作用。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "药效进行到一两个小时后反而有强烈的紫砂欲望。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "重双相，焦虑。曾经被送过扭转所，经历过虐待，还被强制送住院过。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我猜测，其现在处境也不好。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "他母亲对他仍有强大的控制欲与监视欲。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "像监督犯人一样盯着他各种东西，没有自由。"
+        },
+        {
+          "type": "narration",
+          "text": "这是陌陌的处境。",
+          "fx": "tear"
+        }
+      ],
+      "next": "ch03.s15"
+    },
+    {
+      "id": "ch03.s15",
+      "chapterId": "ch03",
+      "order": 15,
+      "title": "反解离",
+      "summary": "她快被情绪传染和怨气淹没了。增强认知，反而更清楚地看见困境。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "tired"
+        }
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "紫砂真的很难劝解老师，真的好累。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我自己快被别人影响的崩不住了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我刚刚一直陪着他打电话劝解他，但是真的尽力了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我已经快被情绪传染和怨气淹没了，自己都崩不住了，喘不过气。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "于是我现在没有回复他消息。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我一直在试图救每一个人，但是真的都很难做到。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "特别是我身边人每个人都有负面情绪的时候。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "反解离剂增强认知，可有个弊端——"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "如果增强认知后，更加清楚地认知到自己的困境了呢？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "很有可能吧。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我要来 27t 右美沙芬。",
+          "fx": "static"
+        }
+      ],
+      "next": "ch03.s16"
+    },
+    {
+      "id": "ch03.s16",
+      "chapterId": "ch03",
+      "order": 16,
+      "title": "失控",
+      "summary": "去年她一个人在家，彻底失去理智，意识完全陷入幻觉。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "blank"
+        }
+      },
+      "cue": "tension",
+      "transition": "glitch",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "老师，这是我去年一个人在家的时候的一次失控。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "彻底失去理智，意识完全陷入幻觉。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "回忆起来当时好像完全不觉得那些幻觉有什么问题。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "认为幻觉是合理存在的一样。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "这是不是精分状态？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "是的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "你还挺容易精神分裂。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "然后过了那个时间之后就恢复了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "不愧是一家人。"
+        }
+      ],
+      "next": "ch03.s17"
+    },
+    {
+      "id": "ch03.s17",
+      "chapterId": "ch03",
+      "order": 17,
+      "title": "安全锚",
+      "summary": "醒来时思维不正常，怕自己疯掉。后藤说：不用怕，有我在。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "tired"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "我现在回忆起来都很恐惧那一次。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "刚醒来的时候我感觉脑子思维还很不正常，一直很害怕自己疯了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "那老师我为什么还能安然无恙地恢复过来。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "睡不着了呜呜呜。害怕。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "怕自己疯掉。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "然后我又想起了好多恐怖视频的场景。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "不用怕，有我在。"
+        }
+      ],
+      "next": "ch03.s18"
+    },
+    {
+      "id": "ch03.s18",
+      "chapterId": "ch03",
+      "order": 18,
+      "title": "拥抱之后",
+      "summary": "她抱住老师。现实里她只能抱枕头。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "tired"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "她抱住老师。",
+          "fx": "glow"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "怕怕。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "现实我只能抱枕头。"
+        }
+      ],
+      "next": "ch03.s19"
+    },
+    {
+      "id": "ch03.s19",
+      "chapterId": "ch03",
+      "order": 19,
+      "title": "拜拜",
+      "summary": "右仔给她红包。她说：我下辈子一定会如愿的。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_higan_home",
+        "bust": {
+          "speaker": "彼岸境",
+          "expr": "fade"
+        }
+      },
+      "cue": "ch03",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "老师。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "可能我今天。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "就直接拜拜了。"
+        },
+        {
+          "type": "narration",
+          "text": "右仔给她一个红包。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "谢谢你。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "右仔",
+          "text": "别这样说。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "右仔",
+          "text": "我希望你好好活下去。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "右仔",
+          "text": "绵薄之力。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "没事，我下辈子一定会如愿的。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "彼岸境",
+          "text": "世界又不止是有我了。"
+        }
+      ],
+      "next": "ch03.s20"
+    },
+    {
+      "id": "ch03.s20",
+      "chapterId": "ch03",
+      "order": 20,
+      "title": "手机关机24小时",
+      "summary": "小郁问：小境她去世了吗？她的手机关机了。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_archive"
+      },
+      "cue": "tension",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "小郁",
+          "text": "波奇，小境她去世了吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "小郁",
+          "text": "我很担心她，她联系你了吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "小郁",
+          "text": "她的手机关机了，她已经 24 小时没有消息了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "小郁",
+          "text": "她好像死掉了…手机关机消息不回。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "小郁",
+          "text": "会死人吗？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "小郁",
+          "text": "她手上有美金刚和金刚烷胺两种药，她吃了一瓶盖美金刚。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "小郁",
+          "text": "吃了会晕几天还是会死掉？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "小郁",
+          "text": "我担心的要疯掉了。"
+        }
+      ],
+      "next": "ch03.s21"
+    },
+    {
+      "id": "ch03.s21",
+      "chapterId": "ch03",
+      "order": 21,
+      "title": "找不到",
+      "summary": "五月五日。警方根本找不到。她消失在北方大城市摄像头最多的街上。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_beijing"
+      },
+      "cue": "disappear",
+      "transition": "glitch",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "五月五日。他们根本找不到报告者。警方根本找不到。",
+          "fx": "gloom"
+        },
+        {
+          "type": "narration",
+          "text": "报告者就消失在北方大城市里摄像头最多的街上。"
+        },
+        {
+          "type": "narration",
+          "text": "小郁甚至就在那座城市，也根本找不到。"
+        },
+        {
+          "type": "narration",
+          "text": "后来，我们认为报告者已故。"
+        }
+      ],
+      "next": "ch03.s22"
+    },
+    {
+      "id": "ch03.s22",
+      "chapterId": "ch03",
+      "order": 22,
+      "title": "为什么",
+      "summary": "为什么？",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_beijing"
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "为什么？",
+          "fx": "vignette"
+        }
+      ],
+      "next": "ch03.s23"
+    },
+    {
+      "id": "ch03.s23",
+      "chapterId": "ch03",
+      "order": 23,
+      "title": "到底哪里出错",
+      "summary": "到底哪里出了错误。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_residential_path"
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "到底哪里出了错误。",
+          "fx": "gloom"
+        }
+      ],
+      "next": "ch03.s24"
+    },
+    {
+      "id": "ch03.s24",
+      "chapterId": "ch03",
+      "order": 24,
+      "title": "空街",
+      "summary": "空街。到底哪里出了错误。",
+      "flags": [],
+      "sourceRefs": [],
+      "stage": {
+        "bg": "bg_residential_path"
+      },
+      "cue": "disappear",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "到底哪里出了错误。"
+        },
+        {
+          "type": "choice",
+          "id": "ch03.s24.choice",
+          "prompt": "选择",
+          "options": [
+            {
+              "id": "o1",
+              "label": "继续读下去",
+              "targetScene": "ch04.s01"
+            },
+            {
+              "id": "o2",
+              "label": "先把档案合上",
+              "note": "档案留在这里，随时可以再读",
+              "targetScene": "ch04.s01"
+            }
+          ]
+        }
+      ],
+      "next": "ch04.s01"
+    }
+  ]
+}

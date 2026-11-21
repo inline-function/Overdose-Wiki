@@ -1,0 +1,8 @@
+PIXEL ART small animal avatar sprite sheet. Four panels in a 2x2 grid, equal cells, the same character in every panel: a small tan stray dog (Chinese rural dog), full body, sitting, centered in each cell with even margins. Chibi proportions, head about half the body height; short floppy ears hanging down; long narrow muzzle; paper-white muzzle, chest and front paws; tan coat with a darker tan patch around the left eye; a thin navy-blue collar with a broken strap dangling off it; big round dark eyes with NO catchlight; short legs; thin tail.
+
+Panel 1 top left: calm, sitting upright, facing the viewer, mouth closed, ears relaxed.
+Panel 2 top right: tired, head lowered, eyes half closed, ears drooping, tail curled around the body.
+Panel 3 bottom left: happy, mouth open with a small rose-pink tongue, eyes as closed arcs, tail lifted.
+Panel 4 bottom right: warning, ears pinned back, eyes narrowed, one tiny white fang showing.
+
+Flat solid magenta background #FF00FF behind every panel, no shadow, no border, no labels, no text. 1px near-black outline, chunky square pixels, hard edges, ordered dithering only, no anti-aliasing, no gradients, no soft shading. Strict limited palette: tan #d9a441, light tan #e8c87a, paper white #e8e0cc, dark brown #5a5448, near-black #17151f, navy #27445a, rose #9c4f5e, magenta background.

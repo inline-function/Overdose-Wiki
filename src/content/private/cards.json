@@ -1,0 +1,414 @@
+[
+  {
+    "id": "sertraline",
+    "name": "舍曲林",
+    "cost": 1,
+    "category": "SRI",
+    "summary": "心理 +5；延迟 +3。",
+    "tags": [
+      "五朵金花",
+      "延迟"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 5
+      },
+      {
+        "op": "delayed",
+        "turns": 2,
+        "effect": {
+          "op": "heal",
+          "target": "self",
+          "track": "psy",
+          "amount": 3
+        }
+      },
+      {
+        "op": "serotonin",
+        "target": "self",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "fluoxetine",
+    "name": "氟西汀",
+    "cost": 1,
+    "category": "SRI",
+    "summary": "心理 +4；负载 +1。",
+    "tags": [
+      "五朵金花"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 4
+      },
+      {
+        "op": "serotonin",
+        "target": "self",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "paroxetine",
+    "name": "帕罗西汀",
+    "cost": 2,
+    "category": "SRI",
+    "summary": "心理 +7；负载 +2。",
+    "tags": [
+      "五朵金花"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 7
+      },
+      {
+        "op": "serotonin",
+        "target": "self",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "fluvoxamine",
+    "name": "氟伏沙明",
+    "cost": 1,
+    "category": "SRI",
+    "summary": "心理 +4；镇静 +1。",
+    "tags": [
+      "五朵金花"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 4
+      },
+      {
+        "op": "status",
+        "target": "self",
+        "status": "镇静",
+        "stacks": 1
+      },
+      {
+        "op": "serotonin",
+        "target": "self",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "citalopram",
+    "name": "西酞普兰",
+    "cost": 1,
+    "category": "SRI",
+    "summary": "心理 +5；负载 +1。",
+    "tags": [
+      "五朵金花"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 5
+      },
+      {
+        "op": "serotonin",
+        "target": "self",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "dxm",
+    "name": "右美沙芬",
+    "cost": 1,
+    "category": "解离",
+    "summary": "生理 -3；心理 +5。",
+    "tags": [
+      "双刃",
+      "解离"
+    ],
+    "ops": [
+      {
+        "op": "damage",
+        "target": "self",
+        "track": "phys",
+        "amount": 3
+      },
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 5
+      },
+      {
+        "op": "status",
+        "target": "self",
+        "status": "解离",
+        "stacks": 1
+      }
+    ]
+  },
+  {
+    "id": "amantadine",
+    "name": "金刚烷胺",
+    "cost": 1,
+    "category": "镇静 / 谵妄",
+    "summary": "己 心+6；敌 谵+2。",
+    "tags": [
+      "镇静",
+      "谵妄"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 6
+      },
+      {
+        "op": "status",
+        "target": "self",
+        "status": "镇静",
+        "stacks": 2
+      },
+      {
+        "op": "damage",
+        "target": "enemy",
+        "track": "psy",
+        "amount": 4
+      },
+      {
+        "op": "status",
+        "target": "enemy",
+        "status": "谵妄",
+        "stacks": 2
+      }
+    ]
+  },
+  {
+    "id": "magnesium",
+    "name": "苏糖酸镁",
+    "cost": 1,
+    "category": "反解离",
+    "summary": "清解离/谵妄 1。",
+    "tags": [
+      "恢复"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 2
+      },
+      {
+        "op": "status",
+        "target": "self",
+        "status": "解离",
+        "stacks": -1
+      },
+      {
+        "op": "status",
+        "target": "self",
+        "status": "谵妄",
+        "stacks": -1
+      }
+    ]
+  },
+  {
+    "id": "pregabalin",
+    "name": "普瑞巴林",
+    "cost": 1,
+    "category": "镇静",
+    "summary": "心理 +4；镇静 +1。",
+    "tags": [
+      "镇静"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 4
+      },
+      {
+        "op": "status",
+        "target": "self",
+        "status": "镇静",
+        "stacks": 1
+      }
+    ]
+  },
+  {
+    "id": "licorice",
+    "name": "复方甘草片",
+    "cost": 1,
+    "category": "阿片类",
+    "summary": "生理 +4；心理 +3。",
+    "tags": [
+      "阿片类"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "phys",
+        "amount": 4
+      },
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 3
+      },
+      {
+        "op": "status",
+        "target": "self",
+        "status": "镇静",
+        "stacks": 1
+      }
+    ]
+  },
+  {
+    "id": "caffeine",
+    "name": "咖啡因",
+    "cost": 0,
+    "category": "兴奋",
+    "summary": "AP +1；生理 -1。",
+    "tags": [
+      "兴奋"
+    ],
+    "ops": [
+      {
+        "op": "ap",
+        "amount": 1
+      },
+      {
+        "op": "damage",
+        "target": "self",
+        "track": "phys",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "naloxone",
+    "name": "纳洛酮",
+    "cost": 1,
+    "category": "恢复",
+    "summary": "清镇静 1；生理 +2。",
+    "tags": [
+      "恢复"
+    ],
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "phys",
+        "amount": 2
+      },
+      {
+        "op": "status",
+        "target": "self",
+        "status": "镇静",
+        "stacks": -1
+      }
+    ]
+  },
+  {
+    "id": "breathe",
+    "name": "呼吸",
+    "cost": 0,
+    "category": "现实检验",
+    "summary": "心理 +4。",
+    "tags": [
+      "固定"
+    ],
+    "storyOnly": true,
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 4
+      }
+    ]
+  },
+  {
+    "id": "window",
+    "name": "看窗外",
+    "cost": 0,
+    "category": "现实检验",
+    "summary": "心理 +3；妄想 -1。",
+    "tags": [
+      "固定"
+    ],
+    "storyOnly": true,
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 3
+      },
+      {
+        "op": "status",
+        "target": "self",
+        "status": "被害妄想",
+        "stacks": -1
+      }
+    ]
+  },
+  {
+    "id": "ask",
+    "name": "问自己",
+    "cost": 0,
+    "category": "现实检验",
+    "summary": "心理 +4。",
+    "tags": [
+      "固定"
+    ],
+    "storyOnly": true,
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 4
+      }
+    ]
+  },
+  {
+    "id": "message",
+    "name": "给朋友发消息",
+    "cost": 0,
+    "category": "现实检验",
+    "summary": "心理 +5。",
+    "tags": [
+      "固定"
+    ],
+    "storyOnly": true,
+    "ops": [
+      {
+        "op": "heal",
+        "target": "self",
+        "track": "psy",
+        "amount": 5
+      }
+    ]
+  }
+]

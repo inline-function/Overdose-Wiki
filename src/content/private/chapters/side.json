@@ -1,0 +1,854 @@
+{
+  "id": "side",
+  "title": "散页",
+  "scenes": [
+    {
+      "id": "side-32",
+      "chapterId": "side",
+      "order": 1,
+      "title": "一片的重量",
+      "summary": "我中午才醒。",
+      "flags": [
+        "drug_use",
+        "withdrawal",
+        "suicide_ideation",
+        "weight_loss"
+      ],
+      "sourceRefs": [
+        "report-032"
+      ],
+      "reportId": "032",
+      "reportSegment": "report-032-full",
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "heading",
+          "text": "一、断药第一天"
+        },
+        {
+          "type": "narration",
+          "text": "我中午才醒。"
+        },
+        {
+          "type": "narration",
+          "text": "窗帘没拉严，光从缝里进来，落在床脚。豆豆蹲在门口，尾巴敲着地板。它是我两个月前买的，一只很小的棕狗。"
+        },
+        {
+          "type": "narration",
+          "text": "它不知道我起不来，只知道我答应过它要出去。"
+        },
+        {
+          "type": "narration",
+          "text": "豆豆把牵引绳叼过来，放在我床边。我伸手摸了摸它的头，没有起来。"
+        },
+        {
+          "type": "narration",
+          "text": "我试着坐起来，腿是软的。不是疼，是没法动。像一块被水泡过的纸。"
+        },
+        {
+          "type": "narration",
+          "text": "手机在枕头边响。工作群一条接一条，有人在问报表。我打了几个字，又删掉。"
+        },
+        {
+          "type": "narration",
+          "text": "工作群里有人发了一个表情包，我盯着看了很久，才想起自己应该回一个。妈妈发来语音，说周末要不要回家吃饭。"
+        },
+        {
+          "type": "narration",
+          "text": "我没有回。我想回她，但不知道说什么。"
+        },
+        {
+          "type": "narration",
+          "text": "我没有具体的坏事。妈妈很包容我，家里也没有出什么大事。可我就是难过，焦虑，像有什么东西在胸口慢慢地漏水。"
+        },
+        {
+          "type": "narration",
+          "text": "豆豆的碗空了。我爬起来，给它倒了一点狗粮。它吃得很响。我站在厨房里，觉得自己离那声音很远。"
+        },
+        {
+          "type": "narration",
+          "text": "我去称了体重。四十五公斤。"
+        },
+        {
+          "type": "narration",
+          "text": "我没有告诉任何人。"
+        },
+        {
+          "type": "narration",
+          "text": "我回到床上，盯着天花板。后来我吃了最小的一片。"
+        },
+        {
+          "type": "narration",
+          "text": "一个小时以后，豆豆变得很可爱。工作群里的消息没有那么可怕了。妈妈的声音从电话里传出来，像真的在爱我。"
+        },
+        {
+          "type": "narration",
+          "text": "我甚至想，明天可以带豆豆去公园。"
+        },
+        {
+          "type": "narration",
+          "text": "我知道这不对。可那一个小时里，我觉得自己是个正常人。"
+        },
+        {
+          "type": "narration",
+          "text": "不是“开心”，是“正常”——能起床，能回消息，能想象明天。"
+        },
+        {
+          "type": "narration",
+          "text": "我给后藤发消息：这是成瘾问题，戒断反应吧。"
+        },
+        {
+          "type": "narration",
+          "text": "他回：是。P 物质不仅掌管焦虑，还掌管疼痛。"
+        },
+        {
+          "type": "narration",
+          "text": "我把手机扣在桌上。豆豆在门口又叫了一声。"
+        },
+        {
+          "type": "narration",
+          "text": "快乐是借的，痛苦是还的。"
+        },
+        {
+          "type": "heading",
+          "text": "二、一周之后"
+        },
+        {
+          "type": "narration",
+          "text": "我硬抗了几天，然后奖励自己一天。"
+        },
+        {
+          "type": "narration",
+          "text": "这就是我的循环：硬抗、奖励、低食欲、再硬抗。"
+        },
+        {
+          "type": "narration",
+          "text": "奖励的那天，我会买一杯奶茶，点一份外卖，把窗帘拉开，觉得自己可以把生活重新捡起来。"
+        },
+        {
+          "type": "narration",
+          "text": "第二天，药效过去，我一天只吃几口饭，连豆豆的碗都不想洗。"
+        },
+        {
+          "type": "narration",
+          "text": "这两个月我瘦了近十斤。裤腰松了，颧骨出来了。我照镜子的时候，觉得镜子里的人比我瘦，也比我陌生。"
+        },
+        {
+          "type": "narration",
+          "text": "妈妈问我是不是瘦了，我说最近在控制饮食。我知道我在骗她。"
+        },
+        {
+          "type": "narration",
+          "text": "妈妈又发来语音，说周末回家吃饭。我说好。我没有告诉她我在吃药。"
+        },
+        {
+          "type": "narration",
+          "text": "我有很严重的社交恐惧。磕药的时候，我能和网友聊一整晚，奔现也不怕；"
+        },
+        {
+          "type": "narration",
+          "text": "不磕的时候，我躺在床上，他跟我说什么，我只能回“嗯”“哦”“啊”“哈哈”。他说我像自闭症。"
+        },
+        {
+          "type": "narration",
+          "text": "我知道他不是在骂我。"
+        },
+        {
+          "type": "narration",
+          "text": "上个月我和一个聊得很好的网友奔现。那天我磕了药，和他去了海边，说了很多话。"
+        },
+        {
+          "type": "narration",
+          "text": "第二天我没磕，我们躺在酒店里，他问我怎么了，我说没事。"
+        },
+        {
+          "type": "narration",
+          "text": "我在戒药吧看到一条 PubMed 案例：一位没有精神心理疾病史的女士，服用普瑞巴林十年治疗神经痛，"
+        },
+        {
+          "type": "narration",
+          "text": "停药后自杀了。"
+        },
+        {
+          "type": "narration",
+          "text": "我把那条截图存了下来。我没有告诉任何人我存了它。"
+        },
+        {
+          "type": "narration",
+          "text": "我下定决心戒断。但我不知道能不能做到。我不想把“戒断”说成一件很勇敢的事；它只是我明天要面对的事。"
+        },
+        {
+          "type": "narration",
+          "text": "今天我把药盒放在桌上，没有打开。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "处理者手记",
+          "text": "这份散页没有结尾。她没有说“我戒掉了”，也没有说“我又吃了”。她只是把药盒放在桌上。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "处理者手记",
+          "text": "我把它归档，放在“未完成”那一格。"
+        }
+      ]
+    },
+    {
+      "id": "side-35",
+      "chapterId": "side",
+      "order": 2,
+      "title": "长路漫漫",
+      "summary": "月烬的日志没有标题，只有编号。",
+      "flags": [
+        "drug_use",
+        "tolerance",
+        "delirium",
+        "unfinished"
+      ],
+      "sourceRefs": [
+        "report-035"
+      ],
+      "reportId": "035",
+      "reportSegment": "report-035-full",
+      "stage": {
+        "bg": "bg_river_night",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "月烬的日志没有标题，只有编号。"
+        },
+        {
+          "type": "heading",
+          "text": "一、药效还在"
+        },
+        {
+          "type": "narration",
+          "text": "二十五"
+        },
+        {
+          "type": "narration",
+          "text": "我又加了一点。不是很多，就是一点。我想把上次的感觉找回来。"
+        },
+        {
+          "type": "narration",
+          "text": "那天晚上，我把房间的灯关了，只留着手机屏幕。风扇在头顶转。我盯着屏幕，等药效上来。"
+        },
+        {
+          "type": "narration",
+          "text": "它来得很慢，像一辆晚点的车。"
+        },
+        {
+          "type": "narration",
+          "text": "二十六"
+        },
+        {
+          "type": "narration",
+          "text": "来劲了。"
+        },
+        {
+          "type": "narration",
+          "text": "我跟自己说，这次刚刚好。音乐变得很慢，时间变得很长。第二天醒来，什么都不记得，只记得“来劲”。"
+        },
+        {
+          "type": "narration",
+          "text": "二十七"
+        },
+        {
+          "type": "narration",
+          "text": "我加了第二次。还是很害怕，但就是想再来一次大的。朋友说别加了，我说好，然后加了。"
+        },
+        {
+          "type": "narration",
+          "text": "二十八"
+        },
+        {
+          "type": "narration",
+          "text": "我睡不着。我搞了药强制关机，结果关不掉。我躺在床上，听见自己的心跳，像有人在隔壁敲墙。"
+        },
+        {
+          "type": "narration",
+          "text": "二十九"
+        },
+        {
+          "type": "narration",
+          "text": "我醒得很早。药效没了。"
+        },
+        {
+          "type": "narration",
+          "text": "我盯着天花板，想：我的药效呢？！"
+        },
+        {
+          "type": "narration",
+          "text": "我以为只是这一次不够。"
+        },
+        {
+          "type": "heading",
+          "text": "二、药效不见了"
+        },
+        {
+          "type": "narration",
+          "text": "三十"
+        },
+        {
+          "type": "narration",
+          "text": "我又加了。还是没有。不是“弱”，是“没有”。像把水倒进一个漏了的杯子。"
+        },
+        {
+          "type": "narration",
+          "text": "我开始记录“多久起效”。以前是一个小时，后来是两个小时，再后来，我不知道它有没有起效。"
+        },
+        {
+          "type": "narration",
+          "text": "三十一"
+        },
+        {
+          "type": "narration",
+          "text": "我开始换时间，换空腹，换顺序。没有用。我以为是耐受，就再等几天。等了几天，还是一样。"
+        },
+        {
+          "type": "narration",
+          "text": "三十二"
+        },
+        {
+          "type": "narration",
+          "text": "我加了很多。吐了。胃液是苦的。我又加了一点。"
+        },
+        {
+          "type": "narration",
+          "text": "谵妄。我想被抽去了一段记忆。我躺在床上，吐了一床，忘了。我记得我去了蜃楼。"
+        },
+        {
+          "type": "narration",
+          "text": "那天晚上，我的脑子像一台坏掉的收音机，所有频道一起响。我听见有人叫我的名字，又听见有人在笑。"
+        },
+        {
+          "type": "narration",
+          "text": "我知道那是假的，但我还是应了一声。"
+        },
+        {
+          "type": "narration",
+          "text": "三十三"
+        },
+        {
+          "type": "narration",
+          "text": "我在超市门口坐着。我想，要不我再加一点。一个穿制服的人把我赶回家。我回到家，又加了。"
+        },
+        {
+          "type": "narration",
+          "text": "我坐在床边，觉得自己在一个转盘上。转盘转得很大，有风。最高也就二十三楼那么高。"
+        },
+        {
+          "type": "narration",
+          "text": "两分钟后，转盘停了，随着副歌。"
+        },
+        {
+          "type": "narration",
+          "text": "三十四"
+        },
+        {
+          "type": "narration",
+          "text": "我喝了一瓶柚子汁，开始吃。头疼。恶心。我吞了很久。然后解离来了。我和大脑像两个人。"
+        },
+        {
+          "type": "narration",
+          "text": "我一坐起来，大脑就自己转，我控制不了。我觉得自己要死了。"
+        },
+        {
+          "type": "narration",
+          "text": "我继续睡。对音乐的感知极其敏感。"
+        },
+        {
+          "type": "narration",
+          "text": "最后一行是："
+        },
+        {
+          "type": "quote",
+          "text": "上厕所呃呃一股药味。"
+        },
+        {
+          "type": "narration",
+          "text": "然后就没有了。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "处理者手记",
+          "text": "这份散页没有收束。月烬没有写“我戒了”，也没有写“我死了”。日志停在“一股药味”，下一页是空白。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "处理者手记",
+          "text": "我把它按原样归档，没有补写。"
+        }
+      ]
+    },
+    {
+      "id": "side-58",
+      "chapterId": "side",
+      "order": 3,
+      "title": "师傅",
+      "summary": "他叫我师傅。",
+      "flags": [
+        "death",
+        "suicide",
+        "grief",
+        "drug_use"
+      ],
+      "sourceRefs": [
+        "report-058"
+      ],
+      "reportId": "058",
+      "reportSegment": "report-058-full",
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "他叫我师傅。"
+        },
+        {
+          "type": "narration",
+          "text": "2023 年 8 月，他第一次在群里加我。他说他看了我写的东西，想叫我师傅。"
+        },
+        {
+          "type": "narration",
+          "text": "我说别叫，他说好，然后还是叫。他第一次叫我师傅的时候，我有点想笑。后来我听习惯了。"
+        },
+        {
+          "type": "narration",
+          "text": "他第一次给我发照片，是一碗面。配文是：师傅，我今天吃了。"
+        },
+        {
+          "type": "narration",
+          "text": "我回了一个“好”。"
+        },
+        {
+          "type": "narration",
+          "text": "从那以后，他每天都会发。有时候是面，有时候是猫，有时候是奶奶家的阳台。像打卡。"
+        },
+        {
+          "type": "narration",
+          "text": "他比我大。他以前有工作，后来工作没了。他每天吃普瑞巴林和右美沙芬，说这样能让他觉得自己还在。"
+        },
+        {
+          "type": "narration",
+          "text": "他搬去奶奶的屋子，用着不知道是谁的钱。他跟我说，师傅，我今天不吃了；第二天又说，师傅，我吃了。"
+        },
+        {
+          "type": "narration",
+          "text": "我没有办法。"
+        },
+        {
+          "type": "narration",
+          "text": "他偶尔会给我发一张照片：一碗面，一只猫，奶奶家的阳台。照片里的东西都很普通，像是在证明他还活着。"
+        },
+        {
+          "type": "narration",
+          "text": "他死前一周还发过一张阳台，晾着一件白衬衫。我没有回。"
+        },
+        {
+          "type": "narration",
+          "text": "我有时候回，有时候不回。我以为明天还会有。"
+        },
+        {
+          "type": "narration",
+          "text": "2024 年 5 月 10 日，我偶然得知他死了。"
+        },
+        {
+          "type": "narration",
+          "text": "联络人说：他跟我说活着没意思，然后把好友删完了，叫我把他删了。他在群里发了几张图，我就报警了。"
+        },
+        {
+          "type": "narration",
+          "text": "打电话过去让他自己打个 120，他也不愿意。我那天早几个小时估计还能救，太晚了。"
+        },
+        {
+          "type": "narration",
+          "text": "我根本就救不了他。他根本就不肯逃离，根本就不肯去治疗与工作。最开始 od 的目的早就分不清了；"
+        },
+        {
+          "type": "narration",
+          "text": "他已经死了，只不过在 2024.04.28 时肉体死亡。"
+        },
+        {
+          "type": "narration",
+          "text": "药物导致他丧失了对世界的情绪，并永远走入了自己。"
+        },
+        {
+          "type": "narration",
+          "text": "我写这份散页的时候，桌上有一把空椅子。那是他以前来我这儿坐过的位置。椅子是空的，碗也是空的。"
+        },
+        {
+          "type": "narration",
+          "text": "手机屏幕亮了一下，是群里的消息，不是他。"
+        },
+        {
+          "type": "narration",
+          "text": "我没有去葬礼。我不知道该以什么身份去。家属不认识我；我也不是他的师父。"
+        },
+        {
+          "type": "narration",
+          "text": "我把他的报告放在 58 号旁边。报告里有一句话，我每次看到都会停一下："
+        },
+        {
+          "type": "quote",
+          "text": "药物导致他丧失了对世界的情绪，并永远走入了自己。"
+        },
+        {
+          "type": "narration",
+          "text": "你说，我该怎么做？"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "处理者手记",
+          "text": "这份散页没有答案。后藤把问题留在了纸上，没有替自己回答。我把它放在 58 号旁边，没有加批注。"
+        }
+      ]
+    },
+    {
+      "id": "side-83",
+      "chapterId": "side",
+      "order": 4,
+      "title": "门口的警车",
+      "summary": "三月，我 o 了二十次。",
+      "flags": [
+        "drug_use",
+        "cognitive_distortion",
+        "paranoia"
+      ],
+      "sourceRefs": [
+        "report-083"
+      ],
+      "reportId": "083",
+      "reportSegment": "report-083-full",
+      "stage": {
+        "bg": "bg_night_street",
+        "bust": {
+          "speaker": "匿名",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "heading",
+          "text": "一、锁帧"
+        },
+        {
+          "type": "narration",
+          "text": "三月，我 o 了二十次。"
+        },
+        {
+          "type": "narration",
+          "text": "我不太记得是怎么开始的。只记得有一天，我加了一点，视线就像锁了帧率一样，每秒才变一次。几秒后黑过去一遍。"
+        },
+        {
+          "type": "narration",
+          "text": "我坐在床上，说着胡话，一边哭。最后靠仅存的意识，让监护人把我按在床上，喂了药。"
+        },
+        {
+          "type": "narration",
+          "text": "第二天醒来，我不记得昨晚做了什么。手机里多了几张截图，是我在药效里买的。我又买了一批。"
+        },
+        {
+          "type": "narration",
+          "text": "我完全意识不到，也控制不了。整个三月，我像被什么东西推着走。"
+        },
+        {
+          "type": "narration",
+          "text": "我知道这样不对，但那个“知道”也在药效里，一会儿有一会儿没有。我看记录，二十次。"
+        },
+        {
+          "type": "narration",
+          "text": "我不敢相信自己能按这个频率磕。"
+        },
+        {
+          "type": "narration",
+          "text": "四月，我得了肠胃炎，吃什么都吐。这反而让我冷静了一些。我配了苏糖酸镁，从那种长期的解离里恢复了一点。"
+        },
+        {
+          "type": "narration",
+          "text": "正好五月初，右美转精二。我想顺便戒掉。结果前几天，我想“最后 o 一次”。"
+        },
+        {
+          "type": "narration",
+          "text": "在药效里，我又非常不理智地、冒着风险买了一批。"
+        },
+        {
+          "type": "narration",
+          "text": "现在看到 wiki 上写的，我才知道：是右美让我失去判断力，还让我意识不到。"
+        },
+        {
+          "type": "narration",
+          "text": "我给后藤发消息：我该怎么办啊。"
+        },
+        {
+          "type": "narration",
+          "text": "群里有人问我最近怎么不说话了。我说在忙。其实我在等药效。"
+        },
+        {
+          "type": "narration",
+          "text": "他回：你得认知到，除了优米，你的人生还剩下什么。"
+        },
+        {
+          "type": "narration",
+          "text": "我盯着这句话看了很久。我想不出答案。我甚至不知道“我的人生”还剩什么；"
+        },
+        {
+          "type": "narration",
+          "text": "我只知道明天药效会过去，我会难受，然后我会想再来一次。"
+        },
+        {
+          "type": "heading",
+          "text": "二、警车"
+        },
+        {
+          "type": "narration",
+          "text": "今天小区门口停了一辆警车。"
+        },
+        {
+          "type": "narration",
+          "text": "我下楼扔垃圾，看到它，第一反应是：他们是来抓我的。我站在楼道里，没有出去。心跳得很快，手心出汗。"
+        },
+        {
+          "type": "narration",
+          "text": "我想起群里有人说，最近查得严；我想起我买过的东西；我想起我手机里的聊天记录。"
+        },
+        {
+          "type": "narration",
+          "text": "我对自己说：这是被害妄想吗？"
+        },
+        {
+          "type": "narration",
+          "text": "我没有动。我站在门后，数了三十秒。然后我探头看了一眼。"
+        },
+        {
+          "type": "narration",
+          "text": "车是白色的，停在门口。门卫在扫地。车里没有人。一个穿校服的小孩从车边跑过去，手里拿着一根烤肠。"
+        },
+        {
+          "type": "narration",
+          "text": "那只是一辆车。"
+        },
+        {
+          "type": "narration",
+          "text": "但我在发抖。"
+        },
+        {
+          "type": "heading",
+          "text": "复演 · 门口的警车"
+        },
+        {
+          "type": "quote",
+          "text": "这不是战斗，是一次现实检验。"
+        },
+        {
+          "type": "narration",
+          "text": "- 回合：3。"
+        },
+        {
+          "type": "narration",
+          "text": "- 手牌（固定，不构筑）：呼吸 / 看窗外 / 问自己 / 给朋友发消息。"
+        },
+        {
+          "type": "narration",
+          "text": "- 对手：被害妄想。"
+        },
+        {
+          "type": "narration",
+          "text": "- 对手出牌：影子 / 脚步声 / 心跳。"
+        },
+        {
+          "type": "narration",
+          "text": "- 目标：撑过 3 回合，并在最后选择“再看一眼”。"
+        },
+        {
+          "type": "narration",
+          "text": "- 无胜负：心理归零 = 解释权被妄想拿走；最后一行仍是“那只是一辆车”，只是语气不同。"
+        },
+        {
+          "type": "narration",
+          "text": "- 禁止：警笛、真实警情、警察形象、制服、追捕。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "第一回合",
+          "text": "影子。你打出“呼吸”。影子退到窗帘后面。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "第二回合",
+          "text": "脚步声。你打出“看窗外”。门卫在扫地，扫帚一下一下。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "第三回合",
+          "text": "心跳。你打出“问自己”。你问：“这是被害妄想吗？”然后你选择“再看一眼”。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "结局",
+          "text": "那只是一辆车。但我在发抖。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "处理者手记",
+          "text": "这份散页没有“战胜”。他只是多看了一眼。多看一眼，已经很难。"
+        }
+      ]
+    },
+    {
+      "id": "side-84",
+      "chapterId": "side",
+      "order": 5,
+      "title": "一种余晖",
+      "summary": "处理者笔记",
+      "flags": [
+        "drug_use",
+        "afterglow",
+        "atypical"
+      ],
+      "sourceRefs": [
+        "report-084"
+      ],
+      "reportId": "084",
+      "reportSegment": "report-084-full",
+      "stage": {
+        "bg": "bg_river_night",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "beats": [
+        {
+          "type": "narration",
+          "text": "处理者笔记"
+        },
+        {
+          "type": "narration",
+          "text": "84 号的报告只有几句话。他称它为“一种余晖”。"
+        },
+        {
+          "type": "narration",
+          "text": "他说，前一天 od 的时候，心跳很快，发汗，不舒服。第二天醒来，耳鸣，五感像被扩张了。"
+        },
+        {
+          "type": "narration",
+          "text": "他高兴了一整天，“像是健全人一样”，甚至持续到第二天。"
+        },
+        {
+          "type": "narration",
+          "text": "他还说，他几乎不会解离。那种“轻飘飘”的感觉，他很少碰见，即使吃了很多。他天生感知比较强，药抗性也奇怪。"
+        },
+        {
+          "type": "narration",
+          "text": "他给我发过一句话："
+        },
+        {
+          "type": "quote",
+          "text": "我总感觉自己是清醒的，而头脑中的药效则化为了一阵阵轻微的麻痹感。"
+        },
+        {
+          "type": "narration",
+          "text": "我把这段话看了三遍。"
+        },
+        {
+          "type": "narration",
+          "text": "他还说过一句："
+        },
+        {
+          "type": "quote",
+          "text": "我之前有一次半衰期并未结束时 od。od 本身稍显不适，心跳过速，发汗。"
+        },
+        {
+          "type": "quote",
+          "text": "但是第二天醒来的时候发现，耳鸣，然后五感感觉扩张了，延伸了。"
+        },
+        {
+          "type": "narration",
+          "text": "我开始套理论：左苏是反解离的，右美是解离的；两者的相互作用，也许能解释余晖。"
+        },
+        {
+          "type": "narration",
+          "text": "苏糖酸镁让他“感到了一丝余晖”。也许关键在 NMDA，或者在 σ 受体，或者在记忆回路。"
+        },
+        {
+          "type": "narration",
+          "text": "每一个解释都差一点。"
+        },
+        {
+          "type": "narration",
+          "text": "我查了左苏、右美、σ 受体、记忆回路。每一个都差一点。"
+        },
+        {
+          "type": "narration",
+          "text": "如果余晖是记忆恢复 + 自杀意念逆转 + 短暂欣快，那么 84 号有欣快，有五感扩张，"
+        },
+        {
+          "type": "narration",
+          "text": "有“像健全人一样”的高兴；但他没有说记忆恢复，也没有说自杀意念逆转。他甚至几乎不会解离。"
+        },
+        {
+          "type": "narration",
+          "text": "如果余晖必须经过解离，那么 84 号就不是余晖。可他的体验又太像了。"
+        },
+        {
+          "type": "narration",
+          "text": "他说他第一次 od 时，就感觉幼年时接触过类似的东西。他说这不重要，只是留下了一个深刻的回忆。"
+        },
+        {
+          "type": "narration",
+          "text": "他还说，他对解离有异常的抗性。"
+        },
+        {
+          "type": "narration",
+          "text": "我本来想把他写进“余晖”那一栏。可我找不到一栏能放他。"
+        },
+        {
+          "type": "narration",
+          "text": "他不是记忆恢复，不是自杀意念逆转，也不是我认识的那种解离后的光。"
+        },
+        {
+          "type": "narration",
+          "text": "他只是第二天醒来，觉得世界变大了，觉得自己“像健全人一样”。"
+        },
+        {
+          "type": "narration",
+          "text": "我甚至想过，是不是因为他几乎不会解离，所以余晖在他身上长成了另一种形状。可这也只是猜测。"
+        },
+        {
+          "type": "narration",
+          "text": "我写下：这不是我认识的那个余晖。"
+        },
+        {
+          "type": "narration",
+          "text": "然后我划掉了“不是”，改成“不完全是”。最后我把整句划掉，只留下："
+        },
+        {
+          "type": "quote",
+          "text": "余晖没有配方，也没有统一的形状。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "处理者手记",
+          "text": "84 号不是反例，也不是证据。他是一个人。我把他的报告放在余晖词条旁边，没有把它塞进任何一张表。"
+        }
+      ]
+    }
+  ]
+}

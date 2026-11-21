@@ -1,0 +1,153 @@
+@font-face {
+  font-family: "Fusion Pixel 8";
+  src: url("/fonts/fusion-pixel-8-subset.woff2?v=20261122") format("woff2");
+  font-display: block;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Fusion Pixel 10";
+  src: url("/fonts/fusion-pixel-10-subset.woff2?v=20261122") format("woff2");
+  font-display: block;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Fusion Pixel 12";
+  src: url("/fonts/fusion-pixel-12-subset.woff2?v=20261122") format("woff2");
+  font-display: block;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Fusion Pixel 8 Patch";
+  src: url("/fonts/fusion-8-patch.woff2?v=20261122") format("woff2");
+  font-display: block;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Fusion Pixel 10 Patch";
+  src: url("/fonts/fusion-10-patch.woff2?v=20261122") format("woff2");
+  font-display: block;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Fusion Pixel 12 Patch";
+  src: url("/fonts/fusion-12-patch.woff2?v=20261122") format("woff2");
+  font-display: block;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Cubic 11";
+  src: url("/fonts/cubic-11-subset.woff2?v=20261122") format("woff2");
+  font-display: block;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Cubic 11 Patch";
+  src: url("/fonts/cubic-11-patch.woff2?v=20261122") format("woff2");
+  font-display: block;
+  font-weight: 400;
+}
+
+:root {
+  --s: 2;
+  --u: calc(var(--s) * 1px);
+
+  /* 24-color palette — 设计/tokens.md */
+  --c-void: #0b0a10;
+  --c-ink: #17151f;
+  --c-ink2: #2b2735;
+  --c-paper: #e8e0cc;
+  --c-paper2: #d6ccb4;
+  --c-paper3: #f3ead8;
+  --c-muted: #5a5448;
+  --c-line: #8c8270;
+  --c-red: #a62b20;
+  --c-red-deep: #721a14;
+  --c-red-wash: #f2d9cf;
+  --c-blue: #2f4f8f;
+  --c-blue2: #4a6fa5;
+  --c-green: #3f6b3f;
+  --c-yellow: #d9a441;
+  --c-yellow2: #f0c866;
+  /* 兼容旧样式里用的 amber 别名；缺定义会让按钮背景整块失效。 */
+  --c-amber: var(--c-yellow);
+  --c-amber-bright: var(--c-yellow2);
+  --c-night: #1b2a3a;
+  --c-night2: #27445a;
+  --c-sky: #8fa8b8;
+  --c-skin: #d8b89a;
+  --c-hair: #2a2a32;
+  --c-cloth: #4a4a55;
+  --c-sun: #e8c87a;
+  --c-river: #5b8fa8;
+
+  /* 角色专用 4 色，不用于 UI */
+  --c-rose: #d98f9b;
+  --c-rose-deep: #9c4f5e;
+  --c-sage: #7f9a6b;
+  --c-sage-deep: #4f6b4a;
+
+  --font-8: "Fusion Pixel 8 Patch", "Fusion Pixel 8", "Cubic 11", "MS Gothic", "SimSun", monospace;
+  --font-10: "Fusion Pixel 10 Patch", "Fusion Pixel 10", "Cubic 11", "MS Gothic", "SimSun", monospace;
+  --font-12: "Fusion Pixel 12 Patch", "Fusion Pixel 12", "Cubic 11", "MS Gothic", "SimSun", monospace;
+  --font-display: "Cubic 11 Patch", "Cubic 11", "Fusion Pixel 12", "MS Gothic", "SimSun", monospace;
+  --font-pixel: var(--font-10);
+
+  --fs-8: calc(8 * var(--u));
+  --fs-10: calc(10 * var(--u));
+  --fs-12: calc(12 * var(--u));
+  --fs-16: calc(16 * var(--u));
+  --fs-18: calc(18 * var(--u));
+
+  --lh-8: calc(11 * var(--u));
+  --lh-10: calc(15 * var(--u));
+  --lh-12: calc(17 * var(--u));
+  --lh-16: calc(20 * var(--u));
+  --lh-18: calc(22 * var(--u));
+
+  --sp-1: calc(2 * var(--u));
+  --sp-2: calc(4 * var(--u));
+  --sp-3: calc(6 * var(--u));
+  --sp-4: calc(8 * var(--u));
+  --sp-5: calc(12 * var(--u));
+  --sp-6: calc(16 * var(--u));
+
+  --bw-2: calc(2 * var(--u));
+  --bw-3: calc(3 * var(--u));
+  --shadow: var(--sp-2) var(--sp-2) 0 var(--c-ink);
+  --shadow-sm: var(--sp-1) var(--sp-1) 0 var(--c-ink);
+
+  --f1: 33ms;
+  --f2: 66ms;
+  --f3: 100ms;
+  --f4: 133ms;
+  --f6: 200ms;
+  --f8: 266ms;
+  --ease-cut: steps(1, end);
+  --ease-2: steps(2, end);
+  --ease-3: steps(3, end);
+  --ease-4: steps(4, end);
+}
+
+[data-font="large"] [data-reading="true"] {
+  --fs-8: calc(10 * var(--u));
+  --fs-10: calc(12 * var(--u));
+  --fs-12: calc(14 * var(--u));
+  --lh-8: calc(13 * var(--u));
+  --lh-10: calc(18 * var(--u));
+  --lh-12: calc(20 * var(--u));
+}
+
+[data-contrast="high"] {
+  --c-muted: var(--c-ink2);
+  --c-line: var(--c-muted);
+  --c-paper: var(--c-paper3);
+  --c-paper2: var(--c-paper3);
+  --c-red-wash: var(--c-paper3);
+}

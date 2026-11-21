@@ -1,0 +1,8 @@
+PIXEL ART kawaii chibi dog avatar, ONE character centered, head and shoulders only, cut off right below the chin. The face is drawn exactly like a cute anime chibi, not like a real dog: HUGE glossy round eyes, each eye about one third of the face width, dark eyes with a large white highlight and a small second highlight, eyes looking straight at the viewer; round puffy cheeks with a soft pink blush; tiny round black nose; tiny omega-shaped mouth. NO protruding muzzle, no wrinkles, no fur texture, no whiskers, no realism.
+
+Breed: black-and-white border collie puppy. Soft dark charcoal #2a2a32 ears hanging down beside the cheeks, a white blaze down the middle of the face, white chest. The head is almost as wide as the canvas, the tiny shoulders peek out below.
+
+Expression: small warm smile. Eyes as gentle upward arcs with highlights, mouth slightly open in a soft smile without showing teeth, stronger blush on the cheeks.
+Flat solid magenta background #FF00FF, no shadow, no border, no text. Thick soft 2px dark-brown outline #17151f, chunky square pixels, hard edges, flat 2-tone shading, no anti-aliasing, no gradients, no dithering. Very cute, adorable, kawaii, soft rounded shapes, sticker style.
+
+Strict limited palette: charcoal #2a2a32, near-black #17151f, paper white #e8e0cc, pale #f3ead8, soft pink #d98f9b, magenta background.

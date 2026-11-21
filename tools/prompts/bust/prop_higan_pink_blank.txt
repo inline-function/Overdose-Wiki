@@ -1,0 +1,11 @@
+PIXEL ART kawaii chibi jellyfish avatar, ONE character centered: a soft round bell dome with four short wavy tentacles hanging below, no body, no arms, no legs. Cute anime chibi style, flat pink jellyfish.
+
+The bell is made of PINK: pale pink #f2d9cf for the lit part, dusty rose #d98f9b for the shading, deep rose #9c4f5e for the rim, and a small glowing dark-red #721a14 core inside the bell. Very soft, pastel, candy pink.
+
+Huge glossy round eyes on the bell, each eye about one quarter of the bell width, dark eyes with one large white highlight and one small highlight, looking straight at the viewer.
+
+ABSOLUTELY NO MOUTH. No mouth, no lips, no nose, no nostrils, no dots under the eyes, no blush marks, no blush circles, no cheek dots, no facial markings of any kind below the eyes. The area under the eyes must be completely blank pink.
+Expression: blank, dissociated. Eyes wide and empty with NO white highlight at all, tiny pupils, tentacles limp and spiky.
+Flat solid magenta background #FF00FF, no shadow, no border, no text. Thick soft 2px dark outline #17151f, chunky square pixels, hard edges, flat 2-tone shading, no anti-aliasing, no gradients, no dithering, no bubbles, no water. Very cute, adorable, kawaii, soft rounded shapes, sticker style.
+
+Strict limited palette: pale pink #f2d9cf, cream #f3ead8, dusty rose #d98f9b, deep rose #9c4f5e, dark red #721a14, near-black #17151f, magenta background.

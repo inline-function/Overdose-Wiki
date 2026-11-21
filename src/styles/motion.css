@@ -1,0 +1,62 @@
+.press {
+  transition:
+    transform var(--f1) var(--ease-cut),
+    box-shadow var(--f1) var(--ease-cut);
+}
+
+.press:active {
+  transform: translate(calc(1 * var(--u)), calc(1 * var(--u)));
+  box-shadow: calc(1 * var(--u)) calc(1 * var(--u)) 0 var(--c-ink);
+}
+
+.tabFx {
+  transition: background-color var(--f1) var(--ease-cut);
+}
+
+.cardFx {
+  transition:
+    transform var(--f2) var(--ease-2),
+    box-shadow var(--f2) var(--ease-cut);
+}
+
+.cardFx:hover {
+  transform: translateY(calc(-2 * var(--u)));
+}
+
+.cardFx[data-selected="true"] {
+  transform: translateY(calc(-4 * var(--u)));
+  outline: var(--bw-3) solid var(--c-yellow);
+  outline-offset: 0;
+}
+
+.stampFx {
+  animation: stamp 150ms steps(3, end) forwards;
+}
+
+@keyframes stamp {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--sp-2));
+  }
+  66% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cutFx {
+  animation: cut var(--f1) steps(1, end);
+}
+
+@keyframes cut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

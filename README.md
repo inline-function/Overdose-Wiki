@@ -6,9 +6,9 @@
 
 本仓库用于演示世界观、阅读流程和界面风格，没有完成完整游戏内容：
 
-- 不含 DLC《稍尽春风》
-- 不含支线剧情
-- 不含战斗系统；相关代码仅归档在 `hidden/battle/`，`/battle/:id` 会重定向到首页
+- DLC《稍尽春风》未完成，未接入当前可玩流程
+- 支线剧情未完成，未接入当前可玩流程
+- 战斗系统未完成；相关代码仅归档在 `hidden/battle/`，`/battle/:id` 会重定向到首页
 - 玩法没有细化：药箱、复演、文档编写等系统只做了最小可演示流程
 - 主线章节可读，但不代表完整玩法、平衡性和后续内容已经完成
 
@@ -50,7 +50,7 @@ hidden/battle 战斗归档，不参与编译与打包
 
 ## 内容与构建
 
-`src/content/private/` 是历史命名，现在存放主线剧情、报告和效果；这些内容随公开仓库发布。`src/content/sample.ts` 是公开 sample。当前版本不包含 DLC、支线和战斗。
+`src/content/private/` 是历史命名，现在存放主线剧情、报告和效果；这些内容随公开仓库发布。`src/content/sample.ts` 是公开 sample。当前可玩范围不包含 DLC、支线和战斗。
 
 - `npm run build:private`：带主线内容的 demo 构建，当前 GitHub Pages 使用这个
 - `npm run build`：sample demo，只用于公开示例

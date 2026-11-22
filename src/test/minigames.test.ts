@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { getMiniGame, miniGameList } from '../content/minigames';
+import { shuffleArray, shuffleOptions } from '../minigames/shuffle';
 
 describe('minigame registry', () => {
   it('loads the seven chapter-one minigames', () => {
@@ -22,6 +23,17 @@ describe('minigame registry', () => {
         'find-object',
       ]),
     );
+  });
+
+  it('shuffles answer options without losing any or putting the correct one first', () => {
+    const source = ['correct', 'wrong-a', 'wrong-b'];
+    const result = shuffleOptions(source, (item) => item === 'correct', () => 0.99);
+    expect(result.filter((item) => item === 'correct')).toHaveLength(1);
+    expect([...result].sort()).toEqual([...source].sort());
+    expect(result[0]).not.toBe('correct');
+
+    const plain = shuffleArray([1, 2, 3], () => 0.5);
+    expect([...plain].sort((a, b) => a - b)).toEqual([1, 2, 3]);
   });
 
   it('keeps timeline order and wiki categories self-consistent', () => {

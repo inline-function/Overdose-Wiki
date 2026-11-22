@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { ChatTriageGame } from '../../content/types';
+import { shuffleOptions } from '../shuffle';
 import s from '../minigame.module.css';
 
 type Line = { who: 'them' | 'me' | 'sys'; text: string };
@@ -19,6 +20,10 @@ export function ChatTriage({
   const [wrong, setWrong] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string | null>(null);
   const question = data.questions[index];
+  const replies = useMemo(
+    () => shuffleOptions(question.replies, (reply) => reply.ok),
+    [question],
+  );
   const last = index >= data.questions.length - 1;
 
   useEffect(() => {
@@ -94,7 +99,7 @@ export function ChatTriage({
           {index + 1} / {data.questions.length} · 选择回复
         </span>
         {!answered ? (
-          question.replies.map((reply) => (
+          replies.map((reply) => (
             <button
               key={reply.id}
               type="button"

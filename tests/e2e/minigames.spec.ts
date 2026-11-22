@@ -111,3 +111,55 @@ test('the seven chapter-one minigames can be completed', async ({ page, browserN
   }
   await finish(page, 'ch01.trip-timeline');
 });
+
+test('placement cards drag, options shuffle, and the timeline guides the drop', async ({
+  page,
+  browserName,
+}) => {
+  test.skip(!hasPrivate, 'requires private content');
+  test.skip(browserName !== 'chromium', 'drag coverage runs on chromium');
+
+  await open(page, 'ch01.s07');
+  await page.locator('[data-testid="forum-error"][data-error="e1"]').click();
+  const forumOptions = await page.getByTestId('forum-option').allTextContents();
+  expect(forumOptions[0]).not.toBe('愈创木酚甘油醚');
+
+  await open(page, 'ch01.s09');
+  const chatOptions = await page.getByTestId('chat-option').allTextContents();
+  expect(chatOptions[0]).not.toBe('不能，血清素综合征。');
+
+  await open(page, 'ch01.s10');
+  const wikiCard = page.locator('[data-testid="wiki-card"][data-card="w1"]');
+  await expect(wikiCard).toHaveAttribute('draggable', 'true');
+  await wikiCard.dragTo(
+    page.locator('[data-testid="wiki-category"][data-category="intro"]'),
+  );
+  await expect(
+    page.locator('[data-testid="wiki-placed-card"][data-card="w1"]'),
+  ).toHaveCount(1);
+
+  await open(page, 'ch01.s12');
+  const firstCard = page.locator('[data-testid="trip-card"][data-card="c1"]');
+  await expect(firstCard).toHaveAttribute('draggable', 'true');
+  await firstCard.click();
+  await expect(page.getByTestId('timeline-guide')).toContainText('第 01 格');
+  await expect(page.getByTestId('timeline-guide-slot')).toHaveCount(1);
+  await page.locator('[data-testid="timeline-slot"][data-slot="0"]').click();
+  await expect(
+    page.locator('[data-testid="timeline-slot"][data-slot="0"]'),
+  ).toHaveAttribute('data-filled', 'true');
+
+  await page
+    .locator('[data-testid="trip-card"][data-card="c2"]')
+    .dragTo(page.locator('[data-testid="timeline-slot"][data-slot="1"]'));
+  await expect(
+    page.locator('[data-testid="timeline-slot"][data-slot="1"]'),
+  ).toHaveAttribute('data-filled', 'true');
+
+  const dataTransfer = await page.evaluateHandle(() => new DataTransfer());
+  await page
+    .locator('[data-testid="trip-card"][data-card="c3"]')
+    .dispatchEvent('dragstart', { dataTransfer });
+  await expect(page.getByTestId('timeline-guide')).toContainText('第 03 格');
+  await expect(page.getByTestId('timeline-guide-slot')).toHaveCount(1);
+});

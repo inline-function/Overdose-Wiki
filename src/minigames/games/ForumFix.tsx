@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { ForumFixGame } from '../../content/types';
+import { shuffleOptions } from '../shuffle';
 import s from '../minigame.module.css';
 
 function renderPost(
@@ -76,6 +77,13 @@ export function ForumFix({
   }
 
   const error = active ? data.errors[active] : undefined;
+  const options = useMemo(
+    () =>
+      error
+        ? shuffleOptions(error.options, (option) => option === error.correct)
+        : [],
+    [error],
+  );
 
   return (
     <div className={s.forum}>
@@ -100,7 +108,7 @@ export function ForumFix({
               更正：{error.phrase} → 应该是什么？
             </p>
             <div className={s.optionRow}>
-              {error.options.map((option) => (
+              {options.map((option) => (
                 <button
                   key={option}
                   type="button"

@@ -542,6 +542,44 @@
   cursor: grab;
 }
 
+.tripCard[data-dragging='true'],
+.wikiCard[data-dragging='true'] {
+  opacity: 0.45;
+}
+
+.cardHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(1 * var(--u));
+  min-width: 0;
+}
+
+.cardHead .tripLabel,
+.cardHead .wikiCardLabel {
+  flex: 1;
+  min-width: 0;
+}
+
+.dragHandle {
+  flex: 0 0 auto;
+  color: var(--c-amber);
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  line-height: var(--lh-8);
+  opacity: 0.8;
+}
+
+.trayGuide {
+  margin: 0 0 calc(1 * var(--u));
+  border-left: calc(1 * var(--u)) solid var(--c-amber);
+  color: var(--c-amber);
+  padding-left: calc(1 * var(--u));
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  line-height: var(--lh-8);
+}
+
 .tripCard:hover,
 .tripCard[data-selected='true'] {
   border-color: var(--c-amber);
@@ -598,6 +636,7 @@
 }
 
 .timelineSlot {
+  position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -619,6 +658,11 @@
   border-style: solid;
   background: var(--c-paper);
   color: var(--c-ink);
+  cursor: grab;
+}
+
+.timelineSlot[data-dragging='true'] {
+  opacity: 0.45;
 }
 
 .timelineSlot[data-wrong='true'] {
@@ -629,6 +673,46 @@
 
 .timelineSlot[data-correct='true'] {
   border-color: var(--c-green);
+}
+
+.timelineRow[data-guide='true'] .timelineIndex {
+  color: var(--c-green);
+}
+
+.timelineSlot[data-guide='true'] {
+  border: calc(2 * var(--u)) dashed var(--c-amber);
+  background: rgba(240, 200, 102, 0.16);
+  color: var(--c-amber);
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(240, 200, 102, 0.18);
+}
+
+.timelineSlot[data-guide='true'][data-filled='true'] {
+  border-style: solid;
+  background: var(--c-paper);
+  color: var(--c-ink);
+}
+
+.timelineSlot[data-over='true'] {
+  border-style: solid;
+  border-color: var(--c-amber);
+}
+
+.timelineSlot[data-over='true'][data-guide='false'] {
+  border-color: var(--c-red);
+}
+
+.slotGuide {
+  position: absolute;
+  top: calc(0.5 * var(--u));
+  right: calc(0.5 * var(--u));
+  border: 1px solid var(--c-amber);
+  background: var(--c-amber);
+  color: var(--c-ink);
+  padding: 0 calc(1 * var(--u));
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  line-height: var(--lh-8);
+  pointer-events: none;
 }
 
 /* 第五高原 */
@@ -818,6 +902,20 @@
   border-color: var(--c-amber);
 }
 
+.wikiCategory[data-guide='true'] {
+  border: calc(2 * var(--u)) solid var(--c-green);
+  background: rgba(119, 141, 92, 0.16);
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(119, 141, 92, 0.14);
+}
+
+.wikiCategory[data-over='true'] {
+  border-color: var(--c-amber);
+}
+
+.wikiCategory[data-guide='true'][data-over='true'] {
+  background: rgba(240, 200, 102, 0.18);
+}
+
 .wikiCategoryLabel {
   flex: 0 0 auto;
   color: var(--c-amber);
@@ -835,6 +933,9 @@
 }
 
 .wikiChip {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(0.5 * var(--u));
   border: 1px solid var(--c-line);
   background: var(--c-paper);
   color: var(--c-ink);
@@ -842,6 +943,18 @@
   font-family: var(--font-8);
   font-size: var(--fs-8);
   line-height: var(--lh-8);
+  cursor: grab;
+  text-align: left;
+}
+
+.wikiChip[data-dragging='true'] {
+  opacity: 0.45;
+}
+
+.chipHandle {
+  color: var(--c-amber);
+  opacity: 0.8;
+  pointer-events: none;
 }
 
 /* 找物 */

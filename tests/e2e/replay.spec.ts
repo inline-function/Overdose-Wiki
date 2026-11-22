@@ -201,9 +201,10 @@ test('章节末直接回到报告，不再停在收尾面板', async ({ page }) 
   }
   await expect(page).toHaveURL(/#\/report\/7$/);
   await expect(page.getByRole('heading', { name: '虚数根' })).toBeVisible();
-  await expect(
-    page.getByRole('button', { name: /^第 14 段 · 报告七后记/ }),
-  ).toHaveAttribute('data-unread', 'false');
+  await expect(page.getByTestId('report-line').last()).toHaveAttribute(
+    'data-unread',
+    'false',
+  );
 });
 
 test('持续型特效有进退场过渡', async ({ page }) => {

@@ -71,9 +71,10 @@ test('chapter-end choice returns straight to the report', async ({ page }) => {
   // 章末不再弹“回首页/回报告”，而是直接落到本章报告页。
   await expect(page).toHaveURL(/#\/report\/7$/);
   await expect(page.getByRole('heading', { name: '虚数根' })).toBeVisible();
-  await expect(
-    page.getByRole('button', { name: /^第 14 段 · 报告七后记/ }),
-  ).toHaveAttribute('data-unread', 'false');
+  await expect(page.getByTestId('report-line').last()).toHaveAttribute(
+    'data-unread',
+    'false',
+  );
 });
 
 test('effect detail renders from content or fallback', async ({ page }) => {
@@ -124,7 +125,7 @@ test('report body renders and links to its scene', async ({ page }) => {
   await page.goto('/#/report/49');
   await expect(page.getByRole('heading', { name: '苦涩的颜料' })).toBeVisible();
   await expect(page.getByText(/处理者按/).first()).toBeVisible();
-  await page.getByRole('button', { name: /^第 1 段 · 好友申请/ }).click();
+  await page.getByTestId('report-line').first().click();
   await expect(page).toHaveURL(/#\/report\/49\/replay\/report-49-full/);
 });
 
@@ -136,7 +137,7 @@ test('font+ and high contrast reach the reading view', async ({ page }) => {
   await expect(page.getByTestId('viewport')).toHaveAttribute('data-font', 'large');
   await expect(page.getByTestId('viewport')).toHaveAttribute('data-contrast', 'high');
   await page.goto('/#/report/7');
-  await expect(page.getByRole('button', { name: /^第 1 段 · 落榜中考生/ })).toBeVisible();
+  await expect(page.getByTestId('report-line').first()).toBeVisible();
   const size = await page.evaluate(() => {
     const node = document.querySelector('[class*="segText"]');
     return node ? Number.parseFloat(getComputedStyle(node).fontSize) : 0;
@@ -162,31 +163,42 @@ test('unlock gating hides ch02 and report 49 until prerequisites', async ({ page
   await expect(page.getByRole('link', { name: /报告 49/ })).toBeVisible();
 });
 
-test('report page lists one entry per dialogue', async ({ page }) => {
+test('report page lists every dialogue line', async ({ page }) => {
   await page.goto('/#/');
   await page.goto('/#/report/7');
-  await expect(page.getByTestId('report-dialogue')).toHaveCount(14);
-  await expect(
-    page.getByRole('button', { name: /^第 1 段 · 落榜中考生/ }),
-  ).toHaveAttribute('data-current', 'true');
-  await expect(
-    page.getByRole('button', { name: /^第 14 段 · 报告七后记/ }),
-  ).toHaveAttribute('data-scene', 'ch01.s14');
+  const lines = page.getByTestId('report-line');
+  await expect(lines).toHaveCount(40);
+  await expect(lines.nth(0)).toHaveAttribute('data-scene', 'ch01.s01');
+  await expect(lines.nth(0)).toHaveAttribute('data-beat', '0');
+  await expect(lines.nth(1)).toHaveAttribute('data-scene', 'ch01.s01');
+  await expect(lines.nth(1)).toHaveAttribute('data-beat', '1');
+  await expect(lines.nth(0)).toHaveAttribute('data-current', 'true');
+  await expect(lines.last()).toHaveAttribute('data-scene', 'ch01.s14');
 });
 
-test('report bracket keys move dialogues with unread confirmation', async ({ page }) => {
+test('report bracket keys move dialogue lines with unread confirmation', async ({ page }) => {
   await page.goto('/#/');
   await page.goto('/#/report/7');
-  await expect(page.getByRole('button', { name: /^第 1 段 · 落榜中考生/ })).toBeVisible();
+  await expect(page.getByTestId('report-line').first()).toBeVisible();
   await page.getByTestId('stage').click({ position: { x: 2, y: 2 } });
   await page.keyboard.press(']');
   const confirm = page.getByRole('alert');
-  await expect(confirm).toContainText('跳到未读段');
+  await expect(confirm).toContainText('跳到未读对话');
   await page.keyboard.press('Escape');
   await expect(confirm).toHaveCount(0);
   await page.keyboard.press(']');
   await page.getByRole('button', { name: '跳转' }).click();
-  await expect(page).toHaveURL(/#\/report\/7\/replay\/ch01\.s02/);
+  await expect(page).toHaveURL(/#\/report\/7\/replay\/ch01\.s01/);
+  await expect
+    .poll(async () =>
+      page.evaluate(
+        () =>
+          (JSON.parse(localStorage.getItem('odw.save.v1') ?? '{}') as {
+            progress?: { beat?: number };
+          }).progress?.beat,
+      ),
+    )
+    .toBe(1);
 });
 
 test('settings export downloads a versioned save', async ({ page }) => {
@@ -238,7 +250,7 @@ test('scroll position is remembered across routes', async ({ page, browserName }
 test('semantic tree exposes landmarks, headings, and names', async ({ page }) => {
   await page.goto('/#/');
   await page.goto('/#/report/7');
-  await expect(page.getByRole('button', { name: /^第 4 段 · 余晖/ })).toBeVisible();
+  await expect(page.getByTestId('report-line').first()).toBeVisible();
   const tree = await page.locator('body').ariaSnapshot();
   expect(tree).toContain('banner');
   expect(tree).toContain('navigation "维基地址栏"');

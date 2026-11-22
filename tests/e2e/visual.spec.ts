@@ -32,7 +32,7 @@ test('report 960', async ({ page }) => {
   await accept(page);
   await page.setViewportSize({ width: 960, height: 540 });
   await page.goto('/#/report/7');
-  await expect(page.getByRole('button', { name: /^第 4 段 · 余晖/ })).toBeVisible();
+  await expect(page.getByTestId('report-line').first()).toBeVisible();
   await expect(page.getByTestId('stage')).toHaveScreenshot('report-960.png', {
     animations: 'disabled',
   });

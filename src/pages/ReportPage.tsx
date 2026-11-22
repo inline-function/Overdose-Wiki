@@ -22,6 +22,15 @@ type JumpTarget = {
   label: string;
   sceneId: string;
   segmentId: string;
+  beatIndex: number;
+};
+
+type DialogueLine = {
+  key: string;
+  scene: Scene;
+  beatIndex: number;
+  speaker: string;
+  text: string;
 };
 
 export function ReportPage() {
@@ -44,11 +53,56 @@ export function ReportPage() {
   const progressSegment = report?.segments.find(
     (item) => item.id === save.progress.segmentId,
   )?.id;
-  const currentSceneId =
-    chapter?.scenes.find((scene) => scene.id === save.progress.sceneId)?.id ??
-    chapter?.scenes[0]?.id ??
-    null;
-  const current = currentSceneId ?? progressSegment ?? report?.segments[0]?.id ?? '';
+  const lines: DialogueLine[] = [];
+  if (chapter) {
+    chapter.scenes.forEach((scene) => {
+      scene.beats.forEach((beat, beatIndex) => {
+        if (beat.type === 'dialogue') {
+          lines.push({
+            key: `${scene.id}:${beatIndex}`,
+            scene,
+            beatIndex,
+            speaker: beat.speaker,
+            text: beat.text,
+          });
+        } else if (beat.type === 'narration') {
+          lines.push({
+            key: `${scene.id}:${beatIndex}`,
+            scene,
+            beatIndex,
+            speaker: beat.speaker ?? '旁白',
+            text: beat.text,
+          });
+        } else if (beat.type === 'quote') {
+          lines.push({
+            key: `${scene.id}:${beatIndex}`,
+            scene,
+            beatIndex,
+            speaker: beat.source ?? '引用',
+            text: beat.text,
+          });
+        }
+      });
+    });
+  }
+  const currentLineIndex = lines.findIndex(
+    (line) =>
+      line.scene.id === save.progress.sceneId && line.beatIndex === save.progress.beat,
+  );
+  const progressSceneLineIndex = lines.reduce(
+    (last, line, index) => (line.scene.id === save.progress.sceneId ? index : last),
+    -1,
+  );
+  const focusLineIndex =
+    currentLineIndex >= 0
+      ? currentLineIndex
+      : progressSceneLineIndex >= 0
+        ? progressSceneLineIndex
+        : 0;
+  const currentLine = currentLineIndex >= 0 ? lines[currentLineIndex] : undefined;
+  const focusLine = lines[focusLineIndex];
+  const current = currentLine?.key ?? progressSegment ?? report?.segments[0]?.id ?? '';
+  const focusKey = focusLine?.key ?? current;
   const read = new Set(save.read[report?.id ?? '7'] ?? []);
   const completed = new Set(save.completedScenes);
   const isDoc = (report?.no ?? 0) >= 100;
@@ -60,7 +114,7 @@ export function ReportPage() {
     if (scrolled.current) return;
     scrolled.current = true;
     requestAnimationFrame(() => currentRef.current?.scrollIntoView?.({ block: 'nearest' }));
-  }, [current, currentSceneId]);
+  }, [focusKey]);
 
   useEffect(() => {
     if (!report) return;
@@ -74,10 +128,10 @@ export function ReportPage() {
       if (event.key !== '[' && event.key !== ']') return;
       event.preventDefault();
       const step = event.key === ']' ? 1 : -1;
-      if (chapter && currentSceneId) {
-        const index = chapter.scenes.findIndex((scene) => scene.id === currentSceneId);
-        const next = chapter.scenes[index + step];
-        if (next) openScene(next);
+      if (chapter) {
+        const index = currentLineIndex >= 0 ? currentLineIndex : focusLineIndex;
+        const next = lines[index + step] ?? (index < 0 && step > 0 ? lines[0] : undefined);
+        if (next) openLine(next);
         return;
       }
       const index = report.segments.findIndex((item) => item.id === current);
@@ -87,7 +141,7 @@ export function ReportPage() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current, currentSceneId, chapter, report]);
+  }, [current, currentLineIndex, focusLineIndex, chapter, report]);
 
   if (!report) {
     return (
@@ -109,7 +163,7 @@ export function ReportPage() {
       reportId: report!.id,
       segmentId: target.segmentId,
       sceneId: target.sceneId,
-      beat: 0,
+      beat: target.beatIndex,
     });
     addHistory(
       makeHistory(
@@ -119,7 +173,9 @@ export function ReportPage() {
         target.segmentId,
       ),
     );
-    navigate(`/report/${report!.id}/replay/${target.segmentId}`);
+    navigate(`/report/${report!.id}/replay/${target.segmentId}`, {
+      state: { startBeat: target.beatIndex },
+    });
   }
 
   function sceneLocked(scene: Scene) {
@@ -127,18 +183,25 @@ export function ReportPage() {
     return meta ? !isSceneUnlocked(meta, save) : false;
   }
 
-  function openScene(scene: Scene) {
-    if (sceneLocked(scene)) {
-      setStatus('该段尚未解锁：先完成前置章节。');
+  function lineRead(line: DialogueLine) {
+    if (completed.has(line.scene.id)) return true;
+    return line.scene.id === save.progress.sceneId && line.beatIndex < save.progress.beat;
+  }
+
+  function openLine(line: DialogueLine) {
+    if (sceneLocked(line.scene)) {
+      setStatus('这场对话尚未解锁：先完成前置章节。');
       return;
     }
-    const segment = segmentForScene(report!.id, scene.id);
+    const segment = segmentForScene(report!.id, line.scene.id);
     const target: JumpTarget = {
-      label: scene.title,
-      sceneId: scene.id,
-      segmentId: segment?.id ?? scene.id,
+      label: `${line.scene.title} · ${line.speaker}`,
+      sceneId: line.scene.id,
+      segmentId: segment?.id ?? line.scene.id,
+      beatIndex: line.beatIndex,
     };
-    if (!completed.has(scene.id) && scene.id !== currentSceneId && !save.settings.spoilers) {
+    const isCurrent = line.key === currentLine?.key;
+    if (!lineRead(line) && !isCurrent && !save.settings.spoilers) {
       setConfirmJump(target);
       return;
     }
@@ -158,6 +221,7 @@ export function ReportPage() {
       label: segment.label,
       sceneId: segment.sceneId,
       segmentId: segment.id,
+      beatIndex: 0,
     };
     if (!read.has(segment.id) && segment.id !== current && !save.settings.spoilers) {
       setConfirmJump(target);
@@ -165,10 +229,6 @@ export function ReportPage() {
     }
     go(target);
   }
-
-  const chapterIndex = chapter
-    ? chapter.scenes.findIndex((scene) => scene.id === currentSceneId)
-    : -1;
 
   return (
     <article className={p.page}>
@@ -194,8 +254,7 @@ export function ReportPage() {
       {!isDoc &&
         (chapter ? (
           <p className={p.toc}>
-            目录：{chapter.scenes.length} 段对话 · 从「{chapter.scenes[0]?.title}」到「
-            {chapter.scenes[chapter.scenes.length - 1]?.title}」
+            目录：{chapter.scenes.length} 场 · {lines.length} 句对话
           </p>
         ) : (
           <p className={p.toc}>
@@ -259,7 +318,7 @@ export function ReportPage() {
 
       {confirmJump && (
         <div className={p.confirmBar} role="alert">
-          <span>跳到未读段「{confirmJump.label}」？</span>
+          <span>跳到未读对话「{confirmJump.label}」？</span>
           <span className={p.confirmActions}>
             <button
               type="button"
@@ -280,28 +339,29 @@ export function ReportPage() {
       )}
 
       {chapter ? (
-        <ol className={p.segmentList} aria-label="对话段落">
-          {chapter.scenes.map((scene, index) => {
-            const isCurrent = scene.id === currentSceneId;
-            const isRead = completed.has(scene.id);
+        <ol className={p.segmentList} aria-label="对话逐条索引">
+          {lines.map((line, index) => {
+            const isCurrent = line.key === currentLine?.key;
+            const isRead = lineRead(line);
             const isUnread = !isCurrent && !isRead;
-            const lockedScene = sceneLocked(scene);
+            const lockedScene = sceneLocked(line.scene);
             return (
-              <li key={scene.id} ref={isCurrent ? currentRef : undefined}>
+              <li key={line.key} ref={line.key === focusKey ? currentRef : undefined}>
                 <button
                   type="button"
                   className={p.segmentButton}
-                  data-testid="report-dialogue"
-                  data-scene={scene.id}
+                  data-testid="report-line"
+                  data-scene={line.scene.id}
+                  data-beat={line.beatIndex}
                   data-current={isCurrent}
                   data-unread={isUnread}
                   data-locked={lockedScene}
                   aria-current={isCurrent ? 'step' : undefined}
-                  onClick={() => openScene(scene)}
+                  onClick={() => openLine(line)}
                 >
                   <span className={p.segMeta}>
                     <span>
-                      第 {index + 1} 段 · {scene.title}
+                      第 {index + 1} 句 · {line.scene.title}
                     </span>
                     {isCurrent && <span className={`${p.tagSmall} ${p.tagUnread}`}>当前</span>}
                     {isUnread && <span className={`${p.tagSmall} ${p.tagUnread}`}>未读</span>}
@@ -311,7 +371,9 @@ export function ReportPage() {
                     {lockedScene && <span className={p.tagSmall}>锁定</span>}
                   </span>
                   <span className={p.segText}>
-                    {lockedScene ? '尚未解锁：先完成前置章节。' : scene.summary}
+                    {lockedScene
+                      ? '这场对话尚未解锁：先完成前置章节。'
+                      : `${line.speaker}：${line.text}`}
                   </span>
                 </button>
               </li>
@@ -357,10 +419,14 @@ export function ReportPage() {
       )}
 
       <footer className={p.articleFoot}>
-        <span>点击任意对话跳转</span>
+        <span>点击任意一句跳转</span>
         <span>
-          {chapter && chapterIndex >= 0
-            ? `当前：第 ${chapterIndex + 1} 段 · ${chapter.scenes[chapterIndex]?.title}`
+          {chapter
+            ? currentLine
+              ? `当前：第 ${currentLineIndex + 1} 句 · ${currentLine.scene.title}`
+              : focusLine
+                ? `读到这里：第 ${focusLineIndex + 1} 句 · ${focusLine.scene.title}`
+                : '本章对话已列完'
             : `当前：${current}`}
         </span>
       </footer>

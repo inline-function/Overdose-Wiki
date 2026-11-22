@@ -266,7 +266,14 @@ function ScenePlayer({
   const canvasIntro = Boolean(canvasOpening);
   useSuppressGuide(showIntro);
   useCue(showIntro ? undefined : sceneCue);
-  const [beatIndex, setBeatIndex] = useState(0);
+  const requestedStartBeat = Number(
+    (location.state as { startBeat?: number } | null)?.startBeat,
+  );
+  const [beatIndex, setBeatIndex] = useState(() =>
+    Number.isFinite(requestedStartBeat)
+      ? Math.min(Math.max(Math.trunc(requestedStartBeat), 0), Math.max(scene.beats.length - 1, 0))
+      : 0,
+  );
   const [typed, setTyped] = useState('');
   const [showEnd, setShowEnd] = useState(false);
   const [revealing, setRevealing] = useState(false);
@@ -342,7 +349,14 @@ function ScenePlayer({
   const typing = isText && typed.length < text.length;
 
   useEffect(() => {
-    setBeatIndex(0);
+    const requested = Number(
+      (location.state as { startBeat?: number } | null)?.startBeat,
+    );
+    setBeatIndex(
+      Number.isFinite(requested)
+        ? Math.min(Math.max(Math.trunc(requested), 0), Math.max(scene.beats.length - 1, 0))
+        : 0,
+    );
     setTyped('');
     setShowEnd(false);
     setChosen(null);

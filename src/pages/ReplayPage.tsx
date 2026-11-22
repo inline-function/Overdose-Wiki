@@ -528,19 +528,29 @@ function ScenePlayer({
     return { ...save, completedScenes: [...save.completedScenes, scene.id] };
   }
 
+  function returnToReport() {
+    setAutoRead(false);
+    setStatus('本章读完，已回到报告。');
+    navigate(`/report/${reportId}`);
+  }
+
   function finishScene() {
     if (!markCurrentScene()) return;
     if (scene.next) {
       const target = getSceneMeta(scene.next);
-      // 下一章还没解锁就不要自动跳进去：停在章末，让任务指引接手
-      if (target && isSceneUnlocked(target, projectedSave())) {
-        goToScene(scene.next);
+      // 同一章内继续自动播放；跨章一律回报告，不再弹“回首页/回报告”。
+      if (target && target.chapterId === scene.chapterId) {
+        if (isSceneUnlocked(target, projectedSave())) {
+          goToScene(scene.next);
+          return;
+        }
+        setStatus('下一场还没解锁。');
+        setAutoRead(false);
+        setShowEnd(true);
         return;
       }
-      if (target) setStatus('本章读完。先完成归档任务，下一章才会解锁。');
     }
-    setAutoRead(false);
-    setShowEnd(true);
+    returnToReport();
   }
 
   function goToScene(sceneId: string) {
@@ -570,10 +580,16 @@ function ScenePlayer({
     if (option.note) setStatus(option.note);
     if (option.targetScene) {
       const target = getSceneMeta(option.targetScene);
+      // 章节结束的选择直接把玩家送回报告；跨章不自动进入下一章。
+      if (target && target.chapterId !== scene.chapterId) {
+        markCurrentScene();
+        returnToReport();
+        return;
+      }
       const nextSave = { ...save, completedScenes: save.completedScenes.includes(scene.id) ? save.completedScenes : [...save.completedScenes, scene.id] };
       if (target && !isSceneUnlocked(target, nextSave)) {
         markCurrentScene();
-        setStatus('下一章还没解锁：先完成归档任务。');
+        setStatus('下一场还没解锁。');
         setAutoRead(false);
         setShowEnd(true);
         return;

@@ -14,7 +14,7 @@ test('S0 shell: consent, routes, replay, settings, 3 scales', async ({ page }) =
   await expect(page.getByRole('heading', { name: '虚数根' })).toBeVisible();
   await page.screenshot({ animations: 'disabled', path: 'test-results/s0-report-960.png' });
 
-  await page.getByRole('button', { name: /RP-7-12/ }).click();
+  await page.getByRole('button', { name: /^第 4 段 · 余晖/ }).click();
   const jump = page.getByRole('button', { name: '跳转' });
   if (await jump.isVisible().catch(() => false)) await jump.click();
   await expect(page.getByRole('img', { name: /像素场景/ })).toBeVisible();

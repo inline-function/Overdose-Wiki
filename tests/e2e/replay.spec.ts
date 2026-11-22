@@ -53,14 +53,14 @@ test('chapter boundaries carry the target report id', async ({ page, browserName
   await page.goto('/#/report/49/replay/ch02.s24');
   await advanceToChoice(page);
   await page.getByRole('button', { name: '1. 继续读下去' }).click();
-  await expect(page).toHaveURL(/#\/report\/50\/replay\//);
-  await expect(page.getByRole('heading', { name: '复演 · 索死法' })).toBeVisible();
+  await expect(page).toHaveURL(/#\/report\/49$/);
+  await expect(page.getByRole('heading', { name: '苦涩的颜料' })).toBeVisible();
 
   await page.goto('/#/report/50/replay/ch03.s24');
   await advanceToChoice(page);
   await page.getByRole('button', { name: '1. 继续读下去' }).click();
-  await expect(page).toHaveURL(/#\/report\/51\/replay\/ch04\.s01/);
-  await expect(page.getByRole('heading', { name: '复演 · 建站三说' })).toBeVisible();
+  await expect(page).toHaveURL(/#\/report\/50$/);
+  await expect(page.getByRole('heading', { name: '从此再也不见' })).toBeVisible();
 });
 
 test('replay drops the trace card and applies a scene transition', async ({ page, browserName }) => {
@@ -186,23 +186,24 @@ test('space completes the typewriter without skipping the beat', async ({ page, 
   await page.keyboard.press('Space');
   await expect.poll(async () => (await line.textContent()) ?? '').not.toBe(full);
 });
-test('章节末停在收尾，不跳进未解锁的下一章', async ({ page }) => {
+test('章节末直接回到报告，不再停在收尾面板', async ({ page }) => {
   await page.goto('/#/report/7/replay/rp-7-26');
   await expect(page.getByRole('heading', { name: /复演 · 报告七后记/ })).toBeVisible();
   const wrap = page.getByTestId('scene-wrap');
-  const end = page.getByRole('group', { name: '场景结束' });
+  const choice = page.getByRole('group', { name: '选择' });
   for (let i = 0; i < 20; i += 1) {
-    if (await end.isVisible().catch(() => false)) break;
-    const choice = page.getByRole('group', { name: '选择' });
     if (await choice.isVisible().catch(() => false)) {
       await choice.getByRole('button').first().click();
-    } else {
-      await wrap.click({ timeout: 3000 }).catch(() => undefined);
+      break;
     }
+    await wrap.click({ timeout: 3000 }).catch(() => undefined);
     await page.waitForTimeout(80);
   }
-  await expect(end).toBeVisible();
-  await expect(page).toHaveURL(/rp-7-26/);
+  await expect(page).toHaveURL(/#\/report\/7$/);
+  await expect(page.getByRole('heading', { name: '虚数根' })).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: /^第 14 段 · 报告七后记/ }),
+  ).toHaveAttribute('data-unread', 'false');
 });
 
 test('持续型特效有进退场过渡', async ({ page }) => {

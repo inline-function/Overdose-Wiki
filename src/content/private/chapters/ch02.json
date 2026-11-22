@@ -97,6 +97,11 @@
           "type": "narration",
           "text": "是K洞......",
           "fx": "blur"
+        },
+        {
+          "type": "minigame",
+          "id": "ch02.k-hole",
+          "label": "K洞：把五感找回来"
         }
       ],
       "next": "ch02.s03"
@@ -296,6 +301,11 @@
           "type": "narration",
           "text": "非常明显的阳性精神病症状。",
           "fx": "tear"
+        },
+        {
+          "type": "minigame",
+          "id": "ch02.voices",
+          "label": "声音：哪些能核对"
         }
       ],
       "next": "ch02.s07"
@@ -375,6 +385,11 @@
           "type": "dialogue",
           "speaker": "后藤",
           "text": "是精神分裂...精神分裂的阳性症状......"
+        },
+        {
+          "type": "minigame",
+          "id": "ch02.paint",
+          "label": "墙上的颜色：把苦调出来"
         }
       ],
       "next": "ch02.s09"
@@ -414,6 +429,11 @@
         {
           "type": "narration",
           "text": "但是喹硫平会加剧抑郁症与人格解体。"
+        },
+        {
+          "type": "minigame",
+          "id": "ch02.care",
+          "label": "能做的事：分开能扛和不能扛"
         }
       ],
       "next": "ch02.s10"
@@ -766,6 +786,11 @@
           "type": "narration",
           "text": "我多么希望来得及呀......",
           "fx": "gloom"
+        },
+        {
+          "type": "minigame",
+          "id": "ch02.echo",
+          "label": "回音：她说的和你听见的"
         }
       ],
       "next": "ch02.s18"

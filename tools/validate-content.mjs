@@ -47,6 +47,10 @@ const MINIGAME_KINDS = new Set([
   'perception',
   'wiki-sort',
   'find-object',
+  'grounding',
+  'voice-filter',
+  'paint-mix',
+  'echo-match',
 ]);
 for (const { file, value } of minigames) {
   if (!value.id || typeof value.id !== 'string') {
@@ -116,6 +120,44 @@ for (const { file, value } of minigames) {
     const objectIds = new Set((value.objects ?? []).map((object) => object.id));
     for (const prompt of value.prompts ?? []) {
       if (!objectIds.has(prompt.target)) errors.push(`${file}: find prompt target ${prompt.target} missing`);
+    }
+  }
+  if (value.kind === 'grounding') {
+    const anchors = Array.isArray(value.anchors) ? value.anchors : [];
+    if (anchors.length < 5) errors.push(`${file}: grounding needs >=5 anchors`);
+    const senses = anchors.map((anchor) => anchor.sense);
+    if (new Set(senses).size !== senses.length) errors.push(`${file}: grounding senses must be unique`);
+  }
+  if (value.kind === 'voice-filter') {
+    const lines = Array.isArray(value.lines) ? value.lines : [];
+    if (lines.length < 4) errors.push(`${file}: voice-filter needs >=4 lines`);
+    for (const line of lines) {
+      if (line.suggested !== 'check' && line.suggested !== 'inside') {
+        errors.push(`${file}: voice line ${line.id} needs suggested check|inside`);
+      }
+    }
+  }
+  if (value.kind === 'paint-mix') {
+    const pigmentIds = new Set((value.pigments ?? []).map((pigment) => pigment.id));
+    const layers = Array.isArray(value.layers) ? value.layers : [];
+    if (pigmentIds.size < 3) errors.push(`${file}: paint-mix needs >=3 pigments`);
+    if (!layers.length) errors.push(`${file}: paint-mix needs >=1 layer`);
+    for (const layer of layers) {
+      if (!Array.isArray(layer.target) || layer.target.length < 2) {
+        errors.push(`${file}: paint layer ${layer.id} needs >=2 pigments`);
+      }
+      for (const pigment of layer.target ?? []) {
+        if (!pigmentIds.has(pigment)) errors.push(`${file}: paint layer ${layer.id} unknown pigment ${pigment}`);
+      }
+    }
+  }
+  if (value.kind === 'echo-match') {
+    const pairs = Array.isArray(value.pairs) ? value.pairs : [];
+    if (pairs.length < 3) errors.push(`${file}: echo-match needs >=3 pairs`);
+    for (const pair of pairs) {
+      if (!pair.left?.text || !pair.right?.text) {
+        errors.push(`${file}: echo pair ${pair.id} needs left/right text`);
+      }
     }
   }
 }

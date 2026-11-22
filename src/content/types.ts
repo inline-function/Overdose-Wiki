@@ -69,7 +69,11 @@ export type MiniGameKind =
   | 'trip-timeline'
   | 'perception'
   | 'wiki-sort'
-  | 'find-object';
+  | 'find-object'
+  | 'grounding'
+  | 'voice-filter'
+  | 'paint-mix'
+  | 'echo-match';
 
 export type MiniGameBase = {
   id: string;
@@ -182,6 +186,9 @@ export type WikiSortGame = MiniGameBase & {
   kind: 'wiki-sort';
   categories: WikiCategory[];
   cards: WikiCard[];
+  /** Optional vocabulary so the same board can read as care triage instead of wiki filing. */
+  trayLabel?: string;
+  placeVerb?: string;
 };
 
 export type FindShape = 'kettle' | 'tea' | 'cup' | 'phone' | 'pill';
@@ -204,6 +211,63 @@ export type FindObjectGame = MiniGameBase & {
   objects: FindObject[];
 };
 
+export type GroundingSense = '看' | '听' | '触' | '闻' | '尝';
+
+export type GroundingAnchor = {
+  id: string;
+  sense: GroundingSense;
+  label: string;
+  line: string;
+};
+
+export type GroundingGame = MiniGameBase & {
+  kind: 'grounding';
+  anchors: GroundingAnchor[];
+};
+
+export type VoiceLine = {
+  id: string;
+  speaker: string;
+  text: string;
+  suggested: 'check' | 'inside';
+};
+
+export type VoiceFilterGame = MiniGameBase & {
+  kind: 'voice-filter';
+  lines: VoiceLine[];
+};
+
+export type PaintPigment = { id: string; label: string; color: string };
+
+export type PaintLayer = {
+  id: string;
+  label: string;
+  /** Pigment ids; order does not matter. */
+  target: string[];
+  underlay: string;
+  note: string;
+};
+
+export type PaintMixGame = MiniGameBase & {
+  kind: 'paint-mix';
+  pigments: PaintPigment[];
+  layers: PaintLayer[];
+};
+
+export type EchoLine = { speaker: string; text: string };
+
+export type EchoPair = {
+  id: string;
+  left: EchoLine;
+  right: EchoLine;
+  note: string;
+};
+
+export type EchoMatchGame = MiniGameBase & {
+  kind: 'echo-match';
+  pairs: EchoPair[];
+};
+
 export type MiniGameData =
   | MemoryCollageGame
   | ForumFixGame
@@ -211,7 +275,11 @@ export type MiniGameData =
   | TripTimelineGame
   | PerceptionGame
   | WikiSortGame
-  | FindObjectGame;
+  | FindObjectGame
+  | GroundingGame
+  | VoiceFilterGame
+  | PaintMixGame
+  | EchoMatchGame;
 
 export type Beat =
   | { type: 'analysis'; caseId: string; label?: string }

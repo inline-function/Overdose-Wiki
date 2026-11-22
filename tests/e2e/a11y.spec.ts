@@ -56,6 +56,23 @@ for (const [route, label] of [
   });
 }
 
+test('axe: chapter two minigames', async ({ page }) => {
+  await page.goto('/#/');
+  await seedScenes(page, ['ch01.s14']);
+  for (const sceneId of ['ch02.s02', 'ch02.s06', 'ch02.s08', 'ch02.s09', 'ch02.s17']) {
+    await page.goto(`/#/report/49/replay/${sceneId}`);
+    await page.getByTestId('scene-wrap').waitFor({ state: 'visible' });
+    for (let i = 0; i < 16; i += 1) {
+      if (await page.getByTestId('minigame-overlay').isVisible().catch(() => false)) break;
+      await page.getByTestId('scene-wrap').click({ timeout: 1500 }).catch(() => undefined);
+      await page.waitForTimeout(220);
+    }
+    await expect(page.getByTestId('minigame-overlay')).toBeVisible();
+    const results = await new AxeBuilder({ page }).analyze();
+    expect(results.violations).toEqual([]);
+  }
+});
+
 test('chapter-end choice returns straight to the report', async ({ page }) => {
   await page.goto('/#/');
   test.skip((await page.getByTestId('stage').getAttribute('data-content')) === 'sample', 'requires private ch01 content');

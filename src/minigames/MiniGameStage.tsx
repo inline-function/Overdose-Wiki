@@ -8,6 +8,10 @@ import { TripTimeline } from './games/TripTimeline';
 import { Perception } from './games/Perception';
 import { WikiSort } from './games/WikiSort';
 import { FindObjectGame } from './games/FindObjectGame';
+import { Grounding } from './games/Grounding';
+import { VoiceFilter } from './games/VoiceFilter';
+import { PaintMix } from './games/PaintMix';
+import { EchoMatch } from './games/EchoMatch';
 import s from './minigame.module.css';
 
 type Props = {
@@ -56,6 +60,14 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
         return <WikiSort data={data} onReady={onReady} onCaption={onCaption} />;
       case 'find-object':
         return <FindObjectGame data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'grounding':
+        return <Grounding data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'voice-filter':
+        return <VoiceFilter data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'paint-mix':
+        return <PaintMix data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'echo-match':
+        return <EchoMatch data={data} onReady={onReady} onCaption={onCaption} />;
     }
   })();
 
@@ -71,7 +83,7 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
         aria-label={data.title}
         tabIndex={-1}
       >
-        <header className={s.titleBar}>
+        <div className={s.titleBar}>
           <span className={s.titleIcon} aria-hidden="true">▣</span>
           <span className={s.titleText}>{data.title}</span>
           <span className={s.titleCase}>
@@ -87,7 +99,7 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
           >
             ×
           </button>
-        </header>
+        </div>
         <div className={s.body}>
           <p className={s.intro}>{data.intro}</p>
           <div className={s.game}>{game}</div>

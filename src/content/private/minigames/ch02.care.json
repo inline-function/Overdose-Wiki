@@ -1,0 +1,81 @@
+{
+  "id": "ch02.care",
+  "kind": "wiki-sort",
+  "title": "能做的事：分开能扛和不能扛",
+  "subtitle": "她说的每一句都在往下坠",
+  "intro": "把她的症状、你能做的、你不能做的分开。不是放弃，是别把自己也拖下去。",
+  "closing": "你能做的没有那么多。但也不是什么都没有。",
+  "doneLabel": "把手机放下",
+  "trayLabel": "还没分开的事",
+  "placeVerb": "放下",
+  "categories": [
+    {
+      "id": "inside",
+      "label": "她正在经历的"
+    },
+    {
+      "id": "can",
+      "label": "你能做的"
+    },
+    {
+      "id": "cannot",
+      "label": "你不能做的"
+    }
+  ],
+  "cards": [
+    {
+      "id": "c1",
+      "label": "幻听",
+      "note": "她说听见电流和管道。",
+      "category": "inside"
+    },
+    {
+      "id": "c2",
+      "label": "连续失眠",
+      "note": "困到突然昏过去。",
+      "category": "inside"
+    },
+    {
+      "id": "c3",
+      "label": "世界在腐烂",
+      "note": "她说眼前的东西在烂。",
+      "category": "inside"
+    },
+    {
+      "id": "c4",
+      "label": "先问安全",
+      "note": "现在身边有没有人？",
+      "category": "can"
+    },
+    {
+      "id": "c5",
+      "label": "联系照护者",
+      "note": "把情况告诉能到场的人。",
+      "category": "can"
+    },
+    {
+      "id": "c6",
+      "label": "建议就医",
+      "note": "把专业的事交给专业的人。",
+      "category": "can"
+    },
+    {
+      "id": "c7",
+      "label": "替她诊断",
+      "note": "你不是医生，也不能替她下结论。",
+      "category": "cannot"
+    },
+    {
+      "id": "c8",
+      "label": "保证不会死",
+      "note": "你无法替另一个人保证。",
+      "category": "cannot"
+    },
+    {
+      "id": "c9",
+      "label": "一个人扛",
+      "note": "这不是一个人能扛住的事。",
+      "category": "cannot"
+    }
+  ]
+}

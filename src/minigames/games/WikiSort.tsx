@@ -23,6 +23,8 @@ export function WikiSort({
   const placedIds = useMemo(() => new Set(Object.keys(placed)), [placed]);
   const tray = order.filter((card) => !placedIds.has(card.id));
   const all = tray.length === 0;
+  const trayLabel = data.trayLabel ?? '未整理';
+  const placeVerb = data.placeVerb ?? '归档';
   const guideCard = data.cards.find((card) => card.id === (dragging ?? selected));
   const guideCategory = guideCard
     ? data.categories.find((category) => category.id === guideCard.category)
@@ -91,7 +93,7 @@ export function WikiSort({
     setSelected(null);
     setDragging(null);
     setOver(null);
-    onCaption(`「${card.label}」归档。`);
+    onCaption(`「${card.label}」${placeVerb}。`);
   }
 
   function handleDrop(event: React.DragEvent, categoryId: string) {
@@ -102,7 +104,7 @@ export function WikiSort({
   return (
     <div className={s.wiki}>
       <div className={s.wikiTray} data-testid="wiki-tray">
-        <p className={s.trayHeading}>未整理 · {tray.length}</p>
+        <p className={s.trayHeading}>{trayLabel} · {tray.length}</p>
         {guideCard && guideCategory ? (
           <p className={s.trayGuide} data-testid="wiki-guide">
             「{guideCard.label}」→「{guideCategory.label}」
@@ -136,7 +138,7 @@ export function WikiSort({
             <span className={s.wikiCardNote}>{card.note}</span>
           </button>
         ))}
-        {tray.length === 0 ? <span className={s.hint}>都归档了。</span> : null}
+        {tray.length === 0 ? <span className={s.hint}>都{placeVerb}了。</span> : null}
       </div>
       <div className={s.wikiCategories} data-testid="wiki-categories">
         {data.categories.map((category) => {

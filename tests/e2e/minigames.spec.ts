@@ -5,14 +5,34 @@ const hasPrivate = existsSync('src/content/private');
 
 test.use({ reducedMotion: 'reduce' });
 
-async function open(page: import('@playwright/test').Page, sceneId: string) {
-  await page.goto(`/#/report/7/replay/${sceneId}`);
-  for (let i = 0; i < 8; i += 1) {
+async function open(
+  page: import('@playwright/test').Page,
+  sceneId: string,
+  reportId = '7',
+) {
+  await page.goto(`/#/report/${reportId}/replay/${sceneId}`);
+  await page.getByTestId('scene-wrap').waitFor({ state: 'visible' });
+  for (let i = 0; i < 16; i += 1) {
     if (await page.getByTestId('minigame-overlay').isVisible().catch(() => false)) return;
     await page.getByTestId('scene-wrap').click({ timeout: 1500 }).catch(() => undefined);
-    await page.waitForTimeout(180);
+    await page.waitForTimeout(240);
   }
   await expect(page.getByTestId('minigame-overlay')).toBeVisible();
+}
+
+async function seedChapter2(page: import('@playwright/test').Page) {
+  await page.goto('/#/');
+  await page.waitForTimeout(450);
+  await page.evaluate(() => {
+    const raw = localStorage.getItem('odw.save.v1');
+    if (!raw) return;
+    const save = JSON.parse(raw);
+    save.completedScenes = Array.from(new Set([...(save.completedScenes ?? []), 'ch01.s14']));
+    save.readEffects = ['解离', '反解离'];
+    save.read = { ...save.read, 108: ['report-108-full'] };
+    localStorage.setItem('odw.save.v1', JSON.stringify(save));
+  });
+  await page.reload();
 }
 
 async function finish(page: import('@playwright/test').Page, id: string) {
@@ -117,6 +137,68 @@ test('the seven chapter-one minigames can be completed', async ({ page, browserN
     await page.getByTestId('timeline-slot').nth(i).click();
   }
   await finish(page, 'ch01.trip-timeline');
+});
+
+test('the five chapter-two minigames can be completed', async ({ page, browserName }) => {
+  test.skip(!hasPrivate, 'requires private content');
+  test.skip(browserName !== 'chromium', 'minigame interaction coverage runs on chromium');
+  test.setTimeout(120000);
+
+  await seedChapter2(page);
+
+  await open(page, 'ch02.s02', '49');
+  const anchors = page.getByTestId('grounding-anchor');
+  await expect(anchors).toHaveCount(5);
+  for (let i = 0; i < 5; i += 1) await anchors.nth(i).click();
+  await finish(page, 'ch02.k-hole');
+
+  await open(page, 'ch02.s06', '49');
+  const voices = page.getByTestId('voice-line');
+  await expect(voices).toHaveCount(6);
+  for (let i = 0; i < 6; i += 1) {
+    const row = voices.nth(i);
+    await row.locator('[data-testid="voice-choice"]').nth(i % 2).click();
+  }
+  await finish(page, 'ch02.voices');
+
+  await open(page, 'ch02.s08', '49');
+  for (let i = 0; i < 3; i += 1) {
+    const layer = page.locator('[data-testid="paint-layer"][data-active="true"]');
+    const layerId = await layer.getAttribute('data-layer');
+    const target = await layer.getAttribute('data-target');
+    for (const pigment of target?.split(',') ?? []) {
+      await page.locator(`[data-testid="paint-pigment"][data-pigment="${pigment}"]`).click();
+    }
+    await page.getByTestId('paint-apply').click();
+    await expect(
+      page.locator(`[data-testid="paint-layer"][data-layer="${layerId}"]`),
+    ).toHaveAttribute('data-done', 'true');
+  }
+  await finish(page, 'ch02.paint');
+
+  await open(page, 'ch02.s09', '49');
+  for (const [card, category] of [
+    ['c1', 'inside'],
+    ['c2', 'inside'],
+    ['c3', 'inside'],
+    ['c4', 'can'],
+    ['c5', 'can'],
+    ['c6', 'can'],
+    ['c7', 'cannot'],
+    ['c8', 'cannot'],
+    ['c9', 'cannot'],
+  ]) {
+    await page.locator(`[data-testid="wiki-card"][data-card="${card}"]`).click();
+    await page.locator(`[data-testid="wiki-category"][data-category="${category}"]`).click();
+  }
+  await finish(page, 'ch02.care');
+
+  await open(page, 'ch02.s17', '49');
+  for (const pair of ['e1', 'e2', 'e3', 'e4']) {
+    await page.locator(`[data-testid="echo-left"][data-pair="${pair}"]`).click();
+    await page.locator(`[data-testid="echo-right"][data-pair="${pair}"]`).click();
+  }
+  await finish(page, 'ch02.echo');
 });
 
 test('placement cards drag, options shuffle, and the timeline guides the drop', async ({

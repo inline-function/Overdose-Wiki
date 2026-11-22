@@ -1582,3 +1582,516 @@
     min-height: calc(18 * var(--u));
   }
 }
+
+
+/* 第二章：K洞五感着陆 */
+.grounding {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(240, 200, 102, 0.07), transparent 38%),
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.86), rgba(12, 10, 18, 0.94) 68%);
+  padding: calc(3 * var(--u)) calc(2 * var(--u)) calc(8 * var(--u));
+}
+
+.groundingHole {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  width: calc(64 * var(--u));
+  height: calc(64 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(circle, #000 0 34%, rgba(0, 0, 0, 0.78) 52%, transparent 72%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.groundingHoleRing {
+  position: absolute;
+  inset: calc(9 * var(--u));
+  border: 1px solid rgba(240, 200, 102, 0.32);
+  border-radius: 50%;
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(0, 0, 0, 0.45), 0 0 calc(8 * var(--u)) rgba(240, 200, 102, 0.12);
+  animation: groundingBreathe 4.6s ease-in-out infinite;
+}
+
+.groundingGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: calc(1.5 * var(--u));
+  width: 100%;
+}
+
+.groundingAnchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(0.8 * var(--u));
+  min-width: 0;
+  min-height: calc(34 * var(--u));
+  border: 1px solid var(--c-line);
+  background: rgba(12, 10, 18, 0.78);
+  color: var(--c-paper);
+  padding: calc(1 * var(--u)) calc(0.7 * var(--u));
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  line-height: var(--lh-8);
+  cursor: pointer;
+}
+
+.groundingAnchor:hover,
+.groundingAnchor:focus-visible {
+  border-color: var(--c-amber);
+  background: rgba(240, 200, 102, 0.12);
+}
+
+.groundingAnchor[data-found='true'] {
+  border-color: var(--c-amber);
+  background: rgba(240, 200, 102, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(240, 200, 102, 0.2);
+}
+
+.groundingSense {
+  color: var(--c-amber);
+  font-family: var(--font-10);
+  font-size: var(--fs-8);
+}
+
+.groundingLabel {
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--c-paper);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.groundingNow {
+  position: absolute;
+  right: calc(4 * var(--u));
+  bottom: calc(2 * var(--u));
+  left: calc(4 * var(--u));
+  z-index: 1;
+  margin: 0;
+  color: var(--c-rose);
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  line-height: var(--lh-8);
+  text-align: center;
+}
+
+.groundingCount {
+  position: absolute;
+  top: calc(2 * var(--u));
+  right: calc(2 * var(--u));
+  z-index: 1;
+  color: #b9ae99;
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+}
+
+/* 第二章：把声音分开 */
+.voiceFilter {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: calc(1 * var(--u)) calc(2 * var(--u));
+  gap: calc(1 * var(--u));
+}
+
+.voiceHeader {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--c-amber);
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  letter-spacing: 0.08em;
+}
+
+.voiceCount {
+  color: #b9ae99;
+}
+
+.voiceList {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: calc(1 * var(--u));
+  min-height: 0;
+  overflow: auto;
+}
+
+.voiceRow {
+  display: grid;
+  grid-template-columns: calc(26 * var(--u)) minmax(0, 1fr) auto;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: calc(1 * var(--u));
+  min-height: calc(17 * var(--u));
+  border-left: calc(1 * var(--u)) solid var(--c-line);
+  background: rgba(12, 10, 18, 0.62);
+  padding: calc(0.5 * var(--u)) calc(1 * var(--u));
+}
+
+.voiceRow[data-choice='check'] {
+  border-left-color: var(--c-amber);
+  background: rgba(240, 200, 102, 0.08);
+}
+
+.voiceRow[data-choice='inside'] {
+  border-left-color: var(--c-rose);
+  opacity: 0.86;
+}
+
+.voiceWho {
+  overflow: hidden;
+  color: var(--c-rose);
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.voiceText {
+  min-width: 0;
+  color: var(--c-paper);
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  line-height: var(--lh-8);
+}
+
+.voiceChoices {
+  display: flex;
+  flex: 0 0 auto;
+  gap: calc(0.6 * var(--u));
+}
+
+.voiceChoice {
+  min-height: calc(13 * var(--u));
+  border: 1px solid var(--c-line);
+  background: var(--c-ink);
+  color: #b9ae99;
+  padding: 0 calc(1 * var(--u));
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.voiceChoice:hover,
+.voiceChoice:focus-visible {
+  border-color: var(--c-amber);
+  color: var(--c-paper);
+}
+
+.voiceChoice[aria-pressed='true'] {
+  border-color: var(--c-amber);
+  background: var(--c-amber);
+  color: var(--c-ink);
+}
+
+/* 第二章：三层颜料 */
+.paint {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: calc(2 * var(--u));
+  height: 100%;
+  overflow: hidden;
+  padding: calc(1 * var(--u)) calc(2 * var(--u));
+}
+
+.paintWall {
+  position: relative;
+  overflow: hidden;
+  border: calc(2 * var(--u)) solid #000;
+  background: var(--c-ink2);
+  box-shadow: inset 0 0 0 1px rgba(240, 200, 102, 0.1);
+}
+
+.paintLayerPreview {
+  position: absolute;
+  inset: calc(3 * var(--u));
+  z-index: 4;
+  border: 1px solid rgba(0, 0, 0, 0.64);
+  opacity: 0.88;
+  transition: background 180ms steps(3, end);
+}
+
+.paintDoneLayer {
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.58);
+  opacity: 0.76;
+}
+
+.paintCracks {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background:
+    linear-gradient(112deg, transparent 0 46%, rgba(0, 0, 0, 0.52) 47% 49%, transparent 50% 100%),
+    linear-gradient(62deg, transparent 0 58%, rgba(0, 0, 0, 0.42) 59% 61%, transparent 62% 100%),
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.paintWallLabel {
+  position: absolute;
+  z-index: 6;
+  right: calc(2 * var(--u));
+  bottom: calc(2 * var(--u));
+  left: calc(2 * var(--u));
+  border-left: calc(2 * var(--u)) solid var(--c-amber);
+  background: rgba(12, 10, 18, 0.78);
+  color: var(--c-paper);
+  padding: 0 calc(1 * var(--u));
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+}
+
+.paintControls {
+  display: flex;
+  flex-direction: column;
+  gap: calc(1.2 * var(--u));
+  min-width: 0;
+}
+
+.paintLayers {
+  display: flex;
+  gap: calc(0.8 * var(--u));
+}
+
+.paintLayerTab {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(0.6 * var(--u));
+  min-width: 0;
+  min-height: calc(16 * var(--u));
+  border: 1px solid var(--c-line);
+  background: rgba(12, 10, 18, 0.72);
+  color: var(--c-muted);
+  padding: 0 calc(1 * var(--u));
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  cursor: pointer;
+}
+
+.paintLayerTab[data-active='true'] {
+  border-color: var(--c-amber);
+  color: var(--c-paper);
+}
+
+.paintLayerTab[data-done='true'] {
+  background: rgba(240, 200, 102, 0.14);
+  color: var(--c-amber);
+}
+
+.paintLayerTab:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.paintCheck {
+  color: var(--c-amber);
+}
+
+.paintTargetRow {
+  display: flex;
+  align-items: center;
+  gap: calc(1 * var(--u));
+  min-height: calc(20 * var(--u));
+  border-top: 1px solid var(--c-line);
+  border-bottom: 1px solid var(--c-line);
+  padding: calc(1 * var(--u)) 0;
+}
+
+.paintTargetLabel {
+  color: #b9ae99;
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+}
+
+.paintSwatch {
+  display: block;
+  width: calc(20 * var(--u));
+  height: calc(16 * var(--u));
+  border: calc(1 * var(--u)) solid #000;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.paintMixLabel {
+  overflow: hidden;
+  color: var(--c-paper);
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paintPots {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: calc(0.8 * var(--u));
+}
+
+.paintPot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(0.5 * var(--u));
+  min-width: 0;
+  min-height: calc(18 * var(--u));
+  border: 1px solid var(--c-line);
+  background: rgba(12, 10, 18, 0.7);
+  color: var(--c-paper);
+  padding: 0;
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  cursor: pointer;
+}
+
+.paintPot[aria-pressed='true'] {
+  border-color: var(--c-amber);
+  background: rgba(240, 200, 102, 0.14);
+}
+
+.paintDot {
+  display: block;
+  width: calc(8 * var(--u));
+  height: calc(8 * var(--u));
+  border: 1px solid #000;
+  border-radius: 50%;
+}
+
+.paintApply {
+  min-height: calc(16 * var(--u));
+  border: calc(2 * var(--u)) solid #000;
+  background: var(--c-amber);
+  color: var(--c-ink);
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  cursor: pointer;
+}
+
+.paintApply:disabled {
+  background: #4a4a55;
+  color: #b9ae99;
+  cursor: default;
+}
+
+/* 第二章：话语回音 */
+.echo {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: calc(1 * var(--u)) calc(2 * var(--u));
+  height: 100%;
+  overflow: hidden;
+  padding: calc(1 * var(--u)) calc(2 * var(--u));
+}
+
+.echoColumn {
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.9 * var(--u));
+  min-height: 0;
+  overflow: auto;
+}
+
+.echoHead {
+  margin: 0;
+  color: var(--c-amber);
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  letter-spacing: 0.08em;
+}
+
+.echoLine {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: calc(0.4 * var(--u));
+  min-height: calc(20 * var(--u));
+  border-left: calc(1 * var(--u)) solid var(--c-line);
+  background: rgba(12, 10, 18, 0.64);
+  color: var(--c-paper);
+  padding: calc(0.6 * var(--u)) calc(1 * var(--u));
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  line-height: var(--lh-8);
+  text-align: left;
+  cursor: pointer;
+}
+
+.echoLine:hover,
+.echoLine:focus-visible {
+  border-left-color: var(--c-amber);
+  background: rgba(240, 200, 102, 0.1);
+}
+
+.echoLine[data-selected='true'] {
+  border-left-color: var(--c-amber);
+  background: rgba(240, 200, 102, 0.15);
+}
+
+.echoLine[data-matched='true'] {
+  border-left-color: var(--c-rose);
+  color: #b9ae99;
+  opacity: 0.78;
+  cursor: default;
+}
+
+.echoWho {
+  color: var(--c-rose);
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+}
+
+.echoNote {
+  grid-column: 1 / -1;
+  margin: 0;
+  border-top: 1px solid var(--c-line);
+  padding-top: calc(0.6 * var(--u));
+  color: #b9ae99;
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  line-height: var(--lh-8);
+}
+
+.echoCount {
+  position: absolute;
+  top: calc(1 * var(--u));
+  right: calc(2 * var(--u));
+  color: #b9ae99;
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+}
+
+@keyframes groundingBreathe {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.06); opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .groundingHoleRing {
+    animation: none;
+  }
+  .paintLayerPreview {
+    transition: none;
+  }
+}

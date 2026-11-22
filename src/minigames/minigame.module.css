@@ -3123,6 +3123,11 @@
   animation: saviorGlitchTear 0.22s steps(2, end) infinite;
 }
 
+.window[data-after-post='true'] {
+  transform-origin: center;
+  animation: saviorWindowOpen 900ms cubic-bezier(0.16, 0.9, 0.22, 1) both;
+}
+
 .saviorAfter {
   position: relative;
 }
@@ -3202,6 +3207,13 @@
   100% { transform: translate3d(calc(1 * var(--u)), calc(0.4 * var(--u)), 0) skewX(1.5deg); }
 }
 
+@keyframes saviorWindowOpen {
+  0% { transform: scaleY(0.012); filter: brightness(2.4) contrast(1.15); }
+  10% { transform: scaleY(0.012); filter: brightness(2.4) contrast(1.15); }
+  56% { transform: scaleY(0.54) skewX(-1deg); filter: brightness(1.4); }
+  100% { transform: scaleY(1) skewX(0deg); filter: none; }
+}
+
 @keyframes saviorLine {
   0% { opacity: 0; transform: scaleX(0.05); }
   18% { opacity: 1; transform: scaleX(1); }
@@ -3243,6 +3255,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .window[data-glitching='true'],
+  .window[data-after-post='true'],
   .saviorAfterBoard,
   .saviorAfter::before,
   .saviorAfterCategory,
@@ -3252,6 +3265,10 @@
     animation: none;
   }
   .window[data-glitching='true'] {
+    filter: none;
+  }
+  .window[data-after-post='true'] {
+    animation: none;
     filter: none;
   }
   .saviorAfter::before {

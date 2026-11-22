@@ -181,7 +181,7 @@ test('replay hands the analysis beat to the overlay and moves on', async ({ page
   const stage = page.getByTestId('analysis-stage');
   for (let index = 0; index < 10; index += 1) {
     if (await stage.isVisible().catch(() => false)) break;
-    await page.getByTestId('dialog').click().catch(() => undefined);
+    await page.getByTestId('dialog').click({ timeout: 500 }).catch(() => undefined);
     await page.waitForTimeout(80);
   }
   await expect(stage).toBeVisible();
@@ -194,5 +194,5 @@ test('replay hands the analysis beat to the overlay and moves on', async ({ page
 
   // 叠层让位给下一句台词，而不是再弹一次演示。
   await expect(page.getByTestId('analysis-stage')).toHaveCount(0);
-  await expect(page.getByTestId('dialog')).toContainText('点破之后');
+  await expect(page.getByTestId('dialog')).toContainText('我给每一次都起了名字');
 });

@@ -221,7 +221,14 @@ test('持续型特效有进退场过渡', async ({ page }) => {
   });
   expect(motion.duration).toContain('0.34s');
   expect(motion.property).toContain('filter');
-  for (let i = 0; i < 8; i += 1) {
+  const skipMinigame = async () => {
+    const exit = page.getByTestId('minigame-exit');
+    if (!(await exit.isVisible().catch(() => false))) return false;
+    await exit.click();
+    return true;
+  };
+  for (let i = 0; i < 12; i += 1) {
+    if (await skipMinigame()) continue;
     await wrap.click();
     await page.waitForTimeout(30);
     if ((await wrap.getAttribute('data-fx')) === 'blur') break;
@@ -231,6 +238,7 @@ test('持续型特效有进退场过渡', async ({ page }) => {
   // 离开这一拍：滤镜应当慢慢退回，而不是硬切
   let left = false;
   for (let i = 0; i < 12 && !left; i += 1) {
+    if (await skipMinigame()) continue;
     await wrap.click();
     try {
       await expect(wrap).not.toHaveAttribute('data-fx', 'blur', { timeout: 900 });

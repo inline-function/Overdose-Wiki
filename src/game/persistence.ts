@@ -62,6 +62,7 @@ export function migrate(raw: unknown): Save | null {
     save.readEffects ??= [];
     save.seenIntros ??= [];
     save.analysis ??= [];
+    save.completedMinigames ??= [];
     return save;
   }
   // v1 is the first schema. Future versions add their migrations here.

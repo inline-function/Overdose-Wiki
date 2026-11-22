@@ -1,0 +1,70 @@
+{
+  "id": "ch01.find-object",
+  "kind": "find-object",
+  "title": "烧水壶在哪里",
+  "subtitle": "复刻失败的日子",
+  "intro": "他想烧水。烧水壶在哪里？为什么水会在烧水壶里而不是在杯子里……",
+  "closing": "茶叶是干什么的来着？……他忘了。",
+  "doneLabel": "让水烧开",
+  "prompts": [
+    {
+      "text": "找到烧水壶",
+      "target": "kettle"
+    },
+    {
+      "text": "找到茶叶",
+      "target": "tea"
+    },
+    {
+      "text": "找到杯子",
+      "target": "cup"
+    }
+  ],
+  "objects": [
+    {
+      "id": "kettle",
+      "label": "烧水壶",
+      "shape": "kettle",
+      "x": 10,
+      "y": 42,
+      "w": 22,
+      "h": 30
+    },
+    {
+      "id": "tea",
+      "label": "茶叶",
+      "shape": "tea",
+      "x": 38,
+      "y": 28,
+      "w": 18,
+      "h": 22
+    },
+    {
+      "id": "cup",
+      "label": "杯子",
+      "shape": "cup",
+      "x": 66,
+      "y": 48,
+      "w": 16,
+      "h": 24
+    },
+    {
+      "id": "phone",
+      "label": "手机",
+      "shape": "phone",
+      "x": 80,
+      "y": 16,
+      "w": 13,
+      "h": 25
+    },
+    {
+      "id": "pill",
+      "label": "药盒",
+      "shape": "pill",
+      "x": 28,
+      "y": 14,
+      "w": 13,
+      "h": 17
+    }
+  ]
+}

@@ -37,6 +37,75 @@ const cards = drugs.length ? [{ file: 'drugs.json', value: drugs }] : [];
 const battles = existsSync(battlesFile)
   ? [{ file: 'battles.json', value: JSON.parse(await readFile(battlesFile, 'utf8')) }]
   : [];
+const minigames = await readJsonFiles(path.join(ROOT, 'minigames'));
+const minigameIds = new Set();
+const MINIGAME_KINDS = new Set([
+  'memory-collage',
+  'forum-fix',
+  'chat-triage',
+  'trip-timeline',
+  'perception',
+  'wiki-sort',
+  'find-object',
+]);
+for (const { file, value } of minigames) {
+  if (!value.id || typeof value.id !== 'string') {
+    errors.push(`${file}: minigame needs id`);
+    continue;
+  }
+  if (minigameIds.has(value.id)) errors.push(`${file}: duplicate minigame ${value.id}`);
+  minigameIds.add(value.id);
+  if (!MINIGAME_KINDS.has(value.kind)) errors.push(`${file}: unknown minigame kind ${value.kind}`);
+  if (!value.title || !value.intro || !value.closing) {
+    errors.push(`${file}: minigame needs title/intro/closing`);
+  }
+  if (value.kind === 'memory-collage' && (!Array.isArray(value.fragments) || value.fragments.length < 3)) {
+    errors.push(`${file}: memory-collage needs >=3 fragments`);
+  }
+  if (value.kind === 'forum-fix') {
+    if (!Array.isArray(value.posts) || !value.errors || typeof value.errors !== 'object') {
+      errors.push(`${file}: forum-fix needs posts[] and errors{}`);
+    }
+    for (const [key, error] of Object.entries(value.errors ?? {})) {
+      if (!error.phrase || !Array.isArray(error.options) || error.options.length < 2) {
+        errors.push(`${file}: forum error ${key} needs phrase/options`);
+      }
+      if (!error.options?.includes(error.correct)) {
+        errors.push(`${file}: forum error ${key} correct must be in options`);
+      }
+    }
+  }
+  if (value.kind === 'chat-triage') {
+    if (!Array.isArray(value.questions) || value.questions.length < 1) {
+      errors.push(`${file}: chat-triage needs questions[]`);
+    }
+    for (const question of value.questions ?? []) {
+      const ok = (question.replies ?? []).filter((reply) => reply.ok).length;
+      if (ok !== 1) errors.push(`${file}: chat question ${question.id} needs exactly one ok reply`);
+    }
+  }
+  if (value.kind === 'trip-timeline') {
+    const orders = (value.cards ?? []).map((card) => card.order).sort((a, b) => a - b);
+    if (!orders.length || orders.some((order, index) => order !== index + 1)) {
+      errors.push(`${file}: trip-timeline orders must be 1..n`);
+    }
+  }
+  if (value.kind === 'perception' && (!Array.isArray(value.lines) || value.lines.length < 1)) {
+    errors.push(`${file}: perception needs lines[]`);
+  }
+  if (value.kind === 'wiki-sort') {
+    const categoryIds = new Set((value.categories ?? []).map((category) => category.id));
+    for (const card of value.cards ?? []) {
+      if (!categoryIds.has(card.category)) errors.push(`${file}: wiki card ${card.id} has unknown category`);
+    }
+  }
+  if (value.kind === 'find-object') {
+    const objectIds = new Set((value.objects ?? []).map((object) => object.id));
+    for (const prompt of value.prompts ?? []) {
+      if (!objectIds.has(prompt.target)) errors.push(`${file}: find prompt target ${prompt.target} missing`);
+    }
+  }
+}
 const sceneIds = new Set();
 const allScenes = new Map();
 
@@ -59,6 +128,10 @@ for (const { file, value } of chapters) {
     const beats = Array.isArray(scene.beats) ? scene.beats : [];
     for (const beat of beats) {
       if (!beat.type) errors.push(`${scene.id}: beat without type`);
+      if (beat.type === 'minigame') {
+        if (!beat.id) errors.push(`${scene.id}: minigame beat without id`);
+        else if (!minigameIds.has(beat.id)) errors.push(`${scene.id}: unknown minigame ${beat.id}`);
+      }
       if (beat.type === 'choice') {
         if (!Array.isArray(beat.options) || beat.options.length < 2) {
           errors.push(`${scene.id}: choice needs >=2 options`);
@@ -292,7 +365,7 @@ const battleCount = [...allScenes.values()].reduce(
 );
 
 console.log(
-  `content:check: ${sceneCount} scenes, ${beatCount} beats, ${choiceCount} choices, ${battleCount} battle beats, ${reports.length} reports, ${effects.length} effects, ${cardIds.size} drugs, ${battleIds.size} battles`,
+  `content:check: ${sceneCount} scenes, ${beatCount} beats, ${choiceCount} choices, ${battleCount} battle beats, ${reports.length} reports, ${effects.length} effects, ${cardIds.size} drugs, ${battleIds.size} battles, ${minigames.length} minigames`,
 );
 if (warnings.length) {
   console.log(`warnings (${warnings.length}):`);

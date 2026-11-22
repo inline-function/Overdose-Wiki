@@ -24,7 +24,9 @@ import { CHAPTER_REPORT } from '../game/routing';
 import { isSceneUnlocked } from '../game/unlocks';
 import { useGameStore } from '../game/store';
 import { getAnalysisCase } from '../content/analysis';
+import { getMiniGame } from '../content/minigames';
 import { AnalysisStage } from '../analysis/AnalysisStage';
+import { MiniGameStage } from '../minigames/MiniGameStage';
 import { PlaceholderPage } from './PlaceholderPage';
 import p from './pages.module.css';
 
@@ -231,6 +233,7 @@ function ScenePlayer({
   const completeScene = useGameStore((state) => state.completeScene);
   const setChoice = useGameStore((state) => state.setChoice);
   const completeAnalysis = useGameStore((state) => state.completeAnalysis);
+  const completeMinigame = useGameStore((state) => state.completeMinigame);
   const addHistory = useGameStore((state) => state.addHistory);
   const setStatus = useGameStore((state) => state.setStatus);
   const autoRead = useGameStore((state) => state.autoRead);
@@ -288,6 +291,7 @@ function ScenePlayer({
   const transition = reduce ? 'none' : (scene.transition ?? sceneTransition(scene.id));
   const fxId = showIntro || showEnd ? undefined : beatFx(beat);
   const analysis = beat?.type === 'analysis' ? getAnalysisCase(beat.caseId) : undefined;
+  const minigame = beat?.type === 'minigame' ? getMiniGame(beat.id) : undefined;
   const fxSpec = fxId ? FX[fxId] : undefined;
   const fxFilter = !reduce && fxId ? FX_FILTER[fxId] : undefined;
   const fxOverlay = !reduce && fxId ? FX_OVERLAY[fxId] : undefined;
@@ -432,7 +436,13 @@ function ScenePlayer({
 
   useEffect(() => {
     if (!autoRead || showEnd || showIntro || !beat) return;
-    if (beat.type === 'choice' || beat.type === 'battle' || beat.type === 'analysis') return;
+    if (
+      beat.type === 'choice' ||
+      beat.type === 'battle' ||
+      beat.type === 'analysis' ||
+      beat.type === 'minigame'
+    )
+      return;
     if (typing) return;
     const timer = window.setTimeout(() => advance(), 1500);
     return () => window.clearTimeout(timer);
@@ -444,7 +454,7 @@ function ScenePlayer({
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       if (target?.matches('input, textarea, select, [contenteditable="true"]')) return;
-      if (beat?.type === 'analysis') return;
+      if (beat?.type === 'analysis' || beat?.type === 'minigame') return;
       if (beat?.type === 'choice') {
         const optionIndex = Number(event.key) - 1;
         const option = beat.options[optionIndex];
@@ -477,7 +487,13 @@ function ScenePlayer({
       return;
     }
     if (!beat || showEnd) return;
-    if (beat.type === 'choice' || beat.type === 'battle' || beat.type === 'analysis') return;
+    if (
+      beat.type === 'choice' ||
+      beat.type === 'battle' ||
+      beat.type === 'analysis' ||
+      beat.type === 'minigame'
+    )
+      return;
     if (typing) {
       if (typeTimer.current !== null) {
         window.clearInterval(typeTimer.current);
@@ -698,6 +714,11 @@ function ScenePlayer({
             <p className={p.choicePrompt}>精神分析</p>
             <p className={p.small}>分析正在进行：{beat.caseId}</p>
           </div>
+        ) : beat?.type === 'minigame' ? (
+          <div className={p.choicePanel} role="group" aria-label="小玩法">
+            <p className={p.choicePrompt}>小玩法</p>
+            <p className={p.small}>{beat.label ?? '这一幕需要你亲手做一遍。'}</p>
+          </div>
         ) : (
           <div
             className={`${p.dialog} ${fxId === 'glow' ? p.dialogGlow : ''} ${
@@ -766,6 +787,33 @@ function ScenePlayer({
           <div className={p.choicePanel} role="group" aria-label="精神分析">
             <p className={p.choicePrompt}>案例缺失</p>
             <p className={p.small}>{beat.caseId} 还没有载入。</p>
+            <button type="button" className={p.choice} onClick={nextBeat}>
+              跳过
+            </button>
+          </div>
+        )
+      ) : null}
+
+      {beat?.type === 'minigame' && !showIntro && !showEnd ? (
+        minigame ? (
+          <MiniGameStage
+            key={`${minigame.id}-${beatIndex}`}
+            data={minigame}
+            completed={save.completedMinigames?.includes(minigame.id) ?? false}
+            onExit={() => {
+              setStatus('小玩法先合上了。');
+              nextBeat();
+            }}
+            onDone={() => {
+              completeMinigame(minigame.id);
+              setStatus('收入档案。');
+              nextBeat();
+            }}
+          />
+        ) : (
+          <div className={p.choicePanel} role="group" aria-label="小玩法">
+            <p className={p.choicePrompt}>玩法缺失</p>
+            <p className={p.small}>{beat.id} 还没有载入。</p>
             <button type="button" className={p.choice} onClick={nextBeat}>
               跳过
             </button>

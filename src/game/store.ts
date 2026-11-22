@@ -33,6 +33,7 @@ type GameStore = {
   setDeck: (deck: Record<string, number>) => void;
   readEffect: (name: string) => void;
   completeAnalysis: (caseId: string) => void;
+  completeMinigame: (id: string) => void;
   readDoc: (reportId: string, segmentId: string) => void;
   claimQuest: (questId: string) => void;
   claimBox: (cardId: string) => void;
@@ -144,6 +145,14 @@ export const useGameStore = create<GameStore>()((set, get) => {
         save.analysis.includes(caseId)
           ? save
           : { ...save, analysis: [...save.analysis, caseId] },
+      );
+    },
+
+    completeMinigame: (id) => {
+      commit((save) =>
+        save.completedMinigames.includes(id)
+          ? save
+          : { ...save, completedMinigames: [...save.completedMinigames, id] },
       );
     },
 

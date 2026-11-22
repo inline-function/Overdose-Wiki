@@ -9,6 +9,7 @@ const SAVE = {
   choices: {},
   unlocks: [],
   deck: {},
+  completedMinigames: [],
   settings: {
     scale: 'auto',
     font: 'normal',

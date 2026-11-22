@@ -35,6 +35,13 @@ describe('save schema', () => {
     expect(parsed?.completedScenes).toEqual(['ch01.s01']);
   });
 
+  it('adds completedMinigames when migrating an older save', () => {
+    const old = defaultSave() as unknown as Record<string, unknown>;
+    delete old.completedMinigames;
+    const save = migrate(old as never);
+    expect(save?.completedMinigames).toEqual([]);
+  });
+
   it('rejects non-JSON import', () => {
     expect(parseImport('not json')).toBeNull();
   });

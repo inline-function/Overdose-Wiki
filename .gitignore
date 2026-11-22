@@ -4,6 +4,7 @@ dist-ssr
 *.local
 playwright-report
 test-results
+play-shots
 .DS_Store
 src/content/generated.ts
 art/

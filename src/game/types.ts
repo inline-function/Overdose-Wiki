@@ -62,6 +62,8 @@ export type Save = {
   seenIntros: string[];
   /** 已走完的精神分析案例 id */
   analysis: string[];
+  /** 已完成的小玩法 id */
+  completedMinigames: string[];
   settings: Settings;
   history: HistoryEntry[];
 };
@@ -93,6 +95,7 @@ export function defaultSave(): Save {
     readEffects: [],
     seenIntros: [],
     analysis: [],
+    completedMinigames: [],
     settings: actionSettings(),
     history: [],
   };

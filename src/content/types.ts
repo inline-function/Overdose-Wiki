@@ -62,8 +62,154 @@ export type AnalysisCaseMeta = {
   subtitle: string;
 };
 
+export type MiniGameKind =
+  | 'memory-collage'
+  | 'forum-fix'
+  | 'chat-triage'
+  | 'trip-timeline'
+  | 'perception'
+  | 'wiki-sort'
+  | 'find-object';
+
+export type MiniGameBase = {
+  id: string;
+  kind: MiniGameKind;
+  title: string;
+  subtitle: string;
+  intro: string;
+  closing: string;
+  doneLabel?: string;
+};
+
+export type MemoryFragment = {
+  id: string;
+  label: string;
+  line: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  tone?: 'red' | 'yellow' | 'blue' | 'green';
+};
+
+export type MemoryCollageGame = MiniGameBase & {
+  kind: 'memory-collage';
+  fragments: MemoryFragment[];
+};
+
+export type ForumError = {
+  phrase: string;
+  options: string[];
+  correct: string;
+  right: string;
+  wrong: string;
+};
+
+export type ForumPost = {
+  id: string;
+  author: string;
+  role: string;
+  body: string;
+};
+
+export type ForumFixGame = MiniGameBase & {
+  kind: 'forum-fix';
+  threadTitle: string;
+  posts: ForumPost[];
+  errors: Record<string, ForumError>;
+};
+
+export type ChatReply = {
+  id: string;
+  label: string;
+  ok: boolean;
+  reply: string;
+  followUp?: string;
+};
+
+export type ChatQuestion = {
+  id: string;
+  from: string;
+  text: string;
+  replies: ChatReply[];
+  interlude?: string;
+};
+
+export type ChatTriageGame = MiniGameBase & {
+  kind: 'chat-triage';
+  questions: ChatQuestion[];
+};
+
+export type TripCard = {
+  id: string;
+  label: string;
+  line: string;
+  order: number;
+};
+
+export type TripTimelineGame = MiniGameBase & {
+  kind: 'trip-timeline';
+  cards: TripCard[];
+};
+
+export type PerceptionLine = {
+  id: string;
+  text: string;
+  note?: string;
+};
+
+export type PerceptionGame = MiniGameBase & {
+  kind: 'perception';
+  lines: PerceptionLine[];
+};
+
+export type WikiCategory = { id: string; label: string };
+
+export type WikiCard = {
+  id: string;
+  label: string;
+  note: string;
+  category: string;
+};
+
+export type WikiSortGame = MiniGameBase & {
+  kind: 'wiki-sort';
+  categories: WikiCategory[];
+  cards: WikiCard[];
+};
+
+export type FindShape = 'kettle' | 'tea' | 'cup' | 'phone' | 'pill';
+
+export type FindObject = {
+  id: string;
+  label: string;
+  shape: FindShape;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+};
+
+export type FindPrompt = { text: string; target: string };
+
+export type FindObjectGame = MiniGameBase & {
+  kind: 'find-object';
+  prompts: FindPrompt[];
+  objects: FindObject[];
+};
+
+export type MiniGameData =
+  | MemoryCollageGame
+  | ForumFixGame
+  | ChatTriageGame
+  | TripTimelineGame
+  | PerceptionGame
+  | WikiSortGame
+  | FindObjectGame;
+
 export type Beat =
   | { type: 'analysis'; caseId: string; label?: string }
+  | { type: 'minigame'; id: string; label?: string }
   | { type: 'narration'; text: string; speaker?: string; fx?: string; emotion?: string }
   | { type: 'dialogue'; speaker: string; text: string; expr?: string; fx?: string; emotion?: string }
   | { type: 'quote'; text: string; source?: string; fx?: string; emotion?: string }

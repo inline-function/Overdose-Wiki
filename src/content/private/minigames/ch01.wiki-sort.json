@@ -1,0 +1,81 @@
+{
+  "id": "ch01.wiki-sort",
+  "kind": "wiki-sort",
+  "title": "第一个首页",
+  "subtitle": "OverdoseWiki 编辑组",
+  "intro": "Sakura 把一堆未整理的文章推过来。先让它们有地方可放。",
+  "closing": "一个个答太浪费时间了。一个站点，大家一看就好了。",
+  "doneLabel": "发布首页",
+  "categories": [
+    {
+      "id": "intro",
+      "label": "引论"
+    },
+    {
+      "id": "branch",
+      "label": "分论"
+    },
+    {
+      "id": "effects",
+      "label": "效果"
+    },
+    {
+      "id": "restore",
+      "label": "恢复术"
+    },
+    {
+      "id": "reports",
+      "label": "报告"
+    }
+  ],
+  "cards": [
+    {
+      "id": "w1",
+      "label": "od引论",
+      "note": "从“为什么”开始",
+      "category": "intro"
+    },
+    {
+      "id": "w2",
+      "label": "od分论",
+      "note": "把症状拆开",
+      "category": "branch"
+    },
+    {
+      "id": "w3",
+      "label": "解离",
+      "note": "五感消融",
+      "category": "effects"
+    },
+    {
+      "id": "w4",
+      "label": "反解离",
+      "note": "把人拉回来",
+      "category": "restore"
+    },
+    {
+      "id": "w5",
+      "label": "幻觉",
+      "note": "看见不存在的东西",
+      "category": "effects"
+    },
+    {
+      "id": "w6",
+      "label": "恢复术",
+      "note": "三命题",
+      "category": "restore"
+    },
+    {
+      "id": "w7",
+      "label": "高原人员构成分析",
+      "note": "谁在高原上",
+      "category": "reports"
+    },
+    {
+      "id": "w8",
+      "label": "od不扩散公约",
+      "note": "先立规矩",
+      "category": "intro"
+    }
+  ]
+}

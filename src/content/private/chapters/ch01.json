@@ -137,6 +137,11 @@
           "fx": "glow"
         },
         {
+          "type": "minigame",
+          "id": "ch01.afterglow",
+          "label": "余晖：记忆拼贴"
+        },
+        {
           "type": "narration",
           "text": "他的瞳孔仿佛散发着辉光，充满了对生活的向往。"
         },
@@ -197,6 +202,11 @@
           "text": "服用金刚烷胺并不会带来“余晖”，而是谵妄。“余晖”的复现失败了。"
         },
         {
+          "type": "minigame",
+          "id": "ch01.find-object",
+          "label": "谵妄：烧水壶在哪里"
+        },
+        {
           "type": "dialogue",
           "speaker": "后藤",
           "text": "为了弄清楚“余晖”的触发方法，我开始一直实验。我那时已经分不清我到底是为了解决自己的抑郁症还是单纯想爽了。"
@@ -232,6 +242,11 @@
           "fx": "blur"
         },
         {
+          "type": "minigame",
+          "id": "ch01.perception",
+          "label": "第五高原：把字按住"
+        },
+        {
           "type": "narration",
           "text": "“余晖”真的存在吗？他不敢回答......",
           "fx": "vignette"
@@ -257,15 +272,9 @@
       "cue": "archive",
       "beats": [
         {
-          "type": "dialogue",
-          "speaker": "后藤",
-          "text": "一派胡言！什么叫做“愈美里面有甘油”？",
-          "fx": "sharpen"
-        },
-        {
-          "type": "dialogue",
-          "speaker": "后藤",
-          "text": "那是愈创木酚甘油醚！愈创木酚甘油醚不是甘油！"
+          "type": "minigame",
+          "id": "ch01.forum-fix",
+          "label": "贴吧纠错：愈美没有甘油"
         },
         {
           "type": "narration",
@@ -322,14 +331,9 @@
       "cue": "archive",
       "beats": [
         {
-          "type": "dialogue",
-          "speaker": "群友",
-          "text": "老师老师，请问舍曲林可以o吗？"
-        },
-        {
-          "type": "dialogue",
-          "speaker": "后藤",
-          "text": "不能，舍曲林不能o，血清素综合征会让你痛不欲生。"
+          "type": "minigame",
+          "id": "ch01.chat-triage",
+          "label": "群聊答疑：一个个答太浪费时间了"
         },
         {
           "type": "narration",
@@ -358,6 +362,11 @@
         {
           "type": "narration",
           "text": "后来有一个叫Sakura的人从贴吧过来找他，邀请他加入OverdoseWiki的编辑组。"
+        },
+        {
+          "type": "minigame",
+          "id": "ch01.wiki-sort",
+          "label": "建站：第一个首页"
         },
         {
           "type": "dialogue",
@@ -392,6 +401,79 @@
           "type": "analysis",
           "caseId": "dxm",
           "label": "病例：右美神经症"
+        }
+      ],
+      "next": "ch01.s12"
+    },
+    {
+      "id": "ch01.s12",
+      "chapterId": "ch01",
+      "order": 12,
+      "title": "报告七的编辑页",
+      "summary": "二十六次，他像在给自己的深渊编目。",
+      "flags": [],
+      "sourceRefs": [],
+      "reportId": "7",
+      "reportSegment": "rp-7-27",
+      "stage": {
+        "bg": "bg_archive",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "calm"
+        }
+      },
+      "cue": "archive",
+      "beats": [
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我给每一次都起了名字——初次od、二次odplus、地狱之行昏迷不醒、余晖的记忆恢复、复刻却截然相反……二十六次。我像在给自己的深渊编目。"
+        },
+        {
+          "type": "minigame",
+          "id": "ch01.trip-timeline",
+          "label": "报告七：二十六次编年"
+        },
+        {
+          "type": "narration",
+          "text": "他管这叫火种——普罗米修斯盗火给人间。他被人从楼上拽回来过，所以要把那只拽人的手做成一个站点、一套理论、一份指南，让后来的人不必再独自站在风里。"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "他们不该像我一样，靠一次意外才活下来。"
+        }
+      ],
+      "next": "ch01.s13"
+    },
+    {
+      "id": "ch01.s13",
+      "chapterId": "ch01",
+      "order": 13,
+      "title": "虚数根",
+      "summary": "二十六次编年写完，他停在最后一页。",
+      "flags": [],
+      "sourceRefs": [],
+      "reportId": "7",
+      "reportSegment": "rp-7-28",
+      "stage": {
+        "bg": "bg_river_night",
+        "bust": {
+          "speaker": "后藤",
+          "expr": "tired"
+        }
+      },
+      "cue": "afterglow",
+      "beats": [
+        {
+          "type": "narration",
+          "text": "二十六次编年写完，理论写完，指南写完。他停在最后一页，觉得终于可以把那东西放下了。",
+          "fx": "invert"
+        },
+        {
+          "type": "dialogue",
+          "speaker": "后藤",
+          "text": "我大抵……可以不再需要它了吧。"
         }
       ],
       "next": "ch01.s14"

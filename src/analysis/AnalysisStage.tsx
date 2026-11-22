@@ -96,6 +96,7 @@ export function AnalysisStage({
   const [hoverSlot, setHoverSlot] = useState<string | null>(null);
   const shakeTimer = useRef<number | null>(null);
   const windowRef = useRef<HTMLElement | null>(null);
+  const trayRef = useRef<HTMLDivElement | null>(null);
   const suppressClick = useRef(0);
   const dragAbort = useRef<AbortController | null>(null);
 
@@ -127,6 +128,14 @@ export function AnalysisStage({
     setShake(slotId);
     if (shakeTimer.current !== null) window.clearTimeout(shakeTimer.current);
     shakeTimer.current = window.setTimeout(() => setShake(null), 420);
+  }
+
+  function scrollTray(direction: -1 | 1) {
+    const tray = trayRef.current;
+    if (!tray) return;
+    const step = Math.max(48, Math.round(tray.clientHeight * 0.6));
+    tray.scrollBy({ top: direction * step, behavior: 'smooth' });
+    gateAudio.tick();
   }
 
   function collect(keyword: AnalysisKeyword) {
@@ -434,31 +443,59 @@ export function AnalysisStage({
                 </div>
               </div>
 
-              <div className={s.tray} aria-label="积木" data-testid="analysis-tray">
-                {tray.length === 0 ? (
-                  <span className={s.trayEmpty}>
-                    {phase === 'collect' ? '点开报告全文，把蓝词收成积木。' : '积木都放上去了。'}
-                  </span>
-                ) : (
-                  tray.map((block) => (
-                    <button
-                      key={block.id}
-                      type="button"
-                      className={s.block}
-                      data-tone={TONE[block.kind]}
-                      data-selected={selected === block.id}
-                      data-testid="analysis-block"
-                      data-block={block.id}
-                      onPointerDown={(event) => startDrag(event, block.id)}
-                      onClick={() => {
-                        if (window.performance.now() < suppressClick.current) return;
-                        clickBlock(block.id);
-                      }}
-                    >
-                      {block.text}
-                    </button>
-                  ))
-                )}
+              <div className={s.trayWrap}>
+                <div
+                  ref={trayRef}
+                  id="analysis-tray-list"
+                  className={s.tray}
+                  aria-label="积木"
+                  data-testid="analysis-tray"
+                >
+                  {tray.length === 0 ? (
+                    <span className={s.trayEmpty}>
+                      {phase === 'collect' ? '点开报告全文，把蓝词收成积木。' : '积木都放上去了。'}
+                    </span>
+                  ) : (
+                    tray.map((block) => (
+                      <button
+                        key={block.id}
+                        type="button"
+                        className={s.block}
+                        data-tone={TONE[block.kind]}
+                        data-selected={selected === block.id}
+                        data-testid="analysis-block"
+                        data-block={block.id}
+                        onPointerDown={(event) => startDrag(event, block.id)}
+                        onClick={() => {
+                          if (window.performance.now() < suppressClick.current) return;
+                          clickBlock(block.id);
+                        }}
+                      >
+                        {block.text}
+                      </button>
+                    ))
+                  )}
+                </div>
+                <button
+                  type="button"
+                  className={`${s.trayScrollButton} ${s.trayScrollUp}`}
+                  data-testid="analysis-tray-up"
+                  aria-label="积木列表向上滚动"
+                  aria-controls="analysis-tray-list"
+                  onClick={() => scrollTray(-1)}
+                >
+                  ↑
+                </button>
+                <button
+                  type="button"
+                  className={`${s.trayScrollButton} ${s.trayScrollDown}`}
+                  data-testid="analysis-tray-down"
+                  aria-label="积木列表向下滚动"
+                  aria-controls="analysis-tray-list"
+                  onClick={() => scrollTray(1)}
+                >
+                  ↓
+                </button>
               </div>
             </div>
 

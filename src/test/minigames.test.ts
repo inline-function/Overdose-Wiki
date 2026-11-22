@@ -3,13 +3,14 @@ import { getMiniGame, miniGameList } from '../content/minigames';
 import { shuffleArray, shuffleOptions } from '../minigames/shuffle';
 
 describe('minigame registry', () => {
-  it('loads the seven chapter-one and five chapter-two minigames', () => {
+  it('loads the chapter-one, chapter-two, and chapter-three minigames', () => {
     const games = miniGameList();
-    expect(games).toHaveLength(12);
+    expect(games).toHaveLength(16);
     const ids = games.map((game) => game.id);
-    expect(new Set(ids).size).toBe(12);
+    expect(new Set(ids).size).toBe(16);
     expect(ids.filter((id) => id.startsWith('ch01.'))).toHaveLength(7);
     expect(ids.filter((id) => id.startsWith('ch02.'))).toHaveLength(5);
+    expect(ids.filter((id) => id.startsWith('ch03.'))).toHaveLength(4);
     for (const id of ids) expect(getMiniGame(id)?.id).toBe(id);
   });
 
@@ -27,6 +28,10 @@ describe('minigame registry', () => {
         'voice-filter',
         'paint-mix',
         'archive-envelope',
+        'memory-develop',
+        'emotion-return',
+        'anchor-room',
+        'camera-wall',
       ]),
     );
   });
@@ -40,6 +45,53 @@ describe('minigame registry', () => {
 
     const plain = shuffleArray([1, 2, 3], () => 0.5);
     expect([...plain].sort((a, b) => a - b)).toEqual([1, 2, 3]);
+  });
+
+  it('keeps chapter three data complete', () => {
+    const afterglow = getMiniGame('ch03.afterglow');
+    expect(afterglow?.kind).toBe('memory-develop');
+    if (afterglow?.kind === 'memory-develop') {
+      expect(afterglow.photos).toHaveLength(5);
+      expect(afterglow.photos.filter((photo) => photo.image)).toHaveLength(4);
+      expect(afterglow.photos.filter((photo) => !photo.image)).toHaveLength(1);
+      for (const photo of afterglow.photos) {
+        expect(photo.label.length).toBeGreaterThan(0);
+        expect(photo.line.length).toBeGreaterThan(0);
+      }
+    }
+
+    const overload = getMiniGame('ch03.overload');
+    expect(overload?.kind).toBe('emotion-return');
+    if (overload?.kind === 'emotion-return') {
+      expect(overload.emotions).toHaveLength(5);
+      expect(new Set(overload.emotions.map((emotion) => emotion.id)).size).toBe(5);
+      for (const emotion of overload.emotions) {
+        expect(emotion.from.length).toBeGreaterThan(0);
+        expect(emotion.line.length).toBeGreaterThan(0);
+      }
+    }
+
+    const anchor = getMiniGame('ch03.anchor');
+    expect(anchor?.kind).toBe('anchor-room');
+    if (anchor?.kind === 'anchor-room') {
+      expect(anchor.anchors).toHaveLength(4);
+      expect(anchor.background).toMatch(/^assets-private\/bg\//);
+      for (const object of anchor.anchors) {
+        expect(object.x).toBeGreaterThanOrEqual(0);
+        expect(object.x).toBeLessThanOrEqual(100);
+        expect(object.line.length).toBeGreaterThan(0);
+      }
+    }
+
+    const search = getMiniGame('ch03.search');
+    expect(search?.kind).toBe('camera-wall');
+    if (search?.kind === 'camera-wall') {
+      expect(search.feeds).toHaveLength(6);
+      for (const feed of search.feeds) {
+        expect(feed.time).toMatch(/^\d{2}:\d{2}$/);
+        expect(feed.image).toMatch(/^assets-private\/bg\//);
+      }
+    }
   });
 
   it('keeps chapter two data complete', () => {

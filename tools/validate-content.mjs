@@ -52,6 +52,10 @@ const MINIGAME_KINDS = new Set([
   'paint-mix',
   'echo-match',
   'archive-envelope',
+  'memory-develop',
+  'emotion-return',
+  'anchor-room',
+  'camera-wall',
 ]);
 for (const { file, value } of minigames) {
   if (!value.id || typeof value.id !== 'string') {
@@ -183,6 +187,62 @@ for (const { file, value } of minigames) {
     if (cards.length < 3) errors.push(`${file}: archive-envelope needs >=3 cards`);
     for (const card of cards) {
       if (!card.text) errors.push(`${file}: archive card ${card.id} needs text`);
+    }
+  }
+  if (value.kind === 'memory-develop') {
+    const photos = Array.isArray(value.photos) ? value.photos : [];
+    if (photos.length < 4) errors.push(`${file}: memory-develop needs >=4 photos`);
+    if (photos.filter((photo) => photo.image).length < 3) {
+      errors.push(`${file}: memory-develop needs >=3 photos with image`);
+    }
+    if (!photos.some((photo) => !photo.image)) {
+      errors.push(`${file}: memory-develop needs at least one blank photo`);
+    }
+    for (const photo of photos) {
+      if (!photo.label || !photo.line) errors.push(`${file}: memory photo ${photo.id} needs label/line`);
+    }
+  }
+  if (value.kind === 'emotion-return') {
+    const emotions = Array.isArray(value.emotions) ? value.emotions : [];
+    if (emotions.length < 4) errors.push(`${file}: emotion-return needs >=4 emotions`);
+    const ids = new Set();
+    for (const emotion of emotions) {
+      if (!emotion.id || !emotion.label || !emotion.from || !emotion.line) {
+        errors.push(`${file}: emotion ${emotion.id} needs id/label/from/line`);
+      }
+      if (ids.has(emotion.id)) errors.push(`${file}: duplicate emotion ${emotion.id}`);
+      ids.add(emotion.id);
+    }
+  }
+  if (value.kind === 'anchor-room') {
+    if (!value.background) errors.push(`${file}: anchor-room needs background`);
+    if (value.background && !value.background.startsWith('assets-private/bg/')) {
+      errors.push(`${file}: anchor-room background must be under assets-private/bg/`);
+    }
+    const anchors = Array.isArray(value.anchors) ? value.anchors : [];
+    if (anchors.length < 3) errors.push(`${file}: anchor-room needs >=3 anchors`);
+    for (const anchor of anchors) {
+      if (!anchor.id || !anchor.label || !anchor.line) {
+        errors.push(`${file}: anchor ${anchor.id} needs id/label/line`);
+      }
+      if (!Number.isFinite(anchor.x) || anchor.x < 0 || anchor.x > 100) {
+        errors.push(`${file}: anchor ${anchor.id} x must be 0..100`);
+      }
+      if (!Number.isFinite(anchor.y) || anchor.y < 0 || anchor.y > 100) {
+        errors.push(`${file}: anchor ${anchor.id} y must be 0..100`);
+      }
+    }
+  }
+  if (value.kind === 'camera-wall') {
+    const feeds = Array.isArray(value.feeds) ? value.feeds : [];
+    if (feeds.length < 4) errors.push(`${file}: camera-wall needs >=4 feeds`);
+    for (const feed of feeds) {
+      if (!feed.id || !feed.label || !feed.time || !feed.line || !feed.image) {
+        errors.push(`${file}: camera feed ${feed.id} needs id/label/time/line/image`);
+      }
+      if (feed.image && !feed.image.startsWith('assets-private/bg/')) {
+        errors.push(`${file}: camera feed ${feed.id} image must be under assets-private/bg/`);
+      }
     }
   }
 }

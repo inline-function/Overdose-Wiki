@@ -74,6 +74,32 @@ test('axe: chapter two minigames', async ({ page }) => {
   }
 });
 
+test('axe: chapter three minigames', async ({ page }) => {
+  test.setTimeout(150000);
+  await page.goto('/#/');
+  await seedScenes(page, ['ch01.s14', 'ch02.s24']);
+  await page.evaluate(() => {
+    const raw = localStorage.getItem('odw.save.v1');
+    if (!raw) return;
+    const save = JSON.parse(raw);
+    save.readEffects = ['解离', '反解离', '幻觉', '谵妄', '镇静'];
+    localStorage.setItem('odw.save.v1', JSON.stringify(save));
+  });
+  await page.reload();
+  for (const sceneId of ['ch03.s06', 'ch03.s15', 'ch03.s17', 'ch03.s20']) {
+    await page.goto(`/#/report/50/replay/${sceneId}`);
+    await page.getByTestId('scene-wrap').waitFor({ state: 'visible' });
+    for (let i = 0; i < 16; i += 1) {
+      if (await page.getByTestId('minigame-overlay').isVisible().catch(() => false)) break;
+      await page.getByTestId('scene-wrap').click({ timeout: 1500 }).catch(() => undefined);
+      await page.waitForTimeout(220);
+    }
+    await expect(page.getByTestId('minigame-overlay')).toBeVisible();
+    const results = await new AxeBuilder({ page }).analyze();
+    expect(results.violations).toEqual([]);
+  }
+});
+
 test('chapter-end choice returns straight to the report', async ({ page }) => {
   await page.goto('/#/');
   test.skip((await page.getByTestId('stage').getAttribute('data-content')) === 'sample', 'requires private ch01 content');

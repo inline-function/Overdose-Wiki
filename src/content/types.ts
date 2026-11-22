@@ -74,7 +74,11 @@ export type MiniGameKind =
   | 'voice-filter'
   | 'paint-mix'
   | 'echo-match'
-  | 'archive-envelope';
+  | 'archive-envelope'
+  | 'memory-develop'
+  | 'emotion-return'
+  | 'anchor-room'
+  | 'camera-wall';
 
 export type MiniGameBase = {
   id: string;
@@ -298,6 +302,60 @@ export type ArchiveEnvelopeGame = MiniGameBase & {
   name: string;
 };
 
+export type MemoryDevelopPhoto = {
+  id: string;
+  label: string;
+  line: string;
+  /** Workspace-relative private background image; omitted for the blank photo. */
+  image?: string;
+  tone: 'warm' | 'blank';
+};
+
+export type MemoryDevelopGame = MiniGameBase & {
+  kind: 'memory-develop';
+  photos: MemoryDevelopPhoto[];
+};
+
+export type EmotionReturnCard = {
+  id: string;
+  label: string;
+  from: string;
+  line: string;
+};
+
+export type EmotionReturnGame = MiniGameBase & {
+  kind: 'emotion-return';
+  emotions: EmotionReturnCard[];
+};
+
+export type AnchorRoomAnchor = {
+  id: string;
+  label: string;
+  line: string;
+  x: number;
+  y: number;
+};
+
+export type AnchorRoomGame = MiniGameBase & {
+  kind: 'anchor-room';
+  /** Workspace-relative private background image, e.g. assets-private/bg/bg_higan_home.png */
+  background: string;
+  anchors: AnchorRoomAnchor[];
+};
+
+export type CameraWallFeed = {
+  id: string;
+  label: string;
+  time: string;
+  line: string;
+  image: string;
+};
+
+export type CameraWallGame = MiniGameBase & {
+  kind: 'camera-wall';
+  feeds: CameraWallFeed[];
+};
+
 export type MiniGameData =
   | MemoryCollageGame
   | ForumFixGame
@@ -310,7 +368,11 @@ export type MiniGameData =
   | VoiceFilterGame
   | PaintMixGame
   | EchoMatchGame
-  | ArchiveEnvelopeGame;
+  | ArchiveEnvelopeGame
+  | MemoryDevelopGame
+  | EmotionReturnGame
+  | AnchorRoomGame
+  | CameraWallGame;
 
 export type Beat =
   | { type: 'analysis'; caseId: string; label?: string }

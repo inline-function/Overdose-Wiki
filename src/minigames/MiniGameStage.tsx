@@ -14,6 +14,10 @@ import { PaintMix } from './games/PaintMix';
 import { EchoMatch } from './games/EchoMatch';
 import { SaviorAfter } from './games/SaviorAfter';
 import { ArchiveEnvelope } from './games/ArchiveEnvelope';
+import { MemoryDevelop } from './games/MemoryDevelop';
+import { EmotionReturn } from './games/EmotionReturn';
+import { AnchorRoom } from './games/AnchorRoom';
+import { CameraWall } from './games/CameraWall';
 import s from './minigame.module.css';
 
 type Props = {
@@ -115,6 +119,14 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
         return <EchoMatch data={data} onReady={onReady} onCaption={onCaption} />;
       case 'archive-envelope':
         return <ArchiveEnvelope data={data} onCaption={onCaption} onDone={handleArchiveDone} />;
+      case 'memory-develop':
+        return <MemoryDevelop data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'emotion-return':
+        return <EmotionReturn data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'anchor-room':
+        return <AnchorRoom data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'camera-wall':
+        return <CameraWall data={data} onReady={onReady} onCaption={onCaption} />;
     }
   })();
 

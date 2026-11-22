@@ -294,6 +294,11 @@
           "type": "dialogue",
           "speaker": "后藤",
           "text": "就算是余晖之后，我的心情也很好很好。"
+        },
+        {
+          "type": "minigame",
+          "id": "ch03.afterglow",
+          "label": "余晖：把好天气留下来"
         }
       ],
       "next": "ch03.s07"
@@ -813,6 +818,11 @@
           "speaker": "彼岸境",
           "text": "我要来 27t 右美沙芬。",
           "fx": "static"
+        },
+        {
+          "type": "minigame",
+          "id": "ch03.overload",
+          "label": "反解离：把不属于你的情绪放回去"
         }
       ],
       "next": "ch03.s16"
@@ -934,6 +944,11 @@
           "type": "dialogue",
           "speaker": "后藤",
           "text": "不用怕，有我在。"
+        },
+        {
+          "type": "minigame",
+          "id": "ch03.anchor",
+          "label": "安全锚：把房间叫回来"
         }
       ],
       "next": "ch03.s18"
@@ -1094,6 +1109,11 @@
           "type": "dialogue",
           "speaker": "小郁",
           "text": "我担心的要疯掉了。"
+        },
+        {
+          "type": "minigame",
+          "id": "ch03.search",
+          "label": "找不到：把每条街都看一遍"
         }
       ],
       "next": "ch03.s21"

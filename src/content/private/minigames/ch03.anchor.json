@@ -1,0 +1,40 @@
+{
+  "id": "ch03.anchor",
+  "kind": "anchor-room",
+  "title": "安全锚：把房间叫回来",
+  "subtitle": "刚醒来，怕自己疯掉",
+  "intro": "房间在抖，东西都浮起来了。先点一个名字，再点它对应的东西。叫对了，它就会停住。",
+  "closing": "房间没有变好。只是她又叫得出它的名字。",
+  "doneLabel": "抱住枕头",
+  "background": "assets-private/bg/bg_higan_home.png",
+  "anchors": [
+    {
+      "id": "pillow",
+      "label": "枕头",
+      "line": "枕头在。她抱得住。",
+      "x": 27,
+      "y": 54
+    },
+    {
+      "id": "blanket",
+      "label": "被子",
+      "line": "被子压在手背上。有重量。",
+      "x": 46,
+      "y": 68
+    },
+    {
+      "id": "cup",
+      "label": "水杯",
+      "line": "杯壁是凉的。",
+      "x": 67,
+      "y": 47
+    },
+    {
+      "id": "window",
+      "label": "窗",
+      "line": "窗外有路灯。不是视频里的画面。",
+      "x": 77,
+      "y": 18
+    }
+  ]
+}

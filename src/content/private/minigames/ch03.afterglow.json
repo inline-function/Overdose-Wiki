@@ -1,0 +1,45 @@
+{
+  "id": "ch03.afterglow",
+  "kind": "memory-develop",
+  "title": "余晖：把好天气留下来",
+  "subtitle": "他只能想起好的部分",
+  "intro": "暗房里挂着五张没有显影的照片。点一张，让它亮起来。最后一张是空的。",
+  "closing": "余晖照到的，都是他还能想起的部分。",
+  "doneLabel": "把照片收好",
+  "photos": [
+    {
+      "id": "newyear",
+      "label": "新年",
+      "line": "鞭炮在楼下响。他捂着耳朵，还是听见了。",
+      "image": "assets-private/bg/bg_spring_festival.png",
+      "tone": "warm"
+    },
+    {
+      "id": "play",
+      "label": "游玩",
+      "line": "那天没有下雨。他跑得很快，没回头看。",
+      "image": "assets-private/bg/bg_wheat_dusk.png",
+      "tone": "warm"
+    },
+    {
+      "id": "festival",
+      "label": "过节",
+      "line": "桌上很吵。他记得自己没怎么说话。",
+      "image": "assets-private/bg/bg_afterglow_gala.png",
+      "tone": "warm"
+    },
+    {
+      "id": "hometown",
+      "label": "回老家",
+      "line": "路很长。他在后座睡着了，醒来还没到。",
+      "image": "assets-private/bg/bg_afterglow_light.png",
+      "tone": "warm"
+    },
+    {
+      "id": "bad",
+      "label": "糟糕的事",
+      "line": "他试过回想一件糟糕的事。照片是空的。",
+      "tone": "blank"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "ch03.overload",
+  "kind": "emotion-return",
+  "title": "反解离：把不属于你的情绪放回去",
+  "subtitle": "情绪传染",
+  "intro": "手机里堆着别人的情绪。先点一团，再点它来的那条消息。把不属于她的放回去。",
+  "closing": "手机还亮着。她还没有放下。",
+  "doneLabel": "先把手机扣下",
+  "emotions": [
+    {
+      "id": "e-anxiety",
+      "label": "焦虑",
+      "from": "陌陌",
+      "line": "药效过去以后，我又开始往下掉。"
+    },
+    {
+      "id": "e-resentment",
+      "label": "怨气",
+      "from": "群友一",
+      "line": "你为什么不回我？你是不是也嫌我烦。"
+    },
+    {
+      "id": "e-fear",
+      "label": "恐惧",
+      "from": "群友二",
+      "line": "我今晚真的撑不住了。"
+    },
+    {
+      "id": "e-exhaustion",
+      "label": "疲惫",
+      "from": "陌生人",
+      "line": "只有你能懂我，你别走。"
+    },
+    {
+      "id": "e-helpless",
+      "label": "无助",
+      "from": "群友三",
+      "line": "你要是也不理我，我就真的没人了。"
+    }
+  ]
+}

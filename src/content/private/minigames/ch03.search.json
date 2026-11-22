@@ -1,0 +1,53 @@
+{
+  "id": "ch03.search",
+  "kind": "camera-wall",
+  "title": "找不到：把每条街都看一遍",
+  "subtitle": "手机关机 24 小时",
+  "intro": "小郁把能打开的监控一格格点开。每一条街都看过去。",
+  "closing": "所有画面里都没有她。至少这些画面里没有。",
+  "doneLabel": "关掉监控",
+  "feeds": [
+    {
+      "id": "cam-1",
+      "label": "小区北门",
+      "time": "03:12",
+      "line": "只有一辆共享单车。",
+      "image": "assets-private/bg/bg_residential_path.png"
+    },
+    {
+      "id": "cam-2",
+      "label": "便利店",
+      "time": "07:48",
+      "line": "卷帘门还没开。",
+      "image": "assets-private/bg/bg_night_street.png"
+    },
+    {
+      "id": "cam-3",
+      "label": "地铁口",
+      "time": "12:20",
+      "line": "人群走得太快，没有一张脸停下来。",
+      "image": "assets-private/bg/bg_beijing.png"
+    },
+    {
+      "id": "cam-4",
+      "label": "她住过的楼下",
+      "time": "18:40",
+      "line": "没有人抬头。",
+      "image": "assets-private/bg/bg_residential_path.png"
+    },
+    {
+      "id": "cam-5",
+      "label": "摄像头最多的街",
+      "time": "23:59",
+      "line": "画面里全是人。没有她。",
+      "image": "assets-private/bg/bg_night_street.png"
+    },
+    {
+      "id": "cam-6",
+      "label": "五月五日",
+      "time": "05:05",
+      "line": "下雨。街是空的。",
+      "image": "assets-private/bg/bg_tunnel.png"
+    }
+  ]
+}

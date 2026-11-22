@@ -35,6 +35,23 @@ async function seedChapter2(page: import('@playwright/test').Page) {
   await page.reload();
 }
 
+async function seedChapter3(page: import('@playwright/test').Page) {
+  await page.goto('/#/');
+  await page.waitForTimeout(450);
+  await page.evaluate(() => {
+    const raw = localStorage.getItem('odw.save.v1');
+    if (!raw) return;
+    const save = JSON.parse(raw);
+    save.completedScenes = Array.from(
+      new Set([...(save.completedScenes ?? []), 'ch01.s14', 'ch02.s24']),
+    );
+    save.readEffects = ['解离', '反解离', '幻觉', '谵妄', '镇静'];
+    save.read = { ...save.read, 108: ['report-108-full'] };
+    localStorage.setItem('odw.save.v1', JSON.stringify(save));
+  });
+  await page.reload();
+}
+
 async function finish(page: import('@playwright/test').Page, id: string) {
   const done = page.getByTestId('minigame-done');
   await expect(done).toBeEnabled({ timeout: 4000 });
@@ -267,6 +284,59 @@ test('the five chapter-two minigames can be completed', async ({ page, browserNa
       { timeout: 4000 },
     )
     .toContain('ch02.archive');
+});
+
+test('the four chapter-three minigames can be completed', async ({ page, browserName }) => {
+  test.skip(!hasPrivate, 'requires private content');
+  test.skip(browserName !== 'chromium', 'minigame interaction coverage runs on chromium');
+  test.setTimeout(150000);
+
+  await seedChapter3(page);
+
+  await open(page, 'ch03.s06', '50');
+  const photos = page.getByTestId('memory-photo');
+  await expect(photos).toHaveCount(5);
+  const photoIds = await photos.evaluateAll((nodes) =>
+    nodes.map((node) => node.getAttribute('data-photo')).filter(Boolean),
+  );
+  expect(photoIds).toHaveLength(5);
+  for (const id of photoIds) {
+    await page.locator(`[data-testid="memory-photo"][data-photo="${id}"]`).click();
+  }
+  await expect(page.getByTestId('memory-photo')).toHaveCount(5);
+  await expect(
+    page.locator('[data-testid="memory-photo"][data-blank="true"]'),
+  ).toHaveAttribute('data-developed', 'true');
+  await finish(page, 'ch03.afterglow');
+
+  await open(page, 'ch03.s15', '50');
+  for (const id of ['e-anxiety', 'e-resentment', 'e-fear', 'e-exhaustion', 'e-helpless']) {
+    await page.locator(`[data-testid="emotion-chip"][data-emotion="${id}"]`).click();
+    await page.locator(`[data-testid="emotion-source"][data-source="${id}"]`).click();
+  }
+  await expect(page.locator('[data-testid="emotion-chip"][data-matched="true"]')).toHaveCount(5);
+  await finish(page, 'ch03.overload');
+
+  await open(page, 'ch03.s17', '50');
+  for (const id of ['pillow', 'blanket', 'cup', 'window']) {
+    await page.locator(`[data-testid="anchor-tag"][data-anchor="${id}"]`).click();
+    await page.locator(`[data-testid="anchor-object"][data-anchor="${id}"]`).click();
+  }
+  await expect(page.locator('[data-testid="anchor-object"][data-anchored="true"]')).toHaveCount(4);
+  await finish(page, 'ch03.anchor');
+
+  await open(page, 'ch03.s20', '50');
+  const feeds = page.getByTestId('camera-feed');
+  await expect(feeds).toHaveCount(6);
+  const feedIds = await feeds.evaluateAll((nodes) =>
+    nodes.map((node) => node.getAttribute('data-feed')).filter(Boolean),
+  );
+  expect(feedIds).toHaveLength(6);
+  for (const id of feedIds) {
+    await page.locator(`[data-testid="camera-feed"][data-feed="${id}"]`).click();
+  }
+  await expect(page.locator('[data-testid="camera-feed"][data-scanned="true"]')).toHaveCount(6);
+  await finish(page, 'ch03.search');
 });
 
 test('placement cards drag, options shuffle, and the timeline guides the drop', async ({

@@ -236,7 +236,7 @@ test('持续型特效有进退场过渡', async ({ page }) => {
     if ((await wrap.getAttribute('data-fx')) === 'blur') break;
   }
   await expect(wrap).toHaveAttribute('data-fx', 'blur');
-  await expect.poll(filter, { timeout: 3000 }).toContain('blur(1.7px)');
+  await expect.poll(filter, { timeout: 3000 }).toContain('blur(1px)');
   // 离开这一拍：滤镜应当慢慢退回，而不是硬切
   let left = false;
   for (let i = 0; i < 12 && !left; i += 1) {
@@ -303,7 +303,7 @@ test('听到彩加死讯时画面压暗', async ({ page, browserName }) => {
     .poll(() =>
       wrap.evaluate((el) => getComputedStyle(el).filter),
     )
-    .toContain('brightness(0.58)');
+    .toContain('brightness(0.72)');
 });
 
 test('afterglow uses the Spring Festival memory background', async ({ page, browserName }) => {

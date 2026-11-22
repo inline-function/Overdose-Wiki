@@ -2,10 +2,10 @@ import type { Beat } from '../content/types';
 
 /** 持续型效果用的 CSS 滤镜；进入/退出由 .sceneWrap 的 filter transition 补间。 */
 export const FX_FILTER: Partial<Record<FxId, string>> = {
-  blur: 'blur(1.7px)',
+  blur: 'blur(1px)',
   sharpen: 'contrast(1.24) saturate(1.18) brightness(1.03)',
   dull: 'grayscale(0.72) brightness(0.82) contrast(0.94)',
-  gloom: 'brightness(0.58) saturate(0.52) contrast(1.06)',
+  gloom: 'brightness(0.72) saturate(0.68) contrast(1.02)',
 };
 
 /** 叠在场景上的持续型覆盖层（辉光 / 隧道视野） */

@@ -86,7 +86,7 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
       setGlitching(false);
       setAfterPost(true);
       onCaption(post.caption);
-    }, 1100);
+    }, 1400);
   }
 
   const game = (() => {
@@ -126,6 +126,7 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
         data-testid="minigame-stage"
         data-kind={data.kind}
         data-after-post={afterPost}
+        data-glitching={glitching}
         role="dialog"
         aria-modal="true"
         aria-label={data.title}

@@ -1019,11 +1019,11 @@
   background:
     radial-gradient(
       ellipse at 50% 42%,
-      rgba(10, 12, 20, 0.12) 24%,
-      rgba(6, 8, 14, 0.7) 78%,
-      rgba(3, 4, 8, 0.92) 100%
+      rgba(10, 12, 20, 0.05) 24%,
+      rgba(6, 8, 14, 0.4) 78%,
+      rgba(3, 4, 8, 0.64) 100%
     ),
-    linear-gradient(rgba(18, 22, 38, 0.16), rgba(18, 22, 38, 0.16));
+    linear-gradient(rgba(18, 22, 38, 0.08), rgba(18, 22, 38, 0.08));
 }
 
 /* 压迫：隧道视野 */
@@ -1204,6 +1204,7 @@
 
 .dialog {
   position: absolute;
+  z-index: 6;
   right: calc(12 * var(--u));
   bottom: calc(4 * var(--u));
   left: calc(12 * var(--u));
@@ -1227,10 +1228,10 @@
 
 /* 听到死讯时，对话框也一起沉下去 */
 .dialogGloom {
-  filter: brightness(0.82) saturate(0.72);
+  filter: brightness(1.22) saturate(1.12);
   box-shadow:
-    0 0 calc(16 * var(--u)) rgba(0, 0, 0, 0.55),
-    inset 0 0 calc(12 * var(--u)) rgba(0, 0, 0, 0.35);
+    0 0 calc(10 * var(--u)) rgba(0, 0, 0, 0.36),
+    inset 0 0 calc(7 * var(--u)) rgba(0, 0, 0, 0.18);
 }
 
 .nameplate {

@@ -234,7 +234,7 @@ test('the five chapter-two minigames can be completed', async ({ page, browserNa
       { steps: 24 },
     );
     await page.mouse.up();
-    await page.waitForTimeout(700);
+    await page.waitForTimeout(850);
   }
   await expect(page.getByTestId('archive-drawer')).toHaveAttribute('data-closed', 'true');
   await expect(page.getByTestId('archive-label')).toBeVisible({ timeout: 6000 });

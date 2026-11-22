@@ -1,15 +1,28 @@
-import { useEffect, useRef, useState, type CSSProperties, type DragEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
+} from 'react';
 import type { ArchiveCard, ArchiveEnvelopeGame } from '../../content/types';
 import s from '../minigame.module.css';
 
 const BASE = import.meta.env.BASE_URL;
 
-type Phase = 'cards' | 'closing' | 'moving' | 'label' | 'bleeding' | 'black';
+type Phase = 'cards' | 'closing' | 'moving' | 'label' | 'whiteout' | 'bleeding' | 'black';
 
 type Falling = {
   card: ArchiveCard;
   left: number;
   top: number;
+  distance: number;
+};
+
+type Ghost = {
+  card: ArchiveCard;
+  x: number;
+  y: number;
 };
 
 export function ArchiveEnvelope({
@@ -23,7 +36,8 @@ export function ArchiveEnvelope({
 }) {
   const [placed, setPlaced] = useState<string[]>([]);
   const [falling, setFalling] = useState<Falling | null>(null);
-  const [dragging, setDragging] = useState<string | null>(null);
+  const [ghost, setGhost] = useState<Ghost | null>(null);
+  const [draggingId, setDraggingId] = useState<string | null>(null);
   const [over, setOver] = useState(false);
   const [drawerClosed, setDrawerClosed] = useState(false);
   const [centered, setCentered] = useState(false);
@@ -32,6 +46,7 @@ export function ArchiveEnvelope({
   const [phase, setPhase] = useState<Phase>('cards');
   const typedRef = useRef(0);
   const timers = useRef<number[]>([]);
+  const dragCleanup = useRef<(() => void) | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
   const envelopeRef = useRef<HTMLDivElement | null>(null);
   const labelRef = useRef<HTMLButtonElement | null>(null);
@@ -44,6 +59,7 @@ export function ArchiveEnvelope({
     return () => {
       for (const timer of timers.current) window.clearTimeout(timer);
       timers.current = [];
+      dragCleanup.current?.();
     };
   }, []);
 
@@ -91,55 +107,107 @@ export function ArchiveEnvelope({
         : `写下第 ${next} 个字：${data.name[next - 1]}。`,
     );
     if (next === data.name.length) {
-      setPhase('bleeding');
-      after(2400, () => setPhase('black'));
-      after(3600, () => onDone());
+      setPhase('whiteout');
+      after(320, () => setPhase('bleeding'));
+      after(1250, () => setPhase('black'));
+      after(2250, () => onDone());
     }
   }
 
-  function dropCard(card: ArchiveCard) {
-    if (phase !== 'cards' || falling || placed.includes(card.id)) return;
-    const stage = stageRef.current?.getBoundingClientRect();
+  function pointOverEnvelope(x: number, y: number) {
     const envelope = envelopeRef.current?.getBoundingClientRect();
-    if (!stage) return;
-    const left = envelope
-      ? ((envelope.left + envelope.width / 2 - stage.left) / stage.width) * 100
-      : 30;
-    const top = envelope
-      ? ((envelope.top + envelope.height * 0.22 - stage.top) / stage.height) * 100
-      : 45;
-    setFalling({ card, left, top });
-    onCaption('手松开了。');
-    after(620, () => {
-      setFalling(null);
-      setPlaced((current) => (current.includes(card.id) ? current : [...current, card.id]));
-      onCaption('卡片落进了档案袋。');
-    });
+    if (!envelope) return false;
+    return x >= envelope.left && x <= envelope.right && y >= envelope.top && y <= envelope.bottom;
   }
 
-  function handleDrop(event: DragEvent) {
-    event.preventDefault();
+  function dropAt(card: ArchiveCard, clientX?: number) {
+    if (phase !== 'cards' || falling || placed.includes(card.id)) return;
+    const envelope = envelopeRef.current?.getBoundingClientRect();
+    if (!envelope) return;
+    const left = clientX === undefined
+      ? 50
+      : Math.max(10, Math.min(90, ((clientX - envelope.left) / envelope.width) * 100));
+    setGhost(null);
+    setDraggingId(null);
     setOver(false);
-    setDragging(null);
-    if (phase !== 'cards' || falling) return;
-    const id = event.dataTransfer.getData('text/plain');
-    const card = data.cards.find((item) => item.id === id);
-    if (!card) return;
-    const stage = stageRef.current?.getBoundingClientRect();
-    if (!stage) return;
-    const left = ((event.clientX - stage.left) / stage.width) * 100;
-    const top = ((event.clientY - stage.top) / stage.height) * 100;
-    setFalling({ card, left, top });
-    onCaption('手松开了。');
-    after(620, () => {
+    setFalling({
+      card,
+      left,
+      top: -10,
+      distance: envelope.height * 0.94,
+    });
+    onCaption('手松开了，卡片从上面掉进去。');
+    after(720, () => {
       setFalling(null);
       setPlaced((current) => (current.includes(card.id) ? current : [...current, card.id]));
       onCaption('卡片落进了档案袋。');
     });
   }
 
-  const glow = 0.56 + typed * 0.12;
-  const saturation = 0.86 + typed * 0.16;
+  function beginPointer(card: ArchiveCard, event: ReactPointerEvent<HTMLButtonElement>) {
+    if (phase !== 'cards' || falling || placed.includes(card.id)) return;
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    event.preventDefault();
+    dragCleanup.current?.();
+
+    const pointerId = event.pointerId;
+    const startX = event.clientX;
+    const startY = event.clientY;
+    let moved = false;
+
+    const cleanup = () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onCancel);
+      if (dragCleanup.current === cleanup) dragCleanup.current = null;
+    };
+
+    const onMove = (moveEvent: PointerEvent) => {
+      if (moveEvent.pointerId !== pointerId) return;
+      if (!moved && Math.hypot(moveEvent.clientX - startX, moveEvent.clientY - startY) > 4) {
+        moved = true;
+        setDraggingId(card.id);
+        onCaption('把卡片拖到档案袋上，然后松手。');
+      }
+      if (!moved) return;
+      setGhost({ card, x: moveEvent.clientX, y: moveEvent.clientY });
+      setOver(pointOverEnvelope(moveEvent.clientX, moveEvent.clientY));
+      if (moveEvent.cancelable) moveEvent.preventDefault();
+    };
+
+    const onUp = (upEvent: PointerEvent) => {
+      if (upEvent.pointerId !== pointerId) return;
+      cleanup();
+      if (!moved) {
+        dropAt(card);
+        return;
+      }
+      if (pointOverEnvelope(upEvent.clientX, upEvent.clientY)) {
+        dropAt(card, upEvent.clientX);
+      } else {
+        setGhost(null);
+        setDraggingId(null);
+        setOver(false);
+        onCaption('卡片没有落进档案袋。');
+      }
+    };
+
+    const onCancel = (cancelEvent: PointerEvent) => {
+      if (cancelEvent.pointerId !== pointerId) return;
+      cleanup();
+      setGhost(null);
+      setDraggingId(null);
+      setOver(false);
+    };
+
+    dragCleanup.current = cleanup;
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onCancel);
+  }
+
+  const glow = [0.55, 0.95, 1.5, 2.3, 3.6][Math.min(typed, 4)];
+  const saturation = [0.86, 1.1, 1.4, 1.8, 2.4][Math.min(typed, 4)];
   const drawerCards = data.cards.filter(
     (card) => !placed.includes(card.id) && falling?.card.id !== card.id,
   );
@@ -164,19 +232,62 @@ export function ArchiveEnvelope({
         data-testid="archive-envelope"
         data-centered={centered}
         data-over={over}
-        onDragOver={(event) => {
-          event.preventDefault();
-          if (!over) setOver(true);
-        }}
-        onDragLeave={() => setOver(false)}
-        onDrop={handleDrop}
       >
-        <div className={s.archiveFlap} aria-hidden="true" />
-        <span className={s.archiveButtonLeft} aria-hidden="true" />
-        <span className={s.archiveButtonRight} aria-hidden="true" />
-        <span className={s.archiveStringA} aria-hidden="true" />
-        <span className={s.archiveStringB} aria-hidden="true" />
-        <span className={s.archiveEnvelopeLabel} aria-hidden="true">档案</span>
+        <div className={s.archiveBack} aria-hidden="true" />
+        <div className={s.archiveOpening} aria-hidden="true" />
+
+        {falling ? (
+          <div
+            key={falling.card.id}
+            className={s.archiveFallingCard}
+            data-testid="archive-falling-card"
+            style={{
+              left: `${falling.left}%`,
+              top: `${falling.top}%`,
+              '--fall-distance': `${falling.distance}px`,
+            } as CSSProperties}
+            aria-hidden="true"
+          >
+            {falling.card.text}
+          </div>
+        ) : null}
+
+        <div className={s.archiveFront} aria-hidden="true">
+          <span className={s.archiveFlapFace} />
+          <svg
+            className={s.archiveFlapLines}
+            viewBox="0 0 100 30"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path d="M1 1 L50 29 L99 1" />
+          </svg>
+          <span className={s.archiveStamped}>档案</span>
+          <svg
+            className={s.archiveStringArt}
+            viewBox="0 0 100 34"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path d="M7 22 C 21 12, 31 30, 50 22 S 79 12, 93 22" />
+            <path d="M7 22 C 21 32, 31 14, 50 22 S 79 32, 93 22" />
+            <path d="M7 22 C 2 12, 8 5, 15 11" />
+            <path d="M93 22 C 98 12, 92 5, 85 11" />
+            <circle cx="7" cy="22" r="4.6" />
+            <circle cx="93" cy="22" r="4.6" />
+            <circle cx="50" cy="22" r="1.2" />
+          </svg>
+          <span className={s.archiveButtonLeft} />
+          <span className={s.archiveButtonRight} />
+          <span className={s.archiveCreaseA} />
+          <span className={s.archiveCreaseB} />
+          <span className={s.archiveSeamLeft} />
+          <span className={s.archiveSeamRight} />
+          <span className={s.archiveBottomFold} />
+        </div>
+
+        <div className={s.archiveLabelFrame} aria-hidden="true" />
+
         {labelVisible ? (
           <button
             type="button"
@@ -212,18 +323,13 @@ export function ArchiveEnvelope({
               className={s.archiveCard}
               data-testid="archive-card"
               data-card={card.id}
-              data-dragging={dragging === card.id}
-              draggable
-              title="拖到档案袋上，松开手；也可以点一下"
-              onDragStart={(event) => {
-                event.dataTransfer.setData('text/plain', card.id);
-                event.dataTransfer.effectAllowed = 'move';
-                setDragging(card.id);
-              }}
-              onDragEnd={() => setDragging(null)}
-              onClick={() => {
-                if (dragging) return;
-                dropCard(card);
+              data-dragging={draggingId === card.id}
+              title="按住拖到档案袋上，然后松手；也可以点一下"
+              onPointerDown={(event) => beginPointer(card, event)}
+              onKeyDown={(event) => {
+                if (event.key !== 'Enter' && event.key !== ' ') return;
+                event.preventDefault();
+                dropAt(card);
               }}
             >
               {card.text}
@@ -233,18 +339,20 @@ export function ArchiveEnvelope({
         </div>
       </div>
 
-      {falling ? (
+      {ghost ? (
         <div
-          key={falling.card.id}
-          className={s.archiveFallingCard}
-          data-testid="archive-falling-card"
-          style={{ left: `${falling.left}%`, top: `${falling.top}%` } as CSSProperties}
+          className={s.archiveDragCard}
+          data-testid="archive-drag-card"
+          style={{ left: ghost.x, top: ghost.y } as CSSProperties}
           aria-hidden="true"
         >
-          {falling.card.text}
+          {ghost.card.text}
         </div>
       ) : null}
 
+      {phase === 'whiteout' || phase === 'bleeding' || phase === 'black' ? (
+        <div className={s.archiveWhiteout} data-testid="archive-whiteout" aria-hidden="true" />
+      ) : null}
       {phase === 'bleeding' || phase === 'black' ? (
         <div className={s.archiveBleed} data-testid="archive-bleed" aria-hidden="true" />
       ) : null}

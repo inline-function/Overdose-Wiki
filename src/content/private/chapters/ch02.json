@@ -305,7 +305,7 @@
         {
           "type": "minigame",
           "id": "ch02.voices",
-          "label": "声音：哪些能核对"
+          "label": "声音：把缠住她的按灭"
         }
       ],
       "next": "ch02.s07"
@@ -786,11 +786,6 @@
           "type": "narration",
           "text": "我多么希望来得及呀......",
           "fx": "gloom"
-        },
-        {
-          "type": "minigame",
-          "id": "ch02.echo",
-          "label": "回音：她说的和你听见的"
         }
       ],
       "next": "ch02.s18"
@@ -882,6 +877,11 @@
           "type": "narration",
           "text": "为什么她要吃那垃圾药......",
           "fx": "gloom"
+        },
+        {
+          "type": "minigame",
+          "id": "ch02.archive",
+          "label": "档案：把名字写上去"
         }
       ],
       "next": "ch02.s20"

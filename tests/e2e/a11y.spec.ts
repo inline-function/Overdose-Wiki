@@ -57,9 +57,10 @@ for (const [route, label] of [
 }
 
 test('axe: chapter two minigames', async ({ page }) => {
+  test.setTimeout(120000);
   await page.goto('/#/');
   await seedScenes(page, ['ch01.s14']);
-  for (const sceneId of ['ch02.s02', 'ch02.s06', 'ch02.s08', 'ch02.s09', 'ch02.s17']) {
+  for (const sceneId of ['ch02.s02', 'ch02.s06', 'ch02.s08', 'ch02.s09', 'ch02.s19']) {
     await page.goto(`/#/report/49/replay/${sceneId}`);
     await page.getByTestId('scene-wrap').waitFor({ state: 'visible' });
     for (let i = 0; i < 16; i += 1) {

@@ -77,5 +77,25 @@
       "note": "这不是一个人能扛住的事。",
       "category": "cannot"
     }
-  ]
+  ],
+  "postCompletion": {
+    "glitchCaption": "屏幕开始抖。分类在闪，像信号被扯断了。",
+    "caption": "所有分类都消失了。只剩下「你能做的」，和一张「你不会死」。",
+    "intro": "屏幕闪了一下。只剩下这一格。",
+    "doneLabel": "关掉手机",
+    "categories": [
+      {
+        "id": "can",
+        "label": "你能做的"
+      }
+    ],
+    "cards": [
+      {
+        "id": "savior",
+        "label": "你不会死",
+        "note": "只要我在这里。",
+        "category": "can"
+      }
+    ]
+  }
 }

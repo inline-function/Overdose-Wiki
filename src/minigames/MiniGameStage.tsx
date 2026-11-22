@@ -12,6 +12,8 @@ import { Grounding } from './games/Grounding';
 import { VoiceFilter } from './games/VoiceFilter';
 import { PaintMix } from './games/PaintMix';
 import { EchoMatch } from './games/EchoMatch';
+import { SaviorAfter } from './games/SaviorAfter';
+import { ArchiveEnvelope } from './games/ArchiveEnvelope';
 import s from './minigame.module.css';
 
 type Props = {
@@ -24,25 +26,68 @@ type Props = {
 export function MiniGameStage({ data, onDone, onExit, completed = false }: Props) {
   const [ready, setReady] = useState(false);
   const [caption, setCaption] = useState(data.intro);
+  const [glitching, setGlitching] = useState(false);
+  const [afterPost, setAfterPost] = useState(false);
+  const [autoClosing, setAutoClosing] = useState(false);
   const windowRef = useRef<HTMLElement | null>(null);
+  const postTimer = useRef<number | null>(null);
+  const autoCloseTimer = useRef<number | null>(null);
+  const post = data.kind === 'wiki-sort' ? data.postCompletion : undefined;
 
   useEffect(() => {
     windowRef.current?.focus();
   }, []);
 
   useEffect(() => {
+    setGlitching(false);
+    setAfterPost(false);
+    setAutoClosing(false);
+  }, [data.id]);
+
+  useEffect(() => {
+    return () => {
+      if (postTimer.current !== null) window.clearTimeout(postTimer.current);
+      if (autoCloseTimer.current !== null) window.clearTimeout(autoCloseTimer.current);
+    };
+  }, []);
+
+  useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();
-        onExit();
+        if (!autoClosing) onExit();
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [onExit]);
+  }, [autoClosing, onExit]);
 
   const onReady = useCallback(() => setReady(true), []);
   const onCaption = useCallback((text: string) => setCaption(text), []);
+
+  function handleArchiveDone() {
+    if (autoClosing) return;
+    setAutoClosing(true);
+    autoCloseTimer.current = window.setTimeout(() => {
+      autoCloseTimer.current = null;
+      onDone();
+    }, 1000);
+  }
+
+  function handleDone() {
+    if (!post || afterPost) {
+      onDone();
+      return;
+    }
+    setGlitching(true);
+    onCaption(post.glitchCaption);
+    postTimer.current = window.setTimeout(() => {
+      postTimer.current = null;
+      setGlitching(false);
+      setAfterPost(true);
+      onCaption(post.caption);
+    }, 1100);
+  }
 
   const game = (() => {
     switch (data.kind) {
@@ -68,16 +113,19 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
         return <PaintMix data={data} onReady={onReady} onCaption={onCaption} />;
       case 'echo-match':
         return <EchoMatch data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'archive-envelope':
+        return <ArchiveEnvelope data={data} onCaption={onCaption} onDone={handleArchiveDone} />;
     }
   })();
 
   return createPortal(
-    <div className={s.overlay} data-testid="minigame-overlay">
+    <div className={s.overlay} data-testid="minigame-overlay" data-closing={autoClosing}>
       <section
         ref={windowRef}
         className={s.window}
         data-testid="minigame-stage"
         data-kind={data.kind}
+        data-after-post={afterPost}
         role="dialog"
         aria-modal="true"
         aria-label={data.title}
@@ -93,7 +141,8 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
           <button
             type="button"
             className={s.winBtn}
-            onClick={onExit}
+            onClick={() => { if (!autoClosing) onExit(); }}
+            disabled={autoClosing}
             aria-label="退出玩法"
             data-testid="minigame-exit"
           >
@@ -101,8 +150,10 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
           </button>
         </div>
         <div className={s.body}>
-          <p className={s.intro}>{data.intro}</p>
-          <div className={s.game}>{game}</div>
+          {afterPost ? null : <p className={s.intro}>{data.intro}</p>}
+          <div className={s.game}>
+            {afterPost && post ? <SaviorAfter data={post} /> : game}
+          </div>
           <footer className={s.footer}>
             <span className={s.caption} data-testid="minigame-caption" aria-live="polite">
               {caption}
@@ -110,14 +161,21 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
             <button
               type="button"
               className={s.primary}
-              onClick={onDone}
-              disabled={!ready}
+              onClick={handleDone}
+              disabled={!ready || glitching}
               data-testid="minigame-done"
             >
-              {ready ? (data.doneLabel ?? '收入档案') : '还差一点'}
+              {glitching
+                ? '……'
+                : afterPost && post
+                  ? (post.doneLabel ?? '关掉')
+                  : ready
+                    ? (data.doneLabel ?? '收入档案')
+                    : '还差一点'}
             </button>
           </footer>
         </div>
+        {glitching ? <div className={s.saviorGlitch} data-testid="savior-glitch" aria-hidden="true" /> : null}
       </section>
     </div>,
     document.body,

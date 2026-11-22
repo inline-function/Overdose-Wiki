@@ -51,6 +51,7 @@ const MINIGAME_KINDS = new Set([
   'voice-filter',
   'paint-mix',
   'echo-match',
+  'archive-envelope',
 ]);
 for (const { file, value } of minigames) {
   if (!value.id || typeof value.id !== 'string') {
@@ -115,6 +116,16 @@ for (const { file, value } of minigames) {
     for (const card of value.cards ?? []) {
       if (!categoryIds.has(card.category)) errors.push(`${file}: wiki card ${card.id} has unknown category`);
     }
+    if (value.postCompletion) {
+      const post = value.postCompletion;
+      const postCategories = new Set((post.categories ?? []).map((category) => category.id));
+      if (!postCategories.size) errors.push(`${file}: wiki-sort postCompletion needs categories`);
+      for (const card of post.cards ?? []) {
+        if (!postCategories.has(card.category)) {
+          errors.push(`${file}: postCompletion card ${card.id} has unknown category`);
+        }
+      }
+    }
   }
   if (value.kind === 'find-object') {
     const objectIds = new Set((value.objects ?? []).map((object) => object.id));
@@ -127,14 +138,17 @@ for (const { file, value } of minigames) {
     if (anchors.length < 5) errors.push(`${file}: grounding needs >=5 anchors`);
     const senses = anchors.map((anchor) => anchor.sense);
     if (new Set(senses).size !== senses.length) errors.push(`${file}: grounding senses must be unique`);
+    for (const anchor of anchors) {
+      if (!anchor.text) errors.push(`${file}: grounding anchor ${anchor.id} needs text`);
+      if (!anchor.image) errors.push(`${file}: grounding anchor ${anchor.id} needs image`);
+    }
   }
   if (value.kind === 'voice-filter') {
-    const lines = Array.isArray(value.lines) ? value.lines : [];
-    if (lines.length < 4) errors.push(`${file}: voice-filter needs >=4 lines`);
-    for (const line of lines) {
-      if (line.suggested !== 'check' && line.suggested !== 'inside') {
-        errors.push(`${file}: voice line ${line.id} needs suggested check|inside`);
-      }
+    const voices = Array.isArray(value.voices) ? value.voices : [];
+    if (voices.length < 20) errors.push(`${file}: voice-filter needs >=20 voices`);
+    if (!value.image) errors.push(`${file}: voice-filter needs image`);
+    for (const voice of voices) {
+      if (!voice.text) errors.push(`${file}: voice ${voice.id} needs text`);
     }
   }
   if (value.kind === 'paint-mix') {
@@ -158,6 +172,17 @@ for (const { file, value } of minigames) {
       if (!pair.left?.text || !pair.right?.text) {
         errors.push(`${file}: echo pair ${pair.id} needs left/right text`);
       }
+    }
+  }
+  if (value.kind === 'archive-envelope') {
+    if (!value.background) errors.push(`${file}: archive-envelope needs background`);
+    if (typeof value.name !== 'string' || value.name.length !== 4) {
+      errors.push(`${file}: archive-envelope needs a four-character name`);
+    }
+    const cards = Array.isArray(value.cards) ? value.cards : [];
+    if (cards.length < 3) errors.push(`${file}: archive-envelope needs >=3 cards`);
+    for (const card of cards) {
+      if (!card.text) errors.push(`${file}: archive card ${card.id} needs text`);
     }
   }
 }

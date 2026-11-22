@@ -1,0 +1,33 @@
+{
+  "id": "ch02.archive",
+  "kind": "archive-envelope",
+  "title": "档案：把名字写上去",
+  "subtitle": "最后一次归档",
+  "intro": "把她说过的那些话放进档案袋。放开手，让它们落进去。",
+  "closing": "档案合上了。名字还在。",
+  "doneLabel": "让档案合上",
+  "background": "assets-private/bg/bg_ch02_archive.png",
+  "name": "桜崎彩加",
+  "cards": [
+    {
+      "id": "a1",
+      "text": "我不会死。"
+    },
+    {
+      "id": "a2",
+      "text": "你不是废物，你是药师波奇，你救了我。"
+    },
+    {
+      "id": "a3",
+      "text": "我下定决心好好服药，绝不od了。"
+    },
+    {
+      "id": "a4",
+      "text": "波奇，我现在回头还来得及吗？"
+    },
+    {
+      "id": "a5",
+      "text": "我不会死、我不会死、我不会死......"
+    }
+  ]
+}

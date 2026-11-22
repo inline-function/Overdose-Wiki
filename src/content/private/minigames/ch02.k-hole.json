@@ -3,39 +3,44 @@
   "kind": "grounding",
   "title": "K洞：把五感找回来",
   "subtitle": "分不清梦与现实",
-  "intro": "她躺在黑洞里，动不了。先不急着解释，只找五件此刻还在的东西。",
+  "intro": "她躺在黑洞里，动不了。五感正在散开，点一下还在的那一句，让背景把它认回来。",
   "closing": "五感一件一件回来。K洞还在，但她知道自己还在这里。",
   "doneLabel": "把这一口气接上",
   "anchors": [
     {
       "id": "see",
       "sense": "看",
-      "label": "那盏没关的灯",
-      "line": "灯还亮着。先看着它。"
+      "text": "看见了没关的灯",
+      "line": "灯还亮着。先看着它。",
+      "image": "assets-private/bg/bg_ch02_k_hole_see.png"
     },
     {
       "id": "hear",
       "sense": "听",
-      "label": "空调的低鸣",
-      "line": "声音很低，但一直在。"
+      "text": "听见了空调的低鸣",
+      "line": "声音很低，但一直在。",
+      "image": "assets-private/bg/bg_ch02_k_hole_hear.png"
     },
     {
       "id": "touch",
       "sense": "触",
-      "label": "被子的重量",
-      "line": "被子压在手背上。"
+      "text": "碰到了被子的重量",
+      "line": "被子压在手背上。",
+      "image": "assets-private/bg/bg_ch02_k_hole_touch.png"
     },
     {
       "id": "smell",
       "sense": "闻",
-      "label": "消毒水的气味",
-      "line": "味道很冲，不是梦。"
+      "text": "闻到了烤肉的香气",
+      "line": "味道很冲，不是梦。",
+      "image": "assets-private/bg/bg_ch02_k_hole_smell.png"
     },
     {
       "id": "taste",
       "sense": "尝",
-      "label": "嘴里的苦味",
-      "line": "苦的。还在这里。"
+      "text": "尝到了嘴里的苦味",
+      "line": "苦的。还在这里。",
+      "image": "assets-private/bg/bg_ch02_k_hole_taste.png"
     }
   ]
 }

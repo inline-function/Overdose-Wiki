@@ -73,7 +73,8 @@ export type MiniGameKind =
   | 'grounding'
   | 'voice-filter'
   | 'paint-mix'
-  | 'echo-match';
+  | 'echo-match'
+  | 'archive-envelope';
 
 export type MiniGameBase = {
   id: string;
@@ -182,6 +183,15 @@ export type WikiCard = {
   category: string;
 };
 
+export type WikiSortPostCompletion = {
+  glitchCaption: string;
+  caption: string;
+  categories: WikiCategory[];
+  cards: WikiCard[];
+  doneLabel?: string;
+  intro?: string;
+};
+
 export type WikiSortGame = MiniGameBase & {
   kind: 'wiki-sort';
   categories: WikiCategory[];
@@ -189,6 +199,8 @@ export type WikiSortGame = MiniGameBase & {
   /** Optional vocabulary so the same board can read as care triage instead of wiki filing. */
   trayLabel?: string;
   placeVerb?: string;
+  /** Optional false-victory reset shown after the board is finished. */
+  postCompletion?: WikiSortPostCompletion;
 };
 
 export type FindShape = 'kettle' | 'tea' | 'cup' | 'phone' | 'pill';
@@ -216,8 +228,12 @@ export type GroundingSense = '看' | '听' | '触' | '闻' | '尝';
 export type GroundingAnchor = {
   id: string;
   sense: GroundingSense;
-  label: string;
+  /** Floating phrase typed on the dark stage. */
+  text: string;
+  /** Caption after it is found. */
   line: string;
+  /** Workspace-relative private background image, e.g. assets-private/bg/bg_....png */
+  image: string;
 };
 
 export type GroundingGame = MiniGameBase & {
@@ -227,14 +243,14 @@ export type GroundingGame = MiniGameBase & {
 
 export type VoiceLine = {
   id: string;
-  speaker: string;
   text: string;
-  suggested: 'check' | 'inside';
 };
 
 export type VoiceFilterGame = MiniGameBase & {
   kind: 'voice-filter';
-  lines: VoiceLine[];
+  voices: VoiceLine[];
+  /** Distorted private background image. */
+  image: string;
 };
 
 export type PaintPigment = { id: string; label: string; color: string };
@@ -268,6 +284,20 @@ export type EchoMatchGame = MiniGameBase & {
   pairs: EchoPair[];
 };
 
+export type ArchiveCard = {
+  id: string;
+  text: string;
+};
+
+export type ArchiveEnvelopeGame = MiniGameBase & {
+  kind: 'archive-envelope';
+  /** Colorful hallucination background behind the envelope. */
+  background: string;
+  cards: ArchiveCard[];
+  /** The full name written on the label, one character at a time. */
+  name: string;
+};
+
 export type MiniGameData =
   | MemoryCollageGame
   | ForumFixGame
@@ -279,7 +309,8 @@ export type MiniGameData =
   | GroundingGame
   | VoiceFilterGame
   | PaintMixGame
-  | EchoMatchGame;
+  | EchoMatchGame
+  | ArchiveEnvelopeGame;
 
 export type Beat =
   | { type: 'analysis'; caseId: string; label?: string }

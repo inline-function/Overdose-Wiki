@@ -149,16 +149,28 @@ test('the five chapter-two minigames can be completed', async ({ page, browserNa
   await open(page, 'ch02.s02', '49');
   const anchors = page.getByTestId('grounding-anchor');
   await expect(anchors).toHaveCount(5);
-  for (let i = 0; i < 5; i += 1) await anchors.nth(i).click();
+  for (let i = 0; i < 5; i += 1) {
+    const anchor = anchors.nth(i);
+    const id = await anchor.getAttribute('data-anchor');
+    await anchor.click();
+    await expect(page.getByTestId('grounding-backdrop')).toHaveAttribute('data-bg', id ?? '');
+  }
   await finish(page, 'ch02.k-hole');
 
   await open(page, 'ch02.s06', '49');
-  const voices = page.getByTestId('voice-line');
-  await expect(voices).toHaveCount(6);
-  for (let i = 0; i < 6; i += 1) {
-    const row = voices.nth(i);
-    await row.locator('[data-testid="voice-choice"]').nth(i % 2).click();
+  await expect(page.getByTestId('voice-backdrop')).toHaveCSS(
+    'background-image',
+    /bg_ch02_voices\.png/,
+  );
+  const voices = page.getByTestId('voice-ghost');
+  const voiceIds = await voices.evaluateAll((nodes) =>
+    nodes.map((node) => node.getAttribute('data-voice')).filter(Boolean),
+  );
+  expect(voiceIds.length).toBeGreaterThanOrEqual(20);
+  for (const id of voiceIds) {
+    await page.locator(`[data-testid="voice-ghost"][data-voice="${id}"]`).click();
   }
+  await expect(voices).toHaveCount(0);
   await finish(page, 'ch02.voices');
 
   await open(page, 'ch02.s08', '49');
@@ -191,14 +203,70 @@ test('the five chapter-two minigames can be completed', async ({ page, browserNa
     await page.locator(`[data-testid="wiki-card"][data-card="${card}"]`).click();
     await page.locator(`[data-testid="wiki-category"][data-category="${category}"]`).click();
   }
+  await page.getByTestId('minigame-done').click();
+  await expect(page.getByTestId('savior-glitch')).toBeVisible();
+  await expect(page.getByTestId('savior-after')).toBeVisible({ timeout: 5000 });
+  await expect(page.getByTestId('savior-category')).toHaveCount(1);
+  await expect(page.getByTestId('savior-category')).toContainText('你能做的');
+  await expect(page.getByTestId('savior-card')).toHaveCount(1);
+  await expect(page.getByTestId('savior-card')).toContainText('你不会死');
+  await expect(page.getByTestId('minigame-done')).toHaveText('关掉手机');
   await finish(page, 'ch02.care');
 
-  await open(page, 'ch02.s17', '49');
-  for (const pair of ['e1', 'e2', 'e3', 'e4']) {
-    await page.locator(`[data-testid="echo-left"][data-pair="${pair}"]`).click();
-    await page.locator(`[data-testid="echo-right"][data-pair="${pair}"]`).click();
+  await open(page, 'ch02.s19', '49');
+  const archiveEnvelope = page.getByTestId('archive-envelope');
+  const archiveCards = await page.getByTestId('archive-card').evaluateAll((nodes) =>
+    nodes.map((node) => node.getAttribute('data-card')).filter(Boolean),
+  );
+  expect(archiveCards).toHaveLength(5);
+  const envelopeBox = await archiveEnvelope.boundingBox();
+  expect(envelopeBox).not.toBeNull();
+  for (const id of archiveCards) {
+    const card = page.locator(`[data-testid="archive-card"][data-card="${id}"]`);
+    const cardBox = await card.boundingBox();
+    expect(cardBox).not.toBeNull();
+    if (!cardBox || !envelopeBox) continue;
+    await page.mouse.move(cardBox.x + cardBox.width / 2, cardBox.y + cardBox.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(
+      envelopeBox.x + envelopeBox.width / 2,
+      envelopeBox.y + envelopeBox.height * 0.2,
+      { steps: 24 },
+    );
+    await page.mouse.up();
+    await page.waitForTimeout(700);
   }
-  await finish(page, 'ch02.echo');
+  await expect(page.getByTestId('archive-drawer')).toHaveAttribute('data-closed', 'true');
+  await expect(page.getByTestId('archive-label')).toBeVisible({ timeout: 6000 });
+  await expect(page.getByTestId('archive-envelope')).toHaveAttribute('data-centered', 'true');
+  const archiveLabel = page.getByTestId('archive-label');
+  await archiveLabel.focus();
+  await page.keyboard.press('Space');
+  await expect(archiveLabel.locator('[data-filled="true"]')).toHaveCount(1);
+  await page.keyboard.press('Enter');
+  await expect(archiveLabel.locator('[data-filled="true"]')).toHaveCount(2);
+  await archiveLabel.click();
+  await expect(archiveLabel.locator('[data-filled="true"]')).toHaveCount(3);
+  await archiveLabel.click();
+  await expect(archiveLabel.locator('[data-filled="true"]')).toHaveCount(4);
+  await expect(page.getByTestId('archive-bleed')).toBeVisible();
+  await expect(page.getByTestId('archive-black')).toBeVisible({ timeout: 5000 });
+  await expect(page.getByTestId('minigame-overlay')).toBeHidden({ timeout: 7000 });
+  await expect
+    .poll(async () => (await page.getByTestId('dialog-line').textContent().catch(() => '')) ?? '', {
+      timeout: 6000,
+    })
+    .toContain('彩加她');
+  await expect
+    .poll(
+      async () =>
+        page.evaluate(() => {
+          const raw = localStorage.getItem('odw.save.v1');
+          return raw ? JSON.parse(raw).completedMinigames : [];
+        }),
+      { timeout: 4000 },
+    )
+    .toContain('ch02.archive');
 });
 
 test('placement cards drag, options shuffle, and the timeline guides the drop', async ({

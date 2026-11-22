@@ -26,7 +26,7 @@ describe('minigame registry', () => {
         'grounding',
         'voice-filter',
         'paint-mix',
-        'echo-match',
+        'archive-envelope',
       ]),
     );
   });
@@ -48,13 +48,18 @@ describe('minigame registry', () => {
     if (kHole?.kind === 'grounding') {
       expect(kHole.anchors).toHaveLength(5);
       expect(new Set(kHole.anchors.map((anchor) => anchor.sense)).size).toBe(5);
+      for (const anchor of kHole.anchors) {
+        expect(anchor.text.length).toBeGreaterThan(0);
+        expect(anchor.image).toMatch(/^assets-private\/bg\//);
+      }
     }
 
     const voices = getMiniGame('ch02.voices');
     expect(voices?.kind).toBe('voice-filter');
     if (voices?.kind === 'voice-filter') {
-      expect(voices.lines).toHaveLength(6);
-      for (const line of voices.lines) expect(['check', 'inside']).toContain(line.suggested);
+      expect(voices.voices.length).toBeGreaterThanOrEqual(20);
+      expect(voices.image).toMatch(/^assets-private\/bg\//);
+      for (const voice of voices.voices) expect(voice.text.length).toBeGreaterThan(0);
     }
 
     const paint = getMiniGame('ch02.paint');
@@ -74,16 +79,20 @@ describe('minigame registry', () => {
       expect(care.cards).toHaveLength(9);
       const categories = new Set(care.categories.map((category) => category.id));
       for (const card of care.cards) expect(categories.has(card.category)).toBe(true);
+      expect(care.postCompletion?.categories).toHaveLength(1);
+      expect(care.postCompletion?.categories[0]?.label).toBe('你能做的');
+      expect(care.postCompletion?.cards).toHaveLength(1);
+      expect(care.postCompletion?.cards[0]?.label).toBe('你不会死');
+      expect(care.postCompletion?.cards[0]?.category).toBe('can');
     }
 
-    const echo = getMiniGame('ch02.echo');
-    expect(echo?.kind).toBe('echo-match');
-    if (echo?.kind === 'echo-match') {
-      expect(echo.pairs).toHaveLength(4);
-      for (const pair of echo.pairs) {
-        expect(pair.left.text.length).toBeGreaterThan(0);
-        expect(pair.right.text.length).toBeGreaterThan(0);
-      }
+    const archive = getMiniGame('ch02.archive');
+    expect(archive?.kind).toBe('archive-envelope');
+    if (archive?.kind === 'archive-envelope') {
+      expect(archive.cards.length).toBeGreaterThanOrEqual(3);
+      expect(archive.name).toBe('桜崎彩加');
+      expect(archive.background).toMatch(/^assets-private\/bg\//);
+      for (const card of archive.cards) expect(card.text.length).toBeGreaterThan(0);
     }
   });
 

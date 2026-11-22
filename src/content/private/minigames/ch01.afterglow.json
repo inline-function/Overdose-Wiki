@@ -15,7 +15,8 @@
       "y": 6,
       "w": 30,
       "h": 30,
-      "tone": "red"
+      "tone": "red",
+      "image": "assets-private/bg/bg_afterglow_spring.png"
     },
     {
       "id": "gala",
@@ -25,7 +26,8 @@
       "y": 3,
       "w": 29,
       "h": 28,
-      "tone": "yellow"
+      "tone": "yellow",
+      "image": "assets-private/bg/bg_afterglow_gala.png"
     },
     {
       "id": "fireworks",
@@ -35,7 +37,8 @@
       "y": 6,
       "w": 30,
       "h": 31,
-      "tone": "blue"
+      "tone": "blue",
+      "image": "assets-private/bg/bg_afterglow_fireworks.png"
     },
     {
       "id": "light",
@@ -45,7 +48,8 @@
       "y": 52,
       "w": 28,
       "h": 30,
-      "tone": "yellow"
+      "tone": "yellow",
+      "image": "assets-private/bg/bg_afterglow_light.png"
     },
     {
       "id": "redpacket",
@@ -55,7 +59,8 @@
       "y": 50,
       "w": 28,
       "h": 31,
-      "tone": "red"
+      "tone": "red",
+      "image": "assets-private/bg/bg_afterglow_redpacket.png"
     },
     {
       "id": "voice",
@@ -65,7 +70,8 @@
       "y": 52,
       "w": 28,
       "h": 29,
-      "tone": "green"
+      "tone": "green",
+      "image": "assets-private/bg/bg_afterglow_voice.png"
     }
   ]
 }

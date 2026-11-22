@@ -47,7 +47,7 @@ async function open(sceneId) {
 
 async function finish(label) {
   const done = page.getByTestId('minigame-done');
-  for (let i = 0; i < 30 && !(await done.isEnabled()); i += 1) {
+  for (let i = 0; i < 60 && !(await done.isEnabled()); i += 1) {
     await page.waitForTimeout(100);
   }
   if (!(await done.isEnabled())) {
@@ -61,28 +61,24 @@ async function finish(label) {
 
 // 1. 余晖
 await open('ch01.s04');
-for (const el of await page.getByTestId('memory-fragment').all()) await el.click();
+for (const el of await page.getByTestId('memory-fragment').all()) await el.click({ force: true });
 await finish('memory-collage');
 
 // 2. 找物
 await open('ch01.s05');
 for (const id of ['kettle', 'tea', 'cup']) {
-  await page.locator(`[data-testid="find-object"][data-object="${id}"]`).click();
+  await page.locator(`[data-testid="find-object"][data-object="${id}"]`).click({ force: true });
   await page.waitForTimeout(250);
 }
 await finish('find-object');
 
 // 3. 感知
 await open('ch01.s06');
-for (let i = 0; i < 3; i += 1) {
-  const hold = page.getByTestId('perception-hold');
-  const box = await hold.boundingBox();
-  if (!box) throw new Error('perception: no hold box');
-  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-  await page.mouse.down();
-  await page.waitForTimeout(1050);
-  await page.mouse.up();
-  await page.waitForTimeout(550);
+const words = page.getByTestId('perception-word');
+console.log('perception words:', await words.count());
+for (let i = 0; i < 6; i += 1) {
+  await words.nth(i).click({ force: true });
+  await page.waitForTimeout(120);
 }
 await finish('perception');
 
@@ -95,10 +91,11 @@ const corrections = [
   ['e3', '不能联用'],
 ];
 for (const [id, option] of corrections) {
-  await page.locator(`[data-testid="forum-error"][data-error="${id}"]`).click();
+  await page.locator(`[data-testid="forum-error"][data-error="${id}"]`).waitFor();
   await forum.getByRole('button', { name: option, exact: true }).click();
-  await page.waitForTimeout(150);
+  await page.waitForTimeout(200);
 }
+console.log('forum replies:', await page.getByTestId('forum-reply').count());
 await finish('forum-fix');
 
 // 5. 群聊
@@ -113,7 +110,7 @@ const answers = [
 for (let i = 0; i < answers.length; i += 1) {
   await page.getByTestId('chat-option').filter({ hasText: answers[i] }).click();
   if (i < answers.length - 1) {
-    await page.getByTestId('chat-next').click();
+    await page.getByTestId('chat-question').waitFor({ state: 'visible', timeout: 5000 });
     await page.waitForTimeout(120);
   }
 }

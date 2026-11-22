@@ -1,6 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { PerceptionGame } from '../../content/types';
 import s from '../minigame.module.css';
+
+const BASE = import.meta.env.BASE_URL;
+const COLORS = ['#f0c866', '#e8e0cc', '#8fa8b8', '#d98f9b', '#7f9a6b', '#5b8fa8', '#e8c87a', '#f2d9cf'];
+
+type WordLook = {
+  color: string;
+  angle: number;
+  fadeMin: number;
+  fadeMax: number;
+  fadeDuration: number;
+  fadeDelay: number;
+  jitterDuration: number;
+  jitterDelay: number;
+  typeStep: number;
+};
 
 export function Perception({
   data,
@@ -11,96 +26,96 @@ export function Perception({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
-  const [index, setIndex] = useState(0);
-  const [holding, setHolding] = useState(false);
-  const [done, setDone] = useState<number[]>([]);
-  const timer = useRef<number | null>(null);
-  const advanceTimer = useRef<number | null>(null);
-  const line = data.lines[index];
-  const last = index >= data.lines.length - 1;
+  const required = Math.min(data.required ?? 6, data.words.length);
+  const [caught, setCaught] = useState<string[]>([]);
+  const readyRef = useRef(false);
+  const [looks] = useState<WordLook[]>(() =>
+    data.words.map((_, index) => ({
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      angle: -12 + Math.round(Math.random() * 24),
+      fadeMin: 0.14 + Math.random() * 0.16,
+      fadeMax: 0.58 + Math.random() * 0.28,
+      fadeDuration: 2.8 + Math.random() * 2.4,
+      fadeDelay: -Math.random() * 4,
+      jitterDuration: 1.4 + Math.random() * 1.8,
+      jitterDelay: -Math.random() * 2,
+      typeStep: 0.035 + (index % 4) * 0.012,
+    })),
+  );
 
   useEffect(() => {
-    return () => {
-      if (timer.current !== null) window.clearTimeout(timer.current);
-      if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current);
-    };
-  }, []);
+    if (caught.length < required || readyRef.current) return;
+    readyRef.current = true;
+    onReady();
+    onCaption(data.closing);
+  }, [caught.length, required, data.closing, onReady, onCaption]);
 
-  function startHold() {
-    if (done.includes(index) || holding) return;
-    setHolding(true);
-    if (timer.current !== null) window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => {
-      timer.current = null;
-      setHolding(false);
-      setDone((current) => (current.includes(index) ? current : [...current, index]));
-      onCaption(data.lines[index].note ?? '这一句终于读完了。');
-      if (last) {
-        onReady();
-        onCaption(data.closing);
-        return;
-      }
-      advanceTimer.current = window.setTimeout(() => {
-        advanceTimer.current = null;
-        setIndex((current) => current + 1);
-      }, 420);
-    }, 900);
-  }
-
-  function cancelHold() {
-    setHolding(false);
-    if (timer.current !== null) {
-      window.clearTimeout(timer.current);
-      timer.current = null;
-    }
+  function catchWord(id: string, note: string | undefined, text: string) {
+    if (caught.includes(id)) return;
+    setCaught((current) => [...current, id]);
+    onCaption(note ?? `他抓住“${text}”，字很快又散了。`);
   }
 
   return (
-    <div className={s.perception}>
-      <div className={s.phone} data-stable={holding} data-testid="perception-phone">
-        <div className={s.driftLine} aria-live="polite">
-          {Array.from(line.text).map((char, charIndex) => (
-            <span
-              key={`${line.id}-${charIndex}`}
-              className={s.driftChar}
-              style={{ animationDelay: `${(charIndex % 7) * 0.13}s` }}
-            >
-              {char}
-            </span>
-          ))}
-        </div>
-      </div>
-      <button
-        type="button"
-        className={s.holdButton}
-        data-testid="perception-hold"
-        data-holding={holding}
-        onPointerDown={(event) => {
-          event.preventDefault();
-          startHold();
-        }}
-        onPointerUp={cancelHold}
-        onPointerLeave={cancelHold}
-        onPointerCancel={cancelHold}
-        onKeyDown={(event) => {
-          if ((event.key === ' ' || event.key === 'Enter') && !event.repeat) {
-            event.preventDefault();
-            startHold();
-          }
-        }}
-        onKeyUp={(event) => {
-          if (event.key === ' ' || event.key === 'Enter') cancelHold();
-        }}
-      >
-        {holding ? '按住……别松' : '按住读这一句'}
-      </button>
-      <div className={s.perceptionMeta}>
+    <div className={s.perception} data-testid="perception-stage">
+      <div
+        className={s.perceptionBg}
+        style={{ backgroundImage: `url("${BASE}assets-private/bg/bg_plateau.png")` }}
+        aria-hidden="true"
+      />
+      <div className={s.perceptionFlow} aria-hidden="true" />
+      <div className={s.perceptionFlowB} aria-hidden="true" />
+      <div className={s.perceptionVeil} aria-hidden="true" />
+      <p className={s.perceptionHint}>点住那些快散掉的字 · 至少 {required} 个</p>
+      {data.words.map((word, index) => {
+        const done = caught.includes(word.id);
+        const look = looks[index];
+        return (
+          <button
+            key={word.id}
+            type="button"
+            className={s.perceptionWord}
+            data-testid="perception-word"
+            data-word={word.id}
+            data-caught={done}
+            aria-label={word.text}
+            aria-pressed={done}
+            onClick={() => catchWord(word.id, word.note, word.text)}
+            style={
+              {
+                left: `${word.x}%`,
+                top: `${word.y}%`,
+                '--word-color': look.color,
+                '--tilt': `${look.angle}deg`,
+                '--fade-min': look.fadeMin,
+                '--fade-max': look.fadeMax,
+                '--fade-duration': `${look.fadeDuration}s`,
+                '--fade-delay': `${look.fadeDelay}s`,
+                '--jitter-duration': `${look.jitterDuration}s`,
+                '--jitter-delay': `${look.jitterDelay}s`,
+              } as CSSProperties
+            }
+          >
+            {Array.from(word.text).map((char, charIndex) => (
+              <span
+                key={`${word.id}-${charIndex}`}
+                className={s.perceptionChar}
+                aria-hidden="true"
+                style={{ animationDelay: `${charIndex * look.typeStep}s` }}
+              >
+                {char}
+              </span>
+            ))}
+          </button>
+        );
+      })}
+      <div className={s.perceptionProgress} data-testid="perception-progress">
         <span>
-          {index + 1} / {data.lines.length}
+          抓住 {caught.length} / {required}
         </span>
-        <span className={s.dots} aria-hidden="true">
-          {data.lines.map((item, dotIndex) => (
-            <span key={item.id} className={s.dot} data-done={done.includes(dotIndex)} />
+        <span className={s.perceptionDots} aria-hidden="true">
+          {data.words.map((word) => (
+            <span key={word.id} className={s.perceptionDot} data-done={caught.includes(word.id)} />
           ))}
         </span>
       </div>

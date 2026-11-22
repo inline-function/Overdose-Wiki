@@ -62,6 +62,22 @@ for (const { file, value } of minigames) {
   if (value.kind === 'memory-collage' && (!Array.isArray(value.fragments) || value.fragments.length < 3)) {
     errors.push(`${file}: memory-collage needs >=3 fragments`);
   }
+  if (value.kind === 'memory-collage') {
+    for (const fragment of value.fragments ?? []) {
+      if (!fragment.image || typeof fragment.image !== 'string') {
+        errors.push(`${file}: memory fragment ${fragment.id} needs image`);
+      }
+    }
+  }
+  if (value.kind === 'perception') {
+    if (!Array.isArray(value.words) || value.words.length < 6) {
+      errors.push(`${file}: perception needs >=6 words`);
+    }
+    const required = value.required ?? 6;
+    if (required < 1 || required > (value.words?.length ?? 0)) {
+      errors.push(`${file}: perception required must be within words`);
+    }
+  }
   if (value.kind === 'forum-fix') {
     if (!Array.isArray(value.posts) || !value.errors || typeof value.errors !== 'object') {
       errors.push(`${file}: forum-fix needs posts[] and errors{}`);
@@ -89,9 +105,6 @@ for (const { file, value } of minigames) {
     if (!orders.length || orders.some((order, index) => order !== index + 1)) {
       errors.push(`${file}: trip-timeline orders must be 1..n`);
     }
-  }
-  if (value.kind === 'perception' && (!Array.isArray(value.lines) || value.lines.length < 1)) {
-    errors.push(`${file}: perception needs lines[]`);
   }
   if (value.kind === 'wiki-sort') {
     const categoryIds = new Set((value.categories ?? []).map((category) => category.id));

@@ -51,27 +51,31 @@ test('the seven chapter-one minigames can be completed', async ({ page, browserN
   await finish(page, 'ch01.find-object');
 
   await open(page, 'ch01.s06');
-  for (let i = 0; i < 3; i += 1) {
-    const hold = page.getByTestId('perception-hold');
-    const box = await hold.boundingBox();
-    if (!box) throw new Error('perception hold missing');
-    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-    await page.mouse.down();
-    await page.waitForTimeout(1000);
-    await page.mouse.up();
-    await page.waitForTimeout(500);
+  const words = page.getByTestId('perception-word');
+  await expect(words).toHaveCount(8);
+  for (let i = 0; i < 6; i += 1) {
+    await words.nth(i).click();
   }
   await finish(page, 'ch01.perception');
 
   await open(page, 'ch01.s07');
-  for (const [error, option] of [
+  const forumAnswers = [
     ['e1', '愈创木酚甘油醚'],
     ['e2', '不能，血清素综合征'],
     ['e3', '不能联用'],
-  ]) {
-    await page.locator(`[data-testid="forum-error"][data-error="${error}"]`).click();
-    await page.getByTestId('forum-correction').getByRole('button', { name: option, exact: true }).click();
+  ] as const;
+  for (let i = 0; i < forumAnswers.length; i += 1) {
+    const [error, option] = forumAnswers[i];
+    await expect(
+      page.locator(`[data-testid="forum-error"][data-error="${error}"]`),
+    ).toHaveAttribute('data-active', 'true');
+    await page
+      .getByTestId('forum-correction')
+      .getByRole('button', { name: option, exact: true })
+      .click();
+    await expect(page.getByTestId('forum-reply')).toHaveCount(i + 1);
   }
+  await expect(page.getByTestId('forum-replied')).toHaveCount(3);
   await finish(page, 'ch01.forum-fix');
 
   await open(page, 'ch01.s09');
@@ -84,7 +88,10 @@ test('the seven chapter-one minigames can be completed', async ({ page, browserN
   ];
   for (let i = 0; i < answers.length; i += 1) {
     await page.getByTestId('chat-option').filter({ hasText: answers[i] }).click();
-    if (i < answers.length - 1) await page.getByTestId('chat-next').click();
+    if (i < answers.length - 1) {
+      await expect(page.getByTestId('chat-typing')).toBeVisible();
+      await expect(page.getByTestId('chat-question')).toBeVisible({ timeout: 5000 });
+    }
   }
   await finish(page, 'ch01.chat-triage');
 
@@ -120,7 +127,10 @@ test('placement cards drag, options shuffle, and the timeline guides the drop', 
   test.skip(browserName !== 'chromium', 'drag coverage runs on chromium');
 
   await open(page, 'ch01.s07');
-  await page.locator('[data-testid="forum-error"][data-error="e1"]').click();
+  await expect(
+    page.locator('[data-testid="forum-error"][data-error="e1"]'),
+  ).toHaveAttribute('data-active', 'true');
+  await expect(page.getByTestId('forum-replied')).toHaveCount(0);
   const forumOptions = await page.getByTestId('forum-option').allTextContents();
   expect(forumOptions[0]).not.toBe('愈创木酚甘油醚');
 

@@ -85,6 +85,8 @@ export type MemoryFragment = {
   id: string;
   label: string;
   line: string;
+  /** Workspace-relative private background image, e.g. assets-private/bg/....png */
+  image: string;
   x: number;
   y: number;
   w: number;
@@ -152,15 +154,19 @@ export type TripTimelineGame = MiniGameBase & {
   cards: TripCard[];
 };
 
-export type PerceptionLine = {
+export type PerceptionWord = {
   id: string;
   text: string;
   note?: string;
+  x: number;
+  y: number;
 };
 
 export type PerceptionGame = MiniGameBase & {
   kind: 'perception';
-  lines: PerceptionLine[];
+  words: PerceptionWord[];
+  /** How many words must be caught to finish; defaults to 6. */
+  required?: number;
 };
 
 export type WikiCategory = { id: string; label: string };

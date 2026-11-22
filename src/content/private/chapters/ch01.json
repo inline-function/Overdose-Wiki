@@ -507,17 +507,21 @@
         {
           "type": "choice",
           "id": "ch01.s14.choice",
-          "prompt": "选择",
+          "prompt": "oder，你想逃出高原吗？",
           "options": [
             {
               "id": "o1",
-              "label": "继续读下去",
+              "label": "留下",
               "targetScene": "ch02.s01"
             },
             {
               "id": "o2",
-              "label": "先把档案合上",
-              "note": "档案留在这里，随时可以再读",
+              "label": "留下",
+              "targetScene": "ch02.s01"
+            },
+            {
+              "id": "o3",
+              "label": "留下",
               "targetScene": "ch02.s01"
             }
           ]

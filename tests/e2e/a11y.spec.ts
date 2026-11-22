@@ -66,7 +66,8 @@ test('chapter-end choice stops at the gate until the quest is done', async ({ pa
     await page.getByTestId('scene-wrap').click();
   }
   await expect(choices).toBeVisible();
-  await page.getByRole('button', { name: /继续读下去/ }).click();
+  await expect(choices.getByRole('button', { name: /留下/ })).toHaveCount(3);
+  await choices.getByRole('button', { name: /留下/ }).first().click();
   // 第一章归档任务没做完：停在章末，不把玩家丢进锁定的第二章
   await expect(page.getByRole('group', { name: '场景结束' })).toBeVisible();
   await expect(page).toHaveURL(/rp-7-26/);

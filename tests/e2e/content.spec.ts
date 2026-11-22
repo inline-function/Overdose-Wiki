@@ -29,6 +29,8 @@ test('five chapters connect into one linear chain', () => {
   const ch01Choice = ch01End?.beats.find((beat) => beat.type === 'choice');
   expect(ch01Choice?.type).toBe('choice');
   if (ch01Choice?.type === 'choice') {
+    expect(ch01Choice.options).toHaveLength(3);
+    expect(ch01Choice.options.map((option) => option.label)).toEqual(['留下', '留下', '留下']);
     expect(ch01Choice.options.every((option) => option.targetScene === 'ch02.s01')).toBe(true);
   }
 

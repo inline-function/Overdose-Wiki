@@ -2,70 +2,125 @@
   "id": "ch04.roshomon",
   "kind": "testimony-board",
   "title": "罗生门：三声部",
-  "subtitle": "三张嘴，三种真相",
-  "intro": "三张嘴。三种真相。没有裁判。先把话放回说话的人，再把互相撕咬的两句连起来。",
-  "closing": "三份说法互相撕咬。真相不在这张桌上。",
+  "subtitle": "合法性战场 · 第一回合",
+  "intro": "清算开始。三份完整证词，档案只能先收录一份。没有裁判，只有先被写进去的人。",
+  "closing": "三份说法互相撕咬。档案留下了，真相没有。",
   "doneLabel": "把三份说法留下",
   "background": "assets-private/bg/bg_testimony_fracture.png",
-  "voices": [
+  "rounds": [
     {
-      "id": "fan",
-      "name": "反藤者",
-      "line": "我只说我看见的。"
+      "id": "record",
+      "label": "第一回合 · 收录",
+      "prompt": "清算开始。桌上三份完整证词，档案只能先收录一份。先让谁开口？",
+      "choices": [
+        {
+          "id": "fan",
+          "label": "反藤者：后藤主动找媒体",
+          "detail": "最像控诉，也最容易被鸡控说成站队。",
+          "tag": "反藤者",
+          "result": "她的版本进了档案。鸡控立刻说：这是藤控的清算。",
+          "effects": {
+            "chicken": 8,
+            "goto": -10,
+            "trust": -4,
+            "archive": 4,
+            "flags": [
+              "testimony.fan-first"
+            ]
+          }
+        },
+        {
+          "id": "goto",
+          "label": "后藤：我只是被挂名",
+          "detail": "能保住他的位置，也会保住他不愿承认的部分。",
+          "tag": "后藤",
+          "result": "后藤的版本把自己写成了被动的人。档案稳了，疑问还在。",
+          "effects": {
+            "goto": 10,
+            "chicken": -4,
+            "trust": 4,
+            "archive": 6,
+            "flags": [
+              "testimony.goto-first"
+            ]
+          }
+        },
+        {
+          "id": "muyu",
+          "label": "沐雨：我确实想毁灭 od 圈",
+          "detail": "最难听，也最不像任何一边的武器。",
+          "tag": "沐雨",
+          "result": "沐雨的口供同时得罪两边。档案第一次有了不站队的句子。",
+          "effects": {
+            "trust": 10,
+            "archive": 10,
+            "goto": -5,
+            "chicken": -5,
+            "flags": [
+              "testimony.muyu-first"
+            ]
+          }
+        }
+      ]
     },
     {
-      "id": "goto",
-      "name": "后藤",
-      "line": "我记得的不是这样。"
-    },
-    {
-      "id": "muyu",
-      "name": "沐雨",
-      "line": "你们只挑自己想听的。"
+      "id": "conclusion",
+      "label": "第二回合 · 结尾",
+      "prompt": "三份证词互相咬住。结尾只能写一种结构。",
+      "choices": [
+        {
+          "id": "parallel",
+          "label": "并列三份，不裁判",
+          "detail": "把互相矛盾原样保留下来。",
+          "tag": "档案",
+          "result": "档案厚了，也更难被任何一方引用。读者只能自己判断。",
+          "effects": {
+            "archive": 14,
+            "trust": 4,
+            "goto": -4,
+            "chicken": -4,
+            "flags": [
+              "testimony.parallel"
+            ]
+          }
+        },
+        {
+          "id": "verifiable",
+          "label": "只写可核实的部分",
+          "detail": "把不能复核的句子全部拿掉。",
+          "tag": "档案",
+          "result": "档案变薄，但每一句都能被复核。三份声音都变得不完整。",
+          "effects": {
+            "archive": 8,
+            "trust": 8,
+            "escalation": -1,
+            "flags": [
+              "testimony.verifiable"
+            ]
+          }
+        },
+        {
+          "id": "public",
+          "label": "把矛盾原样交给公众",
+          "detail": "不替任何人收尾，让所有人看见三张嘴。",
+          "tag": "旁观",
+          "result": "公众拿到了三份互相打脸的证词。有人开始说：连他们自己都说不清。",
+          "effects": {
+            "trust": -10,
+            "chicken": -4,
+            "goto": -4,
+            "escalation": 1,
+            "flags": [
+              "testimony.public"
+            ]
+          }
+        }
+      ]
     }
   ],
-  "claims": [
-    {
-      "id": "c1",
-      "short": "主动找媒体",
-      "text": "后藤主动找上媒体，策划了这次采访。",
-      "voiceId": "fan",
-      "contradictionWith": "c2"
-    },
-    {
-      "id": "c2",
-      "short": "只是挂名",
-      "text": "我在采访里只是挂了个名，没有策划。",
-      "voiceId": "goto",
-      "contradictionWith": "c1"
-    },
-    {
-      "id": "c3",
-      "short": "还在拉人",
-      "text": "他退圈后还在群里拉人采访。",
-      "voiceId": "fan",
-      "contradictionWith": "c4"
-    },
-    {
-      "id": "c4",
-      "short": "没法反击",
-      "text": "退圈之后，我没法反击。",
-      "voiceId": "goto",
-      "contradictionWith": "c3"
-    },
-    {
-      "id": "c5",
-      "short": "毁灭 od 圈",
-      "text": "我的目的是毁灭 od 圈，建立真正意义上的药圈。",
-      "voiceId": "muyu",
-      "contradictionWith": "c6"
-    },
-    {
-      "id": "c6",
-      "short": "我圈钱",
-      "text": "我缺钱，我圈钱怎么了。",
-      "voiceId": "muyu",
-      "contradictionWith": "c5"
-    }
-  ]
+  "reactions": {
+    "fan": "鸡控把反藤者的证词剪成“清算宣言”。藤控开始要求你补上后藤的名字。",
+    "goto": "后藤的版本让藤控松了口气。鸡控开始问：被挂名的人为什么能代表档案？",
+    "muyu": "沐雨的口供同时得罪两边。两边都开始问：这段要不要删？"
+  }
 }

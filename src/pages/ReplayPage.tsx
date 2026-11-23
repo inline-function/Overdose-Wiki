@@ -23,6 +23,7 @@ import { CANVAS_OPENINGS } from '../openings/registry';
 import { CHAPTER_REPORT } from '../game/routing';
 import { isSceneUnlocked } from '../game/unlocks';
 import { useGameStore } from '../game/store';
+import { warTableOf } from '../game/warTable';
 import { getAnalysisCase } from '../content/analysis';
 import { getMiniGame } from '../content/minigames';
 import { AnalysisStage } from '../analysis/AnalysisStage';
@@ -240,6 +241,7 @@ function ScenePlayer({
   const setChoice = useGameStore((state) => state.setChoice);
   const completeAnalysis = useGameStore((state) => state.completeAnalysis);
   const completeMinigame = useGameStore((state) => state.completeMinigame);
+  const setWarTable = useGameStore((state) => state.setWarTable);
   const addHistory = useGameStore((state) => state.addHistory);
   const setStatus = useGameStore((state) => state.setStatus);
   const autoRead = useGameStore((state) => state.autoRead);
@@ -847,6 +849,8 @@ function ScenePlayer({
             key={`${minigame.id}-${beatIndex}`}
             data={minigame}
             completed={save.completedMinigames?.includes(minigame.id) ?? false}
+            warTable={warTableOf(save)}
+            onWarChange={setWarTable}
             onExit={() => {
               setStatus('小玩法先合上了。');
               nextBeat();

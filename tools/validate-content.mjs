@@ -249,6 +249,63 @@ for (const { file, value } of minigames) {
       }
     }
   }
+  if (value.kind === 'rumor-map' || value.kind === 'testimony-board') {
+    if (!value.background) errors.push(`${file}: ${value.kind} needs background`);
+    const rounds = Array.isArray(value.rounds) ? value.rounds : [];
+    if (rounds.length < 2) errors.push(`${file}: ${value.kind} needs >=2 rounds`);
+    for (const round of rounds) {
+      if (!round.id || !round.prompt) errors.push(`${file}: ${value.kind} round needs id/prompt`);
+      const choices = Array.isArray(round.choices) ? round.choices : [];
+      if (choices.length < 2) errors.push(`${file}: ${value.kind} round ${round.id} needs >=2 choices`);
+      for (const choice of choices) {
+        if (!choice.id || !choice.label || !choice.detail || !choice.result) {
+          errors.push(`${file}: ${value.kind} choice ${choice.id} needs label/detail/result`);
+        }
+        const meters = ['goto', 'chicken', 'trust', 'archive', 'escalation']
+          .filter((key) => typeof choice.effects?.[key] === 'number');
+        if (meters.length === 0) {
+          errors.push(`${file}: ${value.kind} choice ${choice.id} needs meter effects`);
+        }
+      }
+    }
+  }
+  if (value.kind === 'redact-document') {
+    const lines = Array.isArray(value.lines) ? value.lines : [];
+    if (lines.length < 6) errors.push(`${file}: redact-document needs >=6 lines`);
+    if (!Number.isInteger(value.budget) || value.budget < 1) {
+      errors.push(`${file}: redact-document needs a positive budget`);
+    }
+    if (!Number.isInteger(value.minPublic) || value.minPublic < 1) {
+      errors.push(`${file}: redact-document needs minPublic`);
+    }
+    const stakes = new Set(['person', 'evidence', 'record']);
+    for (const line of lines) {
+      if (!line.id || !line.text || !stakes.has(line.stake)) {
+        errors.push(`${file}: redact line ${line.id} needs text/stake`);
+      }
+      if (!line.redactEffects || !line.keepEffects) {
+        errors.push(`${file}: redact line ${line.id} needs redact/keep effects`);
+      }
+    }
+  }
+  if (value.kind === 'knowledge-dossier') {
+    const cards = Array.isArray(value.cards) ? value.cards : [];
+    const policies = Array.isArray(value.policies) ? value.policies : [];
+    if (cards.length < 4) errors.push(`${file}: knowledge-dossier needs >=4 cards`);
+    if (policies.length < 2) errors.push(`${file}: knowledge-dossier needs >=2 policies`);
+    for (const card of cards) {
+      if (!card.id || !card.title || !Array.isArray(card.faces) || card.faces.length !== 2) {
+        errors.push(`${file}: knowledge card ${card.id} needs title/two faces`);
+      }
+    }
+    for (const policy of policies) {
+      const meters = ['goto', 'chicken', 'trust', 'archive', 'escalation']
+        .filter((key) => typeof policy.effects?.[key] === 'number');
+      if (!policy.id || !policy.label || !policy.line || meters.length === 0) {
+        errors.push(`${file}: knowledge policy ${policy.id} needs label/line/effects`);
+      }
+    }
+  }
 }
 const sceneIds = new Set();
 const allScenes = new Map();

@@ -2,9 +2,9 @@
   "id": "ch04.knowledge",
   "kind": "knowledge-dossier",
   "title": "知识论：两面性的知识",
-  "subtitle": "每一面都能救人，也能害人",
-  "intro": "每一份知识都带着第二张脸。翻开它，再决定怎么放出去。",
-  "closing": "两面性的知识，不会因为一条方针就变成一面。",
+  "subtitle": "政策树 · 四张卡",
+  "intro": "每一份知识都带着第二张脸。翻开它，再决定让哪一面进入公共档案。",
+  "closing": "四张方针钉上墙。知识没有变成一面，只是被你的选择压向了一边。",
   "doneLabel": "把方针钉上墙",
   "background": "assets-private/bg/bg_knowledge_fracture.png",
   "cards": [
@@ -69,17 +69,31 @@
     {
       "id": "open",
       "label": "直接公开",
-      "line": "发出去。有人得救，有人学会害人。"
+      "line": "发出去。有人得救，有人学会害人。",
+      "effects": {
+        "trust": 6,
+        "archive": 6,
+        "escalation": 1
+      }
     },
     {
       "id": "context",
       "label": "加注后公开",
-      "line": "加一段话。能挡一部分，挡不住转发。"
+      "line": "加一段话。能挡一部分，挡不住转发。",
+      "effects": {
+        "trust": 9,
+        "archive": 3
+      }
     },
     {
       "id": "withhold",
       "label": "不公开细节",
-      "line": "藏起来。需要它的人也可能找不到。"
+      "line": "藏起来。需要它的人也可能找不到。",
+      "effects": {
+        "trust": -4,
+        "archive": -7,
+        "escalation": -1
+      }
     }
   ]
 }

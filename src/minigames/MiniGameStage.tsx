@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { MiniGameData } from '../content/types';
+import type { WarTable } from '../game/types';
 import { MemoryCollage } from './games/MemoryCollage';
 import { ForumFix } from './games/ForumFix';
 import { ChatTriage } from './games/ChatTriage';
@@ -22,6 +23,7 @@ import { RumorMap } from './games/RumorMap';
 import { TestimonyBoard } from './games/TestimonyBoard';
 import { RedactDocument } from './games/RedactDocument';
 import { KnowledgeDossier } from './games/KnowledgeDossier';
+import { WarTableHUD } from './WarTableHUD';
 import s from './minigame.module.css';
 
 type Props = {
@@ -29,9 +31,11 @@ type Props = {
   onDone: () => void;
   onExit: () => void;
   completed?: boolean;
+  warTable: WarTable;
+  onWarChange: (table: WarTable) => void;
 };
 
-export function MiniGameStage({ data, onDone, onExit, completed = false }: Props) {
+export function MiniGameStage({ data, onDone, onExit, completed = false, warTable, onWarChange }: Props) {
   const [ready, setReady] = useState(false);
   const [caption, setCaption] = useState(data.intro);
   const [glitching, setGlitching] = useState(false);
@@ -132,13 +136,13 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
       case 'camera-wall':
         return <CameraWall data={data} onReady={onReady} onCaption={onCaption} />;
       case 'rumor-map':
-        return <RumorMap data={data} onReady={onReady} onCaption={onCaption} />;
+        return <RumorMap data={data} warTable={warTable} onWarChange={onWarChange} onReady={onReady} onCaption={onCaption} />;
       case 'testimony-board':
-        return <TestimonyBoard data={data} onReady={onReady} onCaption={onCaption} />;
+        return <TestimonyBoard data={data} warTable={warTable} onWarChange={onWarChange} onReady={onReady} onCaption={onCaption} />;
       case 'redact-document':
-        return <RedactDocument data={data} onReady={onReady} onCaption={onCaption} />;
+        return <RedactDocument data={data} warTable={warTable} onWarChange={onWarChange} onReady={onReady} onCaption={onCaption} />;
       case 'knowledge-dossier':
-        return <KnowledgeDossier data={data} onReady={onReady} onCaption={onCaption} />;
+        return <KnowledgeDossier data={data} warTable={warTable} onWarChange={onWarChange} onReady={onReady} onCaption={onCaption} />;
     }
   })();
 
@@ -176,6 +180,7 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
         </div>
         <div className={s.body}>
           {afterPost ? null : <p className={s.intro}>{data.intro}</p>}
+          {!afterPost && data.id.startsWith('ch04.') ? <WarTableHUD table={warTable} /> : null}
           <div className={s.game}>
             {afterPost && post ? <SaviorAfter data={post} /> : game}
           </div>

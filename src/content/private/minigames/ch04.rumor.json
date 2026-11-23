@@ -2,99 +2,118 @@
   "id": "ch04.rumor",
   "kind": "rumor-map",
   "title": "伪藤：名字是怎么变成武器的",
-  "subtitle": "一条原帖被转成了四种东西",
-  "intro": "一句话被转四次，就会长出牙齿。点出后来才被塞进去的句子。",
-  "closing": "名字被叫得越响，离那个人越远。",
-  "doneLabel": "把原帖收好",
+  "subtitle": "叙事战 · 第一回合",
+  "intro": "一句原话被转四次，就会长出牙齿。你现在能决定的是：先放哪一张牌。",
+  "closing": "传播链没有停下来。它只是换了一个人手里继续长。",
+  "doneLabel": "把这次行动归档",
   "background": "assets-private/bg/bg_rumor_fracture.png",
-  "steps": [
+  "rounds": [
     {
-      "id": "original",
-      "label": "原帖",
-      "line": "这是原帖。名字、动作、对象都在。",
-      "fragments": [
+      "id": "launch",
+      "label": "第一回合 · 定调",
+      "prompt": "伪藤账号出现。你手里有一张截图、一份原帖，和两个已经炸开的群。先放什么？",
+      "choices": [
         {
-          "text": "后藤",
-          "added": false
+          "id": "screenshot",
+          "label": "把“鸡控在伪装”的截图抛进群",
+          "detail": "最快，也最脏。截图会替所有人省掉核实。",
+          "tag": "鸡控",
+          "result": "截图比原帖跑得快。鸡控否认时，群里已经开始找下一个靶子。",
+          "effects": {
+            "chicken": -12,
+            "trust": -5,
+            "escalation": 1,
+            "flags": [
+              "rumor.released-screenshot"
+            ]
+          }
         },
         {
-          "text": "预警",
-          "added": false
+          "id": "verify",
+          "label": "让藤控内部先核验时间戳",
+          "detail": "慢一步，但把“谁在伪造”变成可查的问题。",
+          "tag": "藤控",
+          "result": "核验拖过了最热的两小时。鸡控删了帖，藤控拿到了原始时间。",
+          "effects": {
+            "goto": 6,
+            "archive": 10,
+            "trust": 4,
+            "flags": [
+              "rumor.verified"
+            ]
+          }
         },
         {
-          "text": "鸡控 od-wiki",
-          "added": false
-        },
-        {
-          "text": "在伪装自己",
-          "added": false
+          "id": "silence",
+          "label": "什么都不发，让两边互相猜",
+          "detail": "不站队，也不负责。沉默会自己长出解释。",
+          "tag": "旁观",
+          "result": "两个群都开始替沉默编故事。没有人被说服，所有人都在等下一张截图。",
+          "effects": {
+            "goto": -4,
+            "chicken": -4,
+            "trust": -8,
+            "escalation": 1,
+            "flags": [
+              "rumor.silent"
+            ]
+          }
         }
       ]
     },
     {
-      "id": "group",
-      "label": "群聊转述",
-      "line": "转述开始变短，也变得更有力。",
-      "fragments": [
+      "id": "fallout",
+      "label": "第二回合 · 收场",
+      "prompt": "视频把原话剪成“要定点爆破 od 圈”。传播链已经离开你的手。现在怎么办？",
+      "choices": [
         {
-          "text": "后藤说",
-          "added": false
+          "id": "full",
+          "label": "放出完整原帖和上下文",
+          "detail": "把被剪掉的那半句还给所有人。",
+          "tag": "档案",
+          "result": "完整版传得慢，但鸡控第一次没法只用一张图回击。",
+          "effects": {
+            "archive": 10,
+            "trust": 8,
+            "chicken": -4
+          }
         },
         {
-          "text": "鸡哥的站",
-          "added": true
+          "id": "counter",
+          "label": "用同一套剪法做反击视频",
+          "detail": "以牙还牙。有效，也会让下一次更容易。",
+          "tag": "鸡控",
+          "result": "反击视频爆了。两边都开始用“他们先剪的”当理由。",
+          "effects": {
+            "chicken": -10,
+            "trust": -8,
+            "escalation": 1,
+            "flags": [
+              "rumor.counter-cut"
+            ]
+          }
         },
         {
-          "text": "是假的",
-          "added": true
-        },
-        {
-          "text": "要搞垮鸡哥",
-          "added": true
-        }
-      ]
-    },
-    {
-      "id": "video",
-      "label": "视频里的说法",
-      "line": "这一句触碰了所有高原人的利益。",
-      "fragments": [
-        {
-          "text": "后藤",
-          "added": false
-        },
-        {
-          "text": "主动找上媒体",
-          "added": true
-        },
-        {
-          "text": "要定点爆破 od 圈",
-          "added": true
-        }
-      ]
-    },
-    {
-      "id": "labels",
-      "label": "最后流传的标签",
-      "line": "最后只剩标签。标签不需要证据。",
-      "fragments": [
-        {
-          "text": "伪藤",
-          "added": true
-        },
-        {
-          "text": "减害骗子",
-          "added": true
-        },
-        {
-          "text": "爆破者",
-          "added": true
-        },
-        {
-          "text": "流量狗",
-          "added": true
+          "id": "third",
+          "label": "把传播链交给第三方存档",
+          "detail": "退出战场，把证据交给不会参战的人。",
+          "tag": "档案",
+          "result": "第三方收下了整条链。它不再属于任何一边，也不再能立刻救人。",
+          "effects": {
+            "archive": 14,
+            "goto": -5,
+            "trust": 4,
+            "flags": [
+              "rumor.third-party"
+            ]
+          }
         }
       ]
     }
-  ]
+  ],
+  "reactions": {
+    "screenshot": "鸡控把你的截图做成“藤控清算”的海报。藤控开始问你：原帖呢？",
+    "verify": "藤控把时间戳贴上墙。鸡控开始要求你公开整段核验记录。",
+    "silence": "两个群都开始替你的沉默编故事。没有人知道你到底站哪边。"
+  }
 }

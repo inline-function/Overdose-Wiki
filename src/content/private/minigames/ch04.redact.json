@@ -2,60 +2,136 @@
   "id": "ch04.redact",
   "kind": "redact-document",
   "title": "公开文档：能删的只有名字",
-  "subtitle": "公开前，先做一份能转载的版本",
-  "intro": "公开之前，先把会割伤人的名字涂黑。",
-  "closing": "文档公开了。能删的只有名字。",
+  "subtitle": "档案政治 · 黑条预算 4",
+  "intro": "公开之前，先决定这份档案要保护谁、又要留下什么证据。黑条只有四条。",
+  "closing": "文档公开了。能删的只有名字，删不掉的都留在档案里。",
   "doneLabel": "公开转载版",
   "background": "assets-private/bg/bg_doc_fracture.png",
   "documentTitle": "关于二〇二五年九月事件的说明（转载版）",
+  "budget": 4,
+  "minPublic": 3,
   "lines": [
     {
       "id": "head",
       "text": "关于二〇二五年九月事件的说明",
-      "action": "keep",
-      "note": "标题留下。"
+      "stake": "record",
+      "note": "标题留下，档案才认得出自己。",
+      "redactEffects": {
+        "archive": -2
+      },
+      "keepEffects": {
+        "archive": 2
+      }
     },
     {
       "id": "byline",
       "text": "署名：超级后后后藤",
-      "action": "keep",
-      "note": "署名留下。"
+      "stake": "record",
+      "note": "署名是公开的，删掉只会让转载版失去出处。",
+      "redactEffects": {
+        "archive": -2
+      },
+      "keepEffects": {
+        "archive": 2
+      }
     },
     {
       "id": "account",
       "text": "小五的账号：[账号]",
-      "action": "redact",
-      "note": "账号不能露出去。"
+      "stake": "person",
+      "note": "账号一旦露出，换号也换不掉被找到的速度。",
+      "redactEffects": {
+        "trust": 4,
+        "archive": -6,
+        "flags": [
+          "doc.protected-account"
+        ]
+      },
+      "keepEffects": {
+        "trust": -8,
+        "escalation": 1
+      }
     },
     {
       "id": "address",
       "text": "他住的地方：[住址]",
-      "action": "redact",
-      "note": "住址不能露出去。"
+      "stake": "person",
+      "note": "住址不是证据，是坐标。",
+      "redactEffects": {
+        "trust": 4,
+        "archive": -6,
+        "flags": [
+          "doc.protected-address"
+        ]
+      },
+      "keepEffects": {
+        "trust": -8,
+        "escalation": 1
+      }
     },
     {
       "id": "quote",
       "text": "沐雨在采访里说：「我的目的是毁灭 od 圈。」",
-      "action": "keep",
-      "note": "公开采访原话留下。"
+      "stake": "evidence",
+      "note": "这句话能定住沐雨，也能被反过来当成整场清算的标题。",
+      "redactEffects": {
+        "archive": -8,
+        "trust": -2
+      },
+      "keepEffects": {
+        "archive": 8,
+        "trust": -2,
+        "escalation": 1,
+        "flags": [
+          "doc.published-quote"
+        ]
+      }
     },
     {
       "id": "dm",
       "text": "有人给我发来的私信：[私信]",
-      "action": "redact",
-      "note": "私信不能露出去。"
+      "stake": "person",
+      "note": "私信里可能有真相，也有另一个人的名字。",
+      "redactEffects": {
+        "trust": 3,
+        "archive": -5,
+        "flags": [
+          "doc.protected-dm"
+        ]
+      },
+      "keepEffects": {
+        "trust": -6,
+        "escalation": 1
+      }
     },
     {
       "id": "dox",
       "text": "鸡哥的开盒内容：[链接]",
-      "action": "redact",
-      "note": "开盒链接不能露出去。"
+      "stake": "person",
+      "note": "公开它，等于替下一次开盒写好模板。",
+      "redactEffects": {
+        "trust": 5,
+        "archive": -7,
+        "flags": [
+          "doc.protected-dox"
+        ]
+      },
+      "keepEffects": {
+        "trust": -10,
+        "escalation": 1
+      }
     },
     {
       "id": "date",
       "text": "公开于二〇二五年十二月七日。",
-      "action": "keep",
-      "note": "日期留下。"
+      "stake": "record",
+      "note": "日期留下，文件才有时间线。",
+      "redactEffects": {
+        "archive": -2
+      },
+      "keepEffects": {
+        "archive": 2
+      }
     }
   ]
 }

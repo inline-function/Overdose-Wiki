@@ -72,6 +72,15 @@ async function seedChapter4(page: import('@playwright/test').Page) {
       104: ['report-104-full'],
       101: ['report-101-full'],
     };
+    save.warTable = {
+      goto: 50,
+      chicken: 50,
+      trust: 50,
+      archive: 50,
+      escalation: 1,
+      decisions: {},
+      flags: [],
+    };
     localStorage.setItem('odw.save.v1', JSON.stringify(save));
   });
   await page.reload();
@@ -404,52 +413,72 @@ test('the four chapter-four minigames can be completed', async ({ page, browserN
   await seedChapter4(page);
 
   await open(page, 'ch04.s04', '51');
-  for (let step = 0; step < 4; step += 1) {
-    const added = page.locator('[data-testid="rumor-fragment"][data-added="true"]');
-    const count = await added.count();
-    for (let i = 0; i < count; i += 1) await added.nth(i).click();
-    if (step < 3) await page.getByTestId('rumor-next').click();
-  }
-  await expect(page.locator('[data-testid="rumor-fragment"][data-marked="true"]')).toHaveCount(4);
+  await expect(page.getByTestId('war-table')).toBeVisible();
+  await expect(page.getByTestId('war-table').locator('[data-meter="chicken"]')).toHaveAttribute(
+    'data-value',
+    '50',
+  );
+  await page.locator('[data-testid="war-choice"][data-choice="screenshot"]').click();
+  await expect(page.getByTestId('war-result')).toBeVisible();
+  await expect(page.getByTestId('war-table').locator('[data-meter="chicken"]')).toHaveAttribute(
+    'data-value',
+    '38',
+  );
+  await page.getByTestId('war-next').click();
+  await page.locator('[data-testid="war-choice"][data-choice="full"]').click();
+  await page.getByTestId('war-next').click();
   await finish(page, 'ch04.rumor');
 
   await open(page, 'ch04.s14', '51');
-  const claimVoice = ['fan', 'goto', 'fan', 'goto', 'muyu', 'muyu'];
-  for (const voice of claimVoice) {
-    await page.locator(`[data-testid="testimony-voice"][data-voice="${voice}"]`).click();
-  }
-  await expect(page.locator('[data-testid="testimony-card"]')).toHaveCount(6);
-  for (const [first, second] of [
-    ['c1', 'c2'],
-    ['c3', 'c4'],
-    ['c5', 'c6'],
-  ]) {
-    await page.locator(`[data-testid="testimony-card"][data-claim="${first}"]`).click();
-    await page.locator(`[data-testid="testimony-card"][data-claim="${second}"]`).click();
-  }
-  await page.getByTestId('testimony-stamp').click();
+  await expect(page.getByTestId('war-table')).toBeVisible();
+  await expect(page.getByTestId('war-table').locator('[data-meter="trust"]')).toHaveAttribute(
+    'data-value',
+    '53',
+  );
+  await page.locator('[data-testid="war-choice"][data-choice="muyu"]').click();
+  await page.getByTestId('war-next').click();
+  await page.locator('[data-testid="war-choice"][data-choice="parallel"]').click();
+  await page.getByTestId('war-next').click();
   await finish(page, 'ch04.roshomon');
 
   await open(page, 'ch04.s20', '51');
-  for (const id of ['head', 'byline', 'account', 'address', 'quote', 'dm', 'dox', 'date']) {
-    await page.locator(`[data-testid="redact-line"][data-line="${id}"]`).click();
-  }
-  for (const id of ['head', 'byline', 'quote', 'date']) {
+  for (const id of ['account', 'address', 'dm', 'dox', 'head', 'byline', 'quote', 'date']) {
     await page.locator(`[data-testid="redact-line"][data-line="${id}"]`).click();
   }
   await expect(page.locator('[data-testid="redact-line"][data-redacted="true"]')).toHaveCount(4);
+  await expect(page.getByTestId('redact-publish')).toBeEnabled();
   await page.getByTestId('redact-publish').click();
+  await expect(page.getByTestId('war-table').locator('[data-meter="trust"]')).not.toHaveAttribute(
+    'data-value',
+    '53',
+  );
   await finish(page, 'ch04.redact');
 
   await open(page, 'ch04.s27', '51');
   for (const id of ['help', 'interaction', 'schedule', 'story']) {
     await page.locator(`[data-testid="knowledge-flip"][data-card="${id}"]`).click();
     await page
-      .locator(`[data-testid="knowledge-policy"][data-card="${id}"][data-policy="open"]`)
+      .locator(`[data-testid="knowledge-policy"][data-card="${id}"][data-policy="context"]`)
       .click();
   }
   await page.getByTestId('knowledge-compile').click();
   await finish(page, 'ch04.knowledge');
+
+  const decisions = await page.evaluate(() => {
+    const raw = localStorage.getItem('odw.save.v1');
+    return raw ? Object.keys(JSON.parse(raw).warTable?.decisions ?? {}) : [];
+  });
+  expect(decisions).toEqual(expect.arrayContaining([
+    'ch04.rumor:launch',
+    'ch04.rumor:fallout',
+    'ch04.roshomon:record',
+    'ch04.roshomon:conclusion',
+    'ch04.redact:publish',
+    'ch04.knowledge:help',
+    'ch04.knowledge:interaction',
+    'ch04.knowledge:schedule',
+    'ch04.knowledge:story',
+  ]));
 });
 
 test('placement cards drag, options shuffle, and the timeline guides the drop', async ({

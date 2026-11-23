@@ -360,56 +360,62 @@ export type CameraWallGame = MiniGameBase & {
   feeds: CameraWallFeed[];
 };
 
-export type RumorFragment = {
-  text: string;
-  added: boolean;
+export type WarEffectPatch = {
+  goto?: number;
+  chicken?: number;
+  trust?: number;
+  archive?: number;
+  escalation?: number;
+  flags?: string[];
 };
 
-export type RumorStep = {
+export type WarChoice = {
   id: string;
   label: string;
-  fragments: RumorFragment[];
-  line: string;
+  detail: string;
+  result: string;
+  tag?: string;
+  effects: WarEffectPatch;
+};
+
+export type WarRound = {
+  id: string;
+  label?: string;
+  prompt: string;
+  choices: WarChoice[];
 };
 
 export type RumorMapGame = MiniGameBase & {
   kind: 'rumor-map';
   background: string;
-  steps: RumorStep[];
-};
-
-export type TestimonyVoice = {
-  id: string;
-  name: string;
-  line: string;
-};
-
-export type TestimonyClaim = {
-  id: string;
-  short: string;
-  text: string;
-  voiceId: string;
-  contradictionWith?: string;
+  reactions?: Record<string, string>;
+  rounds: WarRound[];
 };
 
 export type TestimonyBoardGame = MiniGameBase & {
   kind: 'testimony-board';
   background: string;
-  voices: TestimonyVoice[];
-  claims: TestimonyClaim[];
+  reactions?: Record<string, string>;
+  rounds: WarRound[];
 };
+
+export type RedactStake = 'person' | 'evidence' | 'record';
 
 export type RedactLine = {
   id: string;
   text: string;
-  action: 'keep' | 'redact';
+  stake: RedactStake;
   note: string;
+  redactEffects: WarEffectPatch;
+  keepEffects: WarEffectPatch;
 };
 
 export type RedactDocumentGame = MiniGameBase & {
   kind: 'redact-document';
   background: string;
   documentTitle: string;
+  budget: number;
+  minPublic: number;
   lines: RedactLine[];
 };
 
@@ -428,6 +434,7 @@ export type KnowledgePolicy = {
   id: string;
   label: string;
   line: string;
+  effects: WarEffectPatch;
 };
 
 export type KnowledgeDossierGame = MiniGameBase & {

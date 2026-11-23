@@ -42,6 +42,23 @@ describe('save schema', () => {
     expect(save?.completedMinigames).toEqual([]);
   });
 
+  it('adds a default war table when migrating an older save', () => {
+    const old = defaultSave() as unknown as Record<string, unknown>;
+    delete old.warTable;
+    const save = migrate(old as never);
+    expect(save?.warTable.goto).toBe(50);
+    expect(save?.warTable.decisions).toEqual({});
+  });
+
+  it('repairs a malformed war table instead of dropping the save', () => {
+    const old = defaultSave() as unknown as Record<string, unknown>;
+    old.warTable = { goto: 99 };
+    const save = migrate(old as never);
+    expect(save).not.toBeNull();
+    expect(save?.warTable.goto).toBe(50);
+    expect(save?.warTable.flags).toEqual([]);
+  });
+
   it('rejects non-JSON import', () => {
     expect(parseImport('not json')).toBeNull();
   });

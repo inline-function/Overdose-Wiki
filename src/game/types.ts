@@ -1,3 +1,5 @@
+import type { WarEffectPatch } from '../content/types';
+
 export const CONSENT_VERSION = 2;
 export const SAVE_VERSION = 1 as const;
 
@@ -39,6 +41,21 @@ export type BattleProgress = {
   seed: number;
 };
 
+export type WarDecision = {
+  choice: string;
+  effects: WarEffectPatch;
+};
+
+export type WarTable = {
+  goto: number;
+  chicken: number;
+  trust: number;
+  archive: number;
+  escalation: number;
+  decisions: Record<string, WarDecision>;
+  flags: string[];
+};
+
 export type Save = {
   version: typeof SAVE_VERSION;
   consent: { version: number; acceptedAt: string };
@@ -64,6 +81,8 @@ export type Save = {
   analysis: string[];
   /** 已完成的小玩法 id */
   completedMinigames: string[];
+  /** 第四章战局：跨四个玩法保留的政治状态 */
+  warTable: WarTable;
   settings: Settings;
   history: HistoryEntry[];
 };
@@ -77,6 +96,18 @@ export const DEFAULT_SETTINGS: Settings = {
   spoilers: false,
   audio: { bgm: 60, sfx: 70, mute: false },
 };
+
+export function defaultWarTable(): WarTable {
+  return {
+    goto: 50,
+    chicken: 50,
+    trust: 50,
+    archive: 50,
+    escalation: 1,
+    decisions: {},
+    flags: [],
+  };
+}
 
 export function defaultSave(): Save {
   return {
@@ -96,6 +127,7 @@ export function defaultSave(): Save {
     seenIntros: [],
     analysis: [],
     completedMinigames: [],
+    warTable: defaultWarTable(),
     settings: actionSettings(),
     history: [],
   };

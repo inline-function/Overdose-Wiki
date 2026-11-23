@@ -3,6 +3,7 @@ import {
   SAVE_VERSION,
   STARTER_CARDS,
   defaultSave,
+  defaultWarTable,
   type HistoryEntry,
   type Save,
   type Settings,
@@ -63,6 +64,18 @@ export function migrate(raw: unknown): Save | null {
     save.seenIntros ??= [];
     save.analysis ??= [];
     save.completedMinigames ??= [];
+    if (
+      !isObject(save.warTable) ||
+      !isObject(save.warTable.decisions) ||
+      typeof save.warTable.goto !== 'number' ||
+      typeof save.warTable.chicken !== 'number' ||
+      typeof save.warTable.trust !== 'number' ||
+      typeof save.warTable.archive !== 'number' ||
+      typeof save.warTable.escalation !== 'number' ||
+      !Array.isArray(save.warTable.flags)
+    ) {
+      save.warTable = defaultWarTable();
+    }
     return save;
   }
   // v1 is the first schema. Future versions add their migrations here.

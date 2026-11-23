@@ -34,6 +34,7 @@ type GameStore = {
   readEffect: (name: string) => void;
   completeAnalysis: (caseId: string) => void;
   completeMinigame: (id: string) => void;
+  setWarTable: (table: Save['warTable']) => void;
   readDoc: (reportId: string, segmentId: string) => void;
   claimQuest: (questId: string) => void;
   claimBox: (cardId: string) => void;
@@ -146,6 +147,10 @@ export const useGameStore = create<GameStore>()((set, get) => {
           ? save
           : { ...save, analysis: [...save.analysis, caseId] },
       );
+    },
+
+    setWarTable: (table) => {
+      commit((save) => ({ ...save, warTable: table }));
     },
 
     completeMinigame: (id) => {

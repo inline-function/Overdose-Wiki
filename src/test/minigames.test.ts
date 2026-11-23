@@ -154,26 +154,33 @@ describe('minigame registry', () => {
   });
 
 
-  it('keeps chapter four data complete', () => {
+  it('keeps chapter four strategic operations complete', () => {
     const rumor = getMiniGame('ch04.rumor');
     expect(rumor?.kind).toBe('rumor-map');
     if (rumor?.kind === 'rumor-map') {
-      expect(rumor.steps).toHaveLength(4);
+      expect(rumor.rounds).toHaveLength(2);
       expect(rumor.background).toMatch(/^assets-private\/bg\//);
-      const added = rumor.steps.flatMap((step) => step.fragments).filter((fragment) => fragment.added);
-      expect(added.length).toBeGreaterThanOrEqual(3);
-      for (const step of rumor.steps) expect(step.line.length).toBeGreaterThan(0);
+      for (const round of rumor.rounds) {
+        expect(round.prompt.length).toBeGreaterThan(0);
+        expect(round.choices).toHaveLength(3);
+        for (const choice of round.choices) {
+          expect(choice.label.length).toBeGreaterThan(0);
+          expect(choice.result.length).toBeGreaterThan(0);
+          expect(Object.keys(choice.effects).length).toBeGreaterThan(1);
+        }
+      }
     }
 
     const testimony = getMiniGame('ch04.roshomon');
     expect(testimony?.kind).toBe('testimony-board');
     if (testimony?.kind === 'testimony-board') {
-      expect(testimony.voices).toHaveLength(3);
-      expect(testimony.claims).toHaveLength(6);
-      const pairs = testimony.claims.filter((claim) => claim.contradictionWith);
-      expect(pairs).toHaveLength(6);
-      for (const claim of testimony.claims) {
-        expect(testimony.voices.some((voice) => voice.id === claim.voiceId)).toBe(true);
+      expect(testimony.rounds).toHaveLength(2);
+      for (const round of testimony.rounds) {
+        expect(round.choices).toHaveLength(3);
+        for (const choice of round.choices) {
+          expect(choice.tag).toBeTruthy();
+          expect(choice.result.length).toBeGreaterThan(0);
+        }
       }
     }
 
@@ -181,8 +188,14 @@ describe('minigame registry', () => {
     expect(redact?.kind).toBe('redact-document');
     if (redact?.kind === 'redact-document') {
       expect(redact.lines).toHaveLength(8);
-      expect(redact.lines.filter((line) => line.action === 'redact')).toHaveLength(4);
-      expect(redact.lines.filter((line) => line.action === 'keep')).toHaveLength(4);
+      expect(redact.budget).toBe(4);
+      expect(redact.minPublic).toBe(3);
+      expect(redact.lines.filter((line) => line.stake === 'person')).toHaveLength(4);
+      expect(redact.lines.filter((line) => line.stake === 'evidence')).toHaveLength(1);
+      for (const line of redact.lines) {
+        expect(Object.keys(line.redactEffects).length).toBeGreaterThan(0);
+        expect(Object.keys(line.keepEffects).length).toBeGreaterThan(0);
+      }
     }
 
     const knowledge = getMiniGame('ch04.knowledge');
@@ -193,6 +206,9 @@ describe('minigame registry', () => {
       for (const card of knowledge.cards) {
         expect(card.faces).toHaveLength(2);
         expect(new Set(card.faces.map((face) => face.tone))).toEqual(new Set(['help', 'harm']));
+      }
+      for (const policy of knowledge.policies) {
+        expect(Object.keys(policy.effects).length).toBeGreaterThan(0);
       }
     }
   });

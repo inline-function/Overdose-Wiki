@@ -22,7 +22,7 @@ export function QuestGuide({ compact = false }: { compact?: boolean }) {
         type="button"
         className={g.collapsed}
         onClick={() => setOpen(true)}
-        aria-label="展开任务指引"
+        title="展开任务指引"
       >
         <span className={g.collapsedTag}>任务</span>
         <span className={g.collapsedStep}>{guide.step}</span>

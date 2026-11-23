@@ -56,6 +56,10 @@ const MINIGAME_KINDS = new Set([
   'emotion-return',
   'anchor-room',
   'camera-wall',
+  'rumor-map',
+  'testimony-board',
+  'redact-document',
+  'knowledge-dossier',
 ]);
 for (const { file, value } of minigames) {
   if (!value.id || typeof value.id !== 'string') {

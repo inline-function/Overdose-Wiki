@@ -1,0 +1,71 @@
+{
+  "id": "ch04.roshomon",
+  "kind": "testimony-board",
+  "title": "罗生门：三声部",
+  "subtitle": "三张嘴，三种真相",
+  "intro": "三张嘴。三种真相。没有裁判。先把话放回说话的人，再把互相撕咬的两句连起来。",
+  "closing": "三份说法互相撕咬。真相不在这张桌上。",
+  "doneLabel": "把三份说法留下",
+  "background": "assets-private/bg/bg_testimony_fracture.png",
+  "voices": [
+    {
+      "id": "fan",
+      "name": "反藤者",
+      "line": "我只说我看见的。"
+    },
+    {
+      "id": "goto",
+      "name": "后藤",
+      "line": "我记得的不是这样。"
+    },
+    {
+      "id": "muyu",
+      "name": "沐雨",
+      "line": "你们只挑自己想听的。"
+    }
+  ],
+  "claims": [
+    {
+      "id": "c1",
+      "short": "主动找媒体",
+      "text": "后藤主动找上媒体，策划了这次采访。",
+      "voiceId": "fan",
+      "contradictionWith": "c2"
+    },
+    {
+      "id": "c2",
+      "short": "只是挂名",
+      "text": "我在采访里只是挂了个名，没有策划。",
+      "voiceId": "goto",
+      "contradictionWith": "c1"
+    },
+    {
+      "id": "c3",
+      "short": "还在拉人",
+      "text": "他退圈后还在群里拉人采访。",
+      "voiceId": "fan",
+      "contradictionWith": "c4"
+    },
+    {
+      "id": "c4",
+      "short": "没法反击",
+      "text": "退圈之后，我没法反击。",
+      "voiceId": "goto",
+      "contradictionWith": "c3"
+    },
+    {
+      "id": "c5",
+      "short": "毁灭 od 圈",
+      "text": "我的目的是毁灭 od 圈，建立真正意义上的药圈。",
+      "voiceId": "muyu",
+      "contradictionWith": "c6"
+    },
+    {
+      "id": "c6",
+      "short": "我圈钱",
+      "text": "我缺钱，我圈钱怎么了。",
+      "voiceId": "muyu",
+      "contradictionWith": "c5"
+    }
+  ]
+}

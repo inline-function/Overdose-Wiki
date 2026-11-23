@@ -18,6 +18,10 @@ import { MemoryDevelop } from './games/MemoryDevelop';
 import { EmotionReturn } from './games/EmotionReturn';
 import { AnchorRoom } from './games/AnchorRoom';
 import { CameraWall } from './games/CameraWall';
+import { RumorMap } from './games/RumorMap';
+import { TestimonyBoard } from './games/TestimonyBoard';
+import { RedactDocument } from './games/RedactDocument';
+import { KnowledgeDossier } from './games/KnowledgeDossier';
 import s from './minigame.module.css';
 
 type Props = {
@@ -127,6 +131,14 @@ export function MiniGameStage({ data, onDone, onExit, completed = false }: Props
         return <AnchorRoom data={data} onReady={onReady} onCaption={onCaption} />;
       case 'camera-wall':
         return <CameraWall data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'rumor-map':
+        return <RumorMap data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'testimony-board':
+        return <TestimonyBoard data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'redact-document':
+        return <RedactDocument data={data} onReady={onReady} onCaption={onCaption} />;
+      case 'knowledge-dossier':
+        return <KnowledgeDossier data={data} onReady={onReady} onCaption={onCaption} />;
     }
   })();
 

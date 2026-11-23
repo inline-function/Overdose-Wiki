@@ -78,7 +78,11 @@ export type MiniGameKind =
   | 'memory-develop'
   | 'emotion-return'
   | 'anchor-room'
-  | 'camera-wall';
+  | 'camera-wall'
+  | 'rumor-map'
+  | 'testimony-board'
+  | 'redact-document'
+  | 'knowledge-dossier';
 
 export type MiniGameBase = {
   id: string;
@@ -356,6 +360,83 @@ export type CameraWallGame = MiniGameBase & {
   feeds: CameraWallFeed[];
 };
 
+export type RumorFragment = {
+  text: string;
+  added: boolean;
+};
+
+export type RumorStep = {
+  id: string;
+  label: string;
+  fragments: RumorFragment[];
+  line: string;
+};
+
+export type RumorMapGame = MiniGameBase & {
+  kind: 'rumor-map';
+  background: string;
+  steps: RumorStep[];
+};
+
+export type TestimonyVoice = {
+  id: string;
+  name: string;
+  line: string;
+};
+
+export type TestimonyClaim = {
+  id: string;
+  short: string;
+  text: string;
+  voiceId: string;
+  contradictionWith?: string;
+};
+
+export type TestimonyBoardGame = MiniGameBase & {
+  kind: 'testimony-board';
+  background: string;
+  voices: TestimonyVoice[];
+  claims: TestimonyClaim[];
+};
+
+export type RedactLine = {
+  id: string;
+  text: string;
+  action: 'keep' | 'redact';
+  note: string;
+};
+
+export type RedactDocumentGame = MiniGameBase & {
+  kind: 'redact-document';
+  background: string;
+  documentTitle: string;
+  lines: RedactLine[];
+};
+
+export type KnowledgeFace = {
+  text: string;
+  tone: 'help' | 'harm';
+};
+
+export type KnowledgeCard = {
+  id: string;
+  title: string;
+  faces: [KnowledgeFace, KnowledgeFace];
+};
+
+export type KnowledgePolicy = {
+  id: string;
+  label: string;
+  line: string;
+};
+
+export type KnowledgeDossierGame = MiniGameBase & {
+  kind: 'knowledge-dossier';
+  background: string;
+  cards: KnowledgeCard[];
+  policies: KnowledgePolicy[];
+};
+
 export type MiniGameData =
   | MemoryCollageGame
   | ForumFixGame
@@ -372,7 +453,13 @@ export type MiniGameData =
   | MemoryDevelopGame
   | EmotionReturnGame
   | AnchorRoomGame
-  | CameraWallGame;
+  | CameraWallGame
+  | RumorMapGame
+  | TestimonyBoardGame
+  | RedactDocumentGame
+  | KnowledgeDossierGame;
+
+export type EventId = 'civil-war';
 
 export type Beat =
   | { type: 'analysis'; caseId: string; label?: string }
@@ -383,6 +470,7 @@ export type Beat =
   | { type: 'heading'; text: string }
   | { type: 'choice'; id: string; prompt?: string; options: ChoiceOption[] }
   | { type: 'battle'; battleId: string; label?: string }
+  | { type: 'event'; event: EventId }
   | { type: 'bg'; bg: string }
   | { type: 'bust'; speaker: string; expr: string }
   | { type: 'sfx'; id: string };

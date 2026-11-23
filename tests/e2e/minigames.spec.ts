@@ -52,6 +52,31 @@ async function seedChapter3(page: import('@playwright/test').Page) {
   await page.reload();
 }
 
+
+async function seedChapter4(page: import('@playwright/test').Page) {
+  await page.goto('/#/');
+  await page.waitForTimeout(450);
+  await page.evaluate(() => {
+    const raw = localStorage.getItem('odw.save.v1');
+    if (!raw) return;
+    const save = JSON.parse(raw);
+    save.completedScenes = Array.from(
+      new Set([...(save.completedScenes ?? []), 'ch01.s14', 'ch02.s24', 'ch03.s24']),
+    );
+    save.readEffects = Array.from(
+      new Set([...(save.readEffects ?? []), '解离', '反解离', '恢复术']),
+    );
+    save.read = {
+      ...(save.read ?? {}),
+      108: ['report-108-full'],
+      104: ['report-104-full'],
+      101: ['report-101-full'],
+    };
+    localStorage.setItem('odw.save.v1', JSON.stringify(save));
+  });
+  await page.reload();
+}
+
 async function finish(page: import('@playwright/test').Page, id: string) {
   const done = page.getByTestId('minigame-done');
   await expect(done).toBeEnabled({ timeout: 4000 });
@@ -337,6 +362,94 @@ test('the four chapter-three minigames can be completed', async ({ page, browser
   }
   await expect(page.locator('[data-testid="camera-feed"][data-scanned="true"]')).toHaveCount(6);
   await finish(page, 'ch03.search');
+});
+
+
+test('the civil war event opens with its own cue and closes into the next scene', async ({
+  page,
+  browserName,
+}) => {
+  test.skip(!hasPrivate, 'requires private content');
+  test.skip(browserName !== 'chromium', 'event coverage runs on chromium');
+  test.setTimeout(45000);
+
+  await seedChapter4(page);
+  await page.goto('/#/report/51/replay/ch04.s03');
+  await page.getByTestId('scene-wrap').waitFor({ state: 'visible' });
+  for (let i = 0; i < 12; i += 1) {
+    if (await page.getByTestId('civil-war-event').isVisible().catch(() => false)) break;
+    await page.getByTestId('scene-wrap').click({ timeout: 1500 }).catch(() => undefined);
+    await page.waitForTimeout(220);
+  }
+  const event = page.getByTestId('civil-war-event');
+  await expect(event).toBeVisible();
+  await expect(event).toHaveAttribute('data-cue', 'drug-war');
+  await expect(event).toContainText('编辑组拒绝交涉');
+  const close = page.getByTestId('civil-war-close');
+  await expect(close).toBeFocused();
+  await expect(close).toHaveText('骨肉再次相残。');
+  await close.click();
+  await expect(event).toBeHidden();
+  await expect
+    .poll(async () => page.url(), { timeout: 6000 })
+    .toContain('/replay/ch04.s04');
+  await expect(page.getByTestId('dialog-line')).toContainText('七月十九到二十一日', { timeout: 6000 });
+});
+
+test('the four chapter-four minigames can be completed', async ({ page, browserName }) => {
+  test.skip(!hasPrivate, 'requires private content');
+  test.skip(browserName !== 'chromium', 'minigame interaction coverage runs on chromium');
+  test.setTimeout(180000);
+
+  await seedChapter4(page);
+
+  await open(page, 'ch04.s04', '51');
+  for (let step = 0; step < 4; step += 1) {
+    const added = page.locator('[data-testid="rumor-fragment"][data-added="true"]');
+    const count = await added.count();
+    for (let i = 0; i < count; i += 1) await added.nth(i).click();
+    if (step < 3) await page.getByTestId('rumor-next').click();
+  }
+  await expect(page.locator('[data-testid="rumor-fragment"][data-marked="true"]')).toHaveCount(4);
+  await finish(page, 'ch04.rumor');
+
+  await open(page, 'ch04.s14', '51');
+  const claimVoice = ['fan', 'goto', 'fan', 'goto', 'muyu', 'muyu'];
+  for (const voice of claimVoice) {
+    await page.locator(`[data-testid="testimony-voice"][data-voice="${voice}"]`).click();
+  }
+  await expect(page.locator('[data-testid="testimony-card"]')).toHaveCount(6);
+  for (const [first, second] of [
+    ['c1', 'c2'],
+    ['c3', 'c4'],
+    ['c5', 'c6'],
+  ]) {
+    await page.locator(`[data-testid="testimony-card"][data-claim="${first}"]`).click();
+    await page.locator(`[data-testid="testimony-card"][data-claim="${second}"]`).click();
+  }
+  await page.getByTestId('testimony-stamp').click();
+  await finish(page, 'ch04.roshomon');
+
+  await open(page, 'ch04.s20', '51');
+  for (const id of ['head', 'byline', 'account', 'address', 'quote', 'dm', 'dox', 'date']) {
+    await page.locator(`[data-testid="redact-line"][data-line="${id}"]`).click();
+  }
+  for (const id of ['head', 'byline', 'quote', 'date']) {
+    await page.locator(`[data-testid="redact-line"][data-line="${id}"]`).click();
+  }
+  await expect(page.locator('[data-testid="redact-line"][data-redacted="true"]')).toHaveCount(4);
+  await page.getByTestId('redact-publish').click();
+  await finish(page, 'ch04.redact');
+
+  await open(page, 'ch04.s27', '51');
+  for (const id of ['help', 'interaction', 'schedule', 'story']) {
+    await page.locator(`[data-testid="knowledge-flip"][data-card="${id}"]`).click();
+    await page
+      .locator(`[data-testid="knowledge-policy"][data-card="${id}"][data-policy="open"]`)
+      .click();
+  }
+  await page.getByTestId('knowledge-compile').click();
+  await finish(page, 'ch04.knowledge');
 });
 
 test('placement cards drag, options shuffle, and the timeline guides the drop', async ({

@@ -27,6 +27,7 @@ import { getAnalysisCase } from '../content/analysis';
 import { getMiniGame } from '../content/minigames';
 import { AnalysisStage } from '../analysis/AnalysisStage';
 import { MiniGameStage } from '../minigames/MiniGameStage';
+import { CivilWarEvent } from '../components/CivilWarEvent';
 import { PlaceholderPage } from './PlaceholderPage';
 import p from './pages.module.css';
 
@@ -54,6 +55,11 @@ const BG_LABEL: Record<string, string> = {
   bg_hospital_ward: '病房',
   bg_night_street: '夜街 / 警车',
   bg_spring_festival: '春节 / 余晖',
+  bg_civil_war_room: '内战 / 档案室',
+  bg_rumor_fracture: '伪藤 / 传播墙',
+  bg_testimony_fracture: '罗生门 / 三支麦克风',
+  bg_doc_fracture: '公开文档 / 涂黑',
+  bg_knowledge_fracture: '知识论 / 双面书架',
 };
 
 const BG_ASSET: Record<string, string> = {
@@ -311,6 +317,10 @@ function ScenePlayer({
   }, [save.settings.audio.mute, save.settings.audio.sfx]);
 
   useEffect(() => {
+    if (scene.id === 'ch04.s03') audio.preloadCue('drug-war');
+  }, [scene.id]);
+
+  useEffect(() => {
     if (!fxId || !fxSpec || showIntro) return;
     gateAudio.unlock();
     if (fxSpec.sound) gateAudio[fxSpec.sound]();
@@ -454,7 +464,8 @@ function ScenePlayer({
       beat.type === 'choice' ||
       beat.type === 'battle' ||
       beat.type === 'analysis' ||
-      beat.type === 'minigame'
+      beat.type === 'minigame' ||
+      beat.type === 'event'
     )
       return;
     if (typing) return;
@@ -468,7 +479,7 @@ function ScenePlayer({
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       if (target?.matches('input, textarea, select, [contenteditable="true"]')) return;
-      if (beat?.type === 'analysis' || beat?.type === 'minigame') return;
+      if (beat?.type === 'analysis' || beat?.type === 'minigame' || beat?.type === 'event') return;
       if (beat?.type === 'choice') {
         const optionIndex = Number(event.key) - 1;
         const option = beat.options[optionIndex];
@@ -505,7 +516,8 @@ function ScenePlayer({
       beat.type === 'choice' ||
       beat.type === 'battle' ||
       beat.type === 'analysis' ||
-      beat.type === 'minigame'
+      beat.type === 'minigame' ||
+      beat.type === 'event'
     )
       return;
     if (typing) {
@@ -749,6 +761,11 @@ function ScenePlayer({
             <p className={p.choicePrompt}>小玩法</p>
             <p className={p.small}>{beat.label ?? '这一幕需要你亲手做一遍。'}</p>
           </div>
+        ) : beat?.type === 'event' ? (
+          <div className={p.choicePanel} role="group" aria-label="紧急事故">
+            <p className={p.choicePrompt}>紧急事故</p>
+            <p className={p.small}>战报正在展开。</p>
+          </div>
         ) : (
           <div
             className={`${p.dialog} ${fxId === 'glow' ? p.dialogGlow : ''} ${
@@ -849,6 +866,15 @@ function ScenePlayer({
             </button>
           </div>
         )
+      ) : null}
+
+      {beat?.type === 'event' && !showIntro && !showEnd ? (
+        <CivilWarEvent
+          onClose={() => {
+            setStatus('药圈内战已经打响。');
+            nextBeat();
+          }}
+        />
       ) : null}
     </section>
   );

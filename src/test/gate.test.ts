@@ -84,7 +84,7 @@ describe('scene cues', () => {
     expect(resolveSceneCue({ id: 'ch02.s01', chapterId: 'ch02' })).toBe('ch02-early');
     expect(resolveSceneCue({ id: 'dlc.s06', chapterId: 'dlc' })).toBe('tragedy');
     expect(resolveSceneCue({ id: 'ch03.s24', chapterId: 'ch03' })).toBe('disappear');
-    expect(resolveSceneCue({ id: 'ch04.s01', chapterId: 'ch04' })).toBe('archive');
+    expect(resolveSceneCue({ id: 'ch04.s01', chapterId: 'ch04' })).toBe('tension');
     expect(resolveSceneCue({ id: 'ch04.s40', chapterId: 'ch04' })).toBe('credits');
     expect(resolveSceneCue({ id: 'dlc.s05', chapterId: 'dlc' })).toBe('night-market');
     expect(resolveSceneCue({ id: 'dlc.s08', chapterId: 'dlc' })).toBe('dlc-summer');

@@ -1,0 +1,85 @@
+{
+  "id": "ch04.knowledge",
+  "kind": "knowledge-dossier",
+  "title": "知识论：两面性的知识",
+  "subtitle": "每一面都能救人，也能害人",
+  "intro": "每一份知识都带着第二张脸。翻开它，再决定怎么放出去。",
+  "closing": "两面性的知识，不会因为一条方针就变成一面。",
+  "doneLabel": "把方针钉上墙",
+  "background": "assets-private/bg/bg_knowledge_fracture.png",
+  "cards": [
+    {
+      "id": "help",
+      "title": "急救与求助",
+      "faces": [
+        {
+          "text": "让人知道该去哪里求助。",
+          "tone": "help"
+        },
+        {
+          "text": "被截成猎奇材料，变成新的伤口。",
+          "tone": "harm"
+        }
+      ]
+    },
+    {
+      "id": "interaction",
+      "title": "药物相互作用",
+      "faces": [
+        {
+          "text": "避免危险搭配。",
+          "tone": "help"
+        },
+        {
+          "text": "被当成配方传播。",
+          "tone": "harm"
+        }
+      ]
+    },
+    {
+      "id": "schedule",
+      "title": "列管时间线",
+      "faces": [
+        {
+          "text": "知道什么变了。",
+          "tone": "help"
+        },
+        {
+          "text": "被当成购买指南。",
+          "tone": "harm"
+        }
+      ]
+    },
+    {
+      "id": "story",
+      "title": "个人经历",
+      "faces": [
+        {
+          "text": "让人不再孤单。",
+          "tone": "help"
+        },
+        {
+          "text": "被当成身份标签。",
+          "tone": "harm"
+        }
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "id": "open",
+      "label": "直接公开",
+      "line": "发出去。有人得救，有人学会害人。"
+    },
+    {
+      "id": "context",
+      "label": "加注后公开",
+      "line": "加一段话。能挡一部分，挡不住转发。"
+    },
+    {
+      "id": "withhold",
+      "label": "不公开细节",
+      "line": "藏起来。需要它的人也可能找不到。"
+    }
+  ]
+}

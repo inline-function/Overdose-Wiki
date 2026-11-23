@@ -15,6 +15,7 @@ class AudioManager {
   private wasPlaying = false;
   private visibilityBound = false;
   private generation = 0;
+  private preloaded = new Map<string, HTMLAudioElement>();
 
   unlock(): void {
     this.unlocked = true;
@@ -48,6 +49,15 @@ class AudioManager {
       if (play && typeof play.catch === 'function') void play.catch(() => undefined);
     }
     this.fadeTo(element, this.targetVolume(), 200);
+  }
+
+  preloadCue(id: string): void {
+    const cue = CUES[id as CueId];
+    if (!cue || this.preloaded.has(id)) return;
+    const sound = new Audio(cue.src);
+    sound.preload = 'auto';
+    this.preloaded.set(id, sound);
+    sound.load();
   }
 
   playCue(id: string, options: { restart?: boolean; fadeMs?: number } = {}): void {

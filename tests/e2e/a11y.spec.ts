@@ -100,6 +100,49 @@ test('axe: chapter three minigames', async ({ page }) => {
   }
 });
 
+
+test('axe: chapter four event and minigames', async ({ page }) => {
+  test.setTimeout(180000);
+  await page.goto('/#/');
+  await seedScenes(page, ['ch01.s14', 'ch02.s24', 'ch03.s24']);
+  await page.evaluate(() => {
+    const raw = localStorage.getItem('odw.save.v1');
+    if (!raw) return;
+    const save = JSON.parse(raw);
+    save.readEffects = ['解离', '反解离', '恢复术'];
+    save.read = {
+      ...(save.read ?? {}),
+      108: ['report-108-full'],
+      104: ['report-104-full'],
+      101: ['report-101-full'],
+    };
+    localStorage.setItem('odw.save.v1', JSON.stringify(save));
+  });
+  await page.reload();
+
+  await page.goto('/#/report/51/replay/ch04.s03');
+  await page.getByTestId('scene-wrap').waitFor({ state: 'visible' });
+  for (let i = 0; i < 12; i += 1) {
+    if (await page.getByTestId('civil-war-event').isVisible().catch(() => false)) break;
+    await page.getByTestId('scene-wrap').click({ timeout: 1500 }).catch(() => undefined);
+    await page.waitForTimeout(220);
+  }
+  await expect(page.getByTestId('civil-war-event')).toBeVisible();
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+
+  for (const sceneId of ['ch04.s04', 'ch04.s14', 'ch04.s20', 'ch04.s27']) {
+    await page.goto(`/#/report/51/replay/${sceneId}`);
+    await page.getByTestId('scene-wrap').waitFor({ state: 'visible' });
+    for (let i = 0; i < 16; i += 1) {
+      if (await page.getByTestId('minigame-overlay').isVisible().catch(() => false)) break;
+      await page.getByTestId('scene-wrap').click({ timeout: 1500 }).catch(() => undefined);
+      await page.waitForTimeout(220);
+    }
+    await expect(page.getByTestId('minigame-overlay')).toBeVisible();
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  }
+});
+
 test('chapter-end choice returns straight to the report', async ({ page }) => {
   await page.goto('/#/');
   test.skip((await page.getByTestId('stage').getAttribute('data-content')) === 'sample', 'requires private ch01 content');

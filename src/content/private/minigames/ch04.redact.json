@@ -1,0 +1,61 @@
+{
+  "id": "ch04.redact",
+  "kind": "redact-document",
+  "title": "公开文档：能删的只有名字",
+  "subtitle": "公开前，先做一份能转载的版本",
+  "intro": "公开之前，先把会割伤人的名字涂黑。",
+  "closing": "文档公开了。能删的只有名字。",
+  "doneLabel": "公开转载版",
+  "background": "assets-private/bg/bg_doc_fracture.png",
+  "documentTitle": "关于二〇二五年九月事件的说明（转载版）",
+  "lines": [
+    {
+      "id": "head",
+      "text": "关于二〇二五年九月事件的说明",
+      "action": "keep",
+      "note": "标题留下。"
+    },
+    {
+      "id": "byline",
+      "text": "署名：超级后后后藤",
+      "action": "keep",
+      "note": "署名留下。"
+    },
+    {
+      "id": "account",
+      "text": "小五的账号：[账号]",
+      "action": "redact",
+      "note": "账号不能露出去。"
+    },
+    {
+      "id": "address",
+      "text": "他住的地方：[住址]",
+      "action": "redact",
+      "note": "住址不能露出去。"
+    },
+    {
+      "id": "quote",
+      "text": "沐雨在采访里说：「我的目的是毁灭 od 圈。」",
+      "action": "keep",
+      "note": "公开采访原话留下。"
+    },
+    {
+      "id": "dm",
+      "text": "有人给我发来的私信：[私信]",
+      "action": "redact",
+      "note": "私信不能露出去。"
+    },
+    {
+      "id": "dox",
+      "text": "鸡哥的开盒内容：[链接]",
+      "action": "redact",
+      "note": "开盒链接不能露出去。"
+    },
+    {
+      "id": "date",
+      "text": "公开于二〇二五年十二月七日。",
+      "action": "keep",
+      "note": "日期留下。"
+    }
+  ]
+}

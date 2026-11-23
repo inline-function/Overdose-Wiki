@@ -87,7 +87,7 @@
       "flags": [],
       "sourceRefs": [],
       "stage": {
-        "bg": "bg_night_street",
+        "bg": "bg_civil_war_room",
         "bust": {
           "speaker": "后藤",
           "expr": "blank"
@@ -116,7 +116,11 @@
         {
           "type": "dialogue",
           "speaker": "后藤",
-          "text": "藤 odw 发展减害派、鸡 odw 自由派，大乱斗起来了，场面既没逻辑又没道理。"
+          "text": "藤 odw 发展减害派、鸡 odw 自由派。藤控群和鸡控群同时静了几秒。然后大乱斗起来了——场面既没逻辑又没道理。"
+        },
+        {
+          "type": "event",
+          "event": "civil-war"
         }
       ],
       "next": "ch04.s04"
@@ -130,7 +134,7 @@
       "flags": [],
       "sourceRefs": [],
       "stage": {
-        "bg": "bg_archive",
+        "bg": "bg_rumor_fracture",
         "bust": {
           "speaker": "后藤",
           "expr": "tired"
@@ -165,6 +169,10 @@
           "type": "dialogue",
           "speaker": "后藤",
           "text": "最后他直接开了核武器。"
+        },
+        {
+          "type": "minigame",
+          "id": "ch04.rumor"
         }
       ],
       "next": "ch04.s05"
@@ -489,7 +497,7 @@
       "flags": [],
       "sourceRefs": [],
       "stage": {
-        "bg": "bg_dlc_convenience",
+        "bg": "bg_testimony_fracture",
         "bust": {
           "speaker": "后藤",
           "expr": "blank"
@@ -514,6 +522,10 @@
         {
           "type": "narration",
           "text": "小五需要反击，但他只想拥有他的平静生活。于是他让后藤接手代管账号交流。"
+        },
+        {
+          "type": "minigame",
+          "id": "ch04.roshomon"
         }
       ],
       "next": "ch04.s15"
@@ -673,7 +685,7 @@
       "flags": [],
       "sourceRefs": [],
       "stage": {
-        "bg": "bg_archive",
+        "bg": "bg_doc_fracture",
         "bust": {
           "speaker": "后藤",
           "expr": "tired"
@@ -695,6 +707,10 @@
           "type": "dialogue",
           "speaker": "后藤",
           "text": "但是意义似乎已经不重要了。"
+        },
+        {
+          "type": "minigame",
+          "id": "ch04.redact"
         }
       ],
       "next": "ch04.s21"
@@ -880,7 +896,7 @@
       "flags": [],
       "sourceRefs": [],
       "stage": {
-        "bg": "bg_dlc_classroom",
+        "bg": "bg_knowledge_fracture",
         "bust": {
           "speaker": "后藤",
           "expr": "calm"
@@ -907,6 +923,10 @@
           "speaker": "鼠尾草",
           "text": "真正的 OD 不扩散困境，不出在这些非黑即白的知识上，而出在两面性的知识上——既可以用于减害，又可以让人遭害。",
           "fx": "sharpen"
+        },
+        {
+          "type": "minigame",
+          "id": "ch04.knowledge"
         }
       ],
       "next": "ch04.s28"

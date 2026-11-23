@@ -21,6 +21,8 @@ export const CUES = {
   tragedy: { src: asset('audio/bgm/tragedy.mp3'), loop: true },
   battle: { src: asset('audio/bgm/battle.mp3'), loop: true },
   tension: { src: asset('audio/bgm/tension.mp3'), loop: true },
+  separation: { src: asset('audio/bgm/separation.mp3'), loop: true },
+  'drug-war': { src: asset('assets-private/audio/drug-war.wav'), loop: false },
   credits: { src: asset('audio/bgm/credits.mp3'), loop: false },
   extras: { src: asset('audio/bgm/extras.mp3'), loop: true },
 } satisfies Record<string, Cue>;

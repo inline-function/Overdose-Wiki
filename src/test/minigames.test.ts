@@ -3,14 +3,15 @@ import { getMiniGame, miniGameList } from '../content/minigames';
 import { shuffleArray, shuffleOptions } from '../minigames/shuffle';
 
 describe('minigame registry', () => {
-  it('loads the chapter-one, chapter-two, and chapter-three minigames', () => {
+  it('loads the chapter-one through chapter-four minigames', () => {
     const games = miniGameList();
-    expect(games).toHaveLength(16);
+    expect(games).toHaveLength(20);
     const ids = games.map((game) => game.id);
-    expect(new Set(ids).size).toBe(16);
+    expect(new Set(ids).size).toBe(20);
     expect(ids.filter((id) => id.startsWith('ch01.'))).toHaveLength(7);
     expect(ids.filter((id) => id.startsWith('ch02.'))).toHaveLength(5);
     expect(ids.filter((id) => id.startsWith('ch03.'))).toHaveLength(4);
+    expect(ids.filter((id) => id.startsWith('ch04.'))).toHaveLength(4);
     for (const id of ids) expect(getMiniGame(id)?.id).toBe(id);
   });
 
@@ -32,6 +33,10 @@ describe('minigame registry', () => {
         'emotion-return',
         'anchor-room',
         'camera-wall',
+        'rumor-map',
+        'testimony-board',
+        'redact-document',
+        'knowledge-dossier',
       ]),
     );
   });
@@ -145,6 +150,50 @@ describe('minigame registry', () => {
       expect(archive.name).toBe('桜崎彩加');
       expect(archive.background).toMatch(/^assets-private\/bg\//);
       for (const card of archive.cards) expect(card.text.length).toBeGreaterThan(0);
+    }
+  });
+
+
+  it('keeps chapter four data complete', () => {
+    const rumor = getMiniGame('ch04.rumor');
+    expect(rumor?.kind).toBe('rumor-map');
+    if (rumor?.kind === 'rumor-map') {
+      expect(rumor.steps).toHaveLength(4);
+      expect(rumor.background).toMatch(/^assets-private\/bg\//);
+      const added = rumor.steps.flatMap((step) => step.fragments).filter((fragment) => fragment.added);
+      expect(added.length).toBeGreaterThanOrEqual(3);
+      for (const step of rumor.steps) expect(step.line.length).toBeGreaterThan(0);
+    }
+
+    const testimony = getMiniGame('ch04.roshomon');
+    expect(testimony?.kind).toBe('testimony-board');
+    if (testimony?.kind === 'testimony-board') {
+      expect(testimony.voices).toHaveLength(3);
+      expect(testimony.claims).toHaveLength(6);
+      const pairs = testimony.claims.filter((claim) => claim.contradictionWith);
+      expect(pairs).toHaveLength(6);
+      for (const claim of testimony.claims) {
+        expect(testimony.voices.some((voice) => voice.id === claim.voiceId)).toBe(true);
+      }
+    }
+
+    const redact = getMiniGame('ch04.redact');
+    expect(redact?.kind).toBe('redact-document');
+    if (redact?.kind === 'redact-document') {
+      expect(redact.lines).toHaveLength(8);
+      expect(redact.lines.filter((line) => line.action === 'redact')).toHaveLength(4);
+      expect(redact.lines.filter((line) => line.action === 'keep')).toHaveLength(4);
+    }
+
+    const knowledge = getMiniGame('ch04.knowledge');
+    expect(knowledge?.kind).toBe('knowledge-dossier');
+    if (knowledge?.kind === 'knowledge-dossier') {
+      expect(knowledge.cards).toHaveLength(4);
+      expect(knowledge.policies).toHaveLength(3);
+      for (const card of knowledge.cards) {
+        expect(card.faces).toHaveLength(2);
+        expect(new Set(card.faces.map((face) => face.tone))).toEqual(new Set(['help', 'harm']));
+      }
     }
   });
 

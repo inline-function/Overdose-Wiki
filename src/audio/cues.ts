@@ -5,7 +5,7 @@ const CHAPTER_DEFAULT: Record<string, CueId> = {
   ch01: 'ch01',
   ch02: 'ch02-early',
   ch03: 'ch03',
-  ch04: 'archive',
+  ch04: 'tension',
   side: 'archive',
   dlc: 'dlc-summer',
 };
@@ -53,36 +53,47 @@ const SCENE_CUE: Record<string, CueId> = {
   'ch03.s22': 'tension', // 手机关机 24 小时
   'ch03.s24': 'disappear', // 空街
 
-  // ch04 · 记录即去向
-  'ch04.s03': 'tension', // 紧急事故
-  'ch04.s05': 'tension', // 核武器
-  'ch04.s07': 'tension', // 圣诞批斗
+  // ch04 · 人们将往何处去（按实际场景重排，避免过于轻松的 afterglow）
+  'ch04.s01': 'tension', // 建站三说
+  'ch04.s02': 'battle', // 自由派与减害派
+  'ch04.s03': 'tension', // 紧急事故；事件内一次性 drug-war
+  'ch04.s04': 'battle', // 伪藤
+  'ch04.s05': 'battle', // 核武器
+  'ch04.s06': 'tension', // 退圈
+  'ch04.s07': 'battle', // 圣诞批斗
   'ch04.s08': 'tension', // 批斗余波
-  'ch04.s09': 'tension', // 有人喊他回来
-  'ch04.s10': 'tension', // 罗生门
-  'ch04.s12': 'tension', // 四十六分钟
-  'ch04.s13': 'tragedy', // 自己挂名被批斗到死
-  'ch04.s14': 'tension', // 反击开始
-  'ch04.s15': 'tension', // 暗中毁生活
-  'ch04.s16': 'tension', // 控制者生活被毁
-  'ch04.s17': 'tension', // 境母来电
-  'ch04.s18': 'afterglow', // 后藤直率回答
-  'ch04.s19': 'tension', // 后藤折返跑找人
-  'ch04.s20': 'afterglow', // 草坪
-  'ch04.s21': 'afterglow', // 红钻头
-  'ch04.s22': 'afterglow', // 后藤恨铁不成钢
-  'ch04.s23': 'afterglow', // 做自己
-  'ch04.s24': 'afterglow', // 码头
-  'ch04.s25': 'afterglow', // 背回
-  'ch04.s26': 'afterglow', // 自我认同
-  'ch04.s29': 'tension', // 方针之争
-  'ch04.s34': 'tension', // 倒计时
-  'ch04.s35': 'tension', // 来信
-  'ch04.s36': 'tension', // 家长断药
-  'ch04.s37': 'disappear', // 全面列管
-  'ch04.s38': 'disappear', // 患者与路人
-  'ch04.s39': 'disappear', // 药圈分崩离析
-  'ch04.s40': 'credits', // 记录即去向
+  'ch04.s09': 'battle', // 反减害论
+  'ch04.s10': 'tension', // 罗生门展开
+  'ch04.s11': 'tension', // 声音一 · 反藤者
+  'ch04.s12': 'tragedy', // 声音二 · 后藤
+  'ch04.s13': 'battle', // 声音三 · 沐雨
+  'ch04.s14': 'battle', // 四十六分钟
+  'ch04.s15': 'tension', // 代管
+  'ch04.s16': 'battle', // 反击开始
+  'ch04.s17': 'battle', // 批斗员开战
+  'ch04.s18': 'tension', // 假退圈
+  'ch04.s19': 'tension', // 假死
+  'ch04.s20': 'tragedy', // 公开文档
+  'ch04.s21': 'tension', // FreeODwiki
+  'ch04.s22': 'tension', // 爱德华
+  'ch04.s23': 'battle', // 方针之争
+  'ch04.s24': 'tension', // 苏镁条目
+  'ch04.s25': 'tension', // 后藤回应
+  'ch04.s26': 'tension', // 鼠尾草反驳
+  'ch04.s27': 'tension', // 知识论
+  'ch04.s28': 'battle', // 付费采访
+  'ch04.s29': 'separation', // 南鸢
+  'ch04.s30': 'tension', // 列管倒计时
+  'ch04.s31': 'tragedy', // 自由的代价
+  'ch04.s32': 'separation', // 来信
+  'ch04.s33': 'tragedy', // 家长断药
+  'ch04.s34': 'battle', // 药圈唾骂
+  'ch04.s35': 'tragedy', // 精神障碍患者
+  'ch04.s36': 'tension', // 评论
+  'ch04.s37': 'disappear', // 药圈分崩离析
+  'ch04.s38': 'disappear', // 后藤还在答疑
+  'ch04.s39': 'disappear', // oder 的出路
+  'ch04.s40': 'credits', // 没有人知道
 
   // dlc
   'dlc.s05': 'night-market', // 温柔 · 老友粉店

@@ -18,6 +18,8 @@ describe('场景配乐与背景', () => {
     // 只有终章最后一幕允许用不循环的片尾曲
     const nonLoop = scenes.filter((scene) => !scene.loop);
     expect(nonLoop.map((scene) => scene.id)).toEqual(['ch04.s40']);
+    expect(CUES['drug-war'].loop).toBe(false);
+    expect(CUES['separation']).toBeTruthy();
   });
 
   it('配乐不是整章一首：主要章节至少有 4 首不同的曲子', async () => {
@@ -32,5 +34,8 @@ describe('场景配乐与背景', () => {
     for (const chapterId of ['ch01', 'ch02', 'ch03', 'ch04']) {
       expect(byChapter[chapterId].size, chapterId).toBeGreaterThanOrEqual(4);
     }
+    expect(byChapter.ch04.has('afterglow')).toBe(false);
+    expect(byChapter.ch04.has('battle')).toBe(true);
+    expect(byChapter.ch04.has('separation')).toBe(true);
   });
 });

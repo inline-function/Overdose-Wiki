@@ -70,7 +70,9 @@
         "I tried to recall something bad then, and found I simply couldn't.",
         "I believe the afterglow can intercept suicides.",
         "Even after the afterglow passed, my mood stayed very, very good.",
-        { "label": "Afterglow: Keep the Good Weather" }
+        {
+          "label": "Afterglow: Keep the Good Weather"
+        }
       ]
     },
     "ch03.s07": {
@@ -125,16 +127,16 @@
     },
     "ch03.s11": {
       "title": "Turning Down a Confession",
-      "summary": "Gotō says: some of them aren't selling, they're surviving. For them compensated dating isn't a fall — it's staying alive.",
+      "summary": "Gotō says: the road is wrong, but the family, school and society that pushed them onto it are far more wrong.",
       "beats": [
-        "Don't curse them.",
-        "Some of them aren't selling. They're surviving.",
-        "A personality that clashes with the family, cut off, thrown out — no job, no diploma, no home.",
-        "And society pushes oders out. The proper channels won't have them.",
-        "All that's left is to make a living in the shadows.",
-        "Compensated dating isn't a fall for them. It's staying alive.",
-        "Society shoves oders into places that can't stand the light, then turns around and calls them filthy.",
-        "They just want to live. That's all.",
+        "Don't curse them like that.",
+        "I'm not saying it's right. Wrong is wrong, and selling is selling.",
+        "But look at how they get pushed to this point.",
+        "Their families throw them out, schools treat them as a problem, and society calls them dirty.",
+        "Cut off, no diploma, no proper job, not even a place to go back to.",
+        "It's not that they want to sell. This is the only road left that keeps them alive.",
+        "The choice is wrong, but whatever leaves them only that choice is far more wrong.",
+        "I'm not making excuses for them. But I can't just curse them and stop there.",
         "Jing was silent."
       ]
     },
@@ -193,7 +195,9 @@
         "What if, with sharper cognition, you see your own trap even more clearly?",
         "Very possible.",
         "I want 27t of dextromethorphan.",
-        { "label": "Anti-Dissociation: Put Back the Feelings That Aren't Yours" }
+        {
+          "label": "Anti-Dissociation: Put Back the Feelings That Aren't Yours"
+        }
       ]
     },
     "ch03.s16": {
@@ -222,7 +226,9 @@
         "Scared of going mad.",
         "And then I remembered so many scenes from horror videos.",
         "Don't be afraid. I'm here.",
-        { "label": "Safety Anchor: Call the Room Back" }
+        {
+          "label": "Safety Anchor: Call the Room Back"
+        }
       ]
     },
     "ch03.s18": {
@@ -262,7 +268,9 @@
         "She has memantine and amantadine. She took a whole bottle cap of memantine.",
         "Will she be dizzy for a few days, or die?",
         "I'm worried sick.",
-        { "label": "Can't Find Her: Check Every Street" }
+        {
+          "label": "Can't Find Her: Check Every Street"
+        }
       ]
     },
     "ch03.s21": {
@@ -278,19 +286,32 @@
     "ch03.s22": {
       "title": "Why",
       "summary": "Why?",
-      "beats": ["Why?"]
+      "beats": [
+        "Why?"
+      ]
     },
     "ch03.s23": {
       "title": "Where Exactly Did It Go Wrong",
       "summary": "Where exactly did it go wrong?",
-      "beats": ["Where exactly did it go wrong?"]
+      "beats": [
+        "Where exactly did it go wrong?"
+      ]
     },
     "ch03.s24": {
       "title": "Empty Street",
       "summary": "An empty street. Where exactly did it go wrong?",
       "beats": [
         "Where exactly did it go wrong?",
-        { "prompt": "Choose", "options": ["Keep reading", { "label": "Close the archive for now", "note": "The archive stays here; you can come back to it any time" }] }
+        {
+          "prompt": "Choose",
+          "options": [
+            "Keep reading",
+            {
+              "label": "Close the archive for now",
+              "note": "The archive stays here; you can come back to it any time"
+            }
+          ]
+        }
       ]
     }
   }

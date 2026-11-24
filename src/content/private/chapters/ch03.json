@@ -481,22 +481,22 @@
         },
         {
           "type": "dialogue",
-          "speaker": "彼岸境",
+          "speaker": "后藤",
           "text": "这是一个伦理学落魄的时代。"
         },
         {
           "type": "dialogue",
-          "speaker": "彼岸境",
+          "speaker": "后藤",
           "text": "上次还有个上来就要我涩图跟撩骚的，我把他直接删了。"
         },
         {
           "type": "dialogue",
-          "speaker": "彼岸境",
+          "speaker": "后藤",
           "text": "还说什么想结婚谈恋爱那种，一下就现出原形本性。"
         },
         {
           "type": "dialogue",
-          "speaker": "彼岸境",
+          "speaker": "后藤",
           "text": "什么玩意。我回忆都好恶心。"
         },
         {
@@ -517,7 +517,7 @@
       "chapterId": "ch03",
       "order": 11,
       "title": "拒绝表白",
-      "summary": "后藤说：有些人不是想卖，是想活。援交对她们不是堕落，是存活。",
+      "summary": "后藤说：路是错的，但把她们逼到这一步的家庭、学校和社会，错得更重。",
       "flags": [],
       "sourceRefs": [],
       "stage": {
@@ -537,37 +537,37 @@
         {
           "type": "dialogue",
           "speaker": "后藤",
-          "text": "有些人不是想卖，是想活。"
+          "text": "我不是说这事对。错就是错，卖就是卖。"
         },
         {
           "type": "dialogue",
           "speaker": "后藤",
-          "text": "个性表达跟家庭冲突，被断供被赶出来，没有工作没有学历没有家。"
+          "text": "可你得看看，她们是怎么被逼到这一步的。"
         },
         {
           "type": "dialogue",
           "speaker": "后藤",
-          "text": "社会又排斥 oder，正经渠道不要她们。"
+          "text": "家里把她们赶出来，学校把她们当问题，社会又嫌她们脏。"
         },
         {
           "type": "dialogue",
           "speaker": "后藤",
-          "text": "她们只能走阴影下的方式谋生。"
+          "text": "断供、没学历、没正经工作，连个能回去的地方都没有。"
         },
         {
           "type": "dialogue",
           "speaker": "后藤",
-          "text": "援交对她们不是堕落，是存活。"
+          "text": "不是想卖，是只剩这条路能活。"
         },
         {
           "type": "dialogue",
           "speaker": "后藤",
-          "text": "社会把 oder 排挤到见不得光的地方，然后回头骂她们见不得光。"
+          "text": "这个选择是错的，但把人逼到只能这么选的东西，错得更狠。"
         },
         {
           "type": "dialogue",
           "speaker": "后藤",
-          "text": "她们只是想活下来，仅此而已。"
+          "text": "我不替她们开脱。可让我只骂她们，我做不到。"
         },
         {
           "type": "narration",

@@ -1,11 +1,12 @@
 import type { Card } from '../content/types';
+import { t } from '../i18n';
 
 export function validateDeck(ids: string[], cards: Card[]) {
   const errors: string[] = [];
   const cardMap = new Map(cards.map((card) => [card.id, card]));
-  if (ids.length < 4 || ids.length > 8) errors.push('卡组需要 4–8 张');
+  if (ids.length < 4 || ids.length > 8) errors.push(t('deck.errorSize'));
   for (const id of ids) {
-    if (!cardMap.has(id)) errors.push(`不存在的卡：${id}`);
+    if (!cardMap.has(id)) errors.push(t('deck.errorUnknownCard', { id }));
   }
   return { ok: errors.length === 0, errors };
 }

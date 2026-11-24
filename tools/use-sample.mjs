@@ -10,7 +10,10 @@ await writeFile(
   DrugEntry,
   Effect,
   ExtraStory,
+  ExtraStoryMeta,
+  EffectMeta,
   Report,
+  ReportMeta,
 } from './types';
 import {
   SAMPLE_BATTLES,
@@ -63,6 +66,7 @@ export const manifest: ContentManifest = {
 export const drugs: DrugEntry[] = SAMPLE_DRUGS;
 export const cards: Card[] = SAMPLE_DRUGS.map(toCard);
 export const battles: Battle[] = SAMPLE_BATTLES;
+export const enDrugs: Record<string, DrugText> = {};
 
 export const chapterLoaders: Record<string, () => Promise<Chapter>> = {
   [SAMPLE_CHAPTER.id]: async () => SAMPLE_CHAPTER,
@@ -72,6 +76,16 @@ export const reportLoaders: Record<string, () => Promise<Report>> = {
 };
 export const effectLoaders: Record<string, () => Promise<Effect>> = {};
 export const extraStoryLoaders: Record<string, () => Promise<ExtraStory>> = {};
+
+export const enChapterOverlays: Record<string, () => Promise<unknown>> = {};
+export const enReportLoaders: Record<string, () => Promise<Report>> = {};
+export const enReportMetas: ReportMeta[] = [];
+export const enReportOverlays: Record<string, () => Promise<unknown>> = {};
+export const enEffectLoaders: Record<string, () => Promise<Effect>> = {};
+export const enEffectMetas: EffectMeta[] = [];
+export const enExtraStoryLoaders: Record<string, () => Promise<ExtraStory>> = {};
+export const enExtraStoryMetas: ExtraStoryMeta[] = [];
+export const enTitles: Record<string, string> = {};
 `,
   'utf8',
 );

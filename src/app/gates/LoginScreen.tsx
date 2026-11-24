@@ -6,6 +6,7 @@ import { useConsentStore } from '../../game/consentStore';
 import { useGameStore } from '../../game/store';
 import { gateAudio } from '../../audio/gateAudio';
 import { CONSENT_VERSION } from '../../game/types';
+import { useLocale, useT } from '../../i18n';
 import {
   PASSWORD_TYPED,
   USERNAME_TYPED,
@@ -22,6 +23,9 @@ type Status = 'idle' | 'checking' | 'success';
 export function LoginScreen() {
   const navigate = useNavigate();
   const location = useLocation();
+  const t = useT();
+  const locale = useLocale();
+  const setSettings = useGameStore((state) => state.setSettings);
   const session = useSessionStore((state) => state.session);
   const consentVersion = useGameStore((state) => state.save.consent.version);
   const consentAccepted = useConsentStore((state) => state.accepted);
@@ -60,8 +64,8 @@ export function LoginScreen() {
   const username = buildUsername(userCount);
   const password = buildPassword(passCount);
   const masked = maskPassword(password, show);
-  const userPlaceholder = coarse ? '点击此处填入用户名' : '';
-  const passPlaceholder = coarse ? '点击此处填入密码' : '';
+  const userPlaceholder = coarse ? t('gate.usernamePlaceholder') : '';
+  const passPlaceholder = coarse ? t('gate.passwordPlaceholder') : '';
   const complete = userCount === USERNAME_TYPED && passCount === PASSWORD_TYPED;
 
   function announce(message: string) {
@@ -74,14 +78,14 @@ export function LoginScreen() {
       const next = nextCount(userCount, USERNAME_TYPED);
       setUserCount(next);
       if (next >= USERNAME_TYPED) {
-        announce('用户名已填入。');
+        announce(t('gate.filledUsername'));
         passwordRef.current?.focus({ preventScroll: true });
       }
     } else {
       const next = nextCount(passCount, PASSWORD_TYPED);
       setPassCount(next);
       if (next >= PASSWORD_TYPED) {
-        announce('密码已填入完整。');
+        announce(t('gate.filledPassword'));
         loginRef.current?.focus({ preventScroll: true });
       }
     }
@@ -91,11 +95,11 @@ export function LoginScreen() {
     if (status !== 'idle') return;
     if (field === 'username') {
       setUserCount(USERNAME_TYPED);
-      announce('用户名已自动填入。');
+      announce(t('gate.autoFilledUsername'));
       passwordRef.current?.focus({ preventScroll: true });
     } else {
       setPassCount(PASSWORD_TYPED);
-      announce('密码已自动填入。');
+      announce(t('gate.autoFilledPassword'));
       loginRef.current?.focus({ preventScroll: true });
     }
   }
@@ -111,12 +115,12 @@ export function LoginScreen() {
       return;
     }
     setStatus('checking');
-    announce('正在验证站长通行证…');
+    announce(t('gate.verifying'));
     const verify = window.setTimeout(() => {
       setStatus('success');
       gateAudio.stamp();
       patch({ loggedIn: true, loginAt: new Date().toISOString() });
-      announce('登录成功。');
+      announce(t('gate.loginSuccess'));
       const target = session.pendingFrom ?? from ?? '/';
       const next = consentAccepted && consentVersion >= CONSENT_VERSION ? target : '/consent';
       const enter = window.setTimeout(() => navigate(next, { replace: true }), 480);
@@ -156,7 +160,7 @@ export function LoginScreen() {
         aria-describedby="login-note"
       >
         <div className={g.loginTitle}>
-          <span id="login-title">ODW 登录</span>
+          <span id="login-title">{t('gate.windowTitle')}</span>
           <span className={g.loginClose} aria-hidden="true">
             ×
           </span>
@@ -166,10 +170,10 @@ export function LoginScreen() {
             <span className={g.loginLogo}>ODW</span>
             <span className={g.loginKicker}>Overdose Wiki</span>
           </div>
-          <p className={g.loginWelcome}>欢迎回来！请登录你的账号！</p>
+          <p className={g.loginWelcome}>{t('gate.welcome')}</p>
 
           <label className={g.field}>
-            <span className={g.fieldLabel}>用户名</span>
+            <span className={g.fieldLabel}>{t('gate.username')}</span>
             <div className={g.inputShell}>
               <input
                 ref={usernameRef}
@@ -180,7 +184,7 @@ export function LoginScreen() {
                 inputMode={coarse ? 'none' : 'text'}
                 autoComplete="off"
                 spellCheck={false}
-                aria-label={coarse ? '用户名，点击自动填入' : '用户名，键盘逐字输入'}
+                aria-label={coarse ? t('gate.usernameAriaCoarse') : t('gate.usernameAriaKeyboard')}
                 onKeyDown={(event) => onKey('username', event)}
                 onPointerDown={(event) => onPointer('username', event)}
               />
@@ -193,14 +197,14 @@ export function LoginScreen() {
 
           <div className={g.field}>
             <div className={g.passwordRow}>
-              <span className={g.fieldLabel}>密码</span>
+              <span className={g.fieldLabel}>{t('gate.password')}</span>
               <button
                 type="button"
                 className={g.showButton}
                 aria-pressed={show}
                 onClick={() => setShow((value) => !value)}
               >
-                {show ? '隐藏' : '显示'}
+                {t(show ? 'gate.hide' : 'gate.show')}
               </button>
             </div>
             <div className={g.inputShell}>
@@ -213,7 +217,7 @@ export function LoginScreen() {
                 inputMode={coarse ? 'none' : 'text'}
                 autoComplete="off"
                 spellCheck={false}
-                aria-label={coarse ? '密码，点击自动填入' : '密码，键盘逐字输入'}
+                aria-label={coarse ? t('gate.passwordAriaCoarse') : t('gate.passwordAriaKeyboard')}
                 onKeyDown={(event) => onKey('password', event)}
                 onPointerDown={(event) => onPointer('password', event)}
               />
@@ -232,9 +236,21 @@ export function LoginScreen() {
               disabled={!complete || status !== 'idle'}
               onClick={submit}
             >
-              {status === 'checking' ? '正在验证…' : status === 'success' ? '登录成功' : '登录'}
+              {status === 'checking'
+                ? t('gate.loggingIn')
+                : status === 'success'
+                  ? t('gate.loggedIn')
+                  : t('gate.login')}
             </button>
-            {status === 'success' && <span className={g.loginStamp}>已进入</span>}
+            <button
+              type="button"
+              className={g.languageButton}
+              lang={locale === 'zh' ? 'en' : 'zh-CN'}
+              onClick={() => setSettings({ lang: locale === 'zh' ? 'en' : 'zh' })}
+            >
+              {t('gate.switchLanguage')}
+            </button>
+            {status === 'success' && <span className={g.loginStamp}>{t('gate.entered')}</span>}
           </div>
 
           <p className={g.loginNote} id="login-note" aria-live="polite">
@@ -242,11 +258,11 @@ export function LoginScreen() {
           </p>
 
           <p className={g.loginFooter}>
-            <Link to="/consent">事先声明</Link>
+            <Link to="/consent">{t('gate.footerConsent')}</Link>
             <span aria-hidden="true"> · </span>
-            <Link to="/settings">设置</Link>
+            <Link to="/settings">{t('gate.footerSettings')}</Link>
             <span aria-hidden="true"> · </span>
-            ODW 档案库 · 站长：后藤
+            {t('gate.footerArchive')}
           </p>
         </div>
       </div>

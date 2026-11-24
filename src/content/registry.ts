@@ -4,11 +4,22 @@ import {
   drugs,
   chapterLoaders,
   effectLoaders,
+  enChapterOverlays,
+  enEffectLoaders,
+  enEffectMetas,
+  enExtraStoryLoaders,
+  enExtraStoryMetas,
+  enReportLoaders,
+  enReportMetas,
+  enTitles,
   extraStoryLoaders,
   isPrivate,
   manifest,
   reportLoaders,
 } from './generated';
+import { getLocale } from '../i18n/locale';
+import { mergeChapter } from './en/merge';
+import type { ChapterOverlay } from './en/types';
 import type {
   Battle,
   Card,
@@ -37,6 +48,28 @@ const sceneMetaMap = new Map<string, SceneMeta>();
 for (const chapter of manifest.chapters) {
   for (const scene of chapter.scenes) sceneMetaMap.set(scene.id, scene);
 }
+const enEffectMetaMap = new Map(enEffectMetas.map((effect) => [effect.id, effect]));
+const enExtraMetaMap = new Map(enExtraStoryMetas.map((story) => [story.id, story]));
+const enReportMetaMap = new Map(
+  enReportMetas.map((report) => [normalizeReportId(report.id), report]),
+);
+const chapterMetaEnMap = new Map(
+  manifest.chapters.map((chapter) => [
+    chapter.id,
+    { ...chapter, title: enTitles[`chapter:${chapter.id}`] ?? chapter.title },
+  ]),
+);
+const chapterMetasEn = [...chapterMetaEnMap.values()];
+const sceneMetaEnMap = new Map<string, SceneMeta>();
+for (const chapter of chapterMetasEn) {
+  for (const scene of chapter.scenes) {
+    sceneMetaEnMap.set(scene.id, {
+      ...scene,
+      title: enTitles[`scene:${scene.id}`] ?? scene.title,
+    });
+  }
+}
+
 const cardMap = new Map(cards.map((card) => [card.id, card]));
 const battleMap = new Map(battles.map((battle) => [battle.id, battle]));
 const drugMap = new Map(drugs.map((drug) => [drug.id, drug]));
@@ -61,38 +94,74 @@ export function getManifest() {
 }
 
 export function getChapterMetas(): ChapterMeta[] {
-  return manifest.chapters;
+  return getLocale() === 'en' ? chapterMetasEn : manifest.chapters;
+}
+
+/** Titles stay in the manifest for structure; the English ones sit in the
+ *  generated title map so a missing translation falls back to Chinese. */
+export function chapterTitle(id: string): string {
+  return (
+    (getLocale() === 'en' ? enTitles[`chapter:${id}`] : undefined) ??
+    chapterMetaMap.get(id)?.title ??
+    id
+  );
+}
+
+export function sceneTitle(id: string): string {
+  return (
+    (getLocale() === 'en' ? enTitles[`scene:${id}`] : undefined) ??
+    sceneMetaMap.get(id)?.title ??
+    id
+  );
 }
 
 export function getChapterMeta(id: string): ChapterMeta | undefined {
-  return chapterMetaMap.get(id);
+  return getLocale() === 'en' ? chapterMetaEnMap.get(id) : chapterMetaMap.get(id);
 }
 
 export function getSceneMeta(id: string): SceneMeta | undefined {
-  return sceneMetaMap.get(id);
+  return getLocale() === 'en' ? sceneMetaEnMap.get(id) : sceneMetaMap.get(id);
 }
 
 export function getReportMetas(): ReportMeta[] {
-  return manifest.reports;
+  if (getLocale() !== 'en' || enReportMetas.length === 0) return manifest.reports;
+  return manifest.reports.map(
+    (report) => enReportMetaMap.get(normalizeReportId(report.id)) ?? report,
+  );
 }
 
 export function getReportMeta(id: string): ReportMeta | undefined {
-  return reportMetaMap.get(normalizeReportId(id));
+  const normalized = normalizeReportId(id);
+  if (getLocale() === 'en') {
+    const translated = enReportMetaMap.get(normalized);
+    if (translated) return translated;
+  }
+  return reportMetaMap.get(normalized);
 }
 
 export function getExtraStoryMetas(): ExtraStoryMeta[] {
-  return manifest.extras;
+  if (getLocale() !== 'en' || enExtraStoryMetas.length === 0) return manifest.extras;
+  return manifest.extras.map((story) => enExtraMetaMap.get(story.id) ?? story);
 }
 
 export function getExtraStoryMeta(id: string): ExtraStoryMeta | undefined {
+  if (getLocale() === 'en') {
+    const translated = enExtraMetaMap.get(id);
+    if (translated) return translated;
+  }
   return extraMetaMap.get(id);
 }
 
 export function getEffectMetas() {
-  return manifest.effects;
+  if (getLocale() !== 'en' || enEffectMetas.length === 0) return manifest.effects;
+  return manifest.effects.map((effect) => enEffectMetaMap.get(effect.id) ?? effect);
 }
 
 export function getEffectMeta(id: string) {
+  if (getLocale() === 'en') {
+    const translated = enEffectMetaMap.get(id);
+    if (translated) return translated;
+  }
   return effectMetaMap.get(id);
 }
 
@@ -120,30 +189,47 @@ const EMPTY_CHAPTER = Promise.resolve(undefined);
 
 export function chapterPromise(id?: string): Promise<Chapter | undefined> {
   if (!id) return EMPTY_CHAPTER;
-  const cached = chapterCache.get(id);
+  const locale = getLocale();
+  const key = `${locale}:${id}`;
+  const cached = chapterCache.get(key);
   if (cached) return cached;
   const loader = chapterLoaders[id];
+  const overlay = locale === 'en' ? enChapterOverlays[id] : undefined;
   const promise = loader
-    ? loader().catch(() => undefined)
+    ? loader()
+        .then(async (chapter) => {
+          if (!overlay) return chapter;
+          try {
+            const module = await overlay();
+            return mergeChapter(chapter, module as ChapterOverlay);
+          } catch {
+            return chapter;
+          }
+        })
+        .catch(() => undefined)
     : Promise.resolve(undefined);
-  chapterCache.set(id, promise);
+  chapterCache.set(key, promise);
   return promise;
 }
 
 export function reportPromise(id: string): Promise<Report | undefined> {
   const normalized = normalizeReportId(id);
-  const cached = reportCache.get(normalized);
+  const locale = getLocale();
+  const key = `${locale}:${normalized}`;
+  const cached = reportCache.get(key);
   if (cached) return cached;
-  const loader = reportLoaders[normalized];
+  const loader =
+    locale === 'en' ? (enReportLoaders[normalized] ?? reportLoaders[normalized]) : reportLoaders[normalized];
   const promise = loader
     ? loader().catch(() => undefined)
     : Promise.resolve(undefined);
-  reportCache.set(normalized, promise);
+  reportCache.set(key, promise);
   return promise;
 }
 
 export function scenePromise(sceneId: string): Promise<Scene | undefined> {
-  const cached = sceneCache.get(sceneId);
+  const key = `${getLocale()}:${sceneId}`;
+  const cached = sceneCache.get(key);
   if (cached) return cached;
   const meta = getSceneMeta(sceneId);
   const promise = meta
@@ -151,29 +237,33 @@ export function scenePromise(sceneId: string): Promise<Scene | undefined> {
         chapter?.scenes.find((scene) => scene.id === sceneId),
       )
     : Promise.resolve(undefined);
-  sceneCache.set(sceneId, promise);
+  sceneCache.set(key, promise);
   return promise;
 }
 
 export function extraStoryPromise(id: string): Promise<ExtraStory | undefined> {
-  const cached = extraStoryCache.get(id);
+  const key = `${getLocale()}:${id}`;
+  const cached = extraStoryCache.get(key);
   if (cached) return cached;
-  const loader = extraStoryLoaders[id];
+  const loader =
+    getLocale() === 'en' ? (enExtraStoryLoaders[id] ?? extraStoryLoaders[id]) : extraStoryLoaders[id];
   const promise = loader
     ? loader().catch(() => undefined)
     : Promise.resolve(undefined);
-  extraStoryCache.set(id, promise);
+  extraStoryCache.set(key, promise);
   return promise;
 }
 
 export function effectPromise(id: string): Promise<Effect | undefined> {
-  const cached = effectCache.get(id);
+  const key = `${getLocale()}:${id}`;
+  const cached = effectCache.get(key);
   if (cached) return cached;
-  const loader = effectLoaders[id];
+  const loader =
+    getLocale() === 'en' ? (enEffectLoaders[id] ?? effectLoaders[id]) : effectLoaders[id];
   const promise = loader
     ? loader().catch(() => undefined)
     : Promise.resolve(undefined);
-  effectCache.set(id, promise);
+  effectCache.set(key, promise);
   return promise;
 }
 

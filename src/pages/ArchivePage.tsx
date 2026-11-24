@@ -4,9 +4,11 @@ import { getReportMetas } from '../content/registry';
 import { SAMPLE_ARCHIVE } from '../content/sample';
 import { useGameStore } from '../game/store';
 import { isReportUnlocked, unlockHint } from '../game/unlocks';
+import { useT } from '../i18n';
 import p from './pages.module.css';
 
 export function ArchivePage() {
+  const tr = useT();
   const setStatus = useGameStore((state) => state.setStatus);
   const save = useGameStore((state) => state.save);
   const reports = getReportMetas();
@@ -17,22 +19,22 @@ export function ArchivePage() {
   );
   return (
     <article className={p.page}>
-      <p className={p.kicker}>档案 / 索引</p>
-      <h1 className={p.pageTitle}>档案索引</h1>
+      <p className={p.kicker}>{tr('archive.kicker')}</p>
+      <h1 className={p.pageTitle}>{tr('archive.title')}</h1>
       <div className={p.searchRow}>
         <input
           className={p.searchBox}
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="搜索编号、标题、报告者"
-          aria-label="搜索档案"
+          placeholder={tr('archive.searchPlaceholder')}
+          aria-label={tr('archive.searchAria')}
         />
         <button
           type="button"
           className={p.pixelButton}
-          onClick={() => setStatus('筛选在 S3 接入。')}
+          onClick={() => setStatus(tr('archive.filterPending'))}
         >
-          筛选
+          {tr('archive.filter')}
         </button>
       </div>
 
@@ -43,7 +45,7 @@ export function ArchivePage() {
             return unlocked ? (
               <Link key={report.id} className={p.archiveCard} to={`/report/${report.id}`}>
                 <span className={p.archiveTitle}>
-                  报告 {report.no} · {report.title}
+                  {tr('archive.report', { no: report.no, title: report.title })}
                 </span>
                 <span className={p.archiveMeta}>
                   {report.reporter} / {report.edited}
@@ -57,7 +59,7 @@ export function ArchivePage() {
                 data-locked="true"
                 onClick={() => setStatus(unlockHint(report))}
               >
-                <span className={p.archiveTitle}>报告 {report.no} · ███</span>
+                <span className={p.archiveTitle}>{tr('archive.reportHidden', { no: report.no })}</span>
                 <span className={p.archiveMeta}>{unlockHint(report)}</span>
               </button>
             );
@@ -65,7 +67,7 @@ export function ArchivePage() {
         </div>
       ) : null}
       {reports.length > 0 && filtered.length === 0 && (
-        <p className={p.empty}>没有匹配的档案。</p>
+        <p className={p.empty}>{tr('archive.empty')}</p>
       )}
       {reports.length === 0 && (
         <div className={p.archiveGrid}>
@@ -76,11 +78,11 @@ export function ArchivePage() {
                 type="button"
                 className={p.archiveCard}
                 data-locked="true"
-                aria-label={`${entry.title}，未归档`}
-                onClick={() => setStatus('该档案尚未归档。')}
+                aria-label={tr('archive.unfiledLabel', { title: entry.title })}
+                onClick={() => setStatus(tr('archive.unfiled'))}
               >
                 <span className={p.archiveTitle}>███ · {entry.id}</span>
-                <span className={p.archiveMeta}>已隐去：未归档</span>
+                <span className={p.archiveMeta}>{tr('archive.redacted')}</span>
               </button>
             ) : (
               <Link key={entry.id} className={p.archiveCard} to={`/report/${entry.id}`}>
@@ -91,7 +93,7 @@ export function ArchivePage() {
           )}
         </div>
       )}
-      <p className={p.versionLine}>私有大包含 14 篇报告；公开 demo 只含脱敏样本。</p>
+      <p className={p.versionLine}>{tr('archive.version')}</p>
     </article>
   );
 }

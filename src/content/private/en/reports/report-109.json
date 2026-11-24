@@ -1,0 +1,38 @@
+{
+  "id": "109",
+  "no": 109,
+  "title": "Specifics of od",
+  "reporter": "Super Goto-Goto-Gotō",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "—",
+  "drugs": "—",
+  "edited": "Internal archive",
+  "segments": [
+    { "id": "report-109-full", "label": "Full text", "date": "Internal", "summary": "A theory entry: classification, definition, and motive." }
+  ],
+  "body": [
+    { "type": "h", "text": "The Chain of Definitions" },
+    { "type": "p", "text": "Any substance with a pharmacological psychoactive effect is called a 'psychoactive substance'. Any psychoactive substance under medical use is a legal medical psychoactive substance; otherwise it isn't. Any psychoactive substance with a pharmacological recreational value, and used non-medically, is a 'recreational psychoactive drug' — including narcotics, abused drugs, and od drugs." },
+    { "type": "p", "text": "Any recreational psychoactive drug that currently satisfies both 'no medical use at all' and 'hard to control' in actual clinical practice is a narcotic. Any drug whose lethality and toxicity are hard to reverse without observable sequelae can be counted as a narcotic. Any drug that isn't a narcotic and is always used abusively can be counted as an abused drug. Any abused psychoactive drug that, when abused, is commonly called od can be counted as an od drug (od drugs are included among abused drugs). Any abused drug whose response, or which itself, is easy to control is a legal recreational psychoactive substance — ethanol is the limit of this line." },
+    { "type": "h", "text": "Separation: od / Abuse / Using" },
+    { "type": "p", "text": "Even though the three should be considered distinct, that doesn't mean od can be let off the charge it deserves. You may treat od and using as two independent horrors, but you shouldn't treat them as the same thing." },
+    { "type": "p", "text": "They differ in the drug used: od drugs, abused drugs, narcotics and psychoactive substances each mean something different. In this wiki's context, amantadine is only an od drug, tramadol is only an abused drug, and heroin is only a narcotic." },
+    { "type": "p", "text": "They differ in legal meaning: generally od is legal, drug abuse may be illegal, and using is definitely illegal. So it can't be lumped in with using." },
+    { "type": "p", "text": "They differ in motive and attitude: quite a lot of od people use it only as a psychological stabilizer, and some as a source of pleasure." },
+    { "type": "p", "text": "They differ slightly in lethality: the average reversibility of harm ranks as od drugs < abused drugs < narcotics." },
+    { "type": "p", "text": "Overall, to prevent making a fuss over nothing and the trouble of handling the problem, separating the three is necessary. Official media always treats od the way it treats using, which makes a fuss over nothing — saying this isn't to shelter od." },
+    { "type": "h", "text": "Drug Definition (Category Overview)" },
+    { "type": "p", "text": "Dextromethorphan: dissociative anesthetic, serotonin reuptake inhibitor; an antidepressant and central cough suppressant. Amantadine: dissociative anesthetic, hallucinogen, psychotomimetic; an antiparkinsonian. Pregabalin: anticonvulsant, anxiolytic. Codeine/dihydrocodeine: opioid anesthetics. Memantine: dissociative anesthetic, psychotomimetic, hallucinogen. Tramadol: opioid anesthetic, combat stimulant. Trihexyphenidyl: antimuscarinic, deliriant, hallucinogen, psychotomimetic. Diphenhydramine/dimenhydrinate: antimuscarinic, deliriant. Benzodiazepines: sedatives. Legal recreational psychoactive substances: ethanol, nicotine, arecoline, caffeine." },
+    { "type": "h", "text": "Threat (Overview)" },
+    { "type": "p", "text": "Dextromethorphan: depersonalization and dissociative disorder, shielding/numbing/weakening perception, invading/destroying/rewriting cognition and judgment, memory disorder, thought suppression, respiratory depression, SSRI withdrawal, vomiting, gastric ulcer, choking risk. Amantadine: the same plus coma, sleepwalking, psychotomimetic states and persecutory delusion, perceptual hallucination, delirium, confusional states. Pregabalin: neuropathic anxiety, somatized pain, depression, suicidal ideation, depersonalization. Memantine: psychotomimetic states, hallucinations and delusions, delirium, memory loss, coma and sleepwalking. Tramadol: reinforced opioid addiction, pain, depression, loss of personality, suicidal ideation. Trihexyphenidyl/diphenhydramine: delirium, disorientation, agonized mad delusions, dehydration, myasthenia. Benzodiazepines: GABAergic inhibition, coma, respiratory depression, withdrawal insomnia, anxiety, depression." },
+    { "type": "h", "text": "People and Cases: R / A / T" },
+    { "type": "p", "text": "The following cases are all real reports." },
+    { "type": "p", "text": "Person R: a high-schooler. During school his father was imprisoned for schizophrenia, his mother couldn't keep raising him because of her traditional views, and R couldn't finish school either, developing depression and anxiety. Afterwards R started od on dextromethorphan. R wants to escape od every waking moment." },
+    { "type": "p", "text": "Person A: a middle-schooler, average grades, everything seemingly normal, who started od on dextromethorphan after being lured into it by classmates." },
+    { "type": "p", "text": "Person T: a master's graduate of a top-211 university. While studying abroad he came into contact with meth, cannabis and cocaine; after returning home he couldn't get narcotics and learned about od, then started od on dextromethorphan." },
+    { "type": "p", "text": "Are they all using? If so, why does R want to escape 'using' every waking moment? This is nothing like the impression one has of using." },
+    { "type": "p", "text": "Using is 'spending happiness in advance and getting a hollow happiness'. Stimulation lifts normal to high; antidepressant lifts low to high. T's education and chance to study abroad give no reason for him to be low; dextro acts on him like a stimulant, 'lifting normal to high' — T's od is equivalent to using. A is the same, because A is abusing drugs." },
+    { "type": "p", "text": "What about R? A broken family and failed schooling left R unspeakably low, and dextro's SRI can only manage an antidepressant effect, 'lifting low to high'. R's circumstances make it impossible for him to be foolishly optimistic; R knows he is suffering, so he chose od, to get the happiness he should have had and that a rotten reality destroyed. This kind of od is a form of escape." },
+    { "type": "p", "text": "Rather than getting stuck on the symptoms, pay more attention to the causes of the symptoms. These three differ in motive and in origin. We record R's 'wants to escape every waking moment' — that is the clearest sentence of compulsion." }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "阿片类麻醉",
+  "title": "Opioid Anesthesia",
+  "tags": ["effect", "opioid", "anesthesia"],
+  "blocks": [
+    { "type": "quote", "text": "That tower you can never escape, from 1840 to now. You can still run from it yourself, because there's no cognitive harm there, and I'll wish you luck. A pity those souls who want a shortcut and are lazy are about to bring down these ruins; when will the rising elevator start going down? To the dying, I salute you." },
+    { "type": "p", "text": "Opioid anesthesia is the main effect of opioid drugs. Opioids are drugs extracted from opium and derivatives of morphine, sharing a structure similar to morphine and acting on opioid receptors. Apart from a few exceptions, their effects are basically the same." },
+    { "type": "p", "text": "Within this wiki's scope:" },
+    { "type": "list", "items": [
+      "Only naloxone antagonizes opioid receptors; all other opioids agonize them.",
+      "Only tramadol and dextromethorphan have additional distinct actions. Dextromethorphan is the dextrorotatory mirror image of morphine, so it has only slight opioid anesthesia.",
+      "Only diphenoxylate is highly targeted at the intestinal system."
+    ] },
+    { "type": "p", "text": "Common opioids: morphine, heroin, fentanyl and its derivatives, tramadol, codeine, pethidine, dihydrocodeine, oxycodone, methadone, naloxone, diphenoxylate." },
+    { "type": "h", "text": "Pharmacology" },
+    { "type": "p", "text": "It agonizes the μ-opioid receptor. Once the μ receptor is agonized, a person gets analgesia, a sense of well-being, drowsiness, enhanced dreaming and euphoria — together, that is 'opioid anesthesia'." },
+    { "type": "list", "items": [
+      "Main effects: opioid anesthesia, well-being, drowsiness, enhanced dreaming, euphoria.",
+      "Main side effects: opioid addiction, scattered attention, severe drowsiness, degraded memory.",
+      "Acute side effects: opioid poisoning, constipation, respiratory depression, coma and stupor, nausea."
+    ] },
+    { "type": "p", "text": "The principle of opioid anesthesia is imitating the body's own painkiller, endorphin. Moving the body actually hurts, and the body secretes endorphins to relieve it, and endorphins bring euphoria at the same time; this is part of why self-harm brings euphoria. Morphine is an 'endorphin analogue' that can stand in for endorphins to relieve pain." },
+    { "type": "h", "text": "Addiction: Triple Withdrawal" },
+    { "type": "p", "text": "Living things have always worked on 'use it or lose it'. With more external morphine, the body gradually stops secreting endorphins and can no longer relieve its own pain; it can only lean on external morphine, and without it even moving a finger hurts." },
+    { "type": "p", "text": "Endorphins also agonize dopaminergic and serotonergic systems and promote the synthesis of dopamine and serotonin. So opioid addiction is in fact a triple withdrawal:" },
+    { "type": "p", "text": "1. Physiological pain. 2. Mental depression. 3. Psychological negativity." },
+    { "type": "p", "text": "Opioid addiction has no cure. Mild addiction can still be fought through with willpower, varying by person; once it's severe, there's no saving it. Heroin addicts on methadone maintenance are essentially replacing heroin with the relatively less addictive methadone." },
+    { "type": "p", "text": "On withdrawal: at a low level it can be countered by sheer endurance, sports, eating spicy food and so on, with effects varying by person; at a higher level, drugs like clonidine are usually needed to tough it out. As the degree of addiction rises, the success rate of withdrawal drops fast." },
+    { "type": "h", "text": "The Four Stages of Poisoning" },
+    { "type": "p", "text": "Over-agonizing opioid receptors leads to opioid poisoning. Clinically it presents in four stages:" },
+    { "type": "h", "text": "Enhanced Dreaming" },
+    { "type": "p", "text": "Opioids enhance dreams extremely obviously. In the opioid dream one usually dreams of many beautiful, happy things, extremely real, as if the person were locked tight inside the dream." },
+    { "type": "p", "text": "The author remembers something: his mother said the doctor gave her an opioid anesthetic during her C-section. By her account, after the injection she fell asleep and dreamed of many beautiful grasses, flowers, landscapes, with a great sense of happiness, a very, very long dream, and when she woke the C-section was over. At another C-section she inhaled laughing gas and said it wasn't pleasant at all, she felt groggy and awful, and had no pain sensation either." },
+    { "type": "h", "text": "The Potency Spectrum" },
+    { "type": "p", "text": "No specific multipliers, only a qualitative spectrum:" },
+    { "type": "p", "text": "Fentanyls > heroin > morphine > oxycodone > codeine/tramadol/pethidine > dextromethorphan (almost no opioid effect)." },
+    { "type": "p", "text": "Naloxone sits at the other end of the spectrum: it antagonizes opioid receptors and is the counter to opioid poisoning. The potency table in the source text is kept in the archive exhibits and not put into the entry — compressing different drugs into a single multiple makes it easy to think they can be converted into each other." },
+    { "type": "h", "text": "Heroin's 'Numbers'" },
+    { "type": "p", "text": "Heroin's numbers one through five are black-market names formed by purity and composition, not a medical classification. International identification of heroin is only qualitative, not by number: apart from material over a certain percentage being called No. 4, it's generally just identified as heroin with the content stated. This piece doesn't go into its manufacture, adulteration or methods of use." },
+    { "type": "h", "text": "Closing" },
+    { "type": "quote", "text": "She said it wasn't pleasant at all, she felt groggy and awful, and had no pain sensation either." },
+    { "type": "h", "text": "Effect Classification Mapping" },
+    { "type": "h", "text": "Related" },
+    { "type": "list", "items": [
+      "Related entries: sedation, dissociation, hallucination, recovery techniques",
+      "Related reports: report-007, report-074",
+      "Related cards: compound licorice tablets, naloxone"
+    ] }
+  ]
+}

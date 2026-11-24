@@ -1,0 +1,119 @@
+{
+  "id": "ch04.rumor",
+  "kind": "rumor-map",
+  "title": "Fake Gotō: how a name becomes a weapon",
+  "subtitle": "Narrative war · round one",
+  "intro": "One sentence, reposted four times, grows teeth. What you can decide now is which card to play first.",
+  "closing": "The spread chain hasn't stopped. It has only moved into someone else's hands and keeps growing.",
+  "doneLabel": "File this action",
+  "background": "assets-private/bg/bg_rumor_fracture.png",
+  "rounds": [
+    {
+      "id": "launch",
+      "label": "Round one · setting the tone",
+      "prompt": "A fake-Gotō account appears. You have a screenshot, the original post, and two groups already on fire. What do you put down first?",
+      "choices": [
+        {
+          "id": "screenshot",
+          "label": "Throw the \"Ji camp is impersonating\" screenshot into the group",
+          "detail": "Fastest, and dirtiest. The screenshot saves everyone the trouble of verifying.",
+          "tag": "Ji camp",
+          "result": "The screenshot outruns the original post. While the Ji camp denies it, the group is already looking for the next target.",
+          "effects": {
+            "chicken": -12,
+            "trust": -5,
+            "escalation": 1,
+            "flags": [
+              "rumor.released-screenshot"
+            ]
+          }
+        },
+        {
+          "id": "verify",
+          "label": "Have the Gotō camp verify the timestamp internally first",
+          "detail": "A step slower, but it turns \"who forged it\" into a checkable question.",
+          "tag": "Gotō camp",
+          "result": "The check runs past the hottest two hours. The Ji camp deletes the post; the Gotō camp has the original timestamp.",
+          "effects": {
+            "goto": 6,
+            "archive": 10,
+            "trust": 4,
+            "flags": [
+              "rumor.verified"
+            ]
+          }
+        },
+        {
+          "id": "silence",
+          "label": "Post nothing and let both sides guess",
+          "detail": "No side, no responsibility. Silence grows its own explanations.",
+          "tag": "Bystander",
+          "result": "Both groups start writing stories for your silence. No one is convinced and everyone waits for the next screenshot.",
+          "effects": {
+            "goto": -4,
+            "chicken": -4,
+            "trust": -8,
+            "escalation": 1,
+            "flags": [
+              "rumor.silent"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fallout",
+      "label": "Round two · the fallout",
+      "prompt": "A video cuts the original sentence into \"targeted bombing of the od scene\". The chain has left your hands. What now?",
+      "choices": [
+        {
+          "id": "full",
+          "label": "Release the full original post with context",
+          "detail": "Give everyone back the half-sentence that was cut.",
+          "tag": "Archive",
+          "result": "The full version travels slowly, but for the first time the Ji camp can't answer with a single image.",
+          "effects": {
+            "archive": 10,
+            "trust": 8,
+            "chicken": -4
+          }
+        },
+        {
+          "id": "counter",
+          "label": "Make a counter-video with the same cutting method",
+          "detail": "An eye for an eye. Effective, and it makes the next one easier.",
+          "tag": "Ji camp",
+          "result": "The counter-video explodes. Both sides start using \"they cut first\" as a reason.",
+          "effects": {
+            "chicken": -10,
+            "trust": -8,
+            "escalation": 1,
+            "flags": [
+              "rumor.counter-cut"
+            ]
+          }
+        },
+        {
+          "id": "third",
+          "label": "Hand the spread chain to a third party to archive",
+          "detail": "Leave the battlefield and give the evidence to someone who won't fight.",
+          "tag": "Archive",
+          "result": "The third party takes the whole chain. It belongs to no side now, and it can no longer save anyone immediately.",
+          "effects": {
+            "archive": 14,
+            "goto": -5,
+            "trust": 4,
+            "flags": [
+              "rumor.third-party"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "reactions": {
+    "screenshot": "The Ji camp turns your screenshot into a \"Gotō-camp purge\" poster. The Gotō camp asks you: where's the original post?",
+    "verify": "The Gotō camp pins the timestamp to the wall. The Ji camp demands you publish the whole verification log.",
+    "silence": "Both groups start writing stories for your silence. No one knows which side you are on."
+  }
+}

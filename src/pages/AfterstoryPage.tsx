@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 import { AfterstoryGame } from '../afterstory/AfterstoryGame';
 import { ChapterOpening } from '../openings/ChapterOpening';
 import { AFTERSTORY_OPENING } from '../openings/afterstory';
-import { ENDINGS } from '../afterstory/content';
+import { endingContentAll } from '../afterstory/content';
+import { z } from '../afterstory/text';
+import { useLocale } from '../i18n';
 import { createRun } from '../afterstory/engine';
 import { useGameStore } from '../game/store';
 import s from './AfterstoryPage.module.css';
 
 export function AfterstoryPage() {
+  const locale = useLocale();
+  void locale;
   const savedRun = useGameStore((state) => state.save.afterstory?.active);
   const seenEndings = useGameStore((state) => state.save.afterstory?.seenEndings);
   const setAfterstory = useGameStore((state) => state.setAfterstory);
@@ -107,45 +111,47 @@ export function AfterstoryPage() {
           />
           <div className={s.coverShade} aria-hidden="true" />
           <div className={s.coverCopy}>
-            <p className={s.eyebrow}>AFTERSTORY // 之后</p>
+            <p className={s.eyebrow}>{z('AFTERSTORY // 之后')}</p>
             <h1
               id="afterstory-title"
               ref={headingRef}
               tabIndex={-1}
               className={s.title}
-              data-text="在漫长岁月之后"
+              data-text={z('在漫长岁月之后')}
             >
-              在漫长岁月之后
+              {z('在漫长岁月之后')}
             </h1>
-            <p className={s.subtitle}>药圈重组 · 八回合 · 2026.01—05</p>
+            <p className={s.subtitle}>{z('药圈重组 · 八回合 · 2026.01—05')}</p>
             <p className={s.blurb}>
-              名单还没有公布。你回到一张旧桌子前，桌上有烟灰、旧帖、没写完的手册，
-              和一百个还没有被说服的位置。八回合，一本手册，一个名字。
+              {z('名单还没有公布。你回到一张旧桌子前，桌上有烟灰、旧帖、没写完的手册，和一百个还没有被说服的位置。八回合，一本手册，一个名字。')}
             </p>
             <button type="button" className={s.enterButton} onClick={start}>
-              <span>{resumableRun ? '继续档案' : '打开档案'}</span>
+              <span>{resumableRun ? z('继续档案') : z('打开档案')}</span>
               <span aria-hidden="true">→</span>
             </button>
             {resumableRun && (
               <p className={s.resumeNote}>
-                进度：第 {resumableRun.turn} 回合 / 进行中
+                {z('进度：第 {n} 回合 / 进行中', { n: resumableRun.turn })}
               </p>
             )}
             {seenEndings && seenEndings.length > 0 && (
               <p className={s.seenNote} data-testid="as-seen-endings">
-                已归档 {seenEndings.length}/7 · {seenEndings.map((id) => ENDINGS[id].title).join(' / ')}
+                {z('已归档 {n}/7 · {titles}', {
+                  n: seenEndings.length,
+                  titles: seenEndings.map((id) => endingContentAll()[id].title).join(' / '),
+                })}
               </p>
             )}
           </div>
           <div className={s.coverStamp} aria-hidden="true">
-            <span>档案 08</span>
+            <span>{z('档案 08')}</span>
             <span>2026.01</span>
           </div>
           <div className={s.coverFoot}>
-            <span>八回合 / 一本手册 / 一个名字</span>
+            <span>{z('八回合 / 一本手册 / 一个名字')}</span>
             <span className={s.coverFootActions}>
-              <button type="button" className={s.rewatch} onClick={rewatchOpening}>重看开场</button>
-              <Link to="/">← 主页</Link>
+              <button type="button" className={s.rewatch} onClick={rewatchOpening}>{z('重看开场')}</button>
+              <Link to="/">{z('← 主页')}</Link>
             </span>
           </div>
         </section>

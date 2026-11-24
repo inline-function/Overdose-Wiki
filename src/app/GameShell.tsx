@@ -15,9 +15,11 @@ import { useSessionStore } from '../game/sessionStore';
 import { useConsentStore } from '../game/consentStore';
 import { cueForPath } from '../audio/cues';
 import { useCue } from '../audio/useCue';
+import { useT } from '../i18n';
 import styles from './GameShell.module.css';
 
 export function GameShell() {
+  const tr = useT();
   const location = useLocation();
   const navigate = useNavigate();
   const save = useGameStore((state) => state.save);
@@ -133,7 +135,7 @@ export function GameShell() {
             showAddress={mode !== 'consent' && mode !== 'afterstory'}
             showStatus={mode !== 'battle' && mode !== 'afterstory'}
           >
-            <Suspense fallback={<div className={styles.loading}>载入档案…</div>}>
+            <Suspense fallback={<div className={styles.loading}>{tr('shell.loading')}</div>}>
               <Outlet />
             </Suspense>
           </WikiWindow>

@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { ReportBlock } from '../content/types';
 import { gateAudio } from '../audio/gateAudio';
 import { useSuppressGuide } from '../ui/guideState';
+import { useT } from '../i18n';
 import p from './pages.module.css';
 
 type DocLine =
@@ -34,6 +35,7 @@ export function DocWriter({
   body?: ReportBlock[];
   onDone: () => void;
 }) {
+  const tr = useT();
   useSuppressGuide(true);
   const lines = useMemo(() => toLines(body), [body]);
   const [index, setIndex] = useState(0);
@@ -158,7 +160,7 @@ export function DocWriter({
     if (line.kind === 'image') {
       return (
         <figure key={key} className={p.writerFigure}>
-          <img className={p.writerImage} src={line.src} alt={line.caption ?? '文档插图'} />
+          <img className={p.writerImage} src={line.src} alt={line.caption ?? tr('docwriter.imageAlt')} />
           {line.caption && <figcaption className={p.writerCaption}>{line.caption}</figcaption>}
         </figure>
       );
@@ -172,9 +174,9 @@ export function DocWriter({
   };
 
   return (
-    <section className={p.writer} data-testid="doc-writer" aria-label="编写文档">
+    <section className={p.writer} data-testid="doc-writer" aria-label={tr('docwriter.aria')}>
       <header className={p.writerBar}>
-        <span>编写中 · {title}</span>
+        <span>{tr('docwriter.writing', { title })}</span>
         <span className={p.writerCount}>
           {Math.min(index, lines.length)} / {lines.length}
         </span>
@@ -184,12 +186,12 @@ export function DocWriter({
         {!done && current ? renderLine(current, index, true) : null}
         {done && (
           <p className={p.writerSigned}>
-            —— 后藤 · 写完于 {new Date().toISOString().slice(0, 10)}
+            {tr('docwriter.signature', { date: new Date().toISOString().slice(0, 10) })}
           </p>
         )}
       </div>
       <footer className={p.writerHint}>
-        {done ? '写完了，正在收进档案…' : 'Enter / 点击屏幕 · 写下一段'}
+        {done ? tr('docwriter.done') : tr('docwriter.next')}
       </footer>
     </section>
   );

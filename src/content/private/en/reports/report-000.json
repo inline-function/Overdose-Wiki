@@ -1,0 +1,67 @@
+{
+  "id": "0",
+  "no": 0,
+  "title": "Assorted Reports",
+  "reporter": "Multiple",
+  "handler": "Super Goto-Goto-Gotō / Teacher Pochi / Pharmacist",
+  "vitals": "",
+  "drugs": "",
+  "edited": "Entered 2024",
+  "unlock": { "kind": "archive", "ref": "report-000" },
+  "segments": [
+    {
+      "id": "report-0-full",
+      "label": "Full text",
+      "date": "2024",
+      "summary": "This file keeps the header and the cross-references; the body awaits S3 integration."
+    }
+  ],
+  "body": [
+    { "type": "quote", "text": "Who knows what will turn up in here? For now, an index." },
+    {
+      "type": "list",
+      "items": [
+        "Kind · Inbox / Selected",
+        "Handled by · Super Goto-Goto-Gotō, Teacher Pochi, Pharmacist",
+        "Note · 9 entries chosen from over 50 short posts; the rest stay in the original file"
+      ]
+    },
+    { "type": "h", "text": "RP-0-1" },
+    { "type": "p", "text": "Reporter: heavier build, rinsed his mouth with milk after theanine. Umi had been used a lot before that." },
+    { "type": "p", "text": "[Handler's note: the quantity has been blacked out.]" },
+    { "type": "h", "text": "RP-0-5" },
+    { "type": "p", "text": "Reporter: I drank a bottle of dextromethorphan syrup, and after a while I really couldn't take it, so I hugged the toilet and threw up." },
+    { "type": "h", "text": "RP-0-10" },
+    { "type": "p", "text": "Reporter: today I o'd a batch all at once, then topped up on and off for a few hours. There was euphoria, but not especially strong, and there was motor enhancement — I couldn't really feel tired (maybe that's the bipolar). Dissociation wasn't especially strong (much less than when I tried to kill myself on quetiapine, sertraline and sodium valproate), but with my eyes closed while listening to music I could concretize the song." },
+    { "type": "p", "text": "[Handler's note: the quantity has been blacked out.]" },
+    { "type": "h", "text": "RP-0-17" },
+    { "type": "p", "text": "Reporter: when I tried to kill myself I took a large amount of amantadine, with hot water. I went into the ICU that day, but I was late, and the doctors wouldn't pump my stomach. Then acute gastroenteritis; I couldn't eat or drink anything, and threw up digested amantadine liquid for three days." },
+    { "type": "h", "text": "RP-0-21" },
+    { "type": "p", "text": "Reporter: I've only taken memantine three times. Dirty stuff, don't take it 😭👊👊👊 Cognitive decline is very obvious, the effects last forever, and the dissociation goes so deep there's no pleasure at all. Amantadine is dirty stuff too — the next day my mouth was so dry I wanted to die, and my hands shook so much my handwriting went crooked." },
+    { "type": "p", "text": "[Handler's note: the reporter's own words; the tone is kept.]" },
+    { "type": "h", "text": "RP-0-25" },
+    { "type": "p", "text": "Reporter: on April 7 I od'd on Goodnight and had some supernatural phenomena that hallucinations can't explain. The quilt would twist, and 'four-dimensional creatures' appeared in the quilt and the room — like a kind of insect that turns transparent, but its outline disturbs the airflow, so you can see a humanoid. Lying in bed there were stretches of a Chinese folk deity procession (I don't know how I imagined that hallucination), as if something superstitious was 'opening a third eye' on my forehead." },
+    { "type": "p", "text": "Reporter: the [four-dimensional creature] insect thing physically threw my quilt off me (really! physically!) — there was air-conditioning airflow hitting my body." },
+    { "type": "p", "text": "Reporter: after o-ing Goodnight, perception goes wrong." },
+    { "type": "h", "text": "RP-0-35" },
+    { "type": "p", "text": "Reporter: I od'd dextromethorphan and Goodnight continuously for a while. Now I don't od at all, but I still can't concentrate, I'm in a tipsy mental state, and if I don't do something abstract for twenty minutes my whole body feels awful. Is this related to my od? If it is, I'd like to ask how to fix it." },
+    { "type": "h", "text": "RP-0-40" },
+    { "type": "p", "text": "Reporter: dextromethorphan is genuinely terrifying. It plays the pig to eat the tiger! A gateway drug, gateway to using. From the moment you o dextro, it lowers your floor. Especially when I was high — I actually thought taking one hit of meth was fine! As long as I wasn't caught... setting aside neurotoxicity and hepatotoxicity, it had already changed my cognition." },
+    { "type": "h", "text": "RP-0-42" },
+    { "type": "p", "text": "Reporter: Hello teacher! Sorry to bother you. I'd like to ask — the first time I took pills not according to dose was sertraline, and then I threw it up myself. After that, every time I take medicine I retch and feel sick, even cold medicine. Yesterday I took dextro and threw up six times, until I had no sense of self at all." },
+    { "type": "p", "text": "Gotō: You've developed a stomach condition. Actually even eating more spicy food now could make you throw up, but drugs clearly irritate it too, which is why you throw up much more. You should take proper care of your stomach." },
+    { "type": "p", "text": "Reporter: What should I do! I eat on time and everything. Only when I see medicine do I get a bitter taste and nausea; normally not." },
+    { "type": "p", "text": "Gotō: Neurosis. That [only when I see medicine...] doesn't need fixing. But your stomach problem should be dealt with." },
+    { "type": "h", "text": "Handler's Note" },
+    { "type": "p", "text": "No. 0 is an inbox, not the main line. What it preserves is the grain of 'circle daily life': someone asks about dosage, someone describes hallucinations, someone says they can't quit, someone just comes to report a dream. In selecting, I avoided information the main line already used, and avoided operational details anyone could follow." },
+    { "type": "h", "text": "Related" },
+    {
+      "type": "list",
+      "items": [
+        "Related entries: dissociation, delirium, sedation, recovery techniques",
+        "Related reports: report-007, report-035, report-083",
+        "Related cards: dextromethorphan, amantadine"
+      ]
+    }
+  ]
+}

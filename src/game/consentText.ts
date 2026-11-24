@@ -1,3 +1,6 @@
+import type { Locale } from '../i18n/types';
+import { CONSENT_SECTIONS_EN } from './consentText.en';
+
 export type ConsentSection = { title: string; items: string[] };
 
 export const CONSENT_SECTIONS: ConsentSection[] = [
@@ -55,3 +58,7 @@ export const CONSENT_SECTIONS: ConsentSection[] = [
     ],
   },
 ];
+
+export function consentSections(locale: Locale): ConsentSection[] {
+  return locale === 'en' ? CONSENT_SECTIONS_EN : CONSENT_SECTIONS;
+}

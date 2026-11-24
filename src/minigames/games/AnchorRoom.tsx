@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { AnchorRoomGame } from '../../content/types';
+import { useT } from '../../i18n';
 import { shuffleArray } from '../shuffle';
 import s from '../minigame.module.css';
 
@@ -24,7 +25,8 @@ export function AnchorRoom({
   const [tags] = useState(() => shuffleArray(data.anchors));
   const [selected, setSelected] = useState<string | null>(null);
   const [anchored, setAnchored] = useState<string[]>([]);
-  const [note, setNote] = useState('先点一个名字。');
+  const tr = useT();
+  const [note, setNote] = useState(() => tr('anchorRoom.start'));
   const readyRef = useRef(false);
   const all = anchored.length >= data.anchors.length;
 
@@ -38,26 +40,26 @@ export function AnchorRoom({
   function chooseTag(anchor: (typeof data.anchors)[number]) {
     if (anchored.includes(anchor.id)) return;
     setSelected(anchor.id);
-    setNote(`「${anchor.label}」在哪里？`);
-    onCaption(`先叫出名字：${anchor.label}。`);
+    setNote(tr('anchorRoom.where', { label: anchor.label }));
+    onCaption(tr('anchorRoom.whereCaption', { label: anchor.label }));
   }
 
   function chooseObject(anchor: (typeof data.anchors)[number]) {
     if (anchored.includes(anchor.id)) return;
     if (!selected) {
-      setNote('先在下面点一个名字。');
-      onCaption('先在下面点一个名字，再点房间里的东西。');
+      setNote(tr('anchorRoom.nameFirst'));
+      onCaption(tr('anchorRoom.nameFirstCaption'));
       return;
     }
     if (selected === anchor.id) {
       setAnchored((current) => [...current, anchor.id]);
       setSelected(null);
-      setNote('叫对了。它停住了。');
+      setNote(tr('anchorRoom.right'));
       onCaption(anchor.line);
       return;
     }
-    setNote('不是这个。再看一眼。');
-    onCaption('不是这个。再看一眼。');
+    setNote(tr('anchorRoom.wrong'));
+    onCaption(tr('anchorRoom.wrong'));
   }
 
   return (
@@ -68,7 +70,7 @@ export function AnchorRoom({
       style={{ backgroundImage: `url("${BASE}${data.background}")` }}
     >
       <div className={s.anchorRoomVeil} aria-hidden="true" />
-      <div className={s.anchorRoomObjects} role="group" aria-label="房间里的东西">
+      <div className={s.anchorRoomObjects} role="group" aria-label={tr('anchorRoom.objectsAria')}>
         {data.anchors.map((anchor) => {
           const pinned = anchored.includes(anchor.id);
           return (
@@ -80,7 +82,7 @@ export function AnchorRoom({
               data-anchor={anchor.id}
               data-anchored={pinned}
               aria-pressed={pinned}
-              aria-label={`${anchor.label}的轮廓`}
+              aria-label={tr('anchorRoom.outlineAria', { label: anchor.label })}
               onClick={() => chooseObject(anchor)}
               style={{ left: `${anchor.x}%`, top: `${anchor.y}%` }}
             >
@@ -93,7 +95,7 @@ export function AnchorRoom({
           );
         })}
       </div>
-      <div className={s.anchorRoomTags} role="group" aria-label="纸标签">
+      <div className={s.anchorRoomTags} role="group" aria-label={tr('anchorRoom.tagsAria')}>
         {tags.map((anchor) => (
           <button
             key={anchor.id}
@@ -112,9 +114,9 @@ export function AnchorRoom({
         ))}
       </div>
       <p className={s.anchorRoomNote} aria-live="polite">
-        {all ? '房间还在。她抱住了枕头。' : note}
+        {all ? tr('anchorRoom.all') : note}
       </p>
-      <span className={s.anchorRoomCount} aria-label={`已锚定 ${anchored.length} 个，共 ${data.anchors.length} 个`}>
+      <span className={s.anchorRoomCount} aria-label={tr('anchorRoom.countAria', { a: anchored.length, b: data.anchors.length })}>
         {anchored.length} / {data.anchors.length}
       </span>
     </div>

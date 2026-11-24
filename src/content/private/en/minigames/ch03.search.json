@@ -1,0 +1,53 @@
+{
+  "id": "ch03.search",
+  "kind": "camera-wall",
+  "title": "Not found: look through every street",
+  "subtitle": "Phone off for 24 hours",
+  "intro": "Xiaoyu clicks open every camera she can. Every street gets looked through.",
+  "closing": "She is in none of the frames. At least not in these frames.",
+  "doneLabel": "Turn off the cameras",
+  "feeds": [
+    {
+      "id": "cam-1",
+      "label": "North gate of the estate",
+      "time": "03:12",
+      "line": "Only a shared bike.",
+      "image": "assets-private/bg/bg_residential_path.png"
+    },
+    {
+      "id": "cam-2",
+      "label": "Convenience store",
+      "time": "07:48",
+      "line": "The shutter isn't up yet.",
+      "image": "assets-private/bg/bg_night_street.png"
+    },
+    {
+      "id": "cam-3",
+      "label": "Subway entrance",
+      "time": "12:20",
+      "line": "The crowd moves too fast; not one face stops.",
+      "image": "assets-private/bg/bg_beijing.png"
+    },
+    {
+      "id": "cam-4",
+      "label": "The building where she lived",
+      "time": "18:40",
+      "line": "No one looks up.",
+      "image": "assets-private/bg/bg_residential_path.png"
+    },
+    {
+      "id": "cam-5",
+      "label": "The street with the most cameras",
+      "time": "23:59",
+      "line": "The frame is full of people. None of them her.",
+      "image": "assets-private/bg/bg_night_street.png"
+    },
+    {
+      "id": "cam-6",
+      "label": "May the fifth",
+      "time": "05:05",
+      "line": "Raining. The street is empty.",
+      "image": "assets-private/bg/bg_tunnel.png"
+    }
+  ]
+}

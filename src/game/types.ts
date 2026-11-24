@@ -1,5 +1,6 @@
 import type { WarEffectPatch } from '../content/types';
 import type { AfterstorySave } from '../afterstory/types';
+import type { Locale } from '../i18n/types';
 
 export const CONSENT_VERSION = 2;
 export const SAVE_VERSION = 1 as const;
@@ -25,6 +26,8 @@ export type Settings = {
   scanlines: boolean;
   spoilers: boolean;
   audio: { bgm: number; sfx: number; mute: boolean };
+  /** Interface/story language. Lives in the save so it travels with it. */
+  lang: Locale;
 };
 
 export type HistoryEntry = {
@@ -98,6 +101,7 @@ export const DEFAULT_SETTINGS: Settings = {
   scanlines: true,
   spoilers: false,
   audio: { bgm: 60, sfx: 70, mute: false },
+  lang: 'zh',
 };
 
 export function defaultWarTable(): WarTable {

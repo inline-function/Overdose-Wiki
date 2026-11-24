@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { RumorMapGame, TestimonyBoardGame, WarChoice } from '../content/types';
 import type { WarTable } from '../game/types';
 import { applyWarDecision, effectSummary } from '../game/warTable';
+import { useT } from '../i18n';
 import s from './minigame.module.css';
 
 const BASE = import.meta.env.BASE_URL;
@@ -23,6 +24,7 @@ export function WarChoiceBoard({
   onCaption: (text: string) => void;
   variant: 'rumor' | 'testimony';
 }) {
+  const tr = useT();
   const [round, setRound] = useState(0);
   const [selected, setSelected] = useState<WarChoice | null>(null);
   const [finished, setFinished] = useState(false);
@@ -67,17 +69,17 @@ export function WarChoiceBoard({
       <div className={s.warBoardVeil} aria-hidden="true" />
       <div className={s.warBoardInner}>
         <div className={s.warBoardTop}>
-          <span className={s.warBoardOperation}>{variant === 'rumor' ? '叙事战' : '合法性战场'}</span>
-          <span className={s.warBoardRound}>{current.label ?? `第 ${round + 1} 回合`}</span>
+          <span className={s.warBoardOperation}>{variant === 'rumor' ? tr('warBoard.rumor') : tr('warBoard.testimony')}</span>
+          <span className={s.warBoardRound}>{current.label ?? tr('war.round', { n: round + 1 })}</span>
         </div>
         <p className={s.warPrompt}>{current.prompt}</p>
         {reaction ? (
           <p className={s.warReaction} data-testid="war-reaction">
-            <span>对手回应</span>
+            <span>{tr('warBoard.opponent')}</span>
             {reaction}
           </p>
         ) : null}
-        <div className={s.warOptions} role="group" aria-label="行动选项">
+        <div className={s.warOptions} role="group" aria-label={tr('warBoard.optionsAria')}>
           {current.choices.map((choice) => {
             const hints = effectSummary(choice.effects);
             return (
@@ -98,10 +100,10 @@ export function WarChoiceBoard({
                 </span>
                 <span className={s.warOptionDetail}>{choice.detail}</span>
                 <span className={s.warOptionEffects}>
-                  {hints.length ? hints.map((hint) => <span key={hint}>{hint}</span>) : '没有立刻改变化'}
+                  {hints.length ? hints.map((hint) => <span key={hint}>{hint}</span>) : tr('warBoard.noChange')}
                 </span>
                 <span className={s.warOptionAction}>
-                  {selected?.id === choice.id ? '已执行' : '执行此项'}
+                  {selected?.id === choice.id ? tr('warBoard.executed') : tr('warBoard.execute')}
                 </span>
               </button>
             );
@@ -111,11 +113,11 @@ export function WarChoiceBoard({
           <div className={s.warResult} data-testid="war-result">
             <p className={s.warResultLine}>{selected.result}</p>
             <button type="button" className={s.warNext} data-testid="war-next" onClick={next}>
-              {last ? '把这次行动归档' : '继续'}
+              {last ? tr('warBoard.fileAction') : tr('warBoard.continue')}
             </button>
           </div>
         ) : (
-          <p className={s.warHint}>选择一项行动。没有正确选项；只有谁先被写进档案。</p>
+          <p className={s.warHint}>{tr('warBoard.hint')}</p>
         )}
       </div>
     </div>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { RedactDocumentGame, RedactLine } from '../../content/types';
 import type { WarTable } from '../../game/types';
 import { applyWarDecision, effectSummary, sumWarEffects } from '../../game/warTable';
+import { useT } from '../../i18n';
 import s from '../minigame.module.css';
 
 const BASE = import.meta.env.BASE_URL;
@@ -19,13 +20,14 @@ export function RedactDocument({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [redacted, setRedacted] = useState<string[]>([]);
   const [reviewed, setReviewed] = useState<string[]>([]);
   const [note, setNote] = useState(() => {
     const prior = Object.keys(warTable.decisions).length;
     return prior
-      ? `战局已经记下 ${prior} 次行动。这份文件会替前面的人收尾。`
-      : '先看一遍。再决定这份档案要保护谁、留下什么。';
+      ? tr('redact.prior', { n: prior })
+      : tr('redact.first');
   });
   const [published, setPublished] = useState(false);
 
@@ -44,13 +46,13 @@ export function RedactDocument({
     const isRedacted = redacted.includes(line.id);
     setReviewed((current) => (current.includes(line.id) ? current : [...current, line.id]));
     if (!isRedacted && redacted.length >= data.budget) {
-      setNote(`黑条用完了。剩下 ${data.lines.length - data.budget} 行只能公开。`);
+      setNote(tr('redact.budgetOut', { n: data.lines.length - data.budget }));
       return;
     }
     setRedacted((current) => (
       isRedacted ? current.filter((id) => id !== line.id) : [...current, line.id]
     ));
-    setNote(isRedacted ? '这一行又露出来了。档案多了一句，也多了一个风险。' : '涂黑了。预览里只剩一条黑条。');
+    setNote(isRedacted ? tr('redact.revealed') : tr('redact.blacked'));
   }
 
   function publish() {
@@ -58,10 +60,10 @@ export function RedactDocument({
     const protectedPeople = selected.filter((line) => line.stake === 'person').length;
     const publicEvidence = publicLines.filter((line) => line.stake === 'evidence').length;
     const result = protectedPeople > publicEvidence
-      ? '你把人保住了，档案变薄。转载的人只能看见残缺的指控。'
+      ? tr('redact.resultPerson')
       : publicEvidence > protectedPeople
-        ? '证据留下了，名字也留下了。下一个人会被这份转载版找到。'
-        : '人和证据各留下了一半。谁都能引用这份档案，谁都能说它缺页。';
+        ? tr('redact.resultEvidence')
+        : tr('redact.resultEven');
     const next = applyWarDecision(
       warTable,
       `${data.id}:publish`,
@@ -85,11 +87,11 @@ export function RedactDocument({
       <div className={s.redactDesk}>
         <div className={s.redactSheet}>
           <div className={s.redactSheetTop}>
-            <span className={s.redactKicker}>公开前 · 转载版</span>
-            <span className={s.redactCount}>{reviewed.length} / {data.lines.length} 已审</span>
+            <span className={s.redactKicker}>{tr('redact.kicker')}</span>
+            <span className={s.redactCount}>{tr('redact.reviewed', { a: reviewed.length, b: data.lines.length })}</span>
           </div>
           <h2 className={s.redactTitle}>{data.documentTitle}</h2>
-          <div className={s.redactLines} role="group" aria-label="逐行选择公开或涂黑">
+          <div className={s.redactLines} role="group" aria-label={tr('redact.linesAria')}>
             {data.lines.map((line) => {
               const isRedacted = redacted.includes(line.id);
               return (
@@ -107,7 +109,13 @@ export function RedactDocument({
                   onClick={() => toggleLine(line)}
                 >
                   <span className={s.redactLineMark}>
-                    {isRedacted ? '黑' : line.stake === 'person' ? '人' : line.stake === 'evidence' ? '证' : '录'}
+                    {isRedacted
+                      ? tr('redact.markBlack')
+                      : line.stake === 'person'
+                        ? tr('redact.markPerson')
+                        : line.stake === 'evidence'
+                          ? tr('redact.markEvidence')
+                          : tr('redact.markRecord')}
                   </span>
                   <span className={s.redactLineText}>
                     {isRedacted ? '████████████████' : line.text}
@@ -117,10 +125,10 @@ export function RedactDocument({
             })}
           </div>
         </div>
-        <aside className={s.redactPreview} aria-label="公开预览">
-          <p className={s.redactKicker}>公开版预览</p>
+        <aside className={s.redactPreview} aria-label={tr('redact.previewAria')}>
+          <p className={s.redactKicker}>{tr('redact.previewKicker')}</p>
           <p className={s.redactBudget}>
-            黑条 {selected.length} / {data.budget} · 公开 {publicLines.length}
+            {tr('redact.budget', { a: selected.length, b: data.budget, c: publicLines.length })}
           </p>
           {data.lines.map((line) => (
             <p key={line.id} className={s.redactPreviewLine}>
@@ -131,7 +139,7 @@ export function RedactDocument({
       </div>
       <div className={s.redactFooter}>
         <p className={s.redactNote} aria-live="polite">{note}</p>
-        <div className={s.redactEffects} aria-label="公开后的战局变化">
+        <div className={s.redactEffects} aria-label={tr('redact.effectsAria')}>
           {effectSummary(effects).map((hint) => <span key={hint}>{hint}</span>)}
         </div>
         <button
@@ -141,7 +149,7 @@ export function RedactDocument({
           disabled={!canPublish}
           onClick={publish}
         >
-          公开转载版
+          {tr('redact.publish')}
         </button>
       </div>
     </div>

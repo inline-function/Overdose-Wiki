@@ -1,0 +1,77 @@
+{
+  "id": "ch01.afterglow",
+  "kind": "memory-collage",
+  "title": "Afterglow",
+  "subtitle": "Piece the good thoughts back together",
+  "intro": "What he sees is not one whole picture but memories lighting up layer by layer. Click once and let a little of it come back.",
+  "closing": "He calls it afterglow. Even now he wants it one more time.",
+  "doneLabel": "Remember this layer of light",
+  "fragments": [
+    {
+      "id": "spring",
+      "label": "Spring Festival",
+      "line": "The couplets by the door are still up; the paste has frozen white.",
+      "x": 2,
+      "y": 6,
+      "w": 30,
+      "h": 30,
+      "tone": "red",
+      "image": "assets-private/bg/bg_afterglow_spring.png"
+    },
+    {
+      "id": "gala",
+      "label": "The gala",
+      "line": "Someone on TV is singing an out-of-tune song.",
+      "x": 35,
+      "y": 3,
+      "w": 29,
+      "h": 28,
+      "tone": "yellow",
+      "image": "assets-private/bg/bg_afterglow_gala.png"
+    },
+    {
+      "id": "fireworks",
+      "label": "Fireworks",
+      "line": "Fireworks burst on the window glass like a scrap of daylight.",
+      "x": 67,
+      "y": 6,
+      "w": 30,
+      "h": 31,
+      "tone": "blue",
+      "image": "assets-private/bg/bg_afterglow_fireworks.png"
+    },
+    {
+      "id": "light",
+      "label": "Window lights",
+      "line": "The windows across the way are lighting up one by one.",
+      "x": 4,
+      "y": 52,
+      "w": 28,
+      "h": 30,
+      "tone": "yellow",
+      "image": "assets-private/bg/bg_afterglow_light.png"
+    },
+    {
+      "id": "redpacket",
+      "label": "Red envelope",
+      "line": "The red envelope is pressed under the bowl, its edges soaked through with oil.",
+      "x": 36,
+      "y": 50,
+      "w": 28,
+      "h": 31,
+      "tone": "red",
+      "image": "assets-private/bg/bg_afterglow_redpacket.png"
+    },
+    {
+      "id": "voice",
+      "label": "A family voice",
+      "line": "Someone in the kitchen calls him to eat; he does not answer.",
+      "x": 69,
+      "y": 52,
+      "w": 28,
+      "h": 29,
+      "tone": "green",
+      "image": "assets-private/bg/bg_afterglow_voice.png"
+    }
+  ]
+}

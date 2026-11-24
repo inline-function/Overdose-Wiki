@@ -5,6 +5,8 @@ import { SAMPLE_ENGINE_CARDS } from '../content/sample';
 import { useGameStore } from '../game/store';
 import { DrugBadge } from '../ui/drug/DrugBadge';
 import p from './pages.module.css';
+import { cardName, cardSummary, drugClassLabel } from '../ui/drug/drugText';
+import { useT } from '../i18n';
 
 const ODDS: Array<[string, number]> = [
   ['other', 15],
@@ -16,6 +18,7 @@ const ODDS: Array<[string, number]> = [
 ];
 
 export function BoxesPage() {
+  const tr = useT();
   const save = useGameStore((state) => state.save);
   const claimBox = useGameStore((state) => state.claimBox);
   const allCards = getCards();
@@ -31,7 +34,7 @@ export function BoxesPage() {
 
   function open() {
     if (save.boxes <= 0) {
-      setMessage('药盒不足。');
+      setMessage(tr('boxes.insufficient'));
       return;
     }
     let roll = Math.random() * 100;
@@ -53,50 +56,53 @@ export function BoxesPage() {
 
   return (
     <article className={p.page}>
-      <p className={p.kicker}>药房 / 药盒</p>
-      <h1 className={p.pageTitle}>药盒</h1>
-      <p className={p.p}>
-        特殊资源。首次阅读支线 +1。开启后按分级概率获得一张未拥有的药卡。
-      </p>
+      <p className={p.kicker}>{tr('boxes.kicker')}</p>
+      <h1 className={p.pageTitle}>{tr('boxes.title')}</h1>
+      <p className={p.p}>{tr('boxes.intro')}</p>
       <div className={p.questPanel}>
         <p className={p.small}>
-          持有药盒：<strong>{save.boxes}</strong> · 已收集：{kinds}/{cards.length} 种 · 共 {totalOwned} 张
+          {tr('boxes.held', { n: save.boxes, kinds, cards: cards.length, total: totalOwned })}
         </p>
         <div className={p.inline}>
           <button type="button" className={p.pixelButton} onClick={open} disabled={save.boxes <= 0}>
-            开启一个药盒
+            {tr('boxes.open')}
           </button>
           <Link className={p.pixelButton} to="/deck">
-            去药箱配牌
+            {tr('boxes.toDeck')}
           </Link>
         </div>
         {message && <p className={p.noticeBox}>{message}</p>}
         {resultCard && (
           <p className={p.p}>
-            开出：<DrugBadge klass={resultCard.klass} /> {resultCard.name} ×{ownedCount(resultCard.id)} · {resultCard.summary}
+            {tr('boxes.opened', {
+              name: cardName(resultCard),
+              count: ownedCount(resultCard.id),
+              summary: cardSummary(resultCard),
+            })}{' '}
+            <DrugBadge klass={resultCard.klass} />
           </p>
         )}
       </div>
 
-      <h2 className={p.pageTitle}>图鉴</h2>
-      <section className={p.deckShelf} aria-label="药品图鉴">
+      <h2 className={p.pageTitle}>{tr('boxes.codex')}</h2>
+      <section className={p.deckShelf} aria-label={tr('boxes.codexAria')}>
         {cards.map((card) => {
           const count = ownedCount(card.id);
           const has = count > 0;
           return (
             <div key={card.id} className={p.shelfCard} data-locked={!has}>
               <span className={p.deckMeta}>
-                <DrugBadge klass={card.klass} /> {card.category}
+                <DrugBadge klass={card.klass} /> {drugClassLabel(card.klass)}
               </span>
-              <span className={p.shelfName}>{has ? card.name : '未获得'}</span>
-              <span className={p.shelfSummary}>{has ? card.summary : '通过药盒获得'}</span>
+              <span className={p.shelfName}>{has ? cardName(card) : tr('boxes.notOwned')}</span>
+              <span className={p.shelfSummary}>{has ? cardSummary(card) : tr('boxes.obtainHint')}</span>
               {has && <span className={p.deckCount}>×{count}</span>}
             </div>
           );
         })}
       </section>
       <p className={p.versionLine}>
-        概率：其他 15% / OTC 40% / Rx 30% / 精二 10% / 精一或麻醉 5%。重复药品会叠加数量；不会开出剧情专用卡。
+        {tr('boxes.odds')}
       </p>
     </article>
   );

@@ -1,0 +1,46 @@
+{
+  "id": "ch02.k-hole",
+  "kind": "grounding",
+  "title": "The K-hole: find the five senses again",
+  "subtitle": "Can't tell dream from waking",
+  "intro": "She lies in the black hole, unable to move. The five senses are spreading apart; click the line that is still there and let the background recognise it.",
+  "closing": "The five senses come back one by one. The K-hole is still there, but she knows she is still here.",
+  "doneLabel": "Catch this breath",
+  "anchors": [
+    {
+      "id": "see",
+      "sense": "See",
+      "text": "Saw a light left on",
+      "line": "The light is still on. Look at it first.",
+      "image": "assets-private/bg/bg_ch02_k_hole_see.png"
+    },
+    {
+      "id": "hear",
+      "sense": "Hear",
+      "text": "Heard the low hum of the air conditioner",
+      "line": "The sound is low, but it never stops.",
+      "image": "assets-private/bg/bg_ch02_k_hole_hear.png"
+    },
+    {
+      "id": "touch",
+      "sense": "Touch",
+      "text": "Felt the weight of the blanket",
+      "line": "The blanket presses on the back of her hand.",
+      "image": "assets-private/bg/bg_ch02_k_hole_touch.png"
+    },
+    {
+      "id": "smell",
+      "sense": "Smell",
+      "text": "Smelled roasting meat",
+      "line": "The smell is sharp. Not a dream.",
+      "image": "assets-private/bg/bg_ch02_k_hole_smell.png"
+    },
+    {
+      "id": "taste",
+      "sense": "Taste",
+      "text": "Tasted bitterness in her mouth",
+      "line": "Bitter. Still here.",
+      "image": "assets-private/bg/bg_ch02_k_hole_taste.png"
+    }
+  ]
+}

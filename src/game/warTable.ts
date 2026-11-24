@@ -1,4 +1,5 @@
 import type { WarEffectPatch } from '../content/types';
+import { t } from '../i18n';
 import { defaultWarTable, type WarTable } from './types';
 
 export type WarMeterKey = 'goto' | 'chicken' | 'trust' | 'archive' | 'escalation';
@@ -65,19 +66,20 @@ export function meterDelta(value: number): string {
   return value > 0 ? `+${value}` : `${value}`;
 }
 
+const METER_LABEL_KEY: Record<WarMeterKey, 'war.gotoShort' | 'war.chickenShort' | 'war.trustShort' | 'war.archiveShort' | 'war.escalationShort'> = {
+  goto: 'war.gotoShort',
+  chicken: 'war.chickenShort',
+  trust: 'war.trustShort',
+  archive: 'war.archiveShort',
+  escalation: 'war.escalationShort',
+};
+
 export function effectSummary(effects: WarEffectPatch): string[] {
-  const labels: Record<WarMeterKey, string> = {
-    goto: '藤控',
-    chicken: '鸡控',
-    trust: '信任',
-    archive: '档案',
-    escalation: '升级',
-  };
   const out: string[] = [];
   for (const { key } of WAR_METERS) {
     const value = effects[key];
     if (typeof value === 'number' && value !== 0) {
-      out.push(`${labels[key]} ${meterDelta(value)}`);
+      out.push(`${t(METER_LABEL_KEY[key])} ${meterDelta(value)}`);
     }
   }
   return out;

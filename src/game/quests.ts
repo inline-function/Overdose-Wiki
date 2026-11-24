@@ -1,3 +1,5 @@
+import { getEffectMeta, getReportMeta } from '../content/registry';
+import { t } from '../i18n';
 import type { Save } from './types';
 
 export type QuestTask = {
@@ -13,7 +15,7 @@ export type ChapterQuest = {
   tasks: QuestTask[];
 };
 
-export const QUESTS: Record<string, ChapterQuest> = {
+const QUESTS_RAW: Record<string, ChapterQuest> = {
   ch01: {
     id: 'ch01',
     title: '第一批归档',
@@ -50,8 +52,36 @@ export const QUESTS: Record<string, ChapterQuest> = {
   },
 };
 
+const TITLE_KEYS = {
+  ch01: 'quest.ch01.title',
+  ch02: 'quest.ch02.title',
+  ch03: 'quest.ch03.title',
+  ch04: 'quest.ch04.title',
+} as const;
+
+/** Labels point at whichever title the current locale shows for the doc/effect. */
+function taskLabel(task: QuestTask): string {
+  const title =
+    task.kind === 'doc'
+      ? (getReportMeta(task.ref)?.title ?? '')
+      : (getEffectMeta(task.ref)?.title ?? '');
+  return task.kind === 'doc'
+    ? t('quest.writeDoc', { title })
+    : t('quest.writeEffect', { title });
+}
+
+function localizedQuest(quest: ChapterQuest): ChapterQuest {
+  const key = TITLE_KEYS[quest.id as keyof typeof TITLE_KEYS];
+  return {
+    id: quest.id,
+    title: key ? t(key) : quest.title,
+    tasks: quest.tasks.map((task) => ({ ...task, label: taskLabel(task) })),
+  };
+}
+
 export function questFor(chapterId: string): ChapterQuest | undefined {
-  return QUESTS[chapterId];
+  const raw = QUESTS_RAW[chapterId];
+  return raw ? localizedQuest(raw) : undefined;
 }
 
 export function taskDone(save: Save, task: QuestTask): boolean {

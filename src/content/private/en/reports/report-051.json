@@ -1,0 +1,79 @@
+{
+  "id": "51",
+  "no": 51,
+  "title": "The Business of Report 49 and Report 50",
+  "reporter": "Super Goto-Goto-Gotō",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "175cm, 60kg",
+  "drugs": "dextromethorphan, magnesium L-threonate, theanine",
+  "edited": "Entered 2024.04.04",
+  "segments": [
+    {
+      "id": "report-51-full",
+      "label": "Full text",
+      "date": "2024-04-04",
+      "summary": "The main text has been folded into the opening of ch03 (the four-way conversation); this file keeps the header, the key dates and the cross-references."
+    }
+  ],
+  "body": [
+    {
+      "type": "list",
+      "items": [
+        "Reporter · Super Goto-Goto-Gotō",
+        "Handled by · Super Goto-Goto-Gotō",
+        "Period · 2024.02.23 – 2024.04.04",
+        "Drugs involved · dextromethorphan, magnesium L-threonate, theanine"
+      ]
+    },
+    { "type": "h", "text": "Handler's Note" },
+    { "type": "p", "text": "This is Gotō's own report, not a reporter's account. It's a re-analysis of 49 and 50; Gotō is both the recorder and the one being analysed. The family history and suicide passages in the original carry his inferences, so read it keeping 'inference' and 'fact' apart." },
+    { "type": "h", "text": "One: Classifying People" },
+    { "type": "p", "text": "Gotō: one, a cheap substitute for hard drugs; two, recreation; three, depression and mental illness." },
+    { "type": "p", "text": "Jing: what are two and three?" },
+    { "type": "p", "text": "Gotō: one is a cheap substitute for hard drugs, two is recreation, three is depression and mental illness. You're definitely three." },
+    { "type": "p", "text": "Jing: hahaha definitely." },
+    { "type": "p", "text": "Gotō: I only want to serve the third kind too." },
+    { "type": "p", "text": "Jing: true, the ones who use it to play, to have fun — what kind of trashy little show-off is that. Who takes medicine for no reason." },
+    { "type": "p", "text": "Gotō: wwwwww that's what I think too. Which is why I really don't serve the second kind." },
+    { "type": "h", "text": "Two: Jing" },
+    { "type": "p", "text": "Jing: then can I tell teacher a story about my father's mental illness wrecking the family? Let teacher infer what he's like." },
+    { "type": "p", "text": "Gotō: ... (analysis: machismo, control, delusion, cutting off power and water, taking the money and leaving.)" },
+    { "type": "p", "text": "Gotō: to keep from becoming your father, you've made yourself very small, avoiding taking up anyone's place..." },
+    { "type": "p", "text": "Jing: true. When I was little, from 0 to 4, my dad was often away, and I was always with my mom." },
+    { "type": "p", "text": "[Handler's note: this is Gotō's inference, not a diagnosis.]" },
+    { "type": "p", "text": "Jing: he's a classmate I've known since second grade... he's the first person I liked. He comforted me, soothed me, talked me through things... then I confessed to him, and he just stayed silent and smiled gently." },
+    { "type": "p", "text": "Jing: and now he has another girlfriend and is colder to me than before. Is it just that he doesn't like me that much?" },
+    { "type": "p", "text": "Jing: by the time you see these messages I'll already be at Betelgeuse... executing tonight." },
+    { "type": "p", "text": "Jing: ███, ████ speeds up unconsciousness and strengthens the toxicity, ████ put into capsules and swallowed, and I can be free." },
+    { "type": "p", "text": "[Handler's note: the method has been blacked out.]" },
+    { "type": "p", "text": "Jing: my family, so much mental illness, I really wish I could have a good warm family... if I still remember you in my next life, can I come find you." },
+    { "type": "p", "text": "Jing: writing the note tonight, you'll be the first to read it." },
+    { "type": "h", "text": "Three: Ayaka" },
+    { "type": "p", "text": "Ayaka: no." },
+    { "type": "p", "text": "Ayaka: it hurts." },
+    { "type": "p", "text": "[A photo: Ayaka's blood from self-harm with a razor blade, twenty-odd cuts, a great deal of blood.]" },
+    { "type": "p", "text": "Ayaka: there's nowhere left to cut..." },
+    { "type": "p", "text": "Ayaka: serves me right." },
+    { "type": "p", "text": "Ayaka: did I jump?" },
+    { "type": "p", "text": "Staff: no." },
+    { "type": "p", "text": "[Handler's note: the photo was not opened; the method is not expanded.]" },
+    { "type": "h", "text": "Four: The Afterglow Theory" },
+    { "type": "p", "text": "Gotō: I believe the afterglow can intercept people who want to kill themselves." },
+    { "type": "p", "text": "Gotō: even after the afterglow, my mood was very, very good. After that, to figure out what triggers the afterglow, I started testing drugs constantly." },
+    { "type": "p", "text": "Jing: god, why is the afterglow so hard to trigger?" },
+    { "type": "p", "text": "Gotō: so the afterglow exists like something out of myth." },
+    { "type": "p", "text": "Jing: that afterglow was like a god giving Teacher Pochi his one and only blessing, and teacher is like Prometheus wanting to bring that flame down to people. Let's bring that flame down to people together." },
+    { "type": "p", "text": "Jing: the afterglow has become my dream too." },
+    { "type": "h", "text": "Handler's Note" },
+    { "type": "p", "text": "No. 51 is the hinge between 49 and 50. It puts three people at one table, and it also exposes Gotō's own categories, theories and saviour narrative. The original contained a long stretch of psychoanalysis; this file keeps only the quotable lines and the context needed to read them." },
+    { "type": "h", "text": "Related" },
+    {
+      "type": "list",
+      "items": [
+        "Related entries: afterglow, recovery techniques, dissociation",
+        "Related reports: report-049, report-050, report-093",
+        "Related cards: magnesium L-threonate, dextromethorphan, reproduction"
+      ]
+    }
+  ]
+}

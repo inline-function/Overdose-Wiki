@@ -2,7 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CONSENT_VERSION } from '../game/types';
 import { useGameStore } from '../game/store';
 import { useSessionStore } from '../game/sessionStore';
-import { CONSENT_SECTIONS } from '../game/consentText';
+import { consentSections } from '../game/consentText';
+import { useLocale, useT } from '../i18n';
 import p from './pages.module.css';
 
 export function ConsentPage() {
@@ -11,6 +12,8 @@ export function ConsentPage() {
   const session = useSessionStore((state) => state.session);
   const navigate = useNavigate();
   const location = useLocation();
+  const t = useT();
+  const sections = consentSections(useLocale());
   const accepted = save.consent.version >= CONSENT_VERSION;
   const from = (location.state as { from?: string } | null)?.from;
 
@@ -25,9 +28,9 @@ export function ConsentPage() {
   return (
     <section className={p.consentWrap}>
       <div className={p.consentCard}>
-        <p className={p.kicker}>ODW // 事先声明 v1</p>
-        <h1>在被记录之前</h1>
-        {CONSENT_SECTIONS.map((section) => (
+        <p className={p.kicker}>{t('consent.kicker')}</p>
+        <h1>{t('consent.heading')}</h1>
+        {sections.map((section) => (
           <section key={section.title} className={p.consentSection}>
             <h2>{section.title}</h2>
             <ul>
@@ -44,18 +47,21 @@ export function ConsentPage() {
             style={{ width: 'calc(72 * var(--u))' }}
             onClick={enter}
           >
-            {accepted ? '进入 ODW' : '同意并进入'}
+            {t(accepted ? 'consent.enter' : 'consent.acceptAndEnter')}
           </button>
           <button
             type="button"
             className={`${p.pixelButton} ${p.ghost}`}
             onClick={() => navigate('/settings')}
           >
-            设置
+            {t('consent.settings')}
           </button>
         </div>
         <p className={p.versionLine}>
-          事先声明 v{CONSENT_VERSION} · {accepted ? '已同意' : '未同意'}
+          {t('consent.versionLine', {
+            version: CONSENT_VERSION,
+            state: t(accepted ? 'consent.stateAccepted' : 'consent.statePending'),
+          })}
         </p>
       </div>
     </section>

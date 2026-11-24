@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { GroundingAnchor, GroundingGame } from '../../content/types';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 const BASE = import.meta.env.BASE_URL;
 const COLORS = ['#f0c866', '#e8e0cc', '#8fa8b8', '#d98f9b', '#7f9a6b'];
@@ -139,6 +140,7 @@ export function Grounding({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [found, setFound] = useState<string[]>([]);
   const [active, setActive] = useState<GroundingAnchor | null>(null);
   const [reduce] = useState(
@@ -180,7 +182,7 @@ export function Grounding({
       <div className={s.groundingFlowB} aria-hidden="true" />
       <div className={s.groundingVeil} aria-hidden="true" />
       <div className={s.groundingNoise} aria-hidden="true" />
-      <p className={s.groundingHint}>点一下正在散开的五感。点中的那一句会把背景叫回来。</p>
+      <p className={s.groundingHint}>{tr('grounding.hint')}</p>
       {data.anchors.map((anchor, index) => (
         <GroundingWord
           key={anchor.id}
@@ -193,7 +195,7 @@ export function Grounding({
         />
       ))}
       <div className={s.groundingProgress} data-testid="grounding-progress">
-        <span>找回来</span>
+        <span>{tr('grounding.regain')}</span>
         <span className={s.groundingDots}>
           {data.anchors.map((anchor) => (
             <span

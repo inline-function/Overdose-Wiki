@@ -1,0 +1,108 @@
+{
+  "id": "ch02.voices",
+  "kind": "voice-filter",
+  "title": "Voices: press mute on the ones that coil around her",
+  "subtitle": "Command hallucinations",
+  "intro": "The voices come out of the wall, the ceiling, the back of her own skull. They are not all to be believed; press them mute one by one.",
+  "closing": "The voices haven't all gone, but the screen has cleared. She can finally hear herself breathe.",
+  "doneLabel": "Give her ears back",
+  "image": "assets-private/bg/bg_ch02_voices.png",
+  "voices": [
+    {
+      "id": "v01",
+      "text": "Die."
+    },
+    {
+      "id": "v02",
+      "text": "You don't deserve to live."
+    },
+    {
+      "id": "v03",
+      "text": "Cut."
+    },
+    {
+      "id": "v04",
+      "text": "Jump out the window."
+    },
+    {
+      "id": "v05",
+      "text": "Hit the wall."
+    },
+    {
+      "id": "v06",
+      "text": "Stop breathing."
+    },
+    {
+      "id": "v07",
+      "text": "No one is coming."
+    },
+    {
+      "id": "v08",
+      "text": "He is lying to you."
+    },
+    {
+      "id": "v09",
+      "text": "You are just a burden."
+    },
+    {
+      "id": "v10",
+      "text": "This body is not yours."
+    },
+    {
+      "id": "v11",
+      "text": "You are not real."
+    },
+    {
+      "id": "v12",
+      "text": "They are all laughing at you."
+    },
+    {
+      "id": "v13",
+      "text": "Don't speak."
+    },
+    {
+      "id": "v14",
+      "text": "You should not be saved."
+    },
+    {
+      "id": "v15",
+      "text": "Go back to the plateau."
+    },
+    {
+      "id": "v16",
+      "text": "Tear the skin open."
+    },
+    {
+      "id": "v17",
+      "text": "You died long ago."
+    },
+    {
+      "id": "v18",
+      "text": "Don't trust Gotō."
+    },
+    {
+      "id": "v19",
+      "text": "You will get her killed."
+    },
+    {
+      "id": "v20",
+      "text": "Quiet."
+    },
+    {
+      "id": "v21",
+      "text": "You don't deserve to eat."
+    },
+    {
+      "id": "v22",
+      "text": "Jump."
+    },
+    {
+      "id": "v23",
+      "text": "Now."
+    },
+    {
+      "id": "v24",
+      "text": "Close your eyes and don't open them again."
+    }
+  ]
+}

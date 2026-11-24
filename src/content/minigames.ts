@@ -1,3 +1,4 @@
+import { getLocale } from '../i18n/locale';
 import type { MiniGameData } from './types';
 
 /**
@@ -7,6 +8,11 @@ import type { MiniGameData } from './types';
 const modules = import.meta.glob<MiniGameData>('./private/minigames/*.json', {
   eager: true,
 });
+// English minigame files mirror the Chinese structure field for field; the
+// loader picks them by id when the locale is English and falls back to zh.
+const enModules = import.meta.glob<MiniGameData>('./private/en/minigames/*.json', {
+  eager: true,
+});
 
 const games = new Map<string, MiniGameData>();
 for (const [path, value] of Object.entries(modules)) {
@@ -14,15 +20,27 @@ for (const [path, value] of Object.entries(modules)) {
   const id = value.id || fileId;
   if (id) games.set(id, { ...value, id });
 }
+const enGames = new Map<string, MiniGameData>();
+for (const [path, value] of Object.entries(enModules)) {
+  const fileId = path.split('/').pop()?.replace(/\.json$/, '') ?? '';
+  const id = value.id || fileId;
+  if (id) enGames.set(id, { ...value, id });
+}
+
+function pick(id: string): MiniGameData | undefined {
+  const base = games.get(id);
+  if (getLocale() !== 'en') return base;
+  return enGames.get(id) ?? base;
+}
 
 export function miniGameList(): MiniGameData[] {
-  return [...games.values()];
+  return [...games.keys()].map((id) => pick(id)!).filter(Boolean);
 }
 
 export function getMiniGame(id: string): MiniGameData | undefined {
-  return games.get(id);
+  return pick(id);
 }
 
 export function minigamePromise(id: string): Promise<MiniGameData | undefined> {
-  return Promise.resolve(games.get(id));
+  return Promise.resolve(pick(id));
 }

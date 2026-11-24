@@ -1,0 +1,152 @@
+{
+  "id": "ch01.chat-triage",
+  "kind": "chat-triage",
+  "title": "Answering one by one wastes too much time",
+  "subtitle": "Duty shift in the od group",
+  "intro": "Messages pop up one after another. Everyone thinks their question only costs him thirty seconds.",
+  "closing": "Answering one by one wastes too much time. If there were a website, everyone could just look.",
+  "doneLabel": "Close the group chat",
+  "questions": [
+    {
+      "id": "q1",
+      "from": "Xiaobei",
+      "text": "Teacher, teacher, can you o on sertraline?",
+      "replies": [
+        {
+          "id": "a",
+          "label": "No. Serotonin syndrome.",
+          "ok": true,
+          "reply": "No. You can't o on sertraline; serotonin syndrome will make you wish you were dead.",
+          "followUp": "Xiaobei: ...okay. Thank you, teacher."
+        },
+        {
+          "id": "b",
+          "label": "Yes, just not too much.",
+          "ok": false,
+          "reply": "Yes, just not too much.",
+          "followUp": "#2: For real? Last time I..."
+        },
+        {
+          "id": "c",
+          "label": "Ask a doctor.",
+          "ok": false,
+          "reply": "Ask a doctor.",
+          "followUp": "Xiaobei: If I had the money to see a doctor, would I be asking in this group?"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "from": "A-Lan",
+      "text": "Can pregabalin and amantadine be taken together?",
+      "replies": [
+        {
+          "id": "a",
+          "label": "Never combine them.",
+          "ok": true,
+          "reply": "Never combine them. Don't treat someone else's experience as a prescription.",
+          "followUp": "A-Lan: Understood."
+        },
+        {
+          "id": "b",
+          "label": "Yes, two hours apart.",
+          "ok": false,
+          "reply": "Yes, two hours apart.",
+          "followUp": "#3: I'll write that down then."
+        },
+        {
+          "id": "c",
+          "label": "I have never tried it.",
+          "ok": false,
+          "reply": "I have never tried it.",
+          "followUp": "A-Lan: Then I'll ask someone else."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "from": "Group Member",
+      "text": "Does memantine really leave holes in your brain?",
+      "replies": [
+        {
+          "id": "a",
+          "label": "The risk is extremely high. It is not a brain supplement.",
+          "ok": true,
+          "reply": "Gotō: The risk is extremely high. It is not a brain supplement.",
+          "followUp": "Group Member: ...that sounds terrifying."
+        },
+        {
+          "id": "b",
+          "label": "No, take it without worry.",
+          "ok": false,
+          "reply": "No, take it without worry.",
+          "followUp": "#4: Are you sure? My friend says it does."
+        },
+        {
+          "id": "c",
+          "label": "It depends on the dose.",
+          "ok": false,
+          "reply": "It depends on the dose.",
+          "followUp": "Group Member: Then how much is safe?"
+        }
+      ],
+      "interlude": "Someone asks: teacher, what's your name? Gotō Hitori. So everyone starts calling him \"Gotō\"."
+    },
+    {
+      "id": "q4",
+      "from": "Xiaobei",
+      "text": "What about dextromethorphan with sertraline?",
+      "replies": [
+        {
+          "id": "a",
+          "label": "Don't. Serotonin syndrome.",
+          "ok": true,
+          "reply": "Don't. Serotonin syndrome is not a joke.",
+          "followUp": "Xiaobei: Okay. I won't touch it."
+        },
+        {
+          "id": "b",
+          "label": "Yes, take them separately.",
+          "ok": false,
+          "reply": "Yes, take them separately.",
+          "followUp": "#2: Really? My friend does that."
+        },
+        {
+          "id": "c",
+          "label": "Ask someone else.",
+          "ok": false,
+          "reply": "Ask someone else.",
+          "followUp": "Xiaobei: I was introduced here by someone else."
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "from": "Anonymous",
+      "text": "I feel terrible. What do I do?",
+      "replies": [
+        {
+          "id": "a",
+          "label": "Don't up the dose. Find someone you trust to stay with you.",
+          "ok": true,
+          "reply": "Don't up the dose. Find someone you trust to stay with you; don't carry it alone.",
+          "followUp": "Anonymous: ...okay."
+        },
+        {
+          "id": "b",
+          "label": "Take a little more and it'll be fine.",
+          "ok": false,
+          "reply": "Take a little more and it'll be fine.",
+          "followUp": "Group Member: Are you insane?"
+        },
+        {
+          "id": "c",
+          "label": "Hold on a bit longer.",
+          "ok": false,
+          "reply": "Hold on a bit longer.",
+          "followUp": "Anonymous: I've been holding on for a long time already."
+        }
+      ]
+    }
+  ]
+}

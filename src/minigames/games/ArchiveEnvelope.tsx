@@ -6,6 +6,7 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from 'react';
 import type { ArchiveCard, ArchiveEnvelopeGame } from '../../content/types';
+import { useT } from '../../i18n';
 import s from '../minigame.module.css';
 
 const BASE = import.meta.env.BASE_URL;
@@ -34,6 +35,7 @@ export function ArchiveEnvelope({
   onCaption: (text: string) => void;
   onDone: () => void;
 }) {
+  const tr = useT();
   const [placed, setPlaced] = useState<string[]>([]);
   const [falling, setFalling] = useState<Falling | null>(null);
   const [ghost, setGhost] = useState<Ghost | null>(null);
@@ -69,16 +71,16 @@ export function ArchiveEnvelope({
     if (!allPlaced || phase !== 'cards') return;
     setPhase('closing');
     setDrawerClosed(true);
-    onCaption('抽屉自己合上了。');
+    onCaption(tr('archiveGame.drawerClosed'));
     after(700, () => {
       setCentered(true);
       setPhase('moving');
-      onCaption('档案袋先快后慢，挪到屏幕中间。');
+      onCaption(tr('archiveGame.moving'));
     });
     after(1900, () => {
       setLabelVisible(true);
       setPhase('label');
-      onCaption('标签上还缺一个名字。点它，或按空格 / 回车。');
+      onCaption(tr('archiveGame.labelCue'));
     });
   }, [allPlaced, phase, onCaption]);
 
@@ -103,8 +105,8 @@ export function ArchiveEnvelope({
     setTyped(next);
     onCaption(
       next === data.name.length
-        ? '名字写完了。'
-        : `写下第 ${next} 个字：${data.name[next - 1]}。`,
+        ? tr('archiveGame.nameDone')
+        : tr('archiveGame.char', { n: next, char: data.name[next - 1] }),
     );
     if (next === data.name.length) {
       setPhase('whiteout');
@@ -136,11 +138,11 @@ export function ArchiveEnvelope({
       top: -10,
       distance: envelope.height * 0.94,
     });
-    onCaption('手松开了，卡片从上面掉进去。');
+    onCaption(tr('archiveGame.released'));
     after(720, () => {
       setFalling(null);
       setPlaced((current) => (current.includes(card.id) ? current : [...current, card.id]));
-      onCaption('卡片落进了档案袋。');
+      onCaption(tr('archiveGame.landed'));
     });
   }
 
@@ -167,7 +169,7 @@ export function ArchiveEnvelope({
       if (!moved && Math.hypot(moveEvent.clientX - startX, moveEvent.clientY - startY) > 4) {
         moved = true;
         setDraggingId(card.id);
-        onCaption('把卡片拖到档案袋上，然后松手。');
+        onCaption(tr('archiveGame.dragCue'));
       }
       if (!moved) return;
       setGhost({ card, x: moveEvent.clientX, y: moveEvent.clientY });
@@ -188,7 +190,7 @@ export function ArchiveEnvelope({
         setGhost(null);
         setDraggingId(null);
         setOver(false);
-        onCaption('卡片没有落进档案袋。');
+        onCaption(tr('archiveGame.missed'));
       }
     };
 
@@ -262,7 +264,7 @@ export function ArchiveEnvelope({
           >
             <path d="M1 1 L50 29 L99 1" />
           </svg>
-          <span className={s.archiveStamped}>档案</span>
+          <span className={s.archiveStamped}>{tr('archiveGame.stamp')}</span>
           <svg
             className={s.archiveStringArt}
             viewBox="0 0 100 34"
@@ -295,10 +297,10 @@ export function ArchiveEnvelope({
             className={s.archiveNameLabel}
             data-testid="archive-label"
             data-visible={labelVisible}
-            aria-label={`在档案袋标签上写名字。第 ${Math.min(typed + 1, data.name.length)} 个字。`}
+            aria-label={tr('archiveGame.labelAria', { n: Math.min(typed + 1, data.name.length) })}
             onClick={advance}
           >
-            <span className={s.archiveNameCaption}>姓名</span>
+            <span className={s.archiveNameCaption}>{tr('archiveGame.nameCaption')}</span>
             <span className={s.archiveName} data-testid="archive-name">
               {Array.from(data.name).map((char, index) => (
                 <span key={`${char}-${index}`} data-filled={index < typed}>
@@ -312,7 +314,7 @@ export function ArchiveEnvelope({
 
       <div className={s.archiveDrawer} data-testid="archive-drawer" data-closed={drawerClosed}>
         <div className={s.archiveDrawerHead}>
-          <span>她说过的</span>
+          <span>{tr('archiveGame.drawerHead')}</span>
           <span className={s.archiveCount}>{placed.length} / {data.cards.length}</span>
         </div>
         <div className={s.archiveCards}>
@@ -324,7 +326,7 @@ export function ArchiveEnvelope({
               data-testid="archive-card"
               data-card={card.id}
               data-dragging={draggingId === card.id}
-              title="按住拖到档案袋上，然后松手；也可以点一下"
+              title={tr('archiveGame.cardTitle')}
               onPointerDown={(event) => beginPointer(card, event)}
               onKeyDown={(event) => {
                 if (event.key !== 'Enter' && event.key !== ' ') return;
@@ -335,7 +337,7 @@ export function ArchiveEnvelope({
               {card.text}
             </button>
           ))}
-          {drawerCards.length === 0 ? <span className={s.archiveEmpty}>都放进去了。</span> : null}
+          {drawerCards.length === 0 ? <span className={s.archiveEmpty}>{tr('archiveGame.empty')}</span> : null}
         </div>
       </div>
 

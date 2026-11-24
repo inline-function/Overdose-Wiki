@@ -1,0 +1,138 @@
+{
+  "title": "Imaginary Root",
+  "scenes": {
+    "ch01.s01": {
+      "title": "The Kid Who Flunked the Entrance Exam",
+      "summary": "A city in the south. A middle-school graduate who meant to be a chemical engineer, with every hope riding on one thing.",
+      "beats": [
+        "In a city in the south there was a middle-school graduate who had flunked the entrance exam and meant to become a chemical engineer.",
+        "Back then he wasn't called Gotō yet.",
+        "He was crushed, and used games to numb himself out of thinking too much."
+      ]
+    },
+    "ch01.s02": {
+      "title": "The Room of Defeat",
+      "summary": "Numb for a while, awake for a while, numb again. The pain grows inward until it becomes an idea.",
+      "beats": [
+        "Numb with games for a while, awake for a while, numb again.",
+        "His confidence didn't come back. Neither did the shadow of that thing pass.",
+        "A year went by. He didn't get better. He only got quieter.",
+        "With no way out, the pain grew inward, into an ever clearer thought.",
+        "Maybe there's only one thing that can...... make it stop."
+      ]
+    },
+    "ch01.s03": {
+      "title": "Standing Upstairs",
+      "summary": "No lights anywhere; wind down his collar. He swallows his first pack of dextromethorphan.",
+      "beats": [
+        "He feels he is standing on a roof. No lights anywhere; wind down his collar; one step forward and there would be no more pain.",
+        "It was his first od — he swallowed a whole pack of dextromethorphan.",
+        "The pills were bitter. Life was bitterer.",
+        "He can't tell where he is — in that dim room? On the cold, silent high-rise? Or......"
+      ]
+    },
+    "ch01.s04": {
+      "title": "Afterglow",
+      "summary": "Spring Festivals, galas, fireworks all rush back at once. He sees the afterglow for the first time.",
+      "beats": [
+        "Then he saw his own past — New Year after New Year, noisy galas, fireworks bursting...... countless good thoughts flooded in.",
+        { "label": "Afterglow: Memory Collage" },
+        "His pupils seemed to give off light, full of longing for life.",
+        "He began to feel the whole world was far too interesting. He was happy.",
+        "Back then I really did want to die.",
+        "But after that one od, the thought turned itself around......",
+        "I call it the afterglow. I still want it again.",
+        "He realized that if he could make the afterglow fire reliably, he could save more people like himself, standing at the edge.",
+        "Before long he began looking for a way to make it fire reliably."
+      ]
+    },
+    "ch01.s05": {
+      "title": "The Days the Repeat Failed",
+      "summary": "Kettle, tea leaves, delirium. Amantadine brings no afterglow — only failure.",
+      "beats": [
+        "Maybe I should boil some water. Where's the kettle? Why is the water in the kettle and not the cup...... tea... tea... what is tea for, again?",
+        "Amantadine doesn't bring the afterglow. It brings delirium. The repeat failed.",
+        { "label": "Delirium: Where Is the Kettle" },
+        "To work out how to trigger it, I kept experimenting. By then I couldn't tell whether I was trying to fix my depression or just wanted to get high."
+      ]
+    },
+    "ch01.s06": {
+      "title": "The Fifth Plateau",
+      "summary": "Senses melt, time warps, the self peels away. Letters squirm like worms.",
+      "beats": [
+        "Then, with dextromethorphan, he came to the Fifth Plateau — senses melting, time warped, the self peeled away......",
+        "It was dissociative anesthesia. Gotō watched the words on his phone blur, then start to writhe like small worms.",
+        { "label": "The Fifth Plateau: Hold the Words Still" },
+        "Does the afterglow really exist? He didn't dare answer......"
+      ]
+    },
+    "ch01.s07": {
+      "title": "Correcting the Forum",
+      "summary": "Guaifenesin is not glycerin. As more people come asking, he starts thinking about harm reduction.",
+      "beats": [
+        { "label": "Forum Correction: Guaifenesin Has No Glycerin" },
+        "He knew pharmacology cold and often stepped in to answer questions. As more people came to him, he began to think about harm reduction."
+      ]
+    },
+    "ch01.s08": {
+      "title": "A Day of Forum Answers",
+      "summary": "Pregabalin must not be combined with amantadine. Memantine hollows out the brain.",
+      "beats": [
+        "Pregabalin can't be combined with amantadine!",
+        "Memantine will hollow out your brain!"
+      ]
+    },
+    "ch01.s09": {
+      "title": "The od Group Chat",
+      "summary": "Sertraline can't be o'd. The group starts calling him Gotō.",
+      "beats": [
+        { "label": "Group Chat Triage: Answering One by One Wastes Too Much Time" },
+        "His WeChat name was Gotō Hitori, so everyone just called him Gotō."
+      ]
+    },
+    "ch01.s10": {
+      "title": "A Stranger from the Forum Sends an Invite: Write Him",
+      "summary": "Sakura comes from the forum to invite him into the OverdoseWiki editorial team.",
+      "beats": [
+        "Later a person called Sakura came over from the forum and invited him to join the OverdoseWiki editorial team.",
+        { "label": "Building the Site: The First Homepage" },
+        "Answering one at a time wastes too much time. If I build a site, everyone can just look it up — much easier! And that's more harm reduction, isn't it?",
+        "After that Gotō wrote a great many harm-reduction articles. His effort paid off: a mass of oders began following ODW, and he gained a certain standing in the drug circle."
+      ]
+    },
+    "ch01.s11": {
+      "title": "Restoration",
+      "summary": "He writes down three propositions, then walks his own record through them.",
+      "beats": [
+        { "label": "Case: DXM Neurosis" }
+      ]
+    },
+    "ch01.s12": {
+      "title": "Report Seven, Edit Page",
+      "summary": "Twenty-six times. He is cataloguing his own abyss.",
+      "beats": [
+        "I gave every one of them a name — first od, second od plus, the trip to hell I didn't wake from, the memory recovery of the afterglow, the repeat that went the opposite way...... twenty-six times. I was cataloguing my own abyss.",
+        { "label": "Report Seven: Chronicle of Twenty-Six" },
+        "He called it a fire — Prometheus stealing fire for mankind. He had been dragged back from the roof once, so he would turn the hand that dragged him into a site, a theory, a guide, so the ones who came after wouldn't have to stand in the wind alone.",
+        "They shouldn't have to survive on an accident, the way I did."
+      ]
+    },
+    "ch01.s13": {
+      "title": "Imaginary Root",
+      "summary": "The chronicle of twenty-six finished, he stops at the last page.",
+      "beats": [
+        "The chronicle finished; the theory finished; the guide finished. He stopped at the last page and felt he could finally put the thing down.",
+        "I can probably...... stop needing it now."
+      ]
+    },
+    "ch01.s14": {
+      "title": "Report Seven: Afterword",
+      "summary": "He no longer needs dextromethorphan to get through the day. But he asks: oder, do you want out of the plateau?",
+      "beats": [
+        "I don't know if I'll od again. But one thing is certain: I no longer need dextromethorphan to get through my life. I've probably escaped the plateau.",
+        "\"oder, do you want out of the plateau?\"",
+        { "prompt": "oder, do you want out of the plateau?", "options": ["Stay", "Stay", "Stay"] }
+      ]
+    }
+  }
+}

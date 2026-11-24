@@ -1,0 +1,15 @@
+{
+  "id": "镇静",
+  "title": "Sedation",
+  "tags": ["effect", "sedation", "benzodiazepine"],
+  "blocks": [
+    { "type": "quote", "text": "Are you running from reality?" },
+    { "type": "p", "text": "Maybe you can go into the dream forever. But reality is yourself, and you can't run from yourself, just as I can't run from myself." },
+    { "type": "p", "text": "Modern people are under great pressure, everyone wound tight. High-pressure insomnia plagues high-pressure people; luckily the doctor gave some fat white little pills. Swallow them, the whole body slackens, and the next time you open your eyes it's the next day — as if a cloud had taken your consciousness away. The cloud is soft, so soft you forget you're still falling." },
+    { "type": "p", "text": "This world is about to end. Every pitiful attempt is just like being in the subconscious, inside a melting hallucination — those struggles, those false happinesses in dreams, those true and false and kind, and the pain layered on pain. They only bring one and the same result." },
+    { "type": "p", "text": "There will be no solar eclipse here. Here there will only be rebirth." },
+    { "type": "p", "text": "You'll never escape reality... you won't understand, but that's the fact. I didn't understand at first either, but later, sleepwalking, I found them." },
+    { "type": "p", "text": "What sedation gives you isn't happiness, it's 'no longer having to cope'. The world is muted, pain is behind a pane of glass, and you watch it happen without having to reach out. You think this is rest. But rest requires that there's still a 'you' resting; when sedation goes too deep, that 'you' gets muted along with everything else." },
+    { "type": "p", "text": "So running from reality becomes running from yourself, and running from yourself is impossible — because you are that reality. The dream isn't an exit, it's another room. You think once you're asleep nothing will matter, but the price of nothing mattering is that nobody's home anymore." }
+  ]
+}

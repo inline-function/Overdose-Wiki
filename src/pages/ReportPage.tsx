@@ -14,6 +14,7 @@ import { makeHistory } from '../game/persistence';
 import { isReportUnlocked, isSceneUnlocked, unlockHint } from '../game/unlocks';
 import { CHAPTER_REPORT } from '../game/routing';
 import { useGameStore } from '../game/store';
+import { useT } from '../i18n';
 import { DocWriter } from './DocWriter';
 import { PlaceholderPage } from './PlaceholderPage';
 import p from './pages.module.css';
@@ -34,6 +35,7 @@ type DialogueLine = {
 };
 
 export function ReportPage() {
+  const tr = useT();
   const { id } = useParams();
   const save = useGameStore((state) => state.save);
   const setProgress = useGameStore((state) => state.setProgress);
@@ -70,7 +72,7 @@ export function ReportPage() {
             key: `${scene.id}:${beatIndex}`,
             scene,
             beatIndex,
-            speaker: beat.speaker ?? '旁白',
+            speaker: beat.speaker ?? tr('report.narration'),
             text: beat.text,
           });
         } else if (beat.type === 'quote') {
@@ -78,7 +80,7 @@ export function ReportPage() {
             key: `${scene.id}:${beatIndex}`,
             scene,
             beatIndex,
-            speaker: beat.source ?? '引用',
+            speaker: beat.source ?? tr('report.quoteSource'),
             text: beat.text,
           });
         }
@@ -146,12 +148,16 @@ export function ReportPage() {
   if (!report) {
     return (
       <PlaceholderPage
-        title={locked ? `报告 ${reportMeta?.no ?? id}` : `报告 ${id ?? '?'}`}
-        kicker={locked ? '档案 / 锁定' : '档案 / 未接入'}
+        title={
+          locked
+            ? tr('report.placeholderLocked', { no: String(reportMeta?.no ?? id) })
+            : tr('report.placeholderUnknown', { id: id ?? '?' })
+        }
+        kicker={locked ? tr('report.kickerLocked') : tr('report.kickerMissing')}
         note={
           locked && reportMeta
-            ? `${unlockHint(reportMeta)}。解锁后可在档案索引打开。`
-            : '这份报告已在目录中，但正文与段落索引尚未接入。'
+            ? tr('report.noteLocked', { hint: unlockHint(reportMeta) })
+            : tr('report.noteMissing')
         }
       />
     );
@@ -168,9 +174,9 @@ export function ReportPage() {
     addHistory(
       makeHistory(
         'scene',
-        `打开 ${target.label}`,
+        tr('report.jumpHistory', { label: target.label }),
         `/report/${report!.id}/replay/${target.segmentId}`,
-        target.segmentId,
+        target.sceneId,
       ),
     );
     navigate(`/report/${report!.id}/replay/${target.segmentId}`, {
@@ -190,7 +196,7 @@ export function ReportPage() {
 
   function openLine(line: DialogueLine) {
     if (sceneLocked(line.scene)) {
-      setStatus('这场对话尚未解锁：先完成前置章节。');
+      setStatus(tr('report.statusSceneLocked'));
       return;
     }
     const segment = segmentForScene(report!.id, line.scene.id);
@@ -210,11 +216,11 @@ export function ReportPage() {
 
   function openSegment(segment: ReportSegment) {
     if (segment.locked) {
-      setStatus('该段已隐去：未归档。');
+      setStatus(tr('report.statusSegmentLocked'));
       return;
     }
     if (!segment.sceneId) {
-      setStatus('该段没有可复演的场景。');
+      setStatus(tr('report.statusNoScene'));
       return;
     }
     const target: JumpTarget = {
@@ -237,29 +243,33 @@ export function ReportPage() {
         <span className={p.tag}>
           {report.no >= 100
             ? written
-              ? '文档 · 已编写'
-              : '文档 · 待编写'
-            : `报告 ${report.no}`}
+              ? tr('report.tagDocWritten')
+              : tr('report.tagDocPending')
+            : tr('report.tagReport', { no: String(report.no) })}
         </span>
       </header>
       <p className={p.articleMeta}>
-        报告者：{report.reporter} / 处理者：{report.handler} /{' '}
-        {report.edited}
+        {tr('report.metaLine', {
+          reporter: report.reporter,
+          handler: report.handler ?? '—',
+          edited: report.edited,
+        })}
       </p>
       {(report.vitals !== '—' || report.drugs !== '—') && (
         <p className={p.articleMeta}>
-          身高体重：{report.vitals} / 有关药物：{report.drugs}
+          {tr('report.vitalsLine', { vitals: report.vitals, drugs: report.drugs })}
         </p>
       )}
       {!isDoc &&
         (chapter ? (
           <p className={p.toc}>
-            目录：{chapter.scenes.length} 场 · {lines.length} 句对话
+            {tr('report.tocScene', {
+              scenes: String(chapter.scenes.length),
+              lines: String(lines.length),
+            })}
           </p>
         ) : (
-          <p className={p.toc}>
-            目录：1 初次 · 9 地狱之行 · 12 余晖 · 13 复刻失败 · 26 最后一次
-          </p>
+          <p className={p.toc}>{tr('report.tocSample')}</p>
         ))}
 
       {isDoc && !written ? (
@@ -269,7 +279,7 @@ export function ReportPage() {
           onDone={() => readDoc(report.id, report.segments[0]?.id ?? `report-${report.id}-full`)}
         />
       ) : report.body && report.body.length > 0 ? (
-        <section className={p.reportBody} aria-label="报告正文">
+        <section className={p.reportBody} aria-label={tr('report.bodyAria')}>
           {report.body.map((block, index) => {
             if (block.type === 'h') {
               return (
@@ -300,7 +310,7 @@ export function ReportPage() {
                   <img
                     className={p.docImage}
                     src={block.src}
-                    alt={block.caption ?? '文档插图'}
+                    alt={block.caption ?? tr('report.imageAlt')}
                     loading="lazy"
                   />
                   {block.caption && <figcaption className={p.docCaption}>{block.caption}</figcaption>}
@@ -318,28 +328,28 @@ export function ReportPage() {
 
       {confirmJump && (
         <div className={p.confirmBar} role="alert">
-          <span>跳到未读对话「{confirmJump.label}」？</span>
+          <span>{tr('report.confirmJump', { label: confirmJump.label })}</span>
           <span className={p.confirmActions}>
             <button
               type="button"
               className={`${p.pixelButton} ${p.primary}`}
               onClick={() => go(confirmJump)}
             >
-              跳转
+              {tr('report.jump')}
             </button>
             <button
               type="button"
               className={p.pixelButton}
               onClick={() => setConfirmJump(null)}
             >
-              取消
+              {tr('report.cancel')}
             </button>
           </span>
         </div>
       )}
 
       {chapter ? (
-        <ol className={p.segmentList} aria-label="对话逐条索引">
+        <ol className={p.segmentList} aria-label={tr('report.lineIndexAria')}>
           {lines.map((line, index) => {
             const isCurrent = line.key === currentLine?.key;
             const isRead = lineRead(line);
@@ -361,19 +371,34 @@ export function ReportPage() {
                 >
                   <span className={p.segMeta}>
                     <span>
-                      第 {index + 1} 句 · {line.scene.title}
+                      {tr('report.lineMeta', {
+                        n: String(index + 1),
+                        title: line.scene.title,
+                      })}
                     </span>
-                    {isCurrent && <span className={`${p.tagSmall} ${p.tagUnread}`}>当前</span>}
-                    {isUnread && <span className={`${p.tagSmall} ${p.tagUnread}`}>未读</span>}
-                    {!isCurrent && isRead && (
-                      <span className={`${p.tagSmall} ${p.tagRead}`}>已读</span>
+                    {isCurrent && (
+                      <span className={`${p.tagSmall} ${p.tagUnread}`}>
+                        {tr('report.tagCurrent')}
+                      </span>
                     )}
-                    {lockedScene && <span className={p.tagSmall}>锁定</span>}
+                    {isUnread && (
+                      <span className={`${p.tagSmall} ${p.tagUnread}`}>
+                        {tr('report.tagUnread')}
+                      </span>
+                    )}
+                    {!isCurrent && isRead && (
+                      <span className={`${p.tagSmall} ${p.tagRead}`}>
+                        {tr('report.tagRead')}
+                      </span>
+                    )}
+                    {lockedScene && (
+                      <span className={p.tagSmall}>{tr('report.tagLocked')}</span>
+                    )}
                   </span>
                   <span className={p.segText}>
                     {lockedScene
-                      ? '这场对话尚未解锁：先完成前置章节。'
-                      : `${line.speaker}：${line.text}`}
+                      ? tr('report.lineLockedText')
+                      : tr('report.lineText', { speaker: line.speaker, text: line.text })}
                   </span>
                 </button>
               </li>
@@ -381,7 +406,7 @@ export function ReportPage() {
           })}
         </ol>
       ) : (
-        <ol className={p.segmentList} aria-label="报告段落">
+        <ol className={p.segmentList} aria-label={tr('report.segmentsAria')}>
           {report.segments.map((segment) => {
             const isCurrent = segment.id === current;
             const isRead = read.has(segment.id);
@@ -399,17 +424,32 @@ export function ReportPage() {
                 >
                   <span className={p.segMeta}>
                     <span>
-                      {segment.label} · {segment.date}
+                      {tr('report.segmentMeta', {
+                        label: segment.label,
+                        date: segment.date ?? '',
+                      })}
                     </span>
-                    {isCurrent && <span className={`${p.tagSmall} ${p.tagUnread}`}>当前</span>}
-                    {isUnread && <span className={`${p.tagSmall} ${p.tagUnread}`}>未读</span>}
-                    {!isCurrent && isRead && (
-                      <span className={`${p.tagSmall} ${p.tagRead}`}>已读</span>
+                    {isCurrent && (
+                      <span className={`${p.tagSmall} ${p.tagUnread}`}>
+                        {tr('report.tagCurrent')}
+                      </span>
                     )}
-                    {segment.locked && <span className={p.tagSmall}>锁定</span>}
+                    {isUnread && (
+                      <span className={`${p.tagSmall} ${p.tagUnread}`}>
+                        {tr('report.tagUnread')}
+                      </span>
+                    )}
+                    {!isCurrent && isRead && (
+                      <span className={`${p.tagSmall} ${p.tagRead}`}>
+                        {tr('report.tagRead')}
+                      </span>
+                    )}
+                    {segment.locked && (
+                      <span className={p.tagSmall}>{tr('report.tagLocked')}</span>
+                    )}
                   </span>
                   <span className={p.segText}>
-                    {segment.locked ? '已隐去：未归档' : segment.summary}
+                    {segment.locked ? tr('report.segmentLocked') : segment.summary}
                   </span>
                 </button>
               </li>
@@ -419,15 +459,21 @@ export function ReportPage() {
       )}
 
       <footer className={p.articleFoot}>
-        <span>点击任意一句跳转</span>
+        <span>{tr('report.footHint')}</span>
         <span>
           {chapter
             ? currentLine
-              ? `当前：第 ${currentLineIndex + 1} 句 · ${currentLine.scene.title}`
+              ? tr('report.footCurrent', {
+                  n: String(currentLineIndex + 1),
+                  title: currentLine.scene.title,
+                })
               : focusLine
-                ? `读到这里：第 ${focusLineIndex + 1} 句 · ${focusLine.scene.title}`
-                : '本章对话已列完'
-            : `当前：${current}`}
+                ? tr('report.footReadTo', {
+                    n: String(focusLineIndex + 1),
+                    title: focusLine.scene.title,
+                  })
+                : tr('report.footDone')
+            : tr('report.footCurrentSegment', { id: current })}
         </span>
       </footer>
     </article>

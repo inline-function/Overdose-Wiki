@@ -16,3 +16,8 @@ art/
 # python cache
 __pycache__/
 *.pyc
+
+# writing / translation corpus stays local
+/docs/
+/tools/prompts/afterstory/
+/tools/i18n/

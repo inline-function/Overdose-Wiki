@@ -1,0 +1,126 @@
+{
+  "id": "ch04.roshomon",
+  "kind": "testimony-board",
+  "title": "Rashomon: three voices",
+  "subtitle": "Legitimacy battlefield · round one",
+  "intro": "The purge begins. Three complete testimonies, and the archive can only file one first. No judge, only whoever gets written in first.",
+  "closing": "The three accounts tear at each other. The archive keeps them; the truth is not kept.",
+  "doneLabel": "Keep all three accounts",
+  "background": "assets-private/bg/bg_testimony_fracture.png",
+  "rounds": [
+    {
+      "id": "record",
+      "label": "Round one · filing",
+      "prompt": "The purge begins. Three complete testimonies on the table, and the archive can only file one first. Who speaks first?",
+      "choices": [
+        {
+          "id": "fan",
+          "label": "Anti-Gotō: Gotō approached the press himself",
+          "detail": "It reads most like an accusation, and is most easily called taking sides by the Ji camp.",
+          "tag": "Anti-Gotō",
+          "result": "Her version enters the file. The Ji camp says at once: this is a Gotō-camp purge.",
+          "effects": {
+            "chicken": 8,
+            "goto": -10,
+            "trust": -4,
+            "archive": 4,
+            "flags": [
+              "testimony.fan-first"
+            ]
+          }
+        },
+        {
+          "id": "goto",
+          "label": "Gotō: I was only put on the masthead",
+          "detail": "It protects his position and also the part he won't admit.",
+          "tag": "Gotō",
+          "result": "Gotō's version writes him as a passive man. The file is stable; the question is not.",
+          "effects": {
+            "goto": 10,
+            "chicken": -4,
+            "trust": 4,
+            "archive": 6,
+            "flags": [
+              "testimony.goto-first"
+            ]
+          }
+        },
+        {
+          "id": "muyu",
+          "label": "Muyu: I did want to destroy the od scene",
+          "detail": "The ugliest to hear, and the least like a weapon for either side.",
+          "tag": "Muyu",
+          "result": "Muyu's testimony offends both sides. For the first time the file holds a sentence that takes no side.",
+          "effects": {
+            "trust": 10,
+            "archive": 10,
+            "goto": -5,
+            "chicken": -5,
+            "flags": [
+              "testimony.muyu-first"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "label": "Round two · the ending",
+      "prompt": "The three testimonies bite into each other. The ending can only be written one way.",
+      "choices": [
+        {
+          "id": "parallel",
+          "label": "Set all three side by side, no verdict",
+          "detail": "Keep the contradictions exactly as they are.",
+          "tag": "Archive",
+          "result": "The file is thicker and harder for any side to cite. Readers have to judge for themselves.",
+          "effects": {
+            "archive": 14,
+            "trust": 4,
+            "goto": -4,
+            "chicken": -4,
+            "flags": [
+              "testimony.parallel"
+            ]
+          }
+        },
+        {
+          "id": "verifiable",
+          "label": "Write only what can be verified",
+          "detail": "Take out every sentence that can't be checked.",
+          "tag": "Archive",
+          "result": "The file gets thinner, but every sentence can be checked. All three voices come out incomplete.",
+          "effects": {
+            "archive": 8,
+            "trust": 8,
+            "escalation": -1,
+            "flags": [
+              "testimony.verifiable"
+            ]
+          }
+        },
+        {
+          "id": "public",
+          "label": "Hand the contradictions to the public as they are",
+          "detail": "End it for no one; let everyone see three mouths.",
+          "tag": "Bystander",
+          "result": "The public gets three testimonies that slap each other. People start saying: even they can't agree.",
+          "effects": {
+            "trust": -10,
+            "chicken": -4,
+            "goto": -4,
+            "escalation": 1,
+            "flags": [
+              "testimony.public"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "reactions": {
+    "fan": "The Ji camp cuts the anti-Gotō testimony into a \"purge manifesto\". The Gotō camp starts demanding you add Gotō's name.",
+    "goto": "Gotō's version lets the Gotō camp breathe. The Ji camp asks: why can a man only on the masthead speak for the archive?",
+    "muyu": "Muyu's testimony offends both sides. Both start asking: should this part be cut?"
+  }
+}

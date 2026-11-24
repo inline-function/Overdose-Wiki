@@ -1,7 +1,8 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { fakeUrl } from '../../game/routing';
-import { useGameStore } from '../../game/store';
+import { useT } from '../../i18n';
+import { DEFAULT_STATUS, useGameStore } from '../../game/store';
 import styles from './WikiWindow.module.css';
 
 type Mode = 'consent' | 'battle' | 'wiki' | 'afterstory';
@@ -100,6 +101,7 @@ export function WikiWindow({ mode, showAddress, showStatus, children }: Props) {
 }
 
 function TitleBar() {
+  const tr = useT();
   const setStatus = useGameStore((state) => state.setStatus);
   return (
     <header className={styles.titlebar}>
@@ -112,7 +114,7 @@ function TitleBar() {
             tabIndex={-1}
             aria-hidden="true"
             className={styles.titleButton}
-            onClick={() => setStatus('窗口由 ODW 持有，无法关闭。')}
+            onClick={() => setStatus(tr('shell.windowLocked'))}
           >
             {label}
           </button>
@@ -123,14 +125,15 @@ function TitleBar() {
 }
 
 function AddressBar() {
+  const tr = useT();
   const location = useLocation();
   const navigate = useNavigate();
   return (
-    <nav className={styles.addressBar} aria-label="维基地址栏">
+    <nav className={styles.addressBar} aria-label={tr('shell.addressAria')}>
       <button
         type="button"
         className={styles.navButton}
-        aria-label="上一页"
+        aria-label={tr('shell.back')}
         onClick={() => navigate(-1)}
       >
         ←
@@ -138,14 +141,14 @@ function AddressBar() {
       <button
         type="button"
         className={styles.navButton}
-        aria-label="下一页"
+        aria-label={tr('shell.forward')}
         onClick={() => navigate(1)}
       >
         →
       </button>
       <input
         className={styles.addressInput}
-        aria-label="网址"
+        aria-label={tr('shell.urlAria')}
         value={fakeUrl(location.pathname)}
         readOnly
         tabIndex={-1}
@@ -157,19 +160,21 @@ function AddressBar() {
 }
 
 function Sidebar() {
+  const tr = useT();
   return (
-    <aside className={styles.sidebar} aria-label="维基侧栏">
-      <SideLink to="/" label="主页" icon="home" end />
+    <aside className={styles.sidebar} aria-label={tr('shell.sidebarAria')}>
+      <SideLink to="/" label={tr('nav.home')} icon="home" end />
       <span className={styles.sideRule} role="separator" aria-hidden="true" />
-      <SideLink to="/chapters" label="剧情" icon="book" />
-      <SideLink to="/docs" label="文档" icon="page" />
-      <SideLink to="/extras" label="番外" icon="star" />
-      <SideLink to="/settings" label="设置" icon="gear" />
+      <SideLink to="/chapters" label={tr('nav.chapters')} icon="book" />
+      <SideLink to="/docs" label={tr('nav.docs')} icon="page" />
+      <SideLink to="/extras" label={tr('nav.extras')} icon="star" />
+      <SideLink to="/settings" label={tr('nav.settings')} icon="gear" />
     </aside>
   );
 }
 
 function StatusLine({ url }: { url: string }) {
+  const tr = useT();
   const status = useGameStore((state) => state.status);
   const autoRead = useGameStore((state) => state.autoRead);
   const setAutoRead = useGameStore((state) => state.setAutoRead);
@@ -177,7 +182,9 @@ function StatusLine({ url }: { url: string }) {
   const inReplay = useLocation().pathname.includes('/replay/');
   return (
     <footer className={styles.statusline}>
-      <span className={styles.statusText}>{status}</span>
+      <span className={styles.statusText}>
+        {status === DEFAULT_STATUS ? tr('status.default') : status}
+      </span>
       <span className={styles.statusActions}>
         {inReplay && (
           <button
@@ -185,14 +192,14 @@ function StatusLine({ url }: { url: string }) {
             className={styles.statusButton}
             data-on={autoRead}
             aria-pressed={autoRead}
-            title="自动阅读：文字显示完后自动翻到下一句"
+            title={tr('status.autoTitle')}
             onClick={() => {
               const next = !autoRead;
               setAutoRead(next);
-              setStatus(next ? '自动阅读：开' : '自动阅读：关');
+              setStatus(next ? tr('status.autoOn') : tr('status.autoOff'));
             }}
           >
-            自动
+            {tr('status.autoLabel')}
           </button>
         )}
         <span className={styles.statusMeta}>{url}</span>

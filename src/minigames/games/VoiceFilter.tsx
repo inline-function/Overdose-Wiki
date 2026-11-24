@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { VoiceFilterGame, VoiceLine } from '../../content/types';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 const BASE = import.meta.env.BASE_URL;
 const COLORS = ['#f0c866', '#e8e0cc', '#8fa8b8', '#d98f9b', '#a9b88f', '#d8a36a', '#c9b6cf'];
 const COLS = 5;
 const ROWS = 5;
-const DISPEL_LINES = ['一条声音暗下去。', '屏幕上的字少了一点。', '它散了。', '又安静了一格。'];
+const DISPEL_KEYS = ['voice.dispel0', 'voice.dispel1', 'voice.dispel2', 'voice.dispel3'] as const;
 
 type Look = {
   x: number;
@@ -58,6 +59,7 @@ export function VoiceFilter({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [removed, setRemoved] = useState<string[]>([]);
   const [looks] = useState(() => makeLooks(data.voices.length));
   const readyRef = useRef(false);
@@ -73,7 +75,7 @@ export function VoiceFilter({
 
   function dispel(voice: VoiceLine) {
     setRemoved((current) => (current.includes(voice.id) ? current : [...current, voice.id]));
-    onCaption(DISPEL_LINES[removed.length % DISPEL_LINES.length]);
+    onCaption(tr(DISPEL_KEYS[removed.length % DISPEL_KEYS.length]));
   }
 
   return (
@@ -89,7 +91,7 @@ export function VoiceFilter({
       <div className={s.voiceFlowB} aria-hidden="true" />
       <div className={s.voiceVeil} aria-hidden="true" />
       <div className={s.voiceNoise} aria-hidden="true" />
-      <p className={s.voiceHint}>把缠住她的声音一条条按灭。</p>
+      <p className={s.voiceHint}>{tr('voice.hint')}</p>
       {data.voices.map((voice, index) => {
         if (removed.includes(voice.id)) return null;
         const look = looks[index];
@@ -101,7 +103,7 @@ export function VoiceFilter({
             data-testid="voice-ghost"
             data-voice={voice.id}
             data-large={look.large}
-            aria-label={`按灭声音：${voice.text}`}
+            aria-label={tr('voice.muteAria', { text: voice.text })}
             style={
               {
                 left: `${look.x}%`,
@@ -121,7 +123,7 @@ export function VoiceFilter({
         );
       })}
       <div className={s.voiceProgress} data-testid="voice-progress">
-        <span>还在响</span>
+        <span>{tr('voice.ringing')}</span>
         <span className={s.voiceProgressNumber}>{remaining}</span>
       </div>
     </div>

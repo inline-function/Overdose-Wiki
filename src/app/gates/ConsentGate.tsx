@@ -4,7 +4,8 @@ import { useFocusTrap } from '../../game/focus';
 import { useSessionStore } from '../../game/sessionStore';
 import { useConsentStore } from '../../game/consentStore';
 import { useGameStore } from '../../game/store';
-import { CONSENT_SECTIONS } from '../../game/consentText';
+import { consentSections } from '../../game/consentText';
+import { useLocale, useT } from '../../i18n';
 import g from './gates.module.css';
 
 export function ConsentGate() {
@@ -14,6 +15,8 @@ export function ConsentGate() {
   const navigate = useNavigate();
   const location = useLocation();
   const dialogRef = useRef<HTMLDivElement>(null);
+  const t = useT();
+  const sections = consentSections(useLocale());
   useFocusTrap(true, dialogRef);
 
   function enter() {
@@ -36,17 +39,22 @@ export function ConsentGate() {
         aria-labelledby="consent-title"
       >
         <div className={g.consentTitle}>
-          <span id="consent-title">ODW // 事先声明 v2</span>
+          <span id="consent-title">{t('gate.consentTitle')}</span>
           <span className={g.loginClose} aria-hidden="true">
             ×
           </span>
         </div>
         <div className={g.consentHeading}>
-          <strong>在被记录之前</strong>
-          <span>站长：后藤 · 请先读完再进入</span>
+          <strong>{t('gate.consentHeading')}</strong>
+          <span>{t('gate.consentByline')}</span>
         </div>
-        <div className={g.consentBody} tabIndex={0} role="region" aria-label="事先声明正文">
-          {CONSENT_SECTIONS.map((section) => (
+        <div
+          className={g.consentBody}
+          tabIndex={0}
+          role="region"
+          aria-label={t('gate.consentBodyLabel')}
+        >
+          {sections.map((section) => (
             <section key={section.title} className={g.consentSection}>
               <h2>{section.title}</h2>
               <ul>
@@ -59,14 +67,14 @@ export function ConsentGate() {
         </div>
         <div className={g.consentActions}>
           <button type="button" className={g.consentButton} onClick={enter}>
-            同意并进入
+            {t('consent.acceptAndEnter')}
           </button>
           <button
             type="button"
             className={g.consentSecondary}
             onClick={() => navigate('/settings')}
           >
-            设置
+            {t('consent.settings')}
           </button>
         </div>
       </div>

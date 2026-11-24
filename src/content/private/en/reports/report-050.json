@@ -1,0 +1,63 @@
+{
+  "id": "50",
+  "no": 50,
+  "title": "Never Seen Again",
+  "reporter": "Jing",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "167cm, 47.5kg",
+  "drugs": "dextromethorphan, magnesium L-threonate, theanine, pregabalin, dimenhydrinate, amantadine",
+  "edited": "Last edited 2024.05.15T04:34",
+  "segments": [
+    {
+      "id": "report-50-full",
+      "label": "Full text",
+      "date": "2024-05-05",
+      "summary": "The main text has been split into ch03.s01; the file keeps the header, the timeline and the last three lines.",
+      "sceneId": "ch03.s01"
+    }
+  ],
+  "body": [
+    {
+      "type": "list",
+      "items": [
+        "Reporter · Jing",
+        "Handled by · Super Goto-Goto-Gotō",
+        "Height / weight · 167cm, 47.5kg",
+        "Entered · 2024.05.05.16:17",
+        "Supplemented · 2024.05.15.04:34",
+        "Drugs involved · dextromethorphan, magnesium L-threonate, theanine, pregabalin, amantadine"
+      ]
+    },
+    { "type": "h", "text": "Handler's Note" },
+    { "type": "p", "text": "No. 50's main text has been split into ch03. This file keeps the header, the timeline and the last three lines." },
+    { "type": "h", "text": "Timeline" },
+    {
+      "type": "list",
+      "items": [
+        "Date · Event",
+        "2024.02.12 · first long conversation; she asks about quetiapine and alcohol",
+        "2024.02.23 · 'Teacher, what happens if amantadine is taken with alcohol / dying'",
+        "2024.02.23 · 'Don't hey-hey me, that'll be a painful death, take the left-threonate as I said first'",
+        "2024.02.24 · bought theanine and left-threonate",
+        "2024.03.02 · 'can't stand it, I want Umi'; Gotō tests whether left-threonate can counter dependence",
+        "2024.03.06 · 'I still want to have happy dreams'",
+        "2024.03.11 · 'Teacher / maybe today / I'll just say goodbye'",
+        "2024.03.13 · Xiaoyu starts looking for her; 'she hasn't been heard from in 24 hours'",
+        "2024.05.05 · 'disappeared on the most camera-covered street in downtown Beijing'"
+      ]
+    },
+    { "type": "h", "text": "The Last Three Lines" },
+    { "type": "quote", "text": "Teacher\nmaybe today\nI'll just say goodbye" },
+    { "type": "h", "text": "Handler's Note" },
+    { "type": "p", "text": "The file ends: 'Later, we considered the reporter deceased.' Afterwards Gotō asked twice, 'where exactly did it go wrong'. Nobody answered." },
+    { "type": "h", "text": "Related" },
+    {
+      "type": "list",
+      "items": [
+        "Related entries: afterglow, recovery techniques, dissociation",
+        "Related reports: report-051, report-049, report-084",
+        "Related cards: magnesium L-threonate, dextromethorphan, reproduction"
+      ]
+    }
+  ]
+}

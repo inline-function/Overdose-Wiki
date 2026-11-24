@@ -1,0 +1,55 @@
+{
+  "id": "32",
+  "no": 32,
+  "title": "Pregabalin Drove Me to the Edge of Suicide",
+  "reporter": "Anonymous",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "",
+  "drugs": "pregabalin",
+  "edited": "Entered 2024.04.27T22:55",
+  "segments": [
+    {
+      "id": "report-32-full",
+      "label": "Full text",
+      "date": "2024-04-27",
+      "summary": "The main text has been split into side-32; the file keeps the header, the key dates and the cross-references.",
+      "sceneId": "side-32"
+    }
+  ],
+  "body": [
+    {
+      "type": "list",
+      "items": [
+        "Reporter · Anonymous [no authorization to use the name]",
+        "Handled by · Super Goto-Goto-Gotō",
+        "Height / weight · ?cm; from 50kg at the start down to 45kg now",
+        "Entered · 2024.04.27.22:55",
+        "Drugs involved · pregabalin"
+      ]
+    },
+    { "type": "h", "text": "Original Report" },
+    { "type": "quote", "text": "Hello! Sorry to bother you. Last November I felt dextro wasn't interesting enough, so I started on pregabalin..." },
+    { "type": "p", "text": "Reporter: at first it was fine. Until 2024, when I started using it often, and in the last month or two even more. But I have been trying my best to control it." },
+    { "type": "p", "text": "Reporter: since the start of this year I've noticed very clearly that on days I don't take it, all twenty-four hours pass in extreme lows and extreme anxiety, and my thinking and reactions slow down, severe insomnia, nervous exhaustion, seriously degraded memory, mild dissociation. Something that happened two hours ago, if I recall it this second, feels very far away from me." },
+    { "type": "p", "text": "Reporter: I always thought these were my own mental health problems. But after two days of high-dose od on pregabalin in a row, and then one day off today, I felt psychological pain on a scale I've never felt in my life. Extreme low, extreme anxiety, but I don't know what I'm sad about or anxious about; there's no concrete thing worth feeling this way. The pain is no less than any physical or mental pain I thought I'd felt. I feel completely unable to bear it; the suicidal thinking is very, very, very strong." },
+    { "type": "p", "text": "Reporter: I never realised this was the drug. My family is fairly normal, my mother is very accepting and loves me, and I've never been badly hurt growing up — at most a bit introverted and pessimistic. There's no reason for it to turn into this all at once. This afternoon, scrolling the quitting forum, I saw people abusing pregabalin describing experiences similar to what I'm going through, and it hit me: this is addiction, this is withdrawal." },
+    { "type": "p", "text": "Reporter: because I have severe social anxiety, this drug let me feel for the first time that I too could be that talkative. And it isn't as violent as dextro; it makes you slowly happy in a very gentle way, and it helps a lot with sleep. Those are all things I badly need. Usually in the twenty-four hours after using it I feel like a normal person, no mental health problems, no negative feelings; but once the effect and the half-life are completely over, the exact opposite state shows up immediately." },
+    { "type": "p", "text": "Reporter: all the happiness the drug gives you gets paid back within a week after it ends, in the same amount of pain. I've now made up my mind to quit. If you can see this, I'd very much like to hear your quitting advice." },
+    { "type": "p", "text": "Reporter: I really can't take the torment. Two hours ago I swallowed a little. I plan to taper off first, just a little, and an hour later my mood was completely fine. Before I swallowed it I was lying in bed, unable to move at all, not wanting to do anything, annoyed at the thought of having to take care of the new dog I bought, wanting to give it away, annoyed about finding a job, guilty that the dog cost my mother so much money. But an hour after that little bit it was all fine: the dog seemed adorable, I wanted to take care of it for life, finding a job was no big deal, my mother loves me. Amazing that one small tablet can control a person's thoughts to that degree." },
+    { "type": "p", "text": "Reporter: in the past two months I've lost almost ten jin. Within twenty-four hours of taking it I feel very normal, my appetite goes back to normal, I often get very hungry; but the moment I stop, I lose all desire for food, and might eat only a few mouthfuls a day." },
+    { "type": "p", "text": "Reporter: and the classic one: I met up with someone I talk to well online. If I've taken the drug that day, I'm talkative and we have a great time, and you can't see a trace of social anxiety. But the moment I don't, I can only lie in the hotel with him all day, unable to move, and whatever he says to me all I can answer is 'mm, oh, ah, haha', like I'm autistic..." },
+    { "type": "h", "text": "Handler's Note" },
+    { "type": "p", "text": "In his reply Gotō mentioned gabapentin substitution therapy, duloxetine prescribed by a hospital, benzodiazepines for insomnia, and exercise and a healthy life. The reporter said that when she isn't on the drug she loses all capacity to act, to express herself and to want anything — she doesn't want to move and can't — but that she will try to push through." },
+    { "type": "p", "text": "At the end of the original text there was a PubMed case attached: a woman with no psychiatric history who took pregabalin for ten years for nerve pain, and killed herself after stopping." },
+    { "type": "p", "text": "Gotō's analysis was one line: Substance P governs not only anxiety but pain. The reporter had already been washed away by Substance P flooding everything." },
+    { "type": "h", "text": "Related" },
+    {
+      "type": "list",
+      "items": [
+        "Related entries: sedation, recovery techniques, stimulation",
+        "Related reports: report-050, report-084",
+        "Related cards: pregabalin"
+      ]
+    }
+  ]
+}

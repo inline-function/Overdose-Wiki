@@ -1,0 +1,42 @@
+{
+  "id": "余晖",
+  "title": "Afterglow",
+  "tags": ["effect", "afterglow", "special"],
+  "blocks": [
+    { "type": "quote", "text": "That afterglow was like a god giving Teacher Pochi his one and only blessing, and teacher is like Prometheus wanting to bring that flame down to people." },
+    { "type": "p", "text": "The afterglow is a legend inside the OD circle, not a medical term. It refers to an experience that is extremely hard to reproduce: memory surfaces again like reefs after the tide goes out, the thought of suicide is entirely reversed within a few hours, and the person briefly feels they 'can keep living'. It usually appears at the end of a severe overdose, like a layer of light left on the horizon after something has burned out." },
+    { "type": "p", "text": "The afterglow has no recipe." },
+    { "type": "h", "text": "Three Features" },
+    { "type": "p", "text": "### Memory recovery" },
+    { "type": "p", "text": "Not simply 'remembering things', but a whole way of perceiving being handed back." },
+    { "type": "p", "text": "In report 7 Gotō wrote: after that time, he suddenly began automatically recalling the best memories of the past — childhood, New Year, outings, festivals, going back to the old home. He tried to recall a bad thing and found he simply couldn't." },
+    { "type": "p", "text": "Huaishu in report 20 put it more concretely: he remembered the way he used to look at the world as a child, some long-forgotten quirks, what his childhood friends looked like, and the people and things buried under trauma. From that he 'grew up all over again', using his adult thinking to feed back into past wounds. He said the child he was and the adult he is really came together." },
+    { "type": "p", "text": "### Reversal of suicidal ideation" },
+    { "type": "p", "text": "In report 7, the moment the afterglow appeared was only a few lines:" },
+    { "type": "quote", "text": "Suicide felt so meaningless.\nSuddenly I didn't want to die; I wanted to live properly.\nBecause my memory suddenly got better." },
+    { "type": "p", "text": "Gotō later recalled in report 51: 'I, who had wanted to die then, turned straight into a sound person.' He believed the afterglow could intercept people who want to kill themselves; and even after the afterglow, his mood was very, very good." },
+    { "type": "p", "text": "### A brief 'sense of being sound'" },
+    { "type": "p", "text": "In report 84, another person called a similar experience 'a kind of afterglow': waking the next day with tinnitus, the five senses as if expanded, extended; happy all day, 'like a sound person', and it even lasted into the next day." },
+    { "type": "p", "text": "Huaishu in report 20 said this effect goes far beyond dissociation and hallucination; it's a pure feeling of happiness." },
+    { "type": "h", "text": "Why It Has No Recipe" },
+    { "type": "p", "text": "Gotō tried to reproduce it." },
+    { "type": "p", "text": "The second time, he got the exact opposite: extreme forgetfulness, forgetting wherever he walked; depressed enough that 'a single lick of salt would have finished it'. Since then he never took dimenhydrinate again. He recorded the usage that had triggered it, but reproduction failed; he also collected other people's reports — dextro plus Goodnight, dextro plus pregabalin, dextro alone, dextro plus sertraline — and every report challenged the theory, with no unified account to be found." },
+    { "type": "p", "text": "So all he could say was: the afterglow exists like something out of myth." },
+    { "type": "p", "text": "The source text also contained an 'afterglow protocol' which the author himself marked as outdated and proven useless. Anything that writes the afterglow as steps is no longer writing about the afterglow." },
+    { "type": "h", "text": "A Hypothesis, Not an Answer" },
+    { "type": "p", "text": "Gotō's guess was: dextromethorphan is dissociative, left-threonate (magnesium L-threonate) is anti-dissociative; their interaction might explain part of the afterglow. He also mentioned that magnesium L-threonate made him 'feel a trace of afterglow'." },
+    { "type": "p", "text": "Another circulating guess points at the sigma receptor, but it's only a guess. The source text gives no testable unified theory, and this piece won't supply one for it." },
+    { "type": "h", "text": "The Cost of the Afterglow" },
+    { "type": "p", "text": "The afterglow intercepted one suicide, and became the reason for the next experiment." },
+    { "type": "p", "text": "To figure out the trigger, Gotō started testing drugs constantly; Jing treated it as the cause of 'bringing the flame down to people', worshipped him, and contributed his own data; Ayaka went further and further down another line. The more the afterglow resembled a myth, the more willing the people chasing it were to pay." },
+    { "type": "p", "text": "This is where the afterglow is most like a drug: it gives you a brief, unreproducible 'good', and then makes you spend the rest of your life looking for it." },
+    { "type": "h", "text": "Closing" },
+    { "type": "quote", "text": "So the afterglow exists like something out of myth." },
+    { "type": "h", "text": "Related" },
+    { "type": "list", "items": [
+      "Related entries: dissociation, anti-dissociation, SRI, recovery techniques",
+      "Related reports: report-007, report-020, report-051, report-084",
+      "Related cards: reproduction, magnesium L-threonate, dextromethorphan"
+    ] }
+  ]
+}

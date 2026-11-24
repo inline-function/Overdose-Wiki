@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { MemoryDevelopGame } from '../../content/types';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -13,6 +14,7 @@ export function MemoryDevelop({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [visited, setVisited] = useState<string[]>([]);
   const [active, setActive] = useState<string | null>(null);
   const readyRef = useRef(false);
@@ -37,7 +39,7 @@ export function MemoryDevelop({
   return (
     <div className={s.memoryDevelop} data-testid="memory-develop-stage">
       <div className={s.memoryDevelopLine} aria-hidden="true" />
-      <div className={s.memoryDevelopPhotos} role="group" aria-label="没有显影的照片">
+      <div className={s.memoryDevelopPhotos} role="group" aria-label={tr('develop.aria')}>
         {data.photos.map((photo, index) => {
           const done = visited.includes(photo.id);
           return (
@@ -74,12 +76,12 @@ export function MemoryDevelop({
       </div>
       <div className={s.memoryDevelopNote} aria-live="polite">
         {all
-          ? '照片都看过了。最后一张还是空的。'
+          ? tr('develop.all')
           : activePhoto
             ? `此刻：${activePhoto.label}`
             : '点一张照片，让它显影。'}
       </div>
-      <span className={s.memoryDevelopCount} aria-label={`已显影 ${visited.length} 张，共 ${data.photos.length} 张`}>
+      <span className={s.memoryDevelopCount} aria-label={tr('develop.countAria', { a: visited.length, b: data.photos.length })}>
         {visited.length} / {data.photos.length}
       </span>
     </div>

@@ -1,0 +1,45 @@
+{
+  "id": "ch03.afterglow",
+  "kind": "memory-develop",
+  "title": "Afterglow: keep the good weather",
+  "subtitle": "He can only remember the good parts",
+  "intro": "Five undeveloped photos hang in the darkroom. Click one and let it light up. The last one is blank.",
+  "closing": "What the afterglow reaches is only the part he can still remember.",
+  "doneLabel": "Put the photos away",
+  "photos": [
+    {
+      "id": "newyear",
+      "label": "New Year",
+      "line": "Firecrackers go off downstairs. He covers his ears and still hears them.",
+      "image": "assets-private/bg/bg_spring_festival.png",
+      "tone": "warm"
+    },
+    {
+      "id": "play",
+      "label": "Playing",
+      "line": "It didn't rain that day. He ran fast and didn't look back.",
+      "image": "assets-private/bg/bg_wheat_dusk.png",
+      "tone": "warm"
+    },
+    {
+      "id": "festival",
+      "label": "The holiday",
+      "line": "The table is loud. He remembers not saying much.",
+      "image": "assets-private/bg/bg_afterglow_gala.png",
+      "tone": "warm"
+    },
+    {
+      "id": "hometown",
+      "label": "Back home",
+      "line": "The road is long. He fell asleep in the back seat and it still wasn't over when he woke.",
+      "image": "assets-private/bg/bg_afterglow_light.png",
+      "tone": "warm"
+    },
+    {
+      "id": "bad",
+      "label": "Something bad",
+      "line": "He tried to recall something bad. The photo is blank.",
+      "tone": "blank"
+    }
+  ]
+}

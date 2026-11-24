@@ -1,0 +1,53 @@
+{
+  "id": "ch01.trip-timeline",
+  "kind": "trip-timeline",
+  "title": "Twenty-six times",
+  "subtitle": "Report seven, edit page",
+  "intro": "Twenty-six times. It is as if he is cataloguing his own abyss. First put these seven cards back where they happened.",
+  "closing": "Twenty-six times, and only once was afterglow. He calls it a spark.",
+  "doneLabel": "Close report seven",
+  "cards": [
+    {
+      "id": "c3",
+      "label": "The trip to hell, unconscious",
+      "line": "When he woke, there were 17 missed calls on his phone.",
+      "order": 3
+    },
+    {
+      "id": "c1",
+      "label": "First od",
+      "line": "The first time. Rooftop. One blister of dextromethorphan.",
+      "order": 1
+    },
+    {
+      "id": "c6",
+      "label": "The Fifth Plateau",
+      "line": "The five senses dissolve; words become bugs.",
+      "order": 6
+    },
+    {
+      "id": "c4",
+      "label": "The afterglow memory returns",
+      "line": "The only time. Spring Festival, the gala, fireworks.",
+      "order": 4
+    },
+    {
+      "id": "c2",
+      "label": "Second odplus",
+      "line": "The second time. He wanted to see the afterglow again.",
+      "order": 2
+    },
+    {
+      "id": "c7",
+      "label": "The last time",
+      "line": "He has not decided whether there will be a next.",
+      "order": 7
+    },
+    {
+      "id": "c5",
+      "label": "The repeat turns out the opposite",
+      "line": "Amantadine. Delirium. Failure.",
+      "order": 5
+    }
+  ]
+}

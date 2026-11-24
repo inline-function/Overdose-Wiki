@@ -2,12 +2,14 @@ import { use, useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import type { Effect, EffectBlock, Report, ReportBlock } from '../content/types';
 import { effectPromise, getEffectMetas, getReportMetas, hasContent, reportPromise } from '../content/registry';
-import { DRUG_WAR_BODY, DRUG_WAR_BUTTON, DRUG_WAR_HEADING, DRUG_WAR_TITLE } from '../content/drugWar';
+import { drugWarText } from '../content/drugWar';
 import { useGameStore } from '../game/store';
+import { useT } from '../i18n';
 import { DocWriter } from './DocWriter';
 import p from './pages.module.css';
 
 export function DocsPage() {
+  const tr = useT();
   const save = useGameStore((state) => state.save);
   const readDoc = useGameStore((state) => state.readDoc);
   const readEffect = useGameStore((state) => state.readEffect);
@@ -50,16 +52,16 @@ export function DocsPage() {
 
   return (
     <article className={p.page}>
-      <p className={p.kicker}>文档 / 归档</p>
-      <h1 className={p.pageTitle}>文档</h1>
-      <p className={p.p}>这里只显示你亲手写过的文档。空白稿纸会从任务指引里打开。</p>
+      <p className={p.kicker}>{tr('docs.kicker')}</p>
+      <h1 className={p.pageTitle}>{tr('docs.title')}</h1>
+      <p className={p.p}>{tr('docs.intro')}</p>
 
       {written.length === 0 && writtenEffects.length === 0 && !warUnlocked ? (
         <div className={p.docEmpty} role="status">
           <span className={p.docEmptyMark} aria-hidden="true">
             ▢
           </span>
-          <p className={p.small}>还没有文档。任务指引会替你打开一张空白稿纸。</p>
+          <p className={p.small}>{tr('docs.empty')}</p>
         </div>
       ) : (
         <div className={p.archiveGrid}>
@@ -70,23 +72,25 @@ export function DocsPage() {
               className={p.archiveCard}
               onClick={() => setReader(effect.id)}
             >
-              <span className={p.archiveTitle}>效果文档 · {effect.title}</span>
-              <span className={p.archiveMeta}>后藤 / 已编写 · 点击重读</span>
+              <span className={p.archiveTitle}>
+                {tr('docs.effectCard', { title: effect.title })}
+              </span>
+              <span className={p.archiveMeta}>{tr('docs.effectMeta')}</span>
             </button>
           ))}
           {warUnlocked && (
             <button type="button" className={p.archiveCard} onClick={() => setWarOpen(true)}>
-              <span className={p.archiveTitle}>药圈内战</span>
-              <span className={p.archiveMeta}>后藤 / 已解禁 · 点击查看</span>
+              <span className={p.archiveTitle}>{tr('docs.warCard')}</span>
+              <span className={p.archiveMeta}>{tr('docs.warMeta')}</span>
             </button>
           )}
           {written.map((report) => (
             <Link key={report.id} className={p.archiveCard} to={`/report/${report.id}`}>
               <span className={p.archiveTitle}>
-                文档 {report.no} · {report.title}
+                {tr('docs.docCard', { no: String(report.no), title: report.title })}
               </span>
               <span className={p.archiveMeta}>
-                {report.reporter} / {report.edited} · 已编写
+                {tr('docs.docMeta', { reporter: report.reporter, edited: report.edited })}
               </span>
             </Link>
           ))}
@@ -141,6 +145,7 @@ function DocWindow({
   onClose: () => void;
   onWritten: () => void;
 }) {
+  const tr = useT();
   const doc = use(source);
   if (!doc) return null;
   const body: ReportBlock[] | undefined = 'blocks' in doc ? doc.blocks : doc.body;
@@ -156,10 +161,10 @@ function DocWindow({
         className={p.docWindow}
         role="dialog"
         aria-modal="true"
-        aria-label={`写文档：${title}`}
+        aria-label={tr('docs.writeAria', { title })}
       >
         <header className={p.docWindowBar}>
-          <span className={p.docWindowTitle}>文档 · {title}</span>
+          <span className={p.docWindowTitle}>{tr('docs.windowTitle', { title })}</span>
           <span className={p.docWindowControls}>
             <span className={p.docWindowControl} aria-hidden="true">
               —
@@ -170,7 +175,7 @@ function DocWindow({
             <button
               type="button"
               className={p.docWindowClose}
-              aria-label="关闭写文档窗口"
+              aria-label={tr('docs.closeWrite')}
               onClick={(event) => {
                 event.stopPropagation();
                 onClose();
@@ -189,6 +194,8 @@ function DocWindow({
 }
 
 function DrugWarWindow({ onClose }: { onClose: () => void }) {
+  const tr = useT();
+  const war = drugWarText();
   const audioRef = useRef<HTMLAudioElement>(null);
   const settings = useGameStore((state) => state.save.settings);
 
@@ -225,17 +232,19 @@ function DrugWarWindow({ onClose }: { onClose: () => void }) {
         className={`${p.docWindow} ${p.warWindow}`}
         role="dialog"
         aria-modal="true"
-        aria-label={`查看文档：${DRUG_WAR_TITLE}`}
+        aria-label={tr('docs.viewAria', { title: war.title })}
       >
         <header className={p.docWindowBar}>
-          <span className={p.docWindowTitle}>文档 · {DRUG_WAR_TITLE}</span>
+          <span className={p.docWindowTitle}>
+            {tr('docs.windowTitle', { title: war.title })}
+          </span>
           <span className={p.docWindowControls}>
             <span className={p.docWindowControl} aria-hidden="true">—</span>
             <span className={p.docWindowControl} aria-hidden="true">□</span>
             <button
               type="button"
               className={p.docWindowClose}
-              aria-label="关闭药圈内战窗口"
+              aria-label={tr('docs.closeWar')}
               onClick={onClose}
             >
               ×
@@ -243,13 +252,13 @@ function DrugWarWindow({ onClose }: { onClose: () => void }) {
           </span>
         </header>
         <div className={p.docWindowScroll}>
-          <article className={p.warPaper} aria-label="药圈内战正文">
-            <h2 className={p.warHeading}>{DRUG_WAR_HEADING}</h2>
-            {DRUG_WAR_BODY.map((paragraph) => (
+          <article className={p.warPaper} aria-label={tr('docs.warBodyAria')}>
+            <h2 className={p.warHeading}>{war.heading}</h2>
+            {war.body.map((paragraph) => (
               <p key={paragraph.slice(0, 18)} className={p.warParagraph}>{paragraph}</p>
             ))}
             <button type="button" className={p.warButton} onClick={onClose}>
-              {DRUG_WAR_BUTTON}
+              {war.button}
             </button>
           </article>
         </div>
@@ -268,6 +277,7 @@ function DocReader({
   source: Promise<Effect | undefined>;
   onClose: () => void;
 }) {
+  const tr = useT();
   const effect = use(source);
   if (!effect) return null;
   return (
@@ -282,10 +292,10 @@ function DocReader({
         className={p.docWindow}
         role="dialog"
         aria-modal="true"
-        aria-label={`查看文档：${title}`}
+        aria-label={tr('docs.viewAria', { title })}
       >
         <header className={p.docWindowBar}>
-          <span className={p.docWindowTitle}>文档 · {title}</span>
+          <span className={p.docWindowTitle}>{tr('docs.windowTitle', { title })}</span>
           <span className={p.docWindowControls}>
             <span className={p.docWindowControl} aria-hidden="true">
               —
@@ -296,7 +306,7 @@ function DocReader({
             <button
               type="button"
               className={p.docWindowClose}
-              aria-label="关闭文档查看窗口"
+              aria-label={tr('docs.closeView')}
               onClick={(event) => {
                 event.stopPropagation();
                 onClose();
@@ -307,9 +317,9 @@ function DocReader({
           </span>
         </header>
         <div className={p.docWindowScroll} data-doc-scroll>
-          <article className={p.writerPaper} aria-label="文档正文">
+          <article className={p.writerPaper} aria-label={tr('docs.bodyAria')}>
             <h2 className={p.docReadTitle}>{title}</h2>
-            <p className={p.docReadMeta}>后藤 · 已归档</p>
+            <p className={p.docReadMeta}>{tr('docs.readMeta')}</p>
             <DocBlocks blocks={effect.blocks} />
           </article>
         </div>

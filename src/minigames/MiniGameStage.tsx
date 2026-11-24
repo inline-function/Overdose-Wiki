@@ -24,6 +24,7 @@ import { TestimonyBoard } from './games/TestimonyBoard';
 import { RedactDocument } from './games/RedactDocument';
 import { KnowledgeDossier } from './games/KnowledgeDossier';
 import { WarTableHUD } from './WarTableHUD';
+import { useT } from '../i18n';
 import s from './minigame.module.css';
 
 type Props = {
@@ -36,6 +37,7 @@ type Props = {
 };
 
 export function MiniGameStage({ data, onDone, onExit, completed = false, warTable, onWarChange }: Props) {
+  const tr = useT();
   const [ready, setReady] = useState(false);
   const [caption, setCaption] = useState(data.intro);
   const [glitching, setGlitching] = useState(false);
@@ -164,7 +166,7 @@ export function MiniGameStage({ data, onDone, onExit, completed = false, warTabl
           <span className={s.titleIcon} aria-hidden="true">▣</span>
           <span className={s.titleText}>{data.title}</span>
           <span className={s.titleCase}>
-            {completed ? '已收入档案 · ' : ''}
+            {completed ? tr('minigame.recorded') : ''}
             {data.subtitle}
           </span>
           <button
@@ -172,7 +174,7 @@ export function MiniGameStage({ data, onDone, onExit, completed = false, warTabl
             className={s.winBtn}
             onClick={() => { if (!autoClosing) onExit(); }}
             disabled={autoClosing}
-            aria-label="退出玩法"
+            aria-label={tr('minigame.exitAria')}
             data-testid="minigame-exit"
           >
             ×
@@ -198,10 +200,10 @@ export function MiniGameStage({ data, onDone, onExit, completed = false, warTabl
               {glitching
                 ? '……'
                 : afterPost && post
-                  ? (post.doneLabel ?? '关掉')
+                  ? (post.doneLabel ?? tr('minigame.close'))
                   : ready
-                    ? (data.doneLabel ?? '收入档案')
-                    : '还差一点'}
+                    ? (data.doneLabel ?? tr('minigame.file'))
+                    : tr('minigame.notYet')}
             </button>
           </footer>
         </div>

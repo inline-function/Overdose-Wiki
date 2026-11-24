@@ -1,0 +1,20 @@
+{
+  "id": "106",
+  "no": 106,
+  "title": "The Outside Gaze",
+  "reporter": "Super Goto-Goto-Gotō",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "—",
+  "drugs": "—",
+  "edited": "Internal archive",
+  "segments": [
+    { "id": "report-106-full", "label": "Full text", "date": "Internal", "summary": "A site-side document." }
+  ],
+  "body": [
+    { "type": "h", "text": "How We Are Seen" },
+    { "type": "p", "text": "The drug circle was seen by the outside not because of harm reduction, and not because of the psychiatric users, but because of the freak show. Paid interviews, fan edits, ships, corpse-baiting, stalking — the dead become material, the living become traffic." },
+    { "type": "p", "text": "The outside gaze can't see compulsion, can't see the psychiatric users, can't see harm-reduction practice; it only sees the recreational users and the grotesque deaths. Plateau residents get flattened into one image: either a lunatic or a joke." },
+    { "type": "h", "text": "The Reverse of Recording" },
+    { "type": "p", "text": "ODW's record is inside that gaze too. Write too closely and it becomes freak-show material; write too lightly and it becomes whitewashing. The only thing to do is keep the specific person, instead of offering a symbol that's easier to consume." }
+  ]
+}

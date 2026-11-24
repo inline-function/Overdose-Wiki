@@ -1,3 +1,18 @@
+import { getLocale } from '../i18n';
+import {
+  DRUG_WAR_BODY_EN,
+  DRUG_WAR_BUTTON_EN,
+  DRUG_WAR_HEADING_EN,
+  DRUG_WAR_TITLE_EN,
+} from './drugWar.en';
+
+export type DrugWarText = {
+  title: string;
+  heading: string;
+  body: string[];
+  button: string;
+};
+
 export const DRUG_WAR_TITLE = '药圈内战';
 
 export const DRUG_WAR_HEADING = '编辑组拒绝交涉';
@@ -8,3 +23,21 @@ export const DRUG_WAR_BODY = [
 ];
 
 export const DRUG_WAR_BUTTON = '骨肉再次相残。';
+
+/** The civil-war clipping in the current locale. */
+export function drugWarText(): DrugWarText {
+  if (getLocale() === 'en') {
+    return {
+      title: DRUG_WAR_TITLE_EN,
+      heading: DRUG_WAR_HEADING_EN,
+      body: DRUG_WAR_BODY_EN,
+      button: DRUG_WAR_BUTTON_EN,
+    };
+  }
+  return {
+    title: DRUG_WAR_TITLE,
+    heading: DRUG_WAR_HEADING,
+    body: DRUG_WAR_BODY,
+    button: DRUG_WAR_BUTTON,
+  };
+}

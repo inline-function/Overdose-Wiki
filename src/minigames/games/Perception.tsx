@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { PerceptionGame } from '../../content/types';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 const BASE = import.meta.env.BASE_URL;
 const COLORS = ['#f0c866', '#e8e0cc', '#8fa8b8', '#d98f9b', '#7f9a6b', '#5b8fa8', '#e8c87a', '#f2d9cf'];
@@ -26,6 +27,7 @@ export function Perception({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const required = Math.min(data.required ?? 6, data.words.length);
   const [caught, setCaught] = useState<string[]>([]);
   const readyRef = useRef(false);
@@ -53,7 +55,7 @@ export function Perception({
   function catchWord(id: string, note: string | undefined, text: string) {
     if (caught.includes(id)) return;
     setCaught((current) => [...current, id]);
-    onCaption(note ?? `他抓住“${text}”，字很快又散了。`);
+    onCaption(note ?? tr('perception.grab', { text }));
   }
 
   return (
@@ -66,7 +68,7 @@ export function Perception({
       <div className={s.perceptionFlow} aria-hidden="true" />
       <div className={s.perceptionFlowB} aria-hidden="true" />
       <div className={s.perceptionVeil} aria-hidden="true" />
-      <p className={s.perceptionHint}>点住那些快散掉的字 · 至少 {required} 个</p>
+      <p className={s.perceptionHint}>{tr('perception.hint', { n: required })}</p>
       {data.words.map((word, index) => {
         const done = caught.includes(word.id);
         const look = looks[index];
@@ -111,7 +113,7 @@ export function Perception({
       })}
       <div className={s.perceptionProgress} data-testid="perception-progress">
         <span>
-          抓住 {caught.length} / {required}
+          {tr('perception.caught', { a: caught.length, b: required })}
         </span>
         <span className={s.perceptionDots} aria-hidden="true">
           {data.words.map((word) => (

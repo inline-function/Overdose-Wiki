@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { MemoryCollageGame } from '../../content/types';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -13,6 +14,7 @@ export function MemoryCollage({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [revealed, setRevealed] = useState<string[]>([]);
   const [active, setActive] = useState<string | null>(null);
   const lit = revealed.length >= data.fragments.length;
@@ -79,7 +81,7 @@ export function MemoryCollage({
         })}
       </div>
       <div className={s.collageNow} aria-live="polite">
-        {activeFragment ? `此刻：${activeFragment.label}` : '点一段记忆，让它亮起来'}
+        {activeFragment ? tr('collage.current', { label: activeFragment.label }) : tr('collage.pick')}
       </div>
       <span className={s.collageHud}>
         {revealed.length} / {data.fragments.length}

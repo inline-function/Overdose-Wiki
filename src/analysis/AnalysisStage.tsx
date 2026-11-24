@@ -8,18 +8,19 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { gateAudio } from '../audio/gateAudio';
+import { useT } from '../i18n';
 import type { AnalysisBlockKind, AnalysisCase, AnalysisKeyword, AnalysisSlot } from '../content/types';
 import s from './analysis.module.css';
 
 type Phase = 'collect' | 'build' | 'sealed' | 'reveal' | 'restore';
 
-const PHASE_LABEL: Record<Phase, string> = {
-  collect: '解离中',
-  build: '串链中',
-  sealed: '链条闭合',
-  reveal: '点破压抑',
-  restore: '恢复',
-};
+const PHASE_KEY = {
+  collect: 'analysis.phase.collect',
+  build: 'analysis.phase.build',
+  sealed: 'analysis.phase.sealed',
+  reveal: 'analysis.phase.reveal',
+  restore: 'analysis.phase.restore',
+} as const;
 
 /** 只用颜色区分四类积木，不再写字面标签。 */
 const TONE: Record<AnalysisBlockKind, string> = {
@@ -80,6 +81,7 @@ export function AnalysisStage({
   onExit?: () => void;
   headerRight?: ReactNode;
 }) {
+  const tr = useT();
   const required = useMemo(() => requiredBlocks(data), [data]);
   const [collected, setCollected] = useState<string[]>([]);
   const [placed, setPlaced] = useState<Record<string, string>>({});
@@ -149,20 +151,20 @@ export function AnalysisStage({
     setCollected(next);
     const nowAll = [...required].every((blockId) => next.includes(blockId));
     if (nowAll) {
-      setCaption('词都齐了。退出报告，把积木串成链子。');
+      setCaption(tr('analysis.caption.done'));
     }
   }
 
   function closeReport() {
     if (!allCollected) {
       gateAudio.hollow();
-      setHint(`还有 ${requiredCount - collectedCount} 个蓝词没有点：把报告再读一遍。`);
+      setHint(tr('analysis.hint.remaining', { n: requiredCount - collectedCount }));
       return;
     }
     setReportOpen(false);
     setHint(null);
     setPhase('build');
-    setCaption('拖动积木，把它们串成一条链。');
+    setCaption(tr('analysis.caption.drag'));
   }
 
   function clickBlock(blockId: string) {
@@ -179,7 +181,7 @@ export function AnalysisStage({
     if (!slot.accepts.includes(blockId)) {
       gateAudio.broken();
       flash(slot.id);
-      setHint('这一块和这条链对不上。');
+      setHint(tr('analysis.hint.mismatch'));
       return;
     }
     gateAudio.focus();
@@ -196,17 +198,17 @@ export function AnalysisStage({
     nextPlaced[slot.id] = blockId;
     if (Object.keys(nextPlaced).length >= data.slots.length) {
       setPhase('sealed');
-      setCaption('链子合上了。点「点破压抑」，看看被压住的是什么。');
+      setCaption(tr('analysis.caption.sealed'));
     } else {
       const next = nextOpenSlot(data, nextPlaced);
-      if (next?.hint) setCaption(`后藤：${next.hint}`);
+      if (next?.hint) setCaption(tr('analysis.caption.goto', { hint: next.hint }));
     }
   }
 
   function clickSlot(slot: AnalysisSlot) {
     if (placed[slot.id]) {
       if (selected) {
-        setHint('这个位置已经有积木了；先点它取回，再放别的。');
+        setHint(tr('analysis.hint.occupied'));
         return;
       }
       setPlaced((prev) => {
@@ -218,7 +220,7 @@ export function AnalysisStage({
       return;
     }
     if (!selected) {
-      setHint('先从下面拖一块积木，或者先点它再点空位。');
+      setHint(tr('analysis.hint.empty'));
       return;
     }
     tryPlace(slot, selected);
@@ -334,9 +336,16 @@ export function AnalysisStage({
           if (window.performance.now() < suppressClick.current) return;
           clickSlot(slot);
         }}
-        aria-label={`${slot.chain === 'main' ? '主链' : '分支'}空位${block ? `：${block.text}` : '，空'}`}
+        aria-label={block
+          ? tr('analysis.slotFilledAria', {
+              chain: tr(slot.chain === 'main' ? 'analysis.chain.main' : 'analysis.chain.branch'),
+              text: block.text,
+            })
+          : tr('analysis.slotEmptyAria', {
+              chain: tr(slot.chain === 'main' ? 'analysis.chain.main' : 'analysis.chain.branch'),
+            })}
       >
-        <span className={s.slotText}>{block?.text ?? '空'}</span>
+        <span className={s.slotText}>{block?.text ?? tr('analysis.slotEmpty')}</span>
       </button>
     );
   };
@@ -350,18 +359,18 @@ export function AnalysisStage({
       tabIndex={-1}
       role="dialog"
       aria-modal="true"
-      aria-label={`精神分析：${data.title}`}
+      aria-label={tr('analysis.stageAria', { title: data.title })}
     >
       <div className={s.titleBar}>
         <span className={s.titleIcon} aria-hidden="true">▣</span>
-        <span className={s.titleText}>精神分析 · 病例工作台</span>
+        <span className={s.titleText}>{tr('analysis.windowTitle')}</span>
         <span className={s.titleCase}>{data.title}</span>
         <div className={s.titleButtons}>
           <button
             type="button"
             className={s.winBtn}
-            aria-label={minimized ? '展开窗口' : '收起窗口'}
-            title={minimized ? '展开' : '收起'}
+            aria-label={minimized ? tr('analysis.expandAria') : tr('analysis.collapseAria')}
+            title={minimized ? tr('analysis.expand') : tr('analysis.collapse')}
             onClick={() => setMinimized((value) => !value)}
           >
             _
@@ -369,8 +378,8 @@ export function AnalysisStage({
           <button
             type="button"
             className={s.winBtn}
-            aria-label={maximized ? '还原窗口' : '放大窗口'}
-            title={maximized ? '还原' : '放大'}
+            aria-label={maximized ? tr('analysis.restoreAria') : tr('analysis.maximizeAria')}
+            title={maximized ? tr('analysis.restore') : tr('analysis.maximize')}
             onClick={() => setMaximized((value) => !value)}
           >
             □
@@ -379,8 +388,8 @@ export function AnalysisStage({
             type="button"
             className={`${s.winBtn} ${s.exit}`}
             data-testid="analysis-exit"
-            aria-label="退出精神分析"
-            title="退出"
+            aria-label={tr('analysis.exitAria')}
+            title={tr('analysis.exit')}
             onClick={exit}
           >
             ×
@@ -392,7 +401,7 @@ export function AnalysisStage({
         <div className={s.windowBody} data-testid="analysis-stage">
           <header className={s.head}>
             <div className={s.headText}>
-              <p className={s.kicker}>精神分析 · 病例</p>
+              <p className={s.kicker}>{tr('analysis.kicker')}</p>
               <h2 className={s.title}>{data.title}</h2>
               <p className={s.subtitle}>{data.subtitle}</p>
             </div>
@@ -407,10 +416,10 @@ export function AnalysisStage({
                   setReportOpen(true);
                 }}
               >
-                报告全文
+                {tr('analysis.reportFull')}
               </button>
               <span className={s.counter} data-testid="analysis-counter">
-                关键词 {collectedCount}/{requiredCount} · 链条 {filled}/{data.slots.length}
+                {tr('analysis.stats', { a: collectedCount, b: requiredCount, c: filled, d: data.slots.length })}
               </span>
             </div>
           </header>
@@ -423,7 +432,7 @@ export function AnalysisStage({
             <div className={s.boardWrap} data-blur={phase === 'collect' && !reportOpen}>
               <div className={s.board} data-complete={complete}>
                 <div className={s.chain} data-chain="main">
-                  <span className={s.chainTag}>主链</span>
+                  <span className={s.chainTag}>{tr('analysis.chain.main')}</span>
                   {mainSlots.map((item, index) => (
                     <span key={item.id} className={s.chainPart}>
                       {index > 0 ? <span className={s.arrow} aria-hidden="true">→</span> : null}
@@ -432,14 +441,14 @@ export function AnalysisStage({
                   ))}
                 </div>
                 <div className={s.chain} data-chain="branch">
-                  <span className={s.chainTag}>分支</span>
+                  <span className={s.chainTag}>{tr('analysis.chain.branch')}</span>
                   {branchSlots.map((item, index) => (
                     <span key={item.id} className={s.chainPart}>
-                      {index > 0 ? <span className={s.arrow} aria-hidden="true">⇢ 压抑 ⇢</span> : null}
+                      {index > 0 ? <span className={s.arrow} aria-hidden="true">{tr('analysis.arrow.repress')}</span> : null}
                       {slot(item)}
                     </span>
                   ))}
-                  <span className={s.arrow} aria-hidden="true">回到病因</span>
+                  <span className={s.arrow} aria-hidden="true">{tr('analysis.arrow.return')}</span>
                 </div>
               </div>
 
@@ -448,12 +457,12 @@ export function AnalysisStage({
                   ref={trayRef}
                   id="analysis-tray-list"
                   className={s.tray}
-                  aria-label="积木"
+                  aria-label={tr('analysis.trayAria')}
                   data-testid="analysis-tray"
                 >
                   {tray.length === 0 ? (
                     <span className={s.trayEmpty}>
-                      {phase === 'collect' ? '点开报告全文，把蓝词收成积木。' : '积木都放上去了。'}
+                      {phase === 'collect' ? tr('analysis.trayCollect') : tr('analysis.trayBuild')}
                     </span>
                   ) : (
                     tray.map((block) => (
@@ -480,7 +489,7 @@ export function AnalysisStage({
                   type="button"
                   className={`${s.trayScrollButton} ${s.trayScrollUp}`}
                   data-testid="analysis-tray-up"
-                  aria-label="积木列表向上滚动"
+                  aria-label={tr('analysis.trayUp')}
                   aria-controls="analysis-tray-list"
                   onClick={() => scrollTray(-1)}
                 >
@@ -490,7 +499,7 @@ export function AnalysisStage({
                   type="button"
                   className={`${s.trayScrollButton} ${s.trayScrollDown}`}
                   data-testid="analysis-tray-down"
-                  aria-label="积木列表向下滚动"
+                  aria-label={tr('analysis.trayDown')}
                   aria-controls="analysis-tray-list"
                   onClick={() => scrollTray(1)}
                 >
@@ -503,21 +512,21 @@ export function AnalysisStage({
 
           <footer className={s.foot}>
             <p className={s.hint} data-testid="analysis-hint">
-              {hint ?? (phase === 'collect' ? '先点右上角「报告全文」。' : '把积木拖进空位；点已填的格子可以取回。')}
+              {hint ?? (phase === 'collect' ? tr('analysis.hint.start') : tr('analysis.hint.drag'))}
             </p>
             {phase === 'sealed' ? (
               <button type="button" className={s.primary} data-testid="analysis-reveal" onClick={reveal}>
-                点破压抑
+                {tr('analysis.revealButton')}
               </button>
             ) : null}
           </footer>
 
             {reportOpen ? (
-              <div className={s.report} role="dialog" aria-label="报告全文" data-testid="analysis-report">
+              <div className={s.report} role="dialog" aria-label={tr('analysis.reportFull')} data-testid="analysis-report">
                 <div className={s.reportHead}>
                   <span>{data.report.title}</span>
                   <button type="button" className={s.ghost} onClick={() => setReportOpen(false)}>
-                    收起
+                    {tr('analysis.reportCollapse')}
                   </button>
                 </div>
                 <div className={s.reportBody}>
@@ -526,14 +535,14 @@ export function AnalysisStage({
                   ))}
                 </div>
                 <div className={s.reportFoot}>
-                  <span className={s.reportHint}>点蓝词，把它收成积木。</span>
+                  <span className={s.reportHint}>{tr('analysis.reportHint')}</span>
                   <button
                     type="button"
                     className={s.darkBtn}
                     data-testid="analysis-report-close"
                     onClick={closeReport}
                   >
-                    退出报告（{collectedCount}/{requiredCount}）
+                    {tr('analysis.reportExit', { a: collectedCount, b: requiredCount })}
                   </button>
                 </div>
               </div>
@@ -556,16 +565,16 @@ export function AnalysisStage({
                       data-testid="analysis-continue"
                       onClick={() => setPhase('restore')}
                     >
-                      继续
+                      {tr('analysis.continue')}
                     </button>
                   </>
                 ) : (
                   <>
-                    <p className={s.restoreTitle}>恢复</p>
+                    <p className={s.restoreTitle}>{tr('analysis.restoreTitle')}</p>
                     <p className={s.restoreText}>{data.restore.text}</p>
                     <p className={s.annotation}>{data.restore.annotation}</p>
                     <button type="button" className={s.primary} data-testid="analysis-done" onClick={finish}>
-                      合上笔记本
+                      {tr('analysis.closeNotebook')}
                     </button>
                   </>
                 )}
@@ -576,8 +585,8 @@ export function AnalysisStage({
       )}
 
       <div className={s.statusBar}>
-        <span>{PHASE_LABEL[phase]}</span>
-        <span>病例 · ESC 退出 · 拖拽积木入槽</span>
+        <span>{tr(PHASE_KEY[phase])}</span>
+        <span>{tr('analysis.statusBar')}</span>
       </div>
     </section>
   );

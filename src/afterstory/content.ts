@@ -1,3 +1,11 @@
+import { getLocale } from '../i18n';
+import {
+  CLAUSES_EN,
+  DEATH_INTERLUDE_EN,
+  ENDINGS_EN,
+  EXTERNAL_EVENTS_EN,
+  TURN_CONTENT_EN,
+} from './content.en';
 import type {
   ClauseId,
   Effect,
@@ -681,4 +689,43 @@ export const ENDING_ORDER: EndingId[] = [
 
 export function replyOptions(visitor: Visitor): ReplyOption[] {
   return visitor.options;
+}
+
+/* ---------- locale-aware accessors ----------
+ * The Chinese tables above stay the source of truth for structure; the English
+ * file only replaces prose. src/test/afterstory-i18n.test.ts compares both. */
+
+function en(): boolean {
+  return getLocale() === 'en';
+}
+
+export function turnContentAt(turn: number): TurnContent {
+  const table = en() ? TURN_CONTENT_EN : TURN_CONTENT;
+  return table[Math.min(TURN_COUNT - 1, Math.max(0, turn - 1))];
+}
+
+export function deathInterlude() {
+  return en() ? DEATH_INTERLUDE_EN : DEATH_INTERLUDE;
+}
+
+export function externalEventList(): ExternalEvent[] {
+  return en() ? EXTERNAL_EVENTS_EN : EXTERNAL_EVENTS;
+}
+
+export function clauseList(): ClauseContent[] {
+  return en() ? CLAUSES_EN : CLAUSES;
+}
+
+export function clauseById(id: ClauseId): ClauseContent {
+  const table = en() ? CLAUSES_EN : CLAUSES;
+  return table.find((clause) => clause.id === id) ?? CLAUSES[0];
+}
+
+export function endingContent(id: EndingId) {
+  const table = en() ? ENDINGS_EN : ENDINGS;
+  return table[id];
+}
+
+export function endingContentAll() {
+  return en() ? ENDINGS_EN : ENDINGS;
 }

@@ -2,32 +2,37 @@ import { Link } from 'react-router-dom';
 import { getChapterMeta, getExtraStoryMetas, getReportMeta } from '../content/registry';
 import { useGameStore } from '../game/store';
 import { isSceneUnlocked, unlockHint } from '../game/unlocks';
+import { useT } from '../i18n';
 import p from './pages.module.css';
 
 export function ExtrasPage() {
+  const tr = useT();
   const setStatus = useGameStore((state) => state.setStatus);
   const save = useGameStore((state) => state.save);
   const contactStories = getExtraStoryMetas();
   const sideScenes = (getChapterMeta('side')?.scenes ?? []).filter(
     (scene) => scene.id !== 'side-83',
   );
-  const hasChat = Boolean(getReportMeta('20'));
+  const chatReport = getReportMeta('20');
   const chatRead = save.read['20']?.includes('chat-20') ?? false;
 
   return (
     <article className={p.page}>
-      <p className={p.kicker}>番外 / 记录</p>
-      <h1 className={p.pageTitle}>番外</h1>
-      <p className={p.p}>
-        不进主线的聊天记录、联络人通信与散页；散页统一按聊天记录排版。锁定条目只显示编号与状态。
-      </p>
+      <p className={p.kicker}>{tr('extras.kicker')}</p>
+      <h1 className={p.pageTitle}>{tr('extras.title')}</h1>
+      <p className={p.p}>{tr('extras.intro')}</p>
 
       <div className={p.extrasGrid}>
-        {hasChat ? (
+        {chatReport ? (
           <Link className={p.extraCard} to="/extras/20">
-            <span className={p.extraTitle}>20 · 至此证明完毕</span>
+            <span className={p.extraTitle}>
+              {chatReport.no} · {chatReport.title}
+            </span>
             <span className={p.extraMeta}>
-              槐树 / 后藤 · 聊天记录 · {chatRead ? '已读' : '约 6 分钟'}
+              {tr('extras.metaChat', {
+                who: tr('extras.chat20Who'),
+                state: chatRead ? tr('extras.stateRead') : tr('extras.stateMinutes'),
+              })}
             </span>
           </Link>
         ) : null}
@@ -41,8 +46,10 @@ export function ExtrasPage() {
                 {isContact ? `${story.id} · ${story.title}` : story.title}
               </span>
               <span className={p.extraMeta}>
-                {isContact ? '联络人通信' : '番外'} · {story.date} ·{' '}
-                {read ? '已读' : '约 6 分钟'}
+                {tr(isContact ? 'extras.metaContact' : 'extras.metaExtra', {
+                  date: story.date,
+                  state: read ? tr('extras.stateRead') : tr('extras.stateMinutes'),
+                })}
               </span>
             </Link>
           );
@@ -63,7 +70,9 @@ export function ExtrasPage() {
                 {report.no} · {report.title}
               </span>
               <span className={p.extraMeta}>
-                散页改排 · 聊天记录 · {read ? '已读' : '未读'}
+                {tr('extras.metaLoose', {
+                  state: read ? tr('extras.stateRead') : tr('extras.stateUnread'),
+                })}
               </span>
             </Link>
           ) : (
@@ -77,13 +86,15 @@ export function ExtrasPage() {
               <span className={p.extraTitle}>
                 {report.no} · {report.title}
               </span>
-              <span className={p.extraMeta}>散页改排 / {unlockHint(report)}</span>
+              <span className={p.extraMeta}>
+                {tr('extras.metaLooseLocked', { hint: unlockHint(report) })}
+              </span>
             </button>
           );
         })}
       </div>
 
-      <p className={p.versionLine}>本页只收录聊天记录；报告与文档仍在档案页。</p>
+      <p className={p.versionLine}>{tr('extras.versionLine')}</p>
     </article>
   );
 }

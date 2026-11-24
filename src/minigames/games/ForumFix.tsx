@@ -2,12 +2,16 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ForumFixGame } from '../../content/types';
 import { shuffleOptions } from '../shuffle';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
+
+type Tr = ReturnType<typeof useT>;
 
 function renderPost(
   body: string,
   errors: ForumFixGame['errors'],
   replied: string[],
   activeId: string | null,
+  tr: Tr,
 ) {
   return body.split(/(\[\[e\d+\]\])/g).map((part, index) => {
     const match = part.match(/^\[\[(e\d+)\]\]$/);
@@ -23,7 +27,7 @@ function renderPost(
         data-testid={done ? 'forum-replied' : 'forum-error'}
         data-error={id}
         data-active={id === activeId}
-        title={done ? '后藤已在下方回复' : '保留原帖，只在下方回复'}
+        title={done ? tr('forum.replied') : tr('forum.keepOnly')}
       >
         {error.phrase}
       </span>
@@ -40,6 +44,7 @@ export function ForumFix({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [replied, setReplied] = useState<string[]>([]);
   const threadRef = useRef<HTMLDivElement>(null);
   const order = useMemo(() => Object.keys(data.errors), [data.errors]);
@@ -71,7 +76,7 @@ export function ForumFix({
 
   function roleFor(id: string): string {
     const post = data.posts.find((item) => item.body.includes(`[[${id}]]`));
-    return post?.role ?? '原帖';
+    return post?.role ?? tr('forum.original');
   }
 
   function choose(option: string) {
@@ -95,7 +100,7 @@ export function ForumFix({
               <span className={s.postRole}>{post.role}</span>
             </div>
             <p className={s.postBody}>
-              {renderPost(post.body, data.errors, replied, activeId)}
+              {renderPost(post.body, data.errors, replied, activeId, tr)}
             </p>
           </article>
         ))}
@@ -111,8 +116,8 @@ export function ForumFix({
                 data-error={id}
               >
                 <div className={s.postAuthor}>
-                  <span>后藤</span>
-                  <span className={s.postRole}>回复 {roleFor(id)}</span>
+                  <span>{tr('forum.goto')}</span>
+                  <span className={s.postRole}>{tr('forum.reply', { role: roleFor(id) })}</span>
                 </div>
                 <p className={s.postBody}>
                   <span className={s.replyQuote}>「{item.phrase}」</span>
@@ -127,7 +132,7 @@ export function ForumFix({
         {error ? (
           <>
             <p className={s.correctionPrompt}>
-              回复 {roleFor(activeId ?? '')}：{error.phrase} → 应该怎么回？
+              {tr('forum.replyPrompt', { role: roleFor(activeId ?? ''), phrase: error.phrase })}
             </p>
             <div className={s.optionRow}>
               {options.map((option) => (
@@ -142,11 +147,11 @@ export function ForumFix({
                 </button>
               ))}
             </div>
-            <p className={s.correctionHint}>原帖不改，只在下面回。回完一条，下一条才会浮上来。</p>
+            <p className={s.correctionHint}>{tr('forum.hint')}</p>
           </>
         ) : (
           <p className={s.correctionPrompt}>
-            {all ? data.closing : '等一等，下一条回复正在浮上来。'}
+            {all ? data.closing : tr('forum.waiting')}
           </p>
         )}
       </div>

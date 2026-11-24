@@ -1,6 +1,7 @@
 import type { Save } from './types';
 import { getChapterMeta } from '../content/registry';
 import { isChapterUnlocked } from './unlocks';
+import { t } from '../i18n';
 import { questFor, taskDone } from './quests';
 import { CHAPTER_REPORT } from './routing';
 
@@ -15,6 +16,18 @@ export type Guide = {
 };
 
 const ORDER = ['ch01', 'ch02', 'ch03', 'ch04'] as const;
+
+const CHAPTER_KEYS = {
+  ch01: 'guide.chapter.ch01',
+  ch02: 'guide.chapter.ch02',
+  ch03: 'guide.chapter.ch03',
+  ch04: 'guide.chapter.ch04',
+} as const;
+
+function chapterName(id: string): string {
+  const key = CHAPTER_KEYS[id as keyof typeof CHAPTER_KEYS];
+  return key ? t(key) : id;
+}
 
 const CHAPTER_NAME: Record<string, string> = {
   ch01: '第一章',
@@ -65,8 +78,8 @@ export function nextGuide(save: Save): Guide | null {
       if (!meta) continue;
       return {
         title: quest.title,
-        step: `开始${CHAPTER_NAME[chapterId] ?? chapterId}`,
-        action: '继续剧情',
+        step: t('guide.startChapter', { chapter: chapterName(chapterId) }),
+        action: t('guide.continueStory'),
         to: `/report/${CHAPTER_REPORT[chapterId] ?? '7'}/replay/${meta.firstScene}`,
         done,
         total,
@@ -79,8 +92,8 @@ export function nextGuide(save: Save): Guide | null {
     const next = tasks.find((item) => !item.done)!;
     return {
       title: quest.title,
-      step: `编写${next.task.label.replace(/^(阅读|编写|归档)/, '')}`,
-      action: '去编写',
+      step: t('guide.writeTask', { label: next.task.label }),
+      action: t('guide.goWrite'),
       to:
         next.task.kind === 'doc'
           ? `/docs?write=${next.task.ref}`
@@ -93,9 +106,9 @@ export function nextGuide(save: Save): Guide | null {
   const sceneId = save.progress.sceneId;
   if (sceneId && !save.completedScenes.includes(sceneId)) {
     return {
-      title: '继续剧情',
-      step: `接着读 · ${sceneId}`,
-      action: '继续剧情',
+      title: t('guide.continueTitle'),
+      step: t('guide.readOn', { scene: sceneId }),
+      action: t('guide.continueAction'),
       to: `/report/${save.progress.reportId ?? '7'}/replay/${sceneId}`,
       done: 0,
       total: 0,
@@ -103,9 +116,9 @@ export function nextGuide(save: Save): Guide | null {
   }
   if (save.completedScenes.length === 0) return null;
   return {
-    title: '归档完成',
-    step: '所有任务都已完成，去剧情里走走。',
-    action: '去剧情',
+    title: t('guide.doneTitle'),
+    step: t('guide.doneStep'),
+    action: t('guide.doneAction'),
     to: '/chapters',
     done: 1,
     total: 1,

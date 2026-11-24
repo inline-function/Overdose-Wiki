@@ -1,0 +1,137 @@
+{
+  "id": "ch04.redact",
+  "kind": "redact-document",
+  "title": "Public document: the only thing you can delete is a name",
+  "subtitle": "Archive politics · black-bar budget 4",
+  "intro": "Before it goes public, decide who this record protects and what evidence it keeps. There are only four bars.",
+  "closing": "The document is public. The only thing you can delete is a name; what can't be deleted stays in the file.",
+  "doneLabel": "Publish the repost edition",
+  "background": "assets-private/bg/bg_doc_fracture.png",
+  "documentTitle": "Statement on the events of September 2025 (repost edition)",
+  "budget": 4,
+  "minPublic": 3,
+  "lines": [
+    {
+      "id": "head",
+      "text": "Statement on the events of September 2025",
+      "stake": "record",
+      "note": "Keep the title, or the file won't recognise itself.",
+      "redactEffects": {
+        "archive": -2
+      },
+      "keepEffects": {
+        "archive": 2
+      }
+    },
+    {
+      "id": "byline",
+      "text": "Byline: Super-Go-Go-Gotō",
+      "stake": "record",
+      "note": "The byline is public; deleting it only strips the repost of its source.",
+      "redactEffects": {
+        "archive": -2
+      },
+      "keepEffects": {
+        "archive": 2
+      }
+    },
+    {
+      "id": "account",
+      "text": "Xiaowu's account: [account]",
+      "stake": "person",
+      "note": "Once the account is out, changing accounts won't change how fast they find you.",
+      "redactEffects": {
+        "trust": 4,
+        "archive": -6,
+        "flags": [
+          "doc.protected-account"
+        ]
+      },
+      "keepEffects": {
+        "trust": -8,
+        "escalation": 1
+      }
+    },
+    {
+      "id": "address",
+      "text": "Where he lives: [address]",
+      "stake": "person",
+      "note": "An address is not evidence. It is a coordinate.",
+      "redactEffects": {
+        "trust": 4,
+        "archive": -6,
+        "flags": [
+          "doc.protected-address"
+        ]
+      },
+      "keepEffects": {
+        "trust": -8,
+        "escalation": 1
+      }
+    },
+    {
+      "id": "quote",
+      "text": "Muyu said in the interview: \"My goal is to destroy the od scene.\"",
+      "stake": "evidence",
+      "note": "This sentence can pin Muyu down, and it can be flipped into the title of the whole purge.",
+      "redactEffects": {
+        "archive": -8,
+        "trust": -2
+      },
+      "keepEffects": {
+        "archive": 8,
+        "trust": -2,
+        "escalation": 1,
+        "flags": [
+          "doc.published-quote"
+        ]
+      }
+    },
+    {
+      "id": "dm",
+      "text": "A DM someone sent me: [DM]",
+      "stake": "person",
+      "note": "The DM may hold the truth, and another person's name.",
+      "redactEffects": {
+        "trust": 3,
+        "archive": -5,
+        "flags": [
+          "doc.protected-dm"
+        ]
+      },
+      "keepEffects": {
+        "trust": -6,
+        "escalation": 1
+      }
+    },
+    {
+      "id": "dox",
+      "text": "Brother Ji's dox content: [link]",
+      "stake": "person",
+      "note": "Publishing it is writing the template for the next dox.",
+      "redactEffects": {
+        "trust": 5,
+        "archive": -7,
+        "flags": [
+          "doc.protected-dox"
+        ]
+      },
+      "keepEffects": {
+        "trust": -10,
+        "escalation": 1
+      }
+    },
+    {
+      "id": "date",
+      "text": "Published on 7 December 2025.",
+      "stake": "record",
+      "note": "Keep the date, or the file has no timeline.",
+      "redactEffects": {
+        "archive": -2
+      },
+      "keepEffects": {
+        "archive": 2
+      }
+    }
+  ]
+}

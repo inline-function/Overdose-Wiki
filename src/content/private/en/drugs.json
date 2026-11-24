@@ -1,0 +1,352 @@
+{
+  "ethanol": {
+    "name": "Ethanol",
+    "aliases": [],
+    "summary": "Brief relaxation, then rebound.",
+    "description": "The most common sedative. A single use buys only a very short calm; an overdose presses down breathing, and stopping brings withdrawal.",
+    "withdrawalLog": "Alcohol rebound withdrawal begins."
+  },
+  "nicotine": {
+    "name": "Nicotine",
+    "aliases": [],
+    "summary": "A short lift, then a quick drop.",
+    "description": "The stimulant in tobacco. One use gives a little action; too much brings palpitations and agitation.",
+    "withdrawalLog": "Nicotine withdrawal begins."
+  },
+  "arecoline": {
+    "name": "Arecoline",
+    "aliases": [],
+    "summary": "The stimulant alkaloid in betel nut.",
+    "description": "One use gives a little action; too much slides into cholinergic overload and agitation."
+  },
+  "caffeine": {
+    "name": "Caffeine",
+    "aliases": [],
+    "summary": "The most used stimulant.",
+    "description": "One use buys 1 action point; too much brings palpitations and anxiety, then tolerance and withdrawal.",
+    "withdrawalLog": "Caffeine withdrawal: headache and fatigue."
+  },
+  "magnesium_threonate": {
+    "name": "Magnesium L-threonate",
+    "aliases": [
+      "Left-Su"
+    ],
+    "summary": "Left-Su: part of the anti-dissociation and recovery kit.",
+    "description": "One use clears a little dissociation and lets glutamate fall back toward baseline. Repeated use does not trigger extra effects."
+  },
+  "diphenhydramine": {
+    "name": "Diphenhydramine",
+    "aliases": [],
+    "summary": "Antihistamine and sedative.",
+    "description": "One use helps you sleep and holds down some agitation; too much brings anticholinergic effects and clouded consciousness."
+  },
+  "dimenhydrinate": {
+    "name": "Dimenhydrinate",
+    "aliases": [],
+    "summary": "Motion-sickness pill, and a sedative.",
+    "description": "One use holds down nausea and agitation; too much brings delirium and anticholinergic effects."
+  },
+  "omeprazole": {
+    "name": "Omeprazole",
+    "aliases": [],
+    "summary": "Stomach lining protection.",
+    "description": "One use makes the body a little more comfortable; it does not touch the mind directly, but it slows the metabolism of some drugs."
+  },
+  "melatonin": {
+    "name": "Melatonin",
+    "aliases": [],
+    "summary": "Sleep rhythm.",
+    "description": "One use helps you sleep and restores a little psyche; too much just makes you sleepier."
+  },
+  "amantadine": {
+    "name": "Amantadine",
+    "aliases": [],
+    "summary": "Antiviral and antiparkinson drug; delirium in overdose.",
+    "description": "One use gives a little action; too much brings anticholinergic effects and delirium."
+  },
+  "memantine": {
+    "name": "Memantine",
+    "aliases": [],
+    "summary": "NMDA antagonist; misused as a dissociative.",
+    "description": "One use lets glutamate fall and clears a little dissociation; too much brings dissociation and delirium."
+  },
+  "nefopam": {
+    "name": "Nefopam",
+    "aliases": [],
+    "summary": "Non-opioid analgesic with anticholinergic side effects.",
+    "description": "One use eases physical pain; too much brings anticholinergic effects and agitation."
+  },
+  "fluoxetine": {
+    "name": "Fluoxetine",
+    "aliases": [],
+    "summary": "One of the five golden flowers; a long-acting SSRI.",
+    "description": "One use starts an SSRI course; too much pushes serotonin past the threshold. It also inhibits CYP2D6.",
+    "withdrawalLog": "SSRI discontinuation rebound."
+  },
+  "sertraline": {
+    "name": "Sertraline",
+    "aliases": [],
+    "summary": "One of the five golden flowers.",
+    "description": "One use starts an SSRI course; too much pushes serotonin past the threshold.",
+    "withdrawalLog": "SSRI discontinuation rebound."
+  },
+  "paroxetine": {
+    "name": "Paroxetine",
+    "aliases": [],
+    "summary": "One of the five golden flowers; marked discontinuation effects.",
+    "description": "One use starts an SSRI course; too much pushes serotonin past the threshold.",
+    "withdrawalLog": "Paroxetine discontinuation is markedly rough."
+  },
+  "fluvoxamine": {
+    "name": "Fluvoxamine",
+    "aliases": [],
+    "summary": "One of the five golden flowers; broad CYP inhibition.",
+    "description": "One use starts an SSRI course; too much pushes serotonin past the threshold.",
+    "withdrawalLog": "SSRI discontinuation rebound."
+  },
+  "citalopram": {
+    "name": "Citalopram",
+    "aliases": [],
+    "summary": "One of the five golden flowers.",
+    "description": "One use starts an SSRI course; too much pushes serotonin past the threshold.",
+    "withdrawalLog": "SSRI discontinuation rebound."
+  },
+  "venlafaxine": {
+    "name": "Venlafaxine",
+    "aliases": [],
+    "summary": "SNRI; marked discontinuation effects.",
+    "description": "One use starts an SNRI course; too much pushes serotonin and noradrenaline up together.",
+    "withdrawalLog": "SNRI discontinuation rebound."
+  },
+  "duloxetine": {
+    "name": "Duloxetine",
+    "aliases": [],
+    "summary": "SNRI; also used for nerve pain.",
+    "description": "One use starts an SNRI course; too much pushes serotonin and noradrenaline up together.",
+    "withdrawalLog": "SNRI discontinuation rebound."
+  },
+  "bupropion": {
+    "name": "Bupropion",
+    "aliases": [],
+    "summary": "NDRI antidepressant with a stimulant edge.",
+    "description": "One use gives a little action and psyche; too much brings agitation and palpitations."
+  },
+  "quetiapine": {
+    "name": "Quetiapine",
+    "aliases": [],
+    "summary": "Atypical antipsychotic; low doses are often used for sleep.",
+    "description": "One use holds down delirium and agitation; too much brings sedation and anticholinergic effects."
+  },
+  "naloxone": {
+    "name": "Naloxone",
+    "aliases": [],
+    "summary": "Opioid antagonist.",
+    "description": "One use clears respiratory depression and pulls endorphins back; repeated use does not trigger extra effects."
+  },
+  "flumazenil": {
+    "name": "Flumazenil",
+    "aliases": [],
+    "summary": "Benzodiazepine antagonist.",
+    "description": "One use clears sedation; repeated use does not trigger extra effects."
+  },
+  "trihexyphenidyl": {
+    "name": "Trihexyphenidyl",
+    "aliases": [],
+    "summary": "Anticholinergic drug.",
+    "description": "One use eases physical stiffness; too much brings delirium and anticholinergic effects."
+  },
+  "promethazine": {
+    "name": "Promethazine",
+    "aliases": [],
+    "summary": "Antihistamine and sedative.",
+    "description": "One use holds down agitation; too much brings anticholinergic effects and delirium."
+  },
+  "tramadol": {
+    "name": "Tramadol",
+    "aliases": [],
+    "summary": "Weak opioid analgesic that also touches serotonin and noradrenaline.",
+    "description": "One use eases physical pain; too much depresses breathing and pushes serotonin up."
+  },
+  "mirtazapine": {
+    "name": "Mirtazapine",
+    "aliases": [],
+    "summary": "Antidepressant, distinctly sedating.",
+    "description": "One use restores psyche and sleep; too much brings sedation and metabolic load."
+  },
+  "trazodone": {
+    "name": "Trazodone",
+    "aliases": [],
+    "summary": "Antidepressant, low doses often used for sleep.",
+    "description": "One use helps you sleep; too much brings sedation and a serotonin load."
+  },
+  "gabapentin": {
+    "name": "Gabapentin",
+    "aliases": [],
+    "summary": "Antiepileptic and nerve-pain drug.",
+    "description": "One use lowers anxiety; too much sedates."
+  },
+  "olanzapine": {
+    "name": "Olanzapine",
+    "aliases": [],
+    "summary": "Atypical antipsychotic.",
+    "description": "One use holds down agitation and delirium; too much brings sedation and anticholinergic effects."
+  },
+  "haloperidol": {
+    "name": "Haloperidol",
+    "aliases": [],
+    "summary": "Typical antipsychotic.",
+    "description": "One use holds down delirium; too much brings sedation and extrapyramidal load."
+  },
+  "scopolamine": {
+    "name": "Scopolamine",
+    "aliases": [],
+    "summary": "Anticholinergic drug.",
+    "description": "One use eases nausea and motion sickness; too much brings delirium and anticholinergic effects."
+  },
+  "lithium": {
+    "name": "Lithium carbonate",
+    "aliases": [],
+    "summary": "Mood stabiliser with a very narrow window.",
+    "description": "One use steadies the psyche; too much brings toxicity, delirium and physical damage."
+  },
+  "dextromethorphan": {
+    "name": "Dextromethorphan",
+    "aliases": [],
+    "summary": "Cough suppressant; a dissociative at high doses.",
+    "description": "One use lets glutamate fall; too much brings heavy dissociation, and it turns on itself."
+  },
+  "pregabalin": {
+    "name": "Pregabalin",
+    "aliases": [],
+    "summary": "Antiepileptic and anxiolytic; stopping hits hard.",
+    "description": "One use holds down agitation; too much brings sedation and respiratory depression.",
+    "withdrawalLog": "Pregabalin withdrawal hits hard."
+  },
+  "alprazolam": {
+    "name": "Alprazolam",
+    "aliases": [],
+    "summary": "Short-acting benzodiazepine.",
+    "description": "One use holds down agitation; too much brings sedation and respiratory depression.",
+    "withdrawalLog": "Benzodiazepine withdrawal."
+  },
+  "clonazepam": {
+    "name": "Clonazepam",
+    "aliases": [],
+    "summary": "Long-acting benzodiazepine.",
+    "description": "One use holds down agitation; too much brings sedation and respiratory depression.",
+    "withdrawalLog": "Benzodiazepine withdrawal."
+  },
+  "zolpidem": {
+    "name": "Zolpidem",
+    "aliases": [],
+    "summary": "Hypnotic; vivid dreams and sleepwalking are commonly reported.",
+    "description": "One use helps you sleep; too much brings sedation and delirium.",
+    "withdrawalLog": "Zolpidem rebound insomnia."
+  },
+  "esketamine": {
+    "name": "Esketamine",
+    "aliases": [],
+    "summary": "Dissociative; recently used for treatment-resistant depression.",
+    "description": "One use brings brief dissociation and restores psyche; too much brings heavy dissociation and a backlash."
+  },
+  "ketamine": {
+    "name": "Ketamine",
+    "aliases": [],
+    "summary": "Dissociative.",
+    "description": "One use brings brief dissociation; too much brings heavy dissociation and a psychic backlash."
+  },
+  "diazepam": {
+    "name": "Diazepam",
+    "aliases": [],
+    "summary": "Long-acting benzodiazepine.",
+    "description": "One use holds down agitation; too much brings sedation and respiratory depression.",
+    "withdrawalLog": "Benzodiazepine withdrawal."
+  },
+  "lorazepam": {
+    "name": "Lorazepam",
+    "aliases": [],
+    "summary": "Intermediate-acting benzodiazepine.",
+    "description": "One use holds down agitation; too much brings sedation and respiratory depression.",
+    "withdrawalLog": "Benzodiazepine withdrawal."
+  },
+  "zopiclone": {
+    "name": "Eszopiclone",
+    "aliases": [],
+    "summary": "Hypnotic.",
+    "description": "One use helps you sleep; too much brings sedation and delirium.",
+    "withdrawalLog": "Hypnotic rebound."
+  },
+  "methylphenidate": {
+    "name": "Methylphenidate",
+    "aliases": [],
+    "summary": "Stimulant used for attention deficit.",
+    "description": "One use gives 1 action point; too much brings agitation and palpitations.",
+    "withdrawalLog": "Stimulant rebound."
+  },
+  "modafinil": {
+    "name": "Modafinil",
+    "aliases": [],
+    "summary": "Wakefulness promoter.",
+    "description": "One use gives 1 action point; too much brings agitation and insomnia.",
+    "classNote": "Class I psychotropic in China."
+  },
+  "dihydrocodeine": {
+    "name": "Dihydrocodeine",
+    "aliases": [],
+    "summary": "Weak opioid analgesic and cough suppressant.",
+    "description": "One use eases physical pain; too much depresses breathing.",
+    "withdrawalLog": "Opioid withdrawal."
+  },
+  "morphine": {
+    "name": "Morphine",
+    "aliases": [],
+    "summary": "Strong opioid analgesic.",
+    "description": "One use holds down pain; too much depresses breathing.",
+    "withdrawalLog": "Opioid withdrawal."
+  },
+  "codeine": {
+    "name": "Codeine",
+    "aliases": [],
+    "summary": "Opioid cough suppressant and analgesic.",
+    "description": "One use holds down pain; too much depresses breathing.",
+    "withdrawalLog": "Opioid withdrawal."
+  },
+  "fentanyl": {
+    "name": "Fentanyl",
+    "aliases": [],
+    "summary": "Strong opioid analgesic.",
+    "description": "One use holds down pain; too much depresses breathing fast.",
+    "withdrawalLog": "Opioid withdrawal."
+  },
+  "methadone": {
+    "name": "Methadone",
+    "aliases": [],
+    "summary": "Long half-life opioid.",
+    "description": "One use holds down pain and withdrawal; too much depresses breathing.",
+    "withdrawalLog": "Opioid withdrawal."
+  },
+  "breathe": {
+    "name": "Breathe",
+    "aliases": [],
+    "summary": "Psyche +4.",
+    "description": "Put your attention back on your breathing."
+  },
+  "window": {
+    "name": "Look out the window",
+    "aliases": [],
+    "summary": "Psyche +3.",
+    "description": "Confirm the same tree is still out there."
+  },
+  "ask": {
+    "name": "Ask yourself",
+    "aliases": [],
+    "summary": "Psyche +4.",
+    "description": "Ask yourself: is this a persecutory delusion?"
+  },
+  "message": {
+    "name": "Message a friend",
+    "aliases": [],
+    "summary": "Psyche +5.",
+    "description": "Send this moment to a real person."
+  }
+}

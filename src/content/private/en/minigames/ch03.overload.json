@@ -1,0 +1,41 @@
+{
+  "id": "ch03.overload",
+  "kind": "emotion-return",
+  "title": "Anti-dissociation: put back the feelings that are not yours",
+  "subtitle": "Emotional contagion",
+  "intro": "The phone is piled with other people's feelings. Click a knot, then the message it came from. Put back the ones that are not hers.",
+  "closing": "The phone is still lit. She has not set it down.",
+  "doneLabel": "Put the phone face down first",
+  "emotions": [
+    {
+      "id": "e-anxiety",
+      "label": "Anxiety",
+      "from": "Momo",
+      "line": "After the dose wears off I start dropping again."
+    },
+    {
+      "id": "e-resentment",
+      "label": "Resentment",
+      "from": "Group Member One",
+      "line": "Why won't you answer me? Are you sick of me too?"
+    },
+    {
+      "id": "e-fear",
+      "label": "Fear",
+      "from": "Group Member Two",
+      "line": "I really can't hold on tonight."
+    },
+    {
+      "id": "e-exhaustion",
+      "label": "Exhaustion",
+      "from": "Stranger",
+      "line": "Only you understand me. Don't leave."
+    },
+    {
+      "id": "e-helpless",
+      "label": "Helplessness",
+      "from": "Group Member Three",
+      "line": "If you ignore me too, I'll really have no one."
+    }
+  ]
+}

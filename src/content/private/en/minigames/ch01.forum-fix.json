@@ -1,0 +1,71 @@
+{
+  "id": "ch01.forum-fix",
+  "kind": "forum-fix",
+  "title": "Fixing the forum post",
+  "subtitle": "Yumei has no glycerin",
+  "intro": "He only meant to reply \"utter nonsense\". But the post has been bumped, and the wrong thing is being repeated.",
+  "closing": "He knows pharmacology well and often mixes into answering questions. More people slowly come to ask him, and he starts thinking about harm reduction.",
+  "doneLabel": "Post the correction",
+  "threadTitle": "[Help] Can Yumei really be used as glycerin?",
+  "posts": [
+    {
+      "id": "op",
+      "author": "OP",
+      "role": "1L",
+      "body": "Only today did I learn that [[e1]]. So can Yumei also be used as glycerin?"
+    },
+    {
+      "id": "r1",
+      "author": "#2",
+      "role": "2L",
+      "body": "Don't talk nonsense above. Someone also says [[e2]] -- is that true?"
+    },
+    {
+      "id": "r2",
+      "author": "#3",
+      "role": "3L",
+      "body": "My friend says [[e3]]. He's been taking it for half a year."
+    },
+    {
+      "id": "r3",
+      "author": "Gotō",
+      "role": "4L",
+      "body": "...You people really aren't afraid to die."
+    }
+  ],
+  "errors": {
+    "e1": {
+      "phrase": "Yumei contains glycerin",
+      "options": [
+        "Glycerin",
+        "Guaifenesin",
+        "Dextromethorphan"
+      ],
+      "correct": "Guaifenesin",
+      "right": "That is guaifenesin, not glycerin. One character different in the name, a whole chain different in the substance.",
+      "wrong": "Gotō: You didn't even read the name right, and you dare put it in your mouth?"
+    },
+    "e2": {
+      "phrase": "you can o on sertraline",
+      "options": [
+        "No. Serotonin syndrome",
+        "Yes, only once",
+        "Depends on your mood"
+      ],
+      "correct": "No. Serotonin syndrome",
+      "right": "No. You can't o on sertraline; serotonin syndrome will make you wish you were dead.",
+      "wrong": "Gotō: Who told you it was fine? Bring that person here too."
+    },
+    "e3": {
+      "phrase": "pregabalin and amantadine are fine together",
+      "options": [
+        "Never combine them",
+        "They can be combined",
+        "Just space them out"
+      ],
+      "correct": "Never combine them",
+      "right": "Never combine them. Don't use \"he's been taking it for half a year\" as evidence; half a year is not proof of safety.",
+      "wrong": "Gotō: Your friend not getting hurt only means his luck hasn't run out yet."
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "id": "ch01.perception",
+  "kind": "perception",
+  "title": "Half-visible characters",
+  "subtitle": "The Fifth Plateau",
+  "intro": "The words on the screen melt, then surface somewhere else. Hold the ones about to scatter; catch six and you can finish this page.",
+  "closing": "Does \"afterglow\" really exist? He does not dare answer.",
+  "doneLabel": "Put the phone face down",
+  "required": 6,
+  "words": [
+    {
+      "id": "w1",
+      "text": "afterglow",
+      "note": "He catches the two words \"after\" and \"glow\"; they scatter between his fingers.",
+      "x": 7,
+      "y": 16
+    },
+    {
+      "id": "w2",
+      "text": "the five senses are melting",
+      "note": "The five senses collapse like wax.",
+      "x": 56,
+      "y": 13
+    },
+    {
+      "id": "w3",
+      "text": "time is not a line",
+      "note": "Time is pulled into a very thin thread.",
+      "x": 27,
+      "y": 32
+    },
+    {
+      "id": "w4",
+      "text": "who am I",
+      "note": "The name dissolves on his tongue.",
+      "x": 70,
+      "y": 34
+    },
+    {
+      "id": "w5",
+      "text": "like little bugs",
+      "note": "The characters crawl across the screen.",
+      "x": 8,
+      "y": 55
+    },
+    {
+      "id": "w6",
+      "text": "this is not the plateau",
+      "note": "He does not know where he is standing.",
+      "x": 47,
+      "y": 56
+    },
+    {
+      "id": "w7",
+      "text": "don't answer",
+      "note": "Someone very far away is asking him something.",
+      "x": 22,
+      "y": 76
+    },
+    {
+      "id": "w8",
+      "text": "I am watching",
+      "note": "There seems to be another pair of eyes behind the screen.",
+      "x": 68,
+      "y": 74
+    }
+  ]
+}

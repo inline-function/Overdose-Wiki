@@ -1,0 +1,272 @@
+{
+  "title": "Bitter Pigment",
+  "scenes": {
+    "ch02.s01": {
+      "title": "Friend Request",
+      "summary": "Ayaka found him through the forum. Two patients confirming, from opposite ends of a screen, that they are the same kind.",
+      "beats": [
+        "Wait — you're actually Teacher Gotō?!",
+        "By then people were already calling him a teacher. So many of them that he nearly believed he could save someone.",
+        "Ugh, my gastritis is back. This whole life of mine, ruined by od.",
+        "I get rhinitis too. Inflammation really is miserable.",
+        "I get it too!",
+        "She wanted to find someone like her, to confirm they were the same kind."
+      ]
+    },
+    "ch02.s02": {
+      "title": "Can't Tell Dream from Reality",
+      "summary": "She says she can't move, that she's lying at the bottom of an abyss. Gotō asks: is it a black hollow?",
+      "beats": [
+        "Teacher, I can't tell if I'm dreaming or awake anymore.",
+        "I've been through it many times — I think I've woken up, then suddenly realise I'm still asleep.",
+        "I can't move. I can only lie there. It feels like I'm inside an abyss.",
+        "The abyss you're describing — is it a black hollow?",
+        "Yes!",
+        "The K-hole......",
+        { "label": "The K-Hole: Get the Five Senses Back" }
+      ]
+    },
+    "ch02.s03": {
+      "title": "Confirming You're the Same Kind",
+      "summary": "Gastritis, palpitations, drowsiness. Depersonalisation and derealisation are eating through her mind, step by step.",
+      "beats": [
+        "Are you okay right now? I'm a little worried about you.",
+        "Wuwu, hug me, Bocchi-chan.",
+        "How's your body? And your head?",
+        "Gastritis again, palpitations all the time, sleepy, my mood is all weird.",
+        "The depersonalisation and derealisation brought on by od dissociatives were eating through Ayaka's mind, step by step......"
+      ]
+    },
+    "ch02.s04": {
+      "title": "Forty-Eight Hours Out of Hospital",
+      "summary": "She asks how quetiapine reacts with alcohol. Only after answering does Gotō ask why.",
+      "beats": [
+        "Can you tell me about quetiapine and alcohol?",
+        "Those two together are usually a way to kill yourself.",
+        "Wait, no... why are you asking?",
+        "I see. I think... I get it.",
+        "I really should ask what someone wants before I answer......",
+        "Tell me I got it wrong, quick. I don't want to become a murderer......",
+        "Sorry. You didn't do anything wrong. Don't put that weight on yourself.",
+        "Bocchi... pharmacist... murderer... \"hey, that Bocchi guy teaches people how to kill themselves.\""
+      ]
+    },
+    "ch02.s05": {
+      "title": "Asking for a Way Out",
+      "summary": "She says she's torn over whether to die, then: nobody would know you taught me.",
+      "beats": [
+        "I'm torn over whether to die.",
+        "Don't......",
+        "It's fine. Nobody will know you taught me.",
+        "Thank you. You've been good to me, Bocchi-chan. Remember what I said on Twitter? There has to be someone you can trust. Can I trust you?",
+        "Quetiapine plus alcohol as a suicide method — that was just a joke. I can't even remember it myself.",
+        "She couldn't tell whether the pills or the reality had put the idea there."
+      ]
+    },
+    "ch02.s06": {
+      "title": "Not Emotional Numbness",
+      "summary": "She hears many voices; her legs drift on their own. The positive symptoms are unmistakable now.",
+      "beats": [
+        "Bocchi, hold me tight, I hear so many voices.",
+        "So strange — my legs feel like they're floating by themselves. Pipes. Electric current. Sounds I don't know.",
+        "My heart is beating so fast.",
+        "Did you od again?",
+        "Very obvious positive psychotic symptoms.",
+        { "label": "The Voices: Press Out the Ones Tangled Around Her" }
+      ]
+    },
+    "ch02.s07": {
+      "title": "Tunnel and Hallucination",
+      "summary": "Her first suicide attempt was pulled back. Forty-eight hours after discharge she swallowed sixty dextromethorphan.",
+      "beats": [
+        "Ayaka's first suicide attempt was pulled back. Then, 48 hours after discharge, set off by someone else, she swallowed 60 tabs of dextromethorphan.",
+        "A very impulsive, very stupid thing to do.",
+        "60t dextromethorphan report: headache, nausea...... emotional numbness."
+      ]
+    },
+    "ch02.s08": {
+      "title": "The Colour on the Wall",
+      "summary": "She wants dextromethorphan to dissociate her personality away, so she won't have to care.",
+      "beats": [
+        "Emotional numbness is a symptom of depersonalisation. Dextromethorphan causes it.",
+        "Don't I expect too much of other people's feelings? So could I take dextromethorphan to depersonalise myself and stop caring?",
+        "Don't do that......",
+        "Right now I'm not just depersonalised — I hear all these voices from nowhere.",
+        "That's schizophrenia... the positive symptoms of schizophrenia......",
+        { "label": "The Colour on the Wall: Mix the Bitter Out" }
+      ]
+    },
+    "ch02.s09": {
+      "title": "Blackout and Amnesia",
+      "summary": "Days without sleep, then passing out mid-sentence. The world is rotting.",
+      "beats": [
+        "Ugh, save me, Bocchi. I haven't slept for days — every time I just pass out from exhaustion.",
+        "Now I keep hearing voices that aren't there. The world feels like it's rotting. It hurts so much......",
+        "This is schizophrenia, depression, depersonalisation. Quetiapine can treat the schizophrenia.",
+        "But quetiapine makes the depression and the depersonalisation worse.",
+        { "label": "What You Can Do: Separate What She Can Carry from What She Can't" }
+      ]
+    },
+    "ch02.s10": {
+      "title": "Her in the Group",
+      "summary": "The magnesium money went on dextromethorphan. Gotō says: you did this to yourself.",
+      "beats": [
+        "Did your magnesium L-threonate arrive?",
+        "No money, meow. It all went on dextromethorphan.",
+        "Ugh, you... ugh... magnesium L-threonate is so much better than dextromethorphan and you won't take it, you have to... ugh, my heart hurts, I'm not talking to you.",
+        "Bocchi, Bocchi, please don't hate me.",
+        "I don't hate you. But you're doing this to yourself."
+      ]
+    },
+    "ch02.s11": {
+      "title": "The Sorry Loop",
+      "summary": "Chronic dissociation keeps her from seeing her own mistakes. The magnesium money becomes alcohol again.",
+      "beats": [
+        "What do you mean?",
+        "Chronic dissociation. It keeps you from seeing your own mistakes. Dextromethorphan will keep blinding you to what's real.",
+        "So if I take the magnesium L-threonate, will I get better?",
+        "Yes.",
+        "Saviour Bocchi, Doctor Bocchi, save me.",
+        "I told you to buy the magnesium L-threonate and try it.",
+        "And the money went on getting drunk again."
+      ]
+    },
+    "ch02.s12": {
+      "title": "A Last Flicker",
+      "summary": "\"I know I was wrong, stop scolding me.\" How terrifying dextromethorphan's rewriting of cognition is.",
+      "beats": [
+        "I'm an idiot.",
+        "You had money to get drunk with. The key was right there, the road was paved, and you wouldn't walk it.",
+        "I know I was wrong, stop scolding me, stop.",
+        "How terrifying, exactly, is dextromethorphan's rewriting of cognition."
+      ]
+    },
+    "ch02.s13": {
+      "title": "Worms",
+      "summary": "She asks for a good way to destroy herself, then dreams Gotō sits beside her in chemistry class.",
+      "beats": [
+        "Bocchi, is there a good way to destroy yourself? What about a little amantadine?",
+        "......",
+        "I dreamed about you last night, Bocchi-chan. You came to my school, you were my deskmate, and during chemistry you talked to me about OverdoseWiki.",
+        "Bocchi, I really feel like there's no saving me. The urge is stronger than it's been all year. So anxious, so painful, so awful. I'm going to try that quetiapine and alcohol you mentioned. This is probably my last report.",
+        "Bocchi, I took a pile of clonazepam. I'm going to take dextromethorphan too.",
+        "On your own again......"
+      ]
+    },
+    "ch02.s14": {
+      "title": "No Answer",
+      "summary": "She asks if she'll become a death report on ODW. Gotō says: the next case will never be you.",
+      "beats": [
+        "Will it kill me?",
+        "Help me, please......",
+        "Help you with what?",
+        "Help me prove that my Restoration works......",
+        "Bocchi, will I become a death report on ODW?",
+        "Never! The next case will never be you!",
+        "I'm sure of it......"
+      ]
+    },
+    "ch02.s15": {
+      "title": "The Caregiver",
+      "summary": "The caregiver says Ayaka has been taking a lot again. The more Gotō thinks, the angrier he gets: she knows everything.",
+      "beats": [
+        "Teacher Gotō, that idiot Ayaka has taken a lot of amantadine and dextromethorphan lately.",
+        "The more I think about this case, the angrier I get. You know why? She knows everything. She just won't leave the plateau.",
+        "I'm useless. It's all my fault......"
+      ]
+    },
+    "ch02.s16": {
+      "title": "She Won't Die",
+      "summary": "\"You're not useless, you're Pharmacist Bocchi, you saved me.\" Over and over: I won't die.",
+      "beats": [
+        "I won't die. You're not useless. You're Pharmacist Bocchi, you saved me.",
+        "I won't die, I won't die, I won't die......",
+        "She knows everything......"
+      ]
+    },
+    "ch02.s17": {
+      "title": "Is It Too Late to Turn Back",
+      "summary": "She says she's scared, asks whether there's still time. Gotō says: there's time.",
+      "beats": [
+        "Bocchi, am I really stupid? I'm scared. Is there still time for me to turn back? I know I'm so sorry, so sorry.....",
+        "Bocchi, I've made up my mind — from now on I'll take my antidepressants properly and never od again. I'm so ashamed, I'm just an idiot......",
+        "There's time. There's time......",
+        "How I wish there were time......"
+      ]
+    },
+    "ch02.s18": {
+      "title": "Afterglow",
+      "summary": "She od'd again. 2t amantadine, 48t dextromethorphan. She says she feels sound again.",
+      "beats": [
+        "Bocchi, are you there? I want to ask what the afterglow is.",
+        "The afterglow feels like all your mental illness is gone.",
+        "After 2t of amantadine and 48t of dextromethorphan I felt sound again. I remembered things from before. I felt happy.",
+        "That's the afterglow.",
+        "How did Ayaka od again......"
+      ]
+    },
+    "ch02.s19": {
+      "title": "Seeing the Doctor",
+      "summary": "Halfway through the appointment she ran. Five bottles of amantadine have gone down the toilet.",
+      "beats": [
+        "Ugh, I took Ayaka to see a doctor, and halfway through she ran off......",
+        "Ayaka bought amantadine behind my back. Why would she take that garbage?",
+        "I poured the stuff down the toilet. My toilet has eaten five bottles of amantadine by now.",
+        "The amantadine gave her schizophrenia. She says my room has lots of coloured worms.",
+        "She says she hears me crying and screaming. Her head is broken.",
+        "Why does she have to take that garbage......",
+        { "label": "The Archive: Write Her Name In" }
+      ]
+    },
+    "ch02.s20": {
+      "title": "The Fall",
+      "summary": "\"Sorry, everyone. Ayaka, she...... she jumped.\"",
+      "beats": [
+        "Sorry, everyone. Ayaka, she......",
+        "She jumped. She's gone......",
+        "When I woke up, she was already gone......",
+        "I'm sorry. I didn't take care of her......",
+        "I guess... she'd wanted to die for a long time... the detective told me: if she doesn't die today, she'll die tomorrow. If not tomorrow, the day after.",
+        "She just wanted to die... I couldn't stop her... I really... did everything I could......"
+      ]
+    },
+    "ch02.s21": {
+      "title": "The Last Day",
+      "summary": "The day before, she was picked up by the police and the caregiver brought her home. Then came today.",
+      "beats": [
+        "Yesterday she was wandering around half-dressed, someone found her and took her to the police station. I brought her home. And then today......",
+        "How terrifying schizophrenia is......"
+      ]
+    },
+    "ch02.s22": {
+      "title": "Mother",
+      "summary": "\"You swore you could take care of her. Why did she still want to die?\"",
+      "beats": [
+        "You two were together and fine. Why did she keep wanting to die? Didn't you swear you could take care of her?",
+        "I'm sorry... I'm sorry... her schizophrenia was so severe...",
+        "Why wouldn't you let me take her home?",
+        "Ayaka was afraid of you......",
+        "......"
+      ]
+    },
+    "ch02.s23": {
+      "title": "Live Well",
+      "summary": "\"Child, you have to live well.\" \"I will.\"",
+      "beats": [
+        "Child, you have to live well......",
+        "I will."
+      ]
+    },
+    "ch02.s24": {
+      "title": "The Colourful Painting Isn't Dry",
+      "summary": "\"Little sister, say something.\" She can never answer again.",
+      "beats": [
+        "When the caregiver saw Ayaka after the fall, she was crying and shouting: \"Little sister, say something!\" But Ayaka could never answer her again.",
+        "Is there some great amnesia spell that could make me forget all this?",
+        "The heavy things — no matter how long it's been, I remember them.",
+        "What happened to her became a nightmare, wrapped around me all the time.",
+        { "prompt": "Choose", "options": ["Keep reading", { "label": "Close the archive for now", "note": "The archive stays here; you can come back to it any time" }] }
+      ]
+    }
+  }
+}

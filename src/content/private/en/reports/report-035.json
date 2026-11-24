@@ -1,0 +1,76 @@
+{
+  "id": "35",
+  "no": 35,
+  "title": "The Long Road",
+  "reporter": "Yuejin",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "170cm, 55kg",
+  "drugs": "amantadine, dextromethorphan, dimenhydrinate",
+  "edited": "Entered 2024.04.28T13:26",
+  "segments": [
+    {
+      "id": "report-35-full",
+      "label": "Full text",
+      "date": "2024-04-28",
+      "summary": "The main text has been split into side-35; the file keeps the header, the key dates and the cross-references.",
+      "sceneId": "side-35"
+    }
+  ],
+  "body": [
+    {
+      "type": "list",
+      "items": [
+        "Reporter · Yuejin",
+        "Handled by · Super Goto-Goto-Gotō",
+        "Height / weight · 170cm, 55kg",
+        "Reported · 2024.04.26.05:47",
+        "Entered · 2024.04.28.13:26",
+        "Drugs involved · amantadine, dextromethorphan"
+      ]
+    },
+    { "type": "h", "text": "Original Report" },
+    { "type": "p", "text": "Yuejin: first time, it hit a few seconds after I swallowed the dextro. Feeling it the moment it goes down is genuinely scary." },
+    { "type": "p", "text": "### Twenty-five" },
+    { "type": "p", "text": "2024.04.03.19:53 Yuejin: dextro." },
+    { "type": "p", "text": "2024.04.03.21:17 Yuejin: adding Goodnight." },
+    { "type": "p", "text": "### Twenty-six" },
+    { "type": "p", "text": "2024.04.04.06:11 Yuejin: can't stand it, o-ing some Goodnight." },
+    { "type": "p", "text": "2024.04.04.06:46 Yuejin: still nothing, added dextro again." },
+    { "type": "p", "text": "2024.04.04.08:04 Yuejin: still nothing, feels awful, added Goodnight again. The effects are terrifying." },
+    { "type": "p", "text": "### Twenty-seven" },
+    { "type": "p", "text": "2024.04.06.21:22 Yuejin: dextro plus Goodnight. Scared, but I just want one big one." },
+    { "type": "p", "text": "2024.04.06.22:11 Yuejin: it hit." },
+    { "type": "p", "text": "2024.04.07.02:56 Yuejin: insomnia. I'm using quetiapine to force a shutdown." },
+    { "type": "p", "text": "2024.04.07.03:24 Yuejin: why won't it shut down." },
+    { "type": "p", "text": "### Twenty-nine" },
+    { "type": "p", "text": "2024.04.10.22:22 Yuejin: dextro." },
+    { "type": "p", "text": "2024.04.10.23:10 Yuejin: dizzy." },
+    { "type": "p", "text": "2024.04.10.23:24 Yuejin: threw up." },
+    { "type": "p", "text": "2024.04.10.03:04 Yuejin: adding dextro." },
+    { "type": "p", "text": "2024.04.10.03:37 Yuejin: adding Goodnight." },
+    { "type": "p", "text": "2024.04.10.07:40 Yuejin: woke up, but... where's my high?!" },
+    { "type": "p", "text": "### Thirty-two" },
+    { "type": "p", "text": "2024.04.22.22:09 Yuejin: I'll o this much for now; if I dissociate I'll o more dextro, because with the first dose I'm afraid I'll die." },
+    { "type": "p", "text": "2024.04.22.22:59 Yuejin: threw up a lot of stomach fluid, but added more." },
+    { "type": "p", "text": "2024.04.22.23:41 Yuejin: delirium, like a stretch of memory was pulled out of me. Lay in bed, threw up all over it, forgot. I do remember going to the mirage. This one actually felt like an od, except the brain fog lingers." },
+    { "type": "p", "text": "### Thirty-four" },
+    { "type": "p", "text": "2024.04.27.17:00 Yuejin: drank a bottle of double-grapefruit juice, started on the dextro at 17:08." },
+    { "type": "p", "text": "2024.04.27.17:27 Yuejin: damn, got a bit of a headache. Finished them, nauseating; it took me 20 minutes to swallow." },
+    { "type": "p", "text": "2024.04.27.17:31 Yuejin: ??? feels like obvious dissociation???? why so fast?" },
+    { "type": "p", "text": "2024.04.27.18:33 Yuejin: such strong dissociation! My brain and I are two completely different people! As soon as I sit up my brain keeps running on its own, I can't control it, my vision blurs, I feel like I'm going to die." },
+    { "type": "p", "text": "2024.04.27.18:39 Yuejin: feels like the word 'death' is flashing all over my body; hands shaking, want to throw up more." },
+    { "type": "p", "text": "2024.04.27.18:56 Yuejin: keep sleeping. Extremely sensitive to music." },
+    { "type": "p", "text": "2024.04.27.20:14 Yuejin: in the toilet, ugh, a smell of medicine." },
+    { "type": "h", "text": "Handler's Note" },
+    { "type": "p", "text": "The report breaks off here. No resolution, no 'afterwards'. The last update in the original stops at 'in the toilet, ugh, a smell of medicine'." },
+    { "type": "h", "text": "Related" },
+    {
+      "type": "list",
+      "items": [
+        "Related entries: dissociation, delirium, recovery techniques",
+        "Related reports: report-002, report-007",
+        "Related cards: dextromethorphan, amantadine"
+      ]
+    }
+  ]
+}

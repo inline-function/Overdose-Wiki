@@ -29,6 +29,8 @@ import { getMiniGame } from '../content/minigames';
 import { AnalysisStage } from '../analysis/AnalysisStage';
 import { MiniGameStage } from '../minigames/MiniGameStage';
 import { CivilWarEvent } from '../components/CivilWarEvent';
+import { EN_NAMES, localizeName } from '../content/en/names';
+import { getLocale, useT, type MessageKey } from '../i18n';
 import { PlaceholderPage } from './PlaceholderPage';
 import p from './pages.module.css';
 
@@ -62,6 +64,42 @@ const BG_LABEL: Record<string, string> = {
   bg_doc_fracture: '公开文档 / 涂黑',
   bg_knowledge_fracture: '知识论 / 双面书架',
 };
+
+const BG_LABEL_EN: Record<string, string> = {
+  bg_archive: 'Archive Room',
+  bg_river_night: 'River at night',
+  bg_goto_room: "Gotō's room",
+  bg_river_day: 'Riverside / afternoon',
+  bg_caijia_room: "Ayaka's room",
+  bg_higan_home: "Jing's room",
+  bg_dlc_classroom: 'DLC classroom',
+  bg_residential_path: 'Residential street',
+  bg_beijing: 'A street in Beijing',
+  bg_dlc_summer_street: 'Ice-jelly stall by the river',
+  bg_dlc_night_market: 'Night market',
+  bg_dlc_school_gate: 'School gate',
+  bg_dlc_convenience: 'Outside the convenience store',
+  bg_dlc_chunfeng_room: "Chunfeng's room",
+  bg_dlc_noodle_shop: 'Old Friends noodle shop',
+  bg_summer_street: 'Summer street',
+  bg_wheat_dusk: 'Wheat field / dusk',
+  bg_rooftop_dusk: 'Rooftop / dusk',
+  bg_plateau: 'The Fifth Plateau',
+  bg_tunnel: 'Tunnel / night',
+  bg_hospital_ward: 'Hospital ward',
+  bg_night_street: 'Night street / police car',
+  bg_spring_festival: 'Spring Festival / afterglow',
+  bg_civil_war_room: 'Civil war / archive room',
+  bg_rumor_fracture: 'Fake Gotō / the wall of spread',
+  bg_testimony_fracture: 'Rashomon / three microphones',
+  bg_doc_fracture: 'Public doc / blacked out',
+  bg_knowledge_fracture: 'Epistemology / two-sided shelf',
+};
+
+function bgLabel(id: string): string {
+  const table = getLocale() === 'en' ? BG_LABEL_EN : BG_LABEL;
+  return table[id] ?? (getLocale() === 'en' ? 'Scene' : '场景');
+}
 
 const BG_ASSET: Record<string, string> = {
   bg_summer_street: 'bg_dlc_summer_street',
@@ -100,6 +138,17 @@ const HIGAN_STATES: Record<string, string> = {
   blank: 'blank',
   fade: 'fade',
 };
+const PROP_BY_EN_NAME: Record<string, string> = {};
+for (const [zh, prop] of Object.entries(PROP_BY_SPEAKER)) {
+  const en = EN_NAMES[zh];
+  if (en) PROP_BY_EN_NAME[en] = prop;
+}
+
+function propFor(speaker: string | undefined): string | undefined {
+  if (!speaker) return undefined;
+  return PROP_BY_SPEAKER[speaker] ?? PROP_BY_EN_NAME[speaker];
+}
+
 const MULTI_STATE_PROPS = new Set(['caijia', 'goto', 'higan']);
 
 function assetUrl(path: string) {
@@ -165,6 +214,7 @@ const FALLBACK_SCENE: Scene = {
 };
 
 export function ReplayPage() {
+  const tr = useT();
   const { id, seg } = useParams();
   const reportId = id ?? '7';
   const save = useGameStore((state) => state.save);
@@ -186,9 +236,9 @@ export function ReplayPage() {
   if (locked) {
     return (
       <PlaceholderPage
-        title={`复演 · ${seg ?? ''}`}
-        kicker="复演 / 锁定"
-        note="这一场尚未解锁。先完成前置章节或档案。"
+        title={tr('replay.title', { title: seg ?? '' })}
+        kicker={tr('replay.lockedKicker')}
+        note={tr('replay.lockedNote')}
       />
     );
   }
@@ -196,9 +246,9 @@ export function ReplayPage() {
   if (!scene) {
     return (
       <PlaceholderPage
-        title={`复演 · ${seg ?? ''}`}
-        kicker="复演 / 未接入"
-        note="这场复演的目标报告尚未接入内容；窗口与舞台已经就位。"
+        title={tr('replay.title', { title: seg ?? '' })}
+        kicker={tr('replay.missingKicker')}
+        note={tr('replay.missingNote')}
       />
     );
   }
@@ -229,6 +279,7 @@ function ScenePlayer({
   segmentId: string;
   segmentLabel: string;
 }) {
+  const tr = useT();
   const navigate = useNavigate();
   const location = useLocation();
   const replayIntro = Boolean(
@@ -288,12 +339,11 @@ function ScenePlayer({
   const [chosen, setChosen] = useState<string | null>(null);
   const beat = scene.beats[beatIndex];
   const beatSpeaker = (beat as { speaker?: string } | undefined)?.speaker;
-  const speaker =
-    beatSpeaker && PROP_BY_SPEAKER[beatSpeaker] ? beatSpeaker : scene.stage.bust?.speaker;
-  const propId = speaker ? PROP_BY_SPEAKER[speaker] : undefined;
+  const speaker = propFor(beatSpeaker) ? beatSpeaker : scene.stage.bust?.speaker;
+  const propId = propFor(speaker);
   const mood = propId ? propMood(propId, scene.stage.bust?.expr) : 'calm';
   const propSrc = propId ? assetUrl(propPath(propId, mood)) : null;
-  const iconSrc = beatSpeaker && PROP_BY_SPEAKER[beatSpeaker] ? propSrc : null;
+  const iconSrc = propFor(beatSpeaker) ? propSrc : null;
   const bgAsset = BG_ASSET[scene.stage.bg] ?? scene.stage.bg;
   const bgSrc = hasContent() ? assetUrl(`assets-private/bg/${bgAsset}.png`) : null;
   const text = beatText(beat);
@@ -543,7 +593,7 @@ function ScenePlayer({
     addHistory(
       makeHistory(
         'scene',
-        `读完 ${scene.title}`,
+        tr('replay.readDone', { title: scene.title }),
         `/report/${reportId}/replay/${segmentId}`,
         scene.id,
       ),
@@ -558,7 +608,7 @@ function ScenePlayer({
 
   function returnToReport() {
     setAutoRead(false);
-    setStatus('本章读完，已回到报告。');
+    setStatus(tr('replay.returned'));
     navigate(`/report/${reportId}`);
   }
 
@@ -572,7 +622,7 @@ function ScenePlayer({
           goToScene(scene.next);
           return;
         }
-        setStatus('下一场还没解锁。');
+        setStatus(tr('replay.nextLocked'));
         setAutoRead(false);
         setShowEnd(true);
         return;
@@ -584,7 +634,7 @@ function ScenePlayer({
   function goToScene(sceneId: string) {
     const target = getSceneMeta(sceneId);
     if (!target) {
-      setStatus(`场景 ${sceneId} 尚未接入。`);
+      setStatus(tr('replay.sceneNotWired', { id: sceneId }));
       setShowEnd(true);
       return;
     }
@@ -617,7 +667,7 @@ function ScenePlayer({
       const nextSave = { ...save, completedScenes: save.completedScenes.includes(scene.id) ? save.completedScenes : [...save.completedScenes, scene.id] };
       if (target && !isSceneUnlocked(target, nextSave)) {
         markCurrentScene();
-        setStatus('下一场还没解锁。');
+        setStatus(tr('replay.nextLocked'));
         setAutoRead(false);
         setShowEnd(true);
         return;
@@ -631,21 +681,25 @@ function ScenePlayer({
 
   return (
     <section className={p.replayPage}>
-      <h1 className="sr-only">复演 · {scene.title}</h1>
+      <h1 className="sr-only">{tr('replay.title', { title: scene.title })}</h1>
       <div className={p.stageTop}>
         <span className={p.fileIcon} aria-hidden="true" />
         <span className={p.stageTopArchive}>
-          档案 {reportId} / {segmentLabel}
+          {tr('replay.archiveLine', { report: reportId, segment: segmentLabel })}
         </span>
         <span className={p.stageTopChapter}>
-          {scene.chapterId} · {chapter?.title ?? scene.title} / {scene.title}
+          {tr('replay.chapterLine', {
+            chapterId: scene.chapterId,
+            title: chapter?.title ?? scene.title,
+            scene: scene.title,
+          })}
         </span>
         <span className={p.stageTopRight}>
           <span className={p.muted}>
             {String(sceneNumber).padStart(2, '0')} / {String(total || 12).padStart(2, '0')}
           </span>
           <Link className={p.replayStageLink} to={`/report/${reportId}`}>
-            报告全文
+            {tr('replay.fullReport')}
           </Link>
         </span>
       </div>
@@ -656,7 +710,7 @@ function ScenePlayer({
         onClick={advance}
         data-testid="scene-wrap"
         data-fx={fxId ?? 'none'}
-        data-fx-label={fxSpec?.label}
+        data-fx-label={fxId && getLocale() === 'en' ? tr(`fx.${fxId}` as MessageKey) : fxSpec?.label}
         style={{ filter: fxFilter ?? 'none' }}
       >
         <canvas
@@ -677,7 +731,7 @@ function ScenePlayer({
               : undefined
           }
           role="img"
-          aria-label={`${BG_LABEL[scene.stage.bg] ?? '场景'}像素场景`}
+          aria-label={tr('replay.canvasAria', { bg: bgLabel(scene.stage.bg) })}
         />
 
         {fxId && !reduce ? (
@@ -715,28 +769,32 @@ function ScenePlayer({
                   closeIntro();
                 }}
               >
-                进入本章
+                {tr('replay.enterChapter')}
               </button>
             </div>
           </div>
         ) : showEnd ? (
-          <div className={p.choicePanel} role="group" aria-label="场景结束">
-            <p className={p.dialogLine}>场景结束 · {scene.title}</p>
+          <div className={p.choicePanel} role="group" aria-label={tr('replay.endGroup')}>
+            <p className={p.dialogLine}>{tr('replay.endLine', { title: scene.title })}</p>
             <p className={p.small}>
-              {scene.next ? `下一场：${scene.next}` : '本章到此为止。'}
+              {scene.next
+                ? tr('replay.nextScene', { id: scene.next })
+                : tr('replay.chapterEnd')}
             </p>
             <div className={p.choiceList}>
               <Link className={p.choice} to={`/report/${reportId}`}>
-                回到报告
+                {tr('replay.backReport')}
               </Link>
               <Link className={p.choice} to="/">
-                回首页
+                {tr('replay.backHome')}
               </Link>
             </div>
           </div>
         ) : beat?.type === 'choice' ? (
-          <div className={p.choicePanel} role="group" aria-label="选择">
-            <p className={p.choicePrompt}>{chosen ? `已记录：${chosen}` : '选择'}</p>
+          <div className={p.choicePanel} role="group" aria-label={tr('replay.choiceGroup')}>
+            <p className={p.choicePrompt}>
+              {chosen ? tr('replay.chosen', { label: chosen }) : tr('replay.choiceTitle')}
+            </p>
             <div className={p.choiceList}>
               {beat.options.map((option, index) => (
                 <button
@@ -754,19 +812,19 @@ function ScenePlayer({
             </div>
           </div>
         ) : beat?.type === 'analysis' ? (
-          <div className={p.choicePanel} role="group" aria-label="精神分析">
-            <p className={p.choicePrompt}>精神分析</p>
-            <p className={p.small}>分析正在进行：{beat.caseId}</p>
+          <div className={p.choicePanel} role="group" aria-label={tr('replay.analysisGroup')}>
+            <p className={p.choicePrompt}>{tr('replay.analysisTitle')}</p>
+            <p className={p.small}>{tr('replay.analysisRunning', { id: beat.caseId })}</p>
           </div>
         ) : beat?.type === 'minigame' ? (
-          <div className={p.choicePanel} role="group" aria-label="小玩法">
-            <p className={p.choicePrompt}>小玩法</p>
-            <p className={p.small}>{beat.label ?? '这一幕需要你亲手做一遍。'}</p>
+          <div className={p.choicePanel} role="group" aria-label={tr('replay.minigameGroup')}>
+            <p className={p.choicePrompt}>{tr('replay.minigameTitle')}</p>
+            <p className={p.small}>{beat.label ?? tr('replay.minigameHint')}</p>
           </div>
         ) : beat?.type === 'event' ? (
-          <div className={p.choicePanel} role="group" aria-label="紧急事故">
-            <p className={p.choicePrompt}>紧急事故</p>
-            <p className={p.small}>战报正在展开。</p>
+          <div className={p.choicePanel} role="group" aria-label={tr('replay.eventGroup')}>
+            <p className={p.choicePrompt}>{tr('replay.eventTitle')}</p>
+            <p className={p.small}>{tr('replay.eventBody')}</p>
           </div>
         ) : (
           <div
@@ -777,13 +835,17 @@ function ScenePlayer({
             onClick={(event) => { event.stopPropagation(); advance(); }}
           >
             {beat?.type === 'narration' && !beat.speaker ? (
-              <span className={p.narrationTag}>旁白</span>
+              <span className={p.narrationTag}>{tr('replay.narration')}</span>
             ) : (
               <span className={p.nameplate}>
                 {iconSrc ? (
                   <img className={p.speakerIcon} src={iconSrc} alt="" aria-hidden="true" />
                 ) : null}
-                {beat?.type === 'dialogue' ? beat.speaker : (beat as { speaker?: string })?.speaker ?? '档案'}
+                {localizeName(
+                  beat?.type === 'dialogue'
+                    ? beat.speaker
+                    : (beat as { speaker?: string })?.speaker,
+                ) ?? tr('replay.archive')}
               </span>
             )}
             {beat?.type === 'quote' && beat.source && (
@@ -802,7 +864,7 @@ function ScenePlayer({
               {typing ? '' : text}
             </span>
             <span className={p.nextMark} aria-hidden="true">
-              {typing ? '…' : '▼ 点击继续'}
+              {typing ? '…' : tr('replay.clickContinue')}
             </span>
           </div>
         )}
@@ -823,21 +885,23 @@ function ScenePlayer({
             key={analysis.id}
             data={analysis}
             onExit={() => {
-              setStatus('精神分析先合上了。');
+              setStatus(tr('replay.analysisClosed'));
               nextBeat();
             }}
             onDone={() => {
               completeAnalysis(beat.caseId);
-              setStatus('恢复了。恢复术词条收入档案。');
+              setStatus(tr('replay.analysisDone'));
               nextBeat();
             }}
           />
         ) : (
-          <div className={p.choicePanel} role="group" aria-label="精神分析">
-            <p className={p.choicePrompt}>案例缺失</p>
-            <p className={p.small}>{beat.caseId} 还没有载入。</p>
+          <div className={p.choicePanel} role="group" aria-label={tr('replay.analysisGroup')}>
+            <p className={p.choicePrompt}>{tr('replay.caseMissing')}</p>
+            <p className={p.small}>
+              {tr('replay.caseMissingLine', { id: beat.caseId })}
+            </p>
             <button type="button" className={p.choice} onClick={nextBeat}>
-              跳过
+              {tr('replay.skip')}
             </button>
           </div>
         )
@@ -852,21 +916,23 @@ function ScenePlayer({
             warTable={warTableOf(save)}
             onWarChange={setWarTable}
             onExit={() => {
-              setStatus('小玩法先合上了。');
+              setStatus(tr('replay.minigameClosed'));
               nextBeat();
             }}
             onDone={() => {
               completeMinigame(minigame.id);
-              setStatus('收入档案。');
+              setStatus(tr('replay.minigameDone'));
               nextBeat();
             }}
           />
         ) : (
-          <div className={p.choicePanel} role="group" aria-label="小玩法">
-            <p className={p.choicePrompt}>玩法缺失</p>
-            <p className={p.small}>{beat.id} 还没有载入。</p>
+          <div className={p.choicePanel} role="group" aria-label={tr('replay.minigameGroup')}>
+            <p className={p.choicePrompt}>{tr('replay.minigameMissing')}</p>
+            <p className={p.small}>
+              {tr('replay.minigameMissingLine', { id: beat.id })}
+            </p>
             <button type="button" className={p.choice} onClick={nextBeat}>
-              跳过
+              {tr('replay.skip')}
             </button>
           </div>
         )
@@ -875,7 +941,7 @@ function ScenePlayer({
       {beat?.type === 'event' && !showIntro && !showEnd ? (
         <CivilWarEvent
           onClose={() => {
-            setStatus('药圈内战已经打响。');
+            setStatus(tr('replay.eventDone'));
             nextBeat();
           }}
         />

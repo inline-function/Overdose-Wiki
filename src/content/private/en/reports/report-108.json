@@ -1,0 +1,36 @@
+{
+  "id": "108",
+  "no": 108,
+  "title": "Introduction to od",
+  "reporter": "Super Goto-Goto-Gotō",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "—",
+  "drugs": "—",
+  "edited": "Internal archive",
+  "segments": [
+    { "id": "report-108-full", "label": "Full text", "date": "Internal", "summary": "A theory entry: definition, mechanism, and the first line of common sense." }
+  ],
+  "body": [
+    { "type": "h", "text": "How It All Began" },
+    { "type": "p", "text": "Overdose, abbreviated od, strictly translated as excessive dose, means an overdose and carries no implication of drug abuse; drug abuse is Drug abuse. od is genuinely contained within drug abuse, and drug abuse is colloquially called 'taking'. " },
+    { "type": "p", "text": "The Chinese word for narcotics is a noun peculiar to that language, and is not equivalent to the English Drug. That word refers to highly threatening psychoactive substances; 'Drug' refers to any medicine at large. In English, when describing what Chinese calls narcotics, one doesn't use Medicine or Medication but Drug — and that stereotype has been passed on ever since." },
+    { "type": "p", "text": "So the first thing is to separate the words: od ≠ abuse ≠ using. Lumping them together makes a fuss over nothing and turns an originally simple problem into a thorny one. Separating them isn't for shelter; it's for being able to handle it." },
+    { "type": "h", "text": "Basic Mechanism Overview" },
+    { "type": "p", "text": "The gastrointestinal tract absorbs the drug into the blood; the liver transforms (metabolizes) the chemicals in the blood — quite a few drugs only act after metabolism, and the more elaborate the metabolism the more the liver suffers; the kidneys filter unwanted chemicals into primary urine and out — the stranger the drug molecule the more the kidneys suffer. Most od drugs act on the nervous system or the brain." },
+    { "type": "p", "text": "Drugs are made into different dosage forms: tablets, injections, inhaled gases. A tablet with only one ingredient is a single-ingredient preparation; with several, a compound preparation. To change physical properties, drugs are often paired with an acid or a base (dextromethorphan hydrobromide, amantadine hydrochloride...); when naming a drug the acid or base is usually left out — one says amantadine, not amantadine hydrochloride." },
+    { "type": "p", "text": "The half-life is the period needed for half the drug to leave the body after dosing; different dosage forms have different half-lives." },
+    { "type": "h", "text": "Receptors: Key and Lock" },
+    { "type": "p", "text": "Chemicals bind to receptors the way a key is inserted into a keyhole. Neurotransmitters bind to their corresponding receptors and always agonize them; other chemicals (such as drugs) can also bind, but don't always agonize." },
+    { "type": "p", "text": "Agonism = inserting a matching key and turning the lock open; inverse agonism = inserting a key and wrecking the keyhole; antagonism = inserting a non-matching key and blocking the keyhole; blockade = taping over the keyhole. Different actions on different receptors produce different drug effects." },
+    { "type": "p", "text": "Main neurotransmitters: dopamine, noradrenaline, serotonin (5-HT), glutamate, acetylcholine, GABA, endorphins, Substance P. The first three are together called monoamines." },
+    { "type": "h", "text": "Effects and Side Effects" },
+    { "type": "p", "text": "Drug effects divide into main effects and side effects, and the division is artificial and changes with circumstances: for treating mania, quetiapine's drowsiness is a side effect; for treating insomnia it's the main effect. They also divide into acute and chronic: under inappropriate use, one dose of a benzodiazepine brings short-term sleep but adds up into long-term insomnia; od on dextro causes acute dissociation and leaves chronic dissociation behind." },
+    { "type": "p", "text": "A side effect that damages the body under given circumstances is called toxicity (hepatotoxicity, neurotoxicity and so on). Low-dose atropine can be a muscle relaxant; an overdose can be a nerve poison. Low-dose paracetamol is a cold medicine; a high dose is hepatotoxic." },
+    { "type": "p", "text": "Psychoactive effects overview: dissociation, SRI, antidepressant, stimulation, delirium, sedation, hypnosis, opioid anesthesia, hallucination, social enhancement, anti-dissociation; the main effects are changes to personality, mood and cognition, plus amnesia. Side effects overview: schizophrenia, dissociative disorder, depersonalization, Alzheimer's, depression, mania, bipolar, anxiety, toxicity, lowered intelligence/memory/cognition, withdrawal reactions, opioid addiction; acute ones include serotonin syndrome, anticholinergic syndrome, disorientation and so on. Physiological side effects overview: headache, organ damage, gastric ulcer, nerve/brain damage, vomiting, respiratory depression, seizures and so on." },
+    { "type": "p", "text": "Schizophrenia ≠ depersonalization disorder ≠ multiple personality disorder. The three are different illnesses with different symptoms." },
+    { "type": "h", "text": "The First Line of Caution" },
+    { "type": "quote", "text": "*Sertraline can't be o'd.*" },
+    { "type": "p", "text": "So many people asked this back then. SSRIs like sertraline basically have no psychoactive effect and an overdose easily triggers serotonin syndrome, so they have no 'OD value' — a typical case of knowledge doing harm reduction: telling people who don't know this piece of common sense is entirely agreeable." },
+    { "type": "p", "text": "The introduction ends here. It gives you words, gives you mechanism, gives you the first line of common sense; it doesn't give you doses, formulas or sources. For the rest, go to the effect entries and the specific entries, and go to the people in the reports who lived." }
+  ]
+}

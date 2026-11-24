@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { WikiSortGame } from '../../content/types';
 import { shuffleArray } from '../shuffle';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 export function WikiSort({
   data,
@@ -12,6 +13,7 @@ export function WikiSort({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [order] = useState(() => shuffleArray(data.cards));
   const [placed, setPlaced] = useState<Record<string, string>>({});
   const [selected, setSelected] = useState<string | null>(null);
@@ -23,8 +25,8 @@ export function WikiSort({
   const placedIds = useMemo(() => new Set(Object.keys(placed)), [placed]);
   const tray = order.filter((card) => !placedIds.has(card.id));
   const all = tray.length === 0;
-  const trayLabel = data.trayLabel ?? '未整理';
-  const placeVerb = data.placeVerb ?? '归档';
+  const trayLabel = data.trayLabel ?? tr('wiki.tray');
+  const placeVerb = data.placeVerb ?? tr('wiki.place');
   const guideCard = data.cards.find((card) => card.id === (dragging ?? selected));
   const guideCategory = guideCard
     ? data.categories.find((category) => category.id === guideCard.category)
@@ -58,8 +60,8 @@ export function WikiSort({
       const category = data.categories.find((item) => item.id === card.category);
       onCaption(
         category
-          ? `「${card.label}」应该归到「${category.label}」。拖过去，或点一下分类。`
-          : '拖动这张卡，或点一下它，再点分类。',
+          ? tr('wiki.should', { card: card.label, category: category.label })
+          : tr('wiki.drag'),
       );
     }
   }
@@ -70,7 +72,7 @@ export function WikiSort({
     setDragging(cardId);
     const category = data.categories.find((item) => item.id === card?.category);
     if (card && category) {
-      onCaption(`「${card.label}」→「${category.label}」。右侧高亮的分类就是它的位置。`);
+      onCaption(tr('wiki.placed', { card: card.label, category: category.label }));
     }
   }
 
@@ -86,7 +88,7 @@ export function WikiSort({
     const category = data.categories.find((item) => item.id === categoryId);
     if (card.category !== categoryId) {
       pulse(categoryId);
-      onCaption(`「${card.label}」不该放在「${category?.label ?? categoryId}」。看高亮的分类。`);
+      onCaption(tr('wiki.wrong', { card: card.label, category: category?.label ?? categoryId }));
       return;
     }
     setPlaced((current) => ({ ...current, [cardId]: categoryId }));
@@ -120,7 +122,7 @@ export function WikiSort({
             data-selected={selected === card.id}
             data-dragging={dragging === card.id}
             draggable
-            title="拖动到右侧分类，或点一下再点分类"
+            title={tr('wiki.dragTitle')}
             onDragStart={(event) => {
               event.dataTransfer.setData('text/plain', card.id);
               event.dataTransfer.effectAllowed = 'move';
@@ -138,7 +140,7 @@ export function WikiSort({
             <span className={s.wikiCardNote}>{card.note}</span>
           </button>
         ))}
-        {tray.length === 0 ? <span className={s.hint}>都{placeVerb}了。</span> : null}
+        {tray.length === 0 ? <span className={s.hint}>{tr('wiki.empty', { verb: placeVerb })}</span> : null}
       </div>
       <div className={s.wikiCategories} data-testid="wiki-categories">
         {data.categories.map((category) => {
@@ -173,7 +175,7 @@ export function WikiSort({
                     data-card={card.id}
                     data-dragging={dragging === card.id}
                     draggable
-                    title="拖动换一个分类，或点一下再点分类"
+                    title={tr('wiki.moveTitle')}
                     onDragStart={(event) => {
                       event.dataTransfer.setData('text/plain', card.id);
                       event.dataTransfer.effectAllowed = 'move';

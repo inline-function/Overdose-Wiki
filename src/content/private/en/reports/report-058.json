@@ -1,0 +1,50 @@
+{
+  "id": "58",
+  "no": 58,
+  "title": "And So od Killed Me",
+  "reporter": "Nongfu Spring",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "",
+  "drugs": "pregabalin, dextromethorphan",
+  "edited": "Entered 2024.05.11T00:48",
+  "segments": [
+    {
+      "id": "report-58-full",
+      "label": "Full text",
+      "date": "2024-05-11",
+      "summary": "The main text has been split into side-58; the file keeps the header, the key dates and the cross-references.",
+      "sceneId": "side-58"
+    }
+  ],
+  "body": [
+    {
+      "type": "list",
+      "items": [
+        "Reporter · Nongfu Spring [no authorization to use the name]",
+        "Handled by · Super Goto-Goto-Gotō",
+        "Lived · 1997.08.13 ~ 2024.04.28 (26 years, 8 months, 15 days)",
+        "Cause of death · poisoning (substance blacked out)",
+        "Entered · 2024.05.11.00:48"
+      ]
+    },
+    { "type": "h", "text": "Recollection" },
+    { "type": "p", "text": "Gotō: this person and I knew each other early on. He called me master; that was 2023.08. Day to day he took pregabalin and dextromethorphan, the dose basically around seventy, because only the usual amount would work. Controlled by the drugs, he lost the ability to work, lived in his grandmother's place, and used money from who knows who. That went on for over a year." },
+    { "type": "p", "text": "Gotō: on 2024.05.10 I learned by chance that he was dead." },
+    { "type": "h", "text": "The Contact" },
+    { "type": "quote", "text": "He told me living was pointless, then deleted all his friends and asked me to delete him. Then he posted a few pictures in the group, so I called the police. On the phone I told him to call 120 himself. He wouldn't; I think he'd already made up his mind. Then I reached his parents, but he still wasn't saved. After I finished with the police I called again, and he was already unconscious and the call wouldn't go through. If I'd guessed a few hours earlier that day maybe I could have saved him. Too late; he'd already drunk the medicine... He probably drank it around nine or ten, because I called the police around half past ten." },
+    { "type": "p", "text": "[An image showing that the contact called the police at 2024.04.28.10:48, 10:55 and 11:02.]" },
+    { "type": "h", "text": "Handler's Note" },
+    { "type": "p", "text": "Gotō: I couldn't save him at all. He refused to leave, refused treatment, refused work. The original purpose of the od was long gone; he was already dead — only his body died on 2024.04.28." },
+    { "type": "p", "text": "Gotō: the drugs took away his feelings about the world and walked him permanently into himself." },
+    { "type": "quote", "text": "Tell me, what should I do?" },
+    { "type": "h", "text": "Related" },
+    {
+      "type": "list",
+      "items": [
+        "Related entries: sedation, recovery techniques",
+        "Related reports: report-032, report-050",
+        "Related cards: pregabalin, dextromethorphan"
+      ]
+    }
+  ]
+}

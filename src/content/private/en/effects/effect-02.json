@@ -1,0 +1,40 @@
+{
+  "id": "兴奋",
+  "title": "Stimulation",
+  "tags": ["effect", "stimulation", "stimulant"],
+  "blocks": [
+    { "type": "quote", "text": "Stimulation lifts normal to high; antidepressant lifts low to high." },
+    { "type": "p", "text": "Stimulation is a class of drug effect that pushes the activity level of the central nervous system upward. Drugs that produce it are called stimulants. It isn't the same thing as an antidepressant: an antidepressant pulls a low person back to normal, a stimulant pushes a normal person up to high." },
+    { "type": "h", "text": "Two Classifications" },
+    { "type": "p", "text": "By structure, a stimulant is either amphetamine-class or it isn't." },
+    { "type": "list", "items": [
+      "Amphetamine class: amphetamine, methamphetamine, cathinones. Strong effect, strong risk; the source text mentioned a 2017 case in the US where someone on bath salts (a cathinone derivative) went out into the street and bit a homeless man.",
+      "Non-phenethylamine class: cocaine, caffeine, and the SRIs pushed into this class pharmacologically."
+    ] },
+    { "type": "p", "text": "By effect, the specific entries separate 'stimulation' from 'antidepressant' again: stimulation lifts normal to high, antidepressant lifts low to high. The two classifications use different axes; there's no need to force them together." },
+    { "type": "h", "text": "Effect and Cost" },
+    { "type": "p", "text": "Stimulants push heart rate, blood pressure, pupils and body temperature up together, while pushing appetite and sleepiness down. Short term it looks like 'better energy'; long term it's tolerance, withdrawal and cardiovascular risk." },
+    { "type": "list", "items": [
+      "Tolerance: the same amount does less and less.",
+      "Withdrawal: the effect passes, arousal rebounds, and drowsiness, depression and anxiety come back together.",
+      "Cardiovascular: faster heartbeat, higher blood pressure; especially dangerous for people with underlying conditions.",
+      "Neurotoxicity: long-term amphetamine use can bring paranoia, hallucinations, stimulant psychosis."
+    ] },
+    { "type": "h", "text": "Caffeine" },
+    { "type": "p", "text": "Caffeine is the most common stimulant, and the one least treated as a 'drug'." },
+    { "type": "p", "text": "It pushes drowsiness away, but adenosine keeps piling up; when the effect passes, the sleepiness comes back all at once. In report 7 caffeine appears repeatedly as a supporting player to dextromethorphan: sometimes to stay awake, sometimes just as daily habit. It doesn't change the direction of dissociation; it only raises the person's arousal a little." },
+    { "type": "p", "text": "Caffeine tolerance comes fast: the same amount wakes you less; stop it and adenosine piles up, and headache, drowsiness and scattered attention come back together. It's the mildest stimulant, and the one most easily ignored." },
+    { "type": "h", "text": "Ephedrine" },
+    { "type": "p", "text": "Ephedrine is a common ingredient in asthma medicine, and it's a stimulant. Its blood-pressure risk is high; stacked with certain drugs, the risk isn't additive. The source text recorded a fatal combination once in report 74; this entry doesn't expand that combination, and keeps only the conclusion: ephedrine isn't 'naturally safe'." },
+    { "type": "h", "text": "Pregabalin Isn't Stimulation" },
+    { "type": "p", "text": "Pregabalin may make a person feel lively, and can even be mistaken for a stimulant; but its mechanism contradicts the definition of a stimulant. In ODW it goes under sedation/anxiolytic, not stimulation. Looking only at how it feels and not at the mechanism is the easiest mistake in classification." },
+    { "type": "h", "text": "Closing" },
+    { "type": "quote", "text": "Stimulants push normal people toward abnormal; antidepressants pull abnormal people back to normal." },
+    { "type": "h", "text": "Related" },
+    { "type": "list", "items": [
+      "Related entries: sedation, SRI, recovery techniques, dissociation",
+      "Related reports: report-007, report-074",
+      "Related cards: caffeine"
+    ] }
+  ]
+}

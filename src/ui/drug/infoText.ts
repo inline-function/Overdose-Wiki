@@ -1,3 +1,12 @@
+import { getLocale } from '../../i18n';
+import {
+  CLASS_TEXT_EN,
+  EFFECT_TEXT_EN,
+  ENZYME_TEXT_EN,
+  INFO_FALLBACK_EN,
+  NEURO_TEXT_EN,
+  TAG_TEXT_EN,
+} from './infoText.en';
 export type InfoKind = 'tag' | 'neuro' | 'enzyme' | 'effect' | 'class';
 
 const TAG_TEXT: Record<string, string> = {
@@ -73,6 +82,13 @@ const CLASS_TEXT: Record<string, string> = {
 };
 
 export function infoText(kind: InfoKind, key: string): string {
+  if (getLocale() === 'en') {
+    if (kind === 'tag') return TAG_TEXT_EN[key] ?? INFO_FALLBACK_EN.tag(key);
+    if (kind === 'neuro') return NEURO_TEXT_EN[key] ?? INFO_FALLBACK_EN.neuro(key);
+    if (kind === 'enzyme') return ENZYME_TEXT_EN[key] ?? INFO_FALLBACK_EN.enzyme(key);
+    if (kind === 'effect') return EFFECT_TEXT_EN[key] ?? INFO_FALLBACK_EN.effect(key);
+    return CLASS_TEXT_EN[key] ?? key;
+  }
   if (kind === 'tag') return TAG_TEXT[key] ?? `标签：${key}。`;
   if (kind === 'neuro') return NEURO_TEXT[key] ?? `神经递质：${key}。`;
   if (kind === 'enzyme') return ENZYME_TEXT[key] ?? `酶：${key}。`;

@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import type { Save } from './types';
 
 export type Tab = {
@@ -26,15 +27,15 @@ export function tabLinks(save: Save): Tab[] {
   const reportId = lastReportId(save);
   const segmentId = lastSegmentId(save);
   return [
-    { id: 'home', label: '首页', to: '/' },
+    { id: 'home', label: t('tab.home'), to: '/' },
     {
       id: 'replay',
-      label: '复演',
+      label: t('tab.replay'),
       to: `/report/${reportId}/replay/${segmentId}`,
     },
-    { id: 'report', label: '报告', to: `/report/${reportId}` },
-    { id: 'history', label: '历史', to: '/history' },
-    { id: 'discussion', label: '讨论', to: `/discussion/${reportId}` },
+    { id: 'report', label: t('tab.report'), to: `/report/${reportId}` },
+    { id: 'history', label: t('tab.history'), to: '/history' },
+    { id: 'discussion', label: t('tab.discussion'), to: `/discussion/${reportId}` },
   ];
 }
 

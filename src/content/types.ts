@@ -677,6 +677,15 @@ export type CourseSpec = {
   grace: number;
 };
 
+export type DrugText = {
+  name: string;
+  aliases?: string[];
+  summary: string;
+  description: string;
+  withdrawalLog?: string;
+  classNote?: string;
+};
+
 export type DrugEntry = {
   kind: 'drug' | 'action';
   id: string;

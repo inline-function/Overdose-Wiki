@@ -1,0 +1,21 @@
+{
+  "id": "105",
+  "no": 105,
+  "title": "The Night Before Scheduling",
+  "reporter": "Super Goto-Goto-Gotō",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "—",
+  "drugs": "—",
+  "edited": "Internal archive",
+  "segments": [
+    { "id": "report-105-full", "label": "Full text", "date": "Internal", "summary": "A site-side document." }
+  ],
+  "body": [
+    { "type": "h", "text": "Countdown" },
+    { "type": "p", "text": "After the commonly abused drugs were scheduled, the drug circle entered a countdown. The harm-reduction camp had nothing left to o: a few successfully left the plateau, most suffered from mental disorders and killed themselves, or switched factions." },
+    { "type": "p", "text": "The libertarians died from lack of awe. They believed that if they were clever enough they could always control the dose and the consequences. Scheduling only took away the drugs they knew; it couldn't take away that belief." },
+    { "type": "h", "text": "Outside and Inside the Wall" },
+    { "type": "p", "text": "Outside the wall, substitutes and combinations keep appearing; inside the wall, ordinary patients can barely get the prescriptions they need. The same policy lands with different weight depending on where you stand." },
+    { "type": "p", "text": "This document doesn't rule on merit. It only records: some people survived because of it, some died because of it, and some neither survived nor died — they were just left in the middle." }
+  ]
+}

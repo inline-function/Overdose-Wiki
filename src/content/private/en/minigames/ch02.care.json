@@ -1,0 +1,101 @@
+{
+  "id": "ch02.care",
+  "kind": "wiki-sort",
+  "title": "What you can do: separate what you can carry from what you can't",
+  "subtitle": "Everything she says is sinking",
+  "intro": "Separate her symptoms, what you can do, and what you cannot. This is not giving up; it's not dragging yourself down with her.",
+  "closing": "What you can do isn't much. But it isn't nothing either.",
+  "doneLabel": "Put the phone down",
+  "trayLabel": "Things not yet separated",
+  "placeVerb": "Put down",
+  "categories": [
+    {
+      "id": "inside",
+      "label": "What she is going through"
+    },
+    {
+      "id": "can",
+      "label": "What you can do"
+    },
+    {
+      "id": "cannot",
+      "label": "What you cannot do"
+    }
+  ],
+  "cards": [
+    {
+      "id": "c1",
+      "label": "Auditory hallucinations",
+      "note": "She says she hears electricity and pipes.",
+      "category": "inside"
+    },
+    {
+      "id": "c2",
+      "label": "No sleep for days",
+      "note": "So tired she suddenly passes out.",
+      "category": "inside"
+    },
+    {
+      "id": "c3",
+      "label": "The world is rotting",
+      "note": "She says the things in front of her are rotting.",
+      "category": "inside"
+    },
+    {
+      "id": "c4",
+      "label": "Ask about safety first",
+      "note": "Is anyone with her right now?",
+      "category": "can"
+    },
+    {
+      "id": "c5",
+      "label": "Contact her caregiver",
+      "note": "Tell someone who can get there.",
+      "category": "can"
+    },
+    {
+      "id": "c6",
+      "label": "Suggest medical care",
+      "note": "Leave professional things to professionals.",
+      "category": "can"
+    },
+    {
+      "id": "c7",
+      "label": "Diagnose her",
+      "note": "You are not a doctor and cannot conclude for her.",
+      "category": "cannot"
+    },
+    {
+      "id": "c8",
+      "label": "Promise she won't die",
+      "note": "You cannot promise that for another person.",
+      "category": "cannot"
+    },
+    {
+      "id": "c9",
+      "label": "Carry it alone",
+      "note": "This is not something one person can carry.",
+      "category": "cannot"
+    }
+  ],
+  "postCompletion": {
+    "glitchCaption": "The screen starts to shake. The categories flicker, like a signal being torn apart.",
+    "caption": "All the categories are gone. Only \"what you can do\" is left, and one card: \"you won't die\".",
+    "intro": "The screen blinks. Only this one cell remains.",
+    "doneLabel": "Turn off the phone",
+    "categories": [
+      {
+        "id": "can",
+        "label": "What you can do"
+      }
+    ],
+    "cards": [
+      {
+        "id": "savior",
+        "label": "You won't die",
+        "note": "As long as I'm here.",
+        "category": "can"
+      }
+    ]
+  }
+}

@@ -4,7 +4,9 @@ import { getCards } from '../content/registry';
 import { SAMPLE_ENGINE_CARDS } from '../content/sample';
 import { useGameStore } from '../game/store';
 import { DrugBadge } from '../ui/drug/DrugBadge';
+import { useT } from '../i18n';
 import p from './pages.module.css';
+import { cardName, cardSummary, drugClassLabel } from '../ui/drug/drugText';
 
 function trimDeck(deck: Record<string, number>, max = 8): Record<string, number> {
   const next: Record<string, number> = {};
@@ -19,6 +21,7 @@ function trimDeck(deck: Record<string, number>, max = 8): Record<string, number>
 }
 
 export function DeckPage() {
+  const tr = useT();
   const contentCards = getCards();
   const cards = (contentCards.length > 0 ? contentCards : SAMPLE_ENGINE_CARDS).filter(
     (card) => !card.storyOnly,
@@ -41,11 +44,13 @@ export function DeckPage() {
 
   function add(id: string) {
     if (ownedCount(id) <= (deck[id] ?? 0)) {
-      setStatus(ownedCount(id) === 0 ? '尚未获得这张药卡。打开药盒后再加入牌组。' : '持有的份数已经全部放进牌组。');
+      setStatus(
+        ownedCount(id) === 0 ? tr('deck.statusNotOwned') : tr('deck.statusAllInDeck'),
+      );
       return;
     }
     if (ids.length >= 8) {
-      setStatus('牌组最多 8 张。');
+      setStatus(tr('deck.statusMax'));
       return;
     }
     setLocalDeck({ ...deck, [id]: (deck[id] ?? 0) + 1 });
@@ -92,7 +97,7 @@ export function DeckPage() {
       next[id] = (next[id] ?? 0) + 1;
     });
     setLocalDeck(trimDeck(next));
-    setStatus('已填入默认 8 张牌组。');
+    setStatus(tr('deck.statusFilled'));
   }
 
   function clearDeck() {
@@ -101,20 +106,20 @@ export function DeckPage() {
 
   function saveDeck() {
     setDeck(deck);
-    setStatus(validation.ok ? '牌组已保存。' : '牌组已保存，但构筑校验未通过。');
+    setStatus(
+      validation.ok ? tr('deck.statusSaved') : tr('deck.statusSavedInvalid'),
+    );
   }
 
   return (
     <article className={p.page}>
-      <p className={p.kicker}>药箱 / 构筑</p>
-      <h1 className={p.pageTitle}>药箱</h1>
-      <p className={p.articleMeta}>
-        {ids.length} / 8 张 · 点击药箱或拖进下方牌组加入 · 点击牌组或拖回药箱移除
-      </p>
+      <p className={p.kicker}>{tr('deck.kicker')}</p>
+      <h1 className={p.pageTitle}>{tr('deck.title')}</h1>
+      <p className={p.articleMeta}>{tr('deck.meta', { n: String(ids.length) })}</p>
 
       <section
         className={p.deckShelf}
-        aria-label="药箱"
+        aria-label={tr('deck.shelfAria')}
         data-dragover={dragOver === 'shelf'}
         onDragOver={(event) => {
           event.preventDefault();
@@ -139,26 +144,36 @@ export function DeckPage() {
               onDragStart={(event) => dragShelf(event, card.id)}
               onClick={() => add(card.id)}
               disabled={!has}
-              aria-label={has ? `${card.name}，加入牌组` : `${card.name}，尚未获得`}
+              aria-label={
+                has
+                  ? tr('deck.addAria', { name: cardName(card) })
+                  : tr('deck.lockedAria', { name: cardName(card) })
+              }
             >
               <span className={p.deckMeta}>
-                <DrugBadge klass={card.klass} /> {card.category}
+                <DrugBadge klass={card.klass} /> {drugClassLabel(card.klass)}
               </span>
-              <span className={p.shelfName}>{has ? card.name : '未获得'}</span>
-              <span className={p.shelfSummary}>{has ? card.summary : '通过药盒获得'}</span>
+              <span className={p.shelfName}>
+                {has ? cardName(card) : tr('deck.notOwned')}
+              </span>
+              <span className={p.shelfSummary}>
+                {has ? cardSummary(card) : tr('deck.obtainHint')}
+              </span>
               {count > 0 && <span className={p.deckCount}>×{count}</span>}
               {has && ownedCount(card.id) > count && (
-                <span className={p.small}>持有 {ownedCount(card.id)}</span>
+                <span className={p.small}>
+                  {tr('deck.owned', { n: String(ownedCount(card.id)) })}
+                </span>
               )}
             </button>
           );
         })}
       </section>
 
-      <h2 className={p.pageTitle}>牌组</h2>
+      <h2 className={p.pageTitle}>{tr('deck.deckTitle')}</h2>
       <section
         className={p.deckTray}
-        aria-label="当前牌组"
+        aria-label={tr('deck.trayAria')}
         data-dragover={dragOver === 'tray'}
         onDragOver={(event) => {
           event.preventDefault();
@@ -176,7 +191,7 @@ export function DeckPage() {
           if (!card) {
             return (
               <div key={`empty-${index}`} className={p.deckSlot} data-empty="true">
-                空
+                {tr('deck.emptySlot')}
               </div>
             );
           }
@@ -188,26 +203,28 @@ export function DeckPage() {
               draggable
               onDragStart={(event) => dragSlot(event, card.id)}
               onClick={() => remove(card.id)}
-              aria-label={`从牌组移除 ${card.name}`}
+              aria-label={tr('deck.removeAria', { name: cardName(card) })}
             >
               <DrugBadge klass={card.klass} />
-              <span>{card.name}</span>
+              <span>{cardName(card)}</span>
             </button>
           );
         })}
       </section>
 
       <div className={p.deckCheck}>
-        {validation.ok ? '构筑校验：通过。' : `构筑校验：${validation.errors.join('；')}`}
+        {validation.ok
+          ? tr('deck.checkOk')
+          : tr('deck.checkFail', { errors: validation.errors.join(' / ') })}
         <div className={p.settingsActions}>
           <button type="button" className={p.pixelButton} onClick={saveDeck}>
-            保存牌组
+            {tr('deck.save')}
           </button>
           <button type="button" className={p.pixelButton} onClick={fillDefault}>
-            填入默认 8 张
+            {tr('deck.fill')}
           </button>
           <button type="button" className={p.pixelButton} onClick={clearDeck}>
-            清空
+            {tr('deck.clear')}
           </button>
         </div>
       </div>

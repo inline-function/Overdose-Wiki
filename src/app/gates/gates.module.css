@@ -994,6 +994,29 @@
   box-shadow: none;
 }
 
+.languageButton {
+  min-height: calc(22 * var(--u));
+  border: var(--bw-2) solid var(--c-ink);
+  background: var(--c-paper3);
+  color: var(--c-ink);
+  box-shadow: var(--shadow-sm);
+  padding: 0 calc(5 * var(--u));
+  font-family: var(--font-8);
+  font-size: var(--fs-8);
+  letter-spacing: calc(0.5 * var(--u));
+  cursor: pointer;
+}
+
+.languageButton:active {
+  transform: translate(calc(1 * var(--u)), calc(1 * var(--u)));
+  box-shadow: none;
+}
+
+.languageButton:focus-visible {
+  outline: var(--bw-2) solid var(--c-red);
+  outline-offset: calc(1 * var(--u));
+}
+
 .loginStamp {
   border: var(--bw-2) solid var(--c-red);
   color: var(--c-red);

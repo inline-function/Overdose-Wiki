@@ -1,0 +1,69 @@
+{
+  "id": "ch02.paint",
+  "kind": "paint-mix",
+  "title": "Colour on the wall: mix the bitterness out",
+  "subtitle": "Three layers of colour",
+  "intro": "She doesn't want to paint. She wants to brush colour onto the wall and cover the person behind it.",
+  "closing": "The colour covers the wall. The person behind it is still there.",
+  "doneLabel": "Wait for the wall to dry",
+  "pigments": [
+    {
+      "id": "red",
+      "label": "Red",
+      "color": "#9d4a4a"
+    },
+    {
+      "id": "yellow",
+      "label": "Yellow",
+      "color": "#c7a34a"
+    },
+    {
+      "id": "blue",
+      "label": "Blue",
+      "color": "#4f6f8f"
+    },
+    {
+      "id": "white",
+      "label": "White",
+      "color": "#d8d1c2"
+    },
+    {
+      "id": "black",
+      "label": "Black",
+      "color": "#17151f"
+    }
+  ],
+  "layers": [
+    {
+      "id": "wall",
+      "label": "Wall grey",
+      "target": [
+        "white",
+        "black",
+        "yellow"
+      ],
+      "underlay": "#07060a",
+      "note": "First paint the room the colour of no feeling."
+    },
+    {
+      "id": "ward",
+      "label": "Hospital-gown blue",
+      "target": [
+        "white",
+        "blue"
+      ],
+      "underlay": "#6b6a66",
+      "note": "Then paint the daytime so it all lasts the same length."
+    },
+    {
+      "id": "bugs",
+      "label": "Bug green",
+      "target": [
+        "yellow",
+        "blue"
+      ],
+      "underlay": "#0b0a10",
+      "note": "Finally paint the things she hears."
+    }
+  ]
+}

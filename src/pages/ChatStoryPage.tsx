@@ -5,6 +5,7 @@ import { extraStoryPromise, reportPromise, scenePromise } from '../content/regis
 import type { ChatFrame } from '../content/types';
 import { gateAudio } from '../audio/gateAudio';
 import { useGameStore } from '../game/store';
+import { useT } from '../i18n';
 import { useSuppressGuide } from '../ui/guideState';
 import s from './ChatStoryPage.module.css';
 
@@ -56,6 +57,7 @@ export function ChatStoryPage() {
   const pinnedRef = useRef(true);
   const markedRef = useRef(false);
   const markRead = useGameStore((state) => state.markRead);
+  const tr = useT();
   const reduce = useGameStore((state) => state.save.settings.motion === 'reduce');
   useSuppressGuide(true);
 
@@ -73,8 +75,10 @@ export function ChatStoryPage() {
           if (!alive) return;
           setDoc({
             title: report?.title ?? scene.title,
-            contact: '散页',
-            meta: report ? `报告 ${report.no} · 聊天记录` : '散页 · 聊天记录',
+            contact: tr('chat.loosePage'),
+            meta: report
+              ? tr('chat.reportMeta', { no: String(report.no) })
+              : tr('chat.looseMeta'),
             frames: sceneToChatFrames(scene),
             readTarget: scene.id,
             readKey: `chat-${scene.id}`,
@@ -93,7 +97,7 @@ export function ChatStoryPage() {
           meta:
             extra.kind === 'story'
               ? extra.chat.period
-              : `与 ${extra.chat.owner} · ${extra.chat.period}`,
+              : tr('chat.withOwner', { owner: extra.chat.owner, period: extra.chat.period }),
           frames: extra.chat.frames,
           readTarget: extra.id,
           readKey: `extra-${extra.id}`,
@@ -108,7 +112,11 @@ export function ChatStoryPage() {
         setDoc({
           title: report.chat.title,
           contact: report.chat.contact,
-          meta: `${report.no}号 · 与 ${report.chat.owner} · ${report.chat.period}`,
+          meta: tr('chat.reportChatMeta', {
+            no: String(report.no),
+            owner: report.chat.owner,
+            period: report.chat.period,
+          }),
           frames: report.chat.frames,
           readTarget: report.id,
           readKey: `chat-${report.id}`,
@@ -121,7 +129,7 @@ export function ChatStoryPage() {
     return () => {
       alive = false;
     };
-  }, [id, sceneId]);
+  }, [id, sceneId, tr]);
 
   const frames = doc?.frames ?? [];
 
@@ -203,7 +211,7 @@ export function ChatStoryPage() {
   if (loading) {
     return (
       <div className={s.loading} role="status">
-        载入记录…
+        {tr('chat.loading')}
       </div>
     );
   }
@@ -211,11 +219,11 @@ export function ChatStoryPage() {
   if (!doc) {
     return (
       <article className={s.missing}>
-        <p className={s.kicker}>番外 / 记录</p>
-        <h1 className={s.missingTitle}>记录未找到</h1>
-        <p className={s.missingText}>这篇番外只在私有档案中提供。</p>
+        <p className={s.kicker}>{tr('chat.kicker')}</p>
+        <h1 className={s.missingTitle}>{tr('chat.missingTitle')}</h1>
+        <p className={s.missingText}>{tr('chat.missingText')}</p>
         <Link className={s.back} to="/extras">
-          返回番外
+          {tr('chat.back')}
         </Link>
       </article>
     );
@@ -227,13 +235,13 @@ export function ChatStoryPage() {
     <article className={s.page} data-reduce={reduce ? 'true' : 'false'}>
       <h1 className={s.srOnly}>{doc.title}</h1>
 
-      <section className={s.chatShell} aria-label={`${doc.title}记录`}>
+      <section className={s.chatShell} aria-label={tr('chat.frameLabel', { title: doc.title })}>
         <header className={s.chatHead}>
           <span className={s.chatName}>{doc.contact}</span>
           <span className={s.chatMeta}>{doc.meta}</span>
-          <span className={s.chatState}>只读</span>
+          <span className={s.chatState}>{tr('chat.readonly')}</span>
           <Link className={`${s.back} ${s.chatBack}`} to="/extras">
-            返回番外
+            {tr('chat.back')}
           </Link>
         </header>
 
@@ -241,7 +249,7 @@ export function ChatStoryPage() {
           ref={logRef}
           className={s.log}
           role="log"
-          aria-label={`${doc.title}记录`}
+          aria-label={tr('chat.frameLabel', { title: doc.title })}
           tabIndex={0}
           onClick={onClickLog}
           onScroll={onScrollLog}
@@ -254,14 +262,14 @@ export function ChatStoryPage() {
         <footer className={s.footer}>
           {done ? (
             <>
-              <span className={s.endMark}>记录结束</span>
+              <span className={s.endMark}>{tr('chat.endMark')}</span>
               {showJump ? (
                 <button type="button" className={s.ghost} onClick={jumpToBottom}>
-                  回到底部
+                  {tr('chat.toBottom')}
                 </button>
               ) : null}
               <button type="button" className={s.ghost} onClick={restart}>
-                重看
+                {tr('chat.restart')}
               </button>
               <span className={s.progress}>
                 {count}/{frames.length}
@@ -270,12 +278,12 @@ export function ChatStoryPage() {
           ) : (
             <>
               <button type="button" className={s.advance} onClick={advance}>
-                继续
+                {tr('chat.advance')}
               </button>
-              <span className={s.hint}>点击记录 / 空格</span>
+              <span className={s.hint}>{tr('chat.hint')}</span>
               {showJump ? (
                 <button type="button" className={s.ghost} onClick={jumpToBottom}>
-                  回到底部
+                  {tr('chat.toBottom')}
                 </button>
               ) : null}
               <span className={s.progress}>

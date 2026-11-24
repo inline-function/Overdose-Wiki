@@ -1,0 +1,28 @@
+{
+  "id": "103",
+  "no": 103,
+  "title": "The Five Golden Flowers and the Effect Docs",
+  "reporter": "Super Goto-Goto-Gotō",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "—",
+  "drugs": "—",
+  "edited": "Internal archive",
+  "segments": [
+    { "id": "report-103-full", "label": "Full text", "date": "Internal", "summary": "A site-side document." }
+  ],
+  "body": [
+    { "type": "h", "text": "Why write effect docs" },
+    { "type": "p", "text": "Sertraline, fluoxetine, paroxetine, fluvoxamine, citalopram — the Five Golden Flowers. People often ask whether they can be o'd. The answer is no: they have basically no psychoactive effect, and an overdose is more likely to trigger serotonin syndrome." },
+    { "type": "p", "text": "This is exactly where harm-reduction knowledge is useful: telling someone who doesn't know a piece of common sense may block one meaningless attempt. So the effect docs aren't a cabinet of curiosities; they're the place where 'no od value' gets written down clearly." },
+    { "type": "h", "text": "Writing order" },
+    {
+      "type": "list",
+      "items": [
+        "Experience first, then mechanism, then associations.",
+        "Cite reports when possible; when not, mark it 'to be verified'.",
+        "Don't turn one person's experience into a general law."
+      ]
+    },
+    { "type": "p", "text": "When Gotō wrote these entries he was often deleting as he wrote. He said an encyclopedia isn't there to teach people how to hurt themselves; it's there so they take a few fewer wrong turns." }
+  ]
+}

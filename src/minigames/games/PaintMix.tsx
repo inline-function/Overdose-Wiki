@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { PaintMixGame } from '../../content/types';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 export function PaintMix({
   data,
@@ -11,6 +12,7 @@ export function PaintMix({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [layerIndex, setLayerIndex] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
   const [done, setDone] = useState<string[]>([]);
@@ -30,14 +32,14 @@ export function PaintMix({
   function togglePigment(id: string) {
     setSelected((current) => {
       if (current.includes(id)) {
-        onCaption(`把${labelOf(id)}刮掉。`);
+        onCaption(tr('paint.removed', { label: labelOf(id) }));
         return current.filter((item) => item !== id);
       }
       if (current.length >= layer.target.length) {
-        onCaption('这一层放不下更多颜料了。先刮掉一种。');
+        onCaption(tr('paint.full'));
         return current;
       }
-      onCaption(`${labelOf(id)}加进去了。`);
+      onCaption(tr('paint.added', { label: labelOf(id) }));
       return [...current, id];
     });
   }
@@ -50,7 +52,7 @@ export function PaintMix({
       wanted.size === chosen.size && [...wanted].every((pigment) => chosen.has(pigment));
     if (!exact) {
       setSelected([]);
-      onCaption('颜色不对。墙没吃进去。再看一眼目标色。');
+      onCaption(tr('paint.wrong'));
       return;
     }
     setDone((current) => [...current, layer.id]);
@@ -87,10 +89,10 @@ export function PaintMix({
           style={{ background: currentColor }}
         />
         <div className={s.paintCracks} aria-hidden="true" />
-        <span className={s.paintWallLabel}>{done.length >= data.layers.length ? '墙刷完了' : layer.label}</span>
+        <span className={s.paintWallLabel}>{done.length >= data.layers.length ? tr('paint.done') : layer.label}</span>
       </div>
       <div className={s.paintControls}>
-        <div className={s.paintLayers} aria-label="三层颜色">
+        <div className={s.paintLayers} aria-label={tr('paint.layersAria')}>
           {data.layers.map((item, index) => {
             const finished = done.includes(item.id);
             return (
@@ -109,7 +111,7 @@ export function PaintMix({
                   if (index < layerIndex) {
                     setLayerIndex(index);
                     setSelected([]);
-                    onCaption(`回到${item.label}。`);
+                    onCaption(tr('paint.back', { label: item.label }));
                   }
                 }}
               >
@@ -120,19 +122,19 @@ export function PaintMix({
           })}
         </div>
         <div className={s.paintTargetRow}>
-          <span className={s.paintTargetLabel}>目标色</span>
+          <span className={s.paintTargetLabel}>{tr('paint.target')}</span>
           <span
             className={s.paintSwatch}
             data-testid="paint-target"
             role="img"
             style={{ background: targetColor }}
-            aria-label={`目标色：${layer.target.map((id) => labelOf(id)).join(' + ')}`}
+            aria-label={tr('paint.targetAria', { list: layer.target.map((id) => labelOf(id)).join(' + ') })}
           />
           <span className={s.paintMixLabel} aria-live="polite">
-            {selected.length ? selected.map((id) => labelOf(id)).join(' + ') : '选颜料'}
+            {selected.length ? selected.map((id) => labelOf(id)).join(' + ') : tr('paint.pick')}
           </span>
         </div>
-        <div className={s.paintPots} role="group" aria-label="颜料盘">
+        <div className={s.paintPots} role="group" aria-label={tr('paint.paletteAria')}>
           {data.pigments.map((pigment) => (
             <button
               key={pigment.id}
@@ -157,7 +159,7 @@ export function PaintMix({
           onClick={apply}
           disabled={all || selected.length === 0}
         >
-          {all ? '都刷完了' : '刷上去'}
+          {all ? tr('paint.allDone') : tr('paint.apply')}
         </button>
       </div>
     </div>

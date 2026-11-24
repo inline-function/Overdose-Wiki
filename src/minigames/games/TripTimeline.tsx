@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { TripTimelineGame } from '../../content/types';
 import { shuffleArray } from '../shuffle';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 const pad = (value: number) => String(value).padStart(2, '0');
 
@@ -14,6 +15,7 @@ export function TripTimeline({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [order] = useState(() => shuffleArray(data.cards));
   const [placed, setPlaced] = useState<Record<number, string>>({});
   const [selected, setSelected] = useState<string | null>(null);
@@ -44,20 +46,20 @@ export function TripTimeline({
       return;
     }
     setWrong(bad);
-    onCaption('记忆对不上。按发生过的顺序再排一次。');
+    onCaption(tr('trip.wrongOrder'));
   }, [filled, slotCount, placed, data.cards, data.closing, onReady, onCaption]);
 
   function select(cardId: string) {
     const card = data.cards.find((item) => item.id === cardId);
     if (selected === cardId) {
       setSelected(null);
-      onCaption('把卡片放到高亮的位置，或者点一下卡片、再点格子。');
+      onCaption(tr('trip.placeHint'));
       return;
     }
     setSelected(cardId);
     if (card) {
       onCaption(
-        `「${card.label}」是第 ${pad(card.order)} 次。拖到高亮的位置，或点一下那一格。`,
+        tr('trip.guideCard', { label: card.label, order: pad(card.order) }),
       );
     }
   }
@@ -67,7 +69,7 @@ export function TripTimeline({
     setSelected(cardId);
     setDragging(cardId);
     if (card) {
-      onCaption(`「${card.label}」→ 第 ${pad(card.order)} 格。高亮的那一格就是它的位置。`);
+      onCaption(tr('trip.placedGuide', { label: card.label, order: pad(card.order) }));
     }
   }
 
@@ -87,7 +89,7 @@ export function TripTimeline({
         setSelected(null);
         setDragging(null);
         setOver(null);
-        onCaption('这张卡放回了未编目。');
+        onCaption(tr('trip.returned'));
       }
       return;
     }
@@ -113,10 +115,10 @@ export function TripTimeline({
   return (
     <div className={s.timeline}>
       <div className={s.timelineTray} data-testid="timeline-tray">
-        <p className={s.trayHeading}>未编目 · {tray.length}</p>
+        <p className={s.trayHeading}>{tr('trip.tray', { n: tray.length })}</p>
         {guideCard ? (
           <p className={s.trayGuide} data-testid="timeline-guide">
-            「{guideCard.label}」→ 第 {pad(guideCard.order)} 格
+            {tr('trip.guideCard', { label: guideCard.label, order: pad(guideCard.order) })}
           </p>
         ) : null}
         {tray.map((card) => (
@@ -129,7 +131,7 @@ export function TripTimeline({
             data-selected={selected === card.id}
             data-dragging={dragging === card.id}
             draggable
-            title="拖动到右侧格子，或点一下再点格子"
+            title={tr('trip.guideTitle')}
             onDragStart={(event) => {
               event.dataTransfer.setData('text/plain', card.id);
               event.dataTransfer.effectAllowed = 'move';
@@ -147,7 +149,7 @@ export function TripTimeline({
             <span className={s.tripLine}>{card.line}</span>
           </button>
         ))}
-        {tray.length === 0 ? <span className={s.hint}>都放上去了。看看顺序。</span> : null}
+        {tray.length === 0 ? <span className={s.hint}>{tr('trip.empty')}</span> : null}
       </div>
       <div className={s.timelineSlots} data-testid="timeline-slots">
         {Array.from({ length: slotCount }, (_, index) => {
@@ -196,11 +198,11 @@ export function TripTimeline({
                     <span className={s.tripLine}>{card.line}</span>
                   </>
                 ) : (
-                  <span>{isGuide ? `放这里 · 第 ${pad(index + 1)} 格` : '把卡片放到这里'}</span>
+                  <span>{isGuide ? tr('trip.slotHere', { n: pad(index + 1) }) : tr('trip.slotEmpty')}</span>
                 )}
                 {isGuide ? (
                   <span className={s.slotGuide} data-testid="timeline-guide-slot">
-                    正确位置
+                    {tr('trip.correct')}
                   </span>
                 ) : null}
               </button>

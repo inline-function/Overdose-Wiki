@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { EchoMatchGame, EchoPair } from '../../content/types';
 import { shuffleArray } from '../shuffle';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 export function EchoMatch({
   data,
@@ -12,10 +13,11 @@ export function EchoMatch({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [rightOrder] = useState(() => shuffleArray(data.pairs));
   const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
   const [matched, setMatched] = useState<string[]>([]);
-  const [note, setNote] = useState('先点左边一句。');
+  const [note, setNote] = useState(() => tr('echo.start'));
   const readyRef = useRef(false);
   const all = matched.length >= data.pairs.length;
 
@@ -30,14 +32,14 @@ export function EchoMatch({
     if (matched.includes(pair.id)) return;
     setSelectedLeft(pair.id);
     setNote(`${pair.left.speaker}：${pair.left.text}`);
-    onCaption(`她说：${pair.left.text}`);
+    onCaption(tr('echo.pickCaption', { text: pair.left.text }));
   }
 
   function chooseRight(pair: EchoPair) {
     if (matched.includes(pair.id)) return;
     if (!selectedLeft) {
-      setNote('先点左边她说的那一句。');
-      onCaption('先选左边一句，再找右边的回音。');
+      setNote(tr('echo.first'));
+      onCaption(tr('echo.firstCaption'));
       return;
     }
     if (selectedLeft === pair.id) {
@@ -47,14 +49,14 @@ export function EchoMatch({
       onCaption(pair.note);
       return;
     }
-    setNote('不是这一句。她说的和这句之间，还隔着一层。');
-    onCaption('不是这一句。再听一遍。');
+    setNote(tr('echo.wrong'));
+    onCaption(tr('echo.wrongCaption'));
   }
 
   return (
     <div className={s.echo} data-testid="echo-stage">
-      <div className={s.echoColumn} role="group" aria-label="她说的">
-        <p className={s.echoHead}>她说的</p>
+      <div className={s.echoColumn} role="group" aria-label={tr('echo.leftAria')}>
+        <p className={s.echoHead}>{tr('echo.leftHead')}</p>
         {data.pairs.map((pair) => (
           <button
             key={pair.id}
@@ -73,8 +75,8 @@ export function EchoMatch({
           </button>
         ))}
       </div>
-      <div className={s.echoColumn} role="group" aria-label="你听见的">
-        <p className={s.echoHead}>你听见的</p>
+      <div className={s.echoColumn} role="group" aria-label={tr('echo.rightAria')}>
+        <p className={s.echoHead}>{tr('echo.rightHead')}</p>
         {rightOrder.map((pair) => (
           <button
             key={pair.id}
@@ -94,7 +96,7 @@ export function EchoMatch({
       <p className={s.echoNote} aria-live="polite">
         {note}
       </p>
-      <span className={s.echoCount} aria-label={`已连上 ${matched.length} 对`}>
+      <span className={s.echoCount} aria-label={tr('echo.countAria', { n: matched.length })}>
         {matched.length} / {data.pairs.length}
       </span>
     </div>

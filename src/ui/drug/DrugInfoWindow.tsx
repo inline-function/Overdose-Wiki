@@ -1,14 +1,20 @@
 import { useState } from 'react';
 import type { DrugEntry } from '../../content/types';
-import { CLASS_LABEL, DrugBadge } from './DrugBadge';
+import { useT } from '../../i18n';
+import { DrugBadge } from './DrugBadge';
+import { drugClassLabel, drugDescription, drugName, effectLabel, neuroLabel, tagLabel } from './drugText';
 import { infoText, type InfoKind } from './infoText';
 import p from '../../pages/pages.module.css';
 import d from './drugs.module.css';
 
 const TURN_HOURS = 3;
-const SEVERITY_LABEL = { light: '轻', medium: '中', heavy: '重' } as const;
-const VALENCE_LABEL = { positive: '正面', negative: '负面', neutral: '中立' } as const;
-const UNIT_LABEL = { g: '克', mg: '毫克', mcg: '微克' } as const;
+const SEVERITY_KEY = { light: 'drug.severity.light', medium: 'drug.severity.medium', heavy: 'drug.severity.heavy' } as const;
+const VALENCE_KEY = {
+  positive: 'drug.valence.positive',
+  negative: 'drug.valence.negative',
+  neutral: 'drug.valence.neutral',
+} as const;
+const UNIT_KEY = { g: 'drug.unit.g', mg: 'drug.unit.mg', mcg: 'drug.unit.mcg' } as const;
 
 type Info = { kind: InfoKind; key: string; title: string };
 
@@ -26,6 +32,7 @@ function ConcentrationGraph({
   player: number;
   opponent: number;
 }) {
+  const tr = useT();
   const [side, setSide] = useState<'player' | 'opponent'>('player');
   const current = side === 'player' ? player : opponent;
   const halfLife = drug.halfLife || 1;
@@ -48,16 +55,19 @@ function ConcentrationGraph({
     <div className={p.graphBlock}>
       <div className={p.inline}>
         <button type="button" className={p.chip} data-active={side === 'player'} onClick={() => setSide('player')}>
-          自己
+          {tr('drug.self')}
         </button>
         <button type="button" className={p.chip} data-active={side === 'opponent'} onClick={() => setSide('opponent')}>
-          对方
+          {tr('drug.other')}
         </button>
-        <span className={p.small}>
-          当前 {TURN_HOURS} 小时/回合 · 半衰期 {halfLife}h
-        </span>
+        <span className={p.small}>{tr('drug.graphMeta', { hours: TURN_HOURS, half: halfLife })}</span>
       </div>
-      <svg viewBox={`0 0 ${width} ${height}`} className={p.concentrationGraph} role="img" aria-label={`${drug.name} 血药浓度曲线`}>
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        className={p.concentrationGraph}
+        role="img"
+        aria-label={tr('drug.graphAria', { name: drugName(drug) })}
+      >
         <line x1={pad} y1={height - pad} x2={width - pad} y2={height - pad} className={p.graphAxis} />
         <line x1={x(0)} y1={pad} x2={x(0)} y2={height - pad} className={p.graphNow} />
         {(drug.concentrationEffects ?? []).map((effect) => (
@@ -73,14 +83,14 @@ function ConcentrationGraph({
         ))}
         <polyline points={line} className={p.graphLine} data-side={side} />
         <text x={x(-3)} y={height - 1} className={p.graphLabel}>-3h</text>
-        <text x={x(0)} y={height - 1} className={p.graphLabel}>现在</text>
+        <text x={x(0)} y={height - 1} className={p.graphLabel}>{tr('drug.now')}</text>
         <text x={x(6)} y={height - 1} className={p.graphLabel}>+6h</text>
         <text x={x(9) - 12} y={height - 1} className={p.graphLabel}>+9h</text>
       </svg>
       <p className={p.small}>
         {current > 0
-          ? `当前浓度 ${current.toFixed(2)}（设定值）；虚线为效应阈值。`
-          : '尚未使用；使用后会生成曲线。'}
+          ? tr('drug.graphNow', { value: current.toFixed(2) })
+          : tr('drug.graphEmpty')}
       </p>
     </div>
   );
@@ -105,94 +115,99 @@ export function DrugInfoWindow({
   opponentConcentration: number;
   onClose: () => void;
 }) {
+  const tr = useT();
   const [info, setInfo] = useState<Info | null>(null);
   const effects = drug.concentrationEffects ?? [];
   const openInfo = (kind: InfoKind, key: string, title?: string) =>
     setInfo({ kind, key, title: title ?? key });
 
   return (
-    <div className={p.winFrame} role="dialog" aria-modal="true" aria-label="药品详情">
+    <div className={p.winFrame} role="dialog" aria-modal="true" aria-label={tr('drug.detailAria')}>
       <div className={p.winTitle}>
-        <span>药品档案 / {drug.name}</span>
+        <span>{tr('drugs.detailKicker')} / {drugName(drug)}</span>
         <span className={p.winDots} aria-hidden="true">— □</span>
-        <button type="button" className={p.winClose} onClick={onClose} aria-label="关闭药品详情">
+        <button type="button" className={p.winClose} onClick={onClose} aria-label={tr('drug.closeDetail')}>
           ×
         </button>
       </div>
       <div className={`${p.winBody} scroll`}>
         <div className={p.winHeader}>
           <h2>
-            <DrugBadge klass={drug.klass} /> {drug.name}
+            <DrugBadge klass={drug.klass} /> {drugName(drug)}
           </h2>
-          <button type="button" className={p.infoChip} onClick={() => openInfo('class', drug.klass, CLASS_LABEL[drug.klass])}>
-            {CLASS_LABEL[drug.klass]}
+          <button
+            type="button"
+            className={p.infoChip}
+            onClick={() => openInfo('class', drug.klass, drugClassLabel(drug.klass))}
+          >
+            {drugClassLabel(drug.klass)}
           </button>
         </div>
         <div className={p.infoChipRow}>
           {drug.tags.map((tag) => (
-            <Chip key={tag} label={tag} onClick={() => openInfo('tag', tag)} />
+            <Chip key={tag} label={tagLabel(tag)} onClick={() => openInfo('tag', tag)} />
           ))}
         </div>
-        <p>{drug.description}</p>
+        <p>{drugDescription(drug)}</p>
 
-        <h3>药代动力学</h3>
+        <h3>{tr('drug.kinetics')}</h3>
         <p>
-          半衰期（设定）：{drug.halfLife}h；生物利用度（设定）：
-          {Math.round((drug.bioavailability ?? 0.6) * 100)}%；耐受倾向：{drug.tolerance}/3。
+          {tr('drug.kineticsInfo', {
+            half: drug.halfLife,
+            bio: Math.round((drug.bioavailability ?? 0.6) * 100),
+            tol: drug.tolerance,
+          })}
         </p>
 
-        <h3>酶</h3>
-        <p>底物</p>
+        <h3>{tr('drug.enzymes')}</h3>
+        <p>{tr('drug.substrates')}</p>
         <div className={p.infoChipRow}>
           {drug.substrates.length ? drug.substrates.map((enzyme) => (
             <Chip key={enzyme} label={enzyme} onClick={() => openInfo('enzyme', enzyme)} />
-          )) : <span className={p.small}>未标注</span>}
+          )) : <span className={p.small}>{tr('drug.untagged')}</span>}
         </div>
-        <p>抑制</p>
+        <p>{tr('drug.inhibitors')}</p>
         <div className={p.infoChipRow}>
           {Object.keys(drug.inhibitors).length ? Object.entries(drug.inhibitors).map(([enzyme, strength]) => (
             <Chip key={enzyme} label={`${enzyme} (${strength})`} onClick={() => openInfo('enzyme', enzyme)} />
-          )) : <span className={p.small}>无</span>}
+          )) : <span className={p.small}>{tr('drug.none')}</span>}
         </div>
-        <p>诱导</p>
+        <p>{tr('drug.inducers')}</p>
         <div className={p.infoChipRow}>
           {drug.inducers.length ? drug.inducers.map((enzyme) => (
             <Chip key={enzyme} label={enzyme} onClick={() => openInfo('enzyme', enzyme)} />
-          )) : <span className={p.small}>无</span>}
+          )) : <span className={p.small}>{tr('drug.none')}</span>}
         </div>
 
-        <h3>神经递质</h3>
+        <h3>{tr('drug.neuro')}</h3>
         <div className={p.infoChipRow}>
           {Object.keys(drug.neuro).length ? Object.keys(drug.neuro).map((neuro) => (
-            <Chip key={neuro} label={neuro} onClick={() => openInfo('neuro', neuro)} />
-          )) : <span className={p.small}>未标注</span>}
+            <Chip key={neuro} label={neuroLabel(neuro)} onClick={() => openInfo('neuro', neuro)} />
+          )) : <span className={p.small}>{tr('drug.untagged')}</span>}
         </div>
 
-        <h3>效应线</h3>
-        <p>
-          每回合第 {drug.effectLine ?? 1} 次使用为单次；同一药品再次使用进入追加效应。
-          追加是否触发取决于药品自身设置。
-        </p>
+        <h3>{tr('drug.effectLine')}</h3>
+        <p>{tr('drug.effectLineInfo', { n: drug.effectLine ?? 1 })}</p>
         <div className={p.infoChipRow}>
           {effects.map((effect) => (
             <Chip
               key={`${effect.name}-${effect.threshold}`}
-              label={`${effect.name} · ${SEVERITY_LABEL[effect.severity]} ${effect.weight}`}
+              label={`${effectLabel(effect.name)} · ${tr(SEVERITY_KEY[effect.severity])} ${effect.weight}`}
               onClick={() => openInfo('effect', effect.name)}
             />
           ))}
         </div>
 
-        <h3>血药浓度效应</h3>
+        <h3>{tr('drug.concentration')}</h3>
         <div className={d.effectTable}>
           {effects.map((effect) => (
             <div className={d.effectLine} key={`${effect.name}-${effect.threshold}`} data-valence={effect.valence}>
-              <span>≥ {effect.threshold}{UNIT_LABEL[effect.unit]}</span>
+              <span>≥ {effect.threshold}{tr(UNIT_KEY[effect.unit])}</span>
               <button type="button" className={p.infoChip} onClick={() => openInfo('effect', effect.name)}>
-                {effect.name}
+                {effectLabel(effect.name)}
               </button>
-              <span>{SEVERITY_LABEL[effect.severity]} · {effect.weight}</span>
-              <span>{VALENCE_LABEL[effect.valence]}</span>
+              <span>{tr(SEVERITY_KEY[effect.severity])} · {effect.weight}</span>
+              <span>{tr(VALENCE_KEY[effect.valence])}</span>
             </div>
           ))}
         </div>
@@ -200,17 +215,17 @@ export function DrugInfoWindow({
       </div>
 
       {info && (
-        <div className={p.infoPopup} role="dialog" aria-modal="true" aria-label={`${info.title} 说明`}>
+        <div className={p.infoPopup} role="dialog" aria-modal="true" aria-label={tr('drug.infoAria', { title: info.title })}>
           <div className={p.infoWindow}>
             <div className={p.winTitle}>
               <span>{info.title}</span>
-              <button type="button" className={p.winClose} onClick={() => setInfo(null)} aria-label="关闭说明">
+              <button type="button" className={p.winClose} onClick={() => setInfo(null)} aria-label={tr('drug.closeInfo')}>
                 ×
               </button>
             </div>
             <p>{infoText(info.kind, info.key)}</p>
             <button type="button" className={p.pixelButton} onClick={() => setInfo(null)}>
-              关闭
+              {tr('drug.close')}
             </button>
           </div>
         </div>

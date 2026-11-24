@@ -3,49 +3,60 @@ import { Link, useParams } from 'react-router-dom';
 import { SAMPLE_EFFECTS } from '../content/sample';
 import { effectPromise, getEffectMetas, hasContent } from '../content/registry';
 import { useGameStore } from '../game/store';
+import { useT } from '../i18n';
 import p from './pages.module.css';
 
 export function EffectsPage() {
+  const tr = useT();
   const { id } = useParams();
   if (id) return <EffectDetail name={decodeURIComponent(id)} />;
 
   const metas = getEffectMetas();
-  const names = metas.length ? metas.map((effect) => effect.id) : SAMPLE_EFFECTS;
+  const entries = metas.length
+    ? metas.map((effect) => ({ id: effect.id, title: effect.title }))
+    : SAMPLE_EFFECTS.map((name) => ({ id: name, title: name }));
   const [query, setQuery] = useState('');
-  const filtered = names.filter((name) => name.toLowerCase().includes(query.trim().toLowerCase()));
+  const needle = query.trim().toLowerCase();
+  const filtered = entries.filter(
+    (entry) =>
+      entry.title.toLowerCase().includes(needle) || entry.id.toLowerCase().includes(needle),
+  );
   return (
     <article className={p.page}>
-      <p className={p.kicker}>效果 / 索引</p>
-      <h1 className={p.pageTitle}>效果</h1>
-      <p className={p.p}>
-        10 类药效词条。词条是 wiki 写法：机制、体验、关联报告与卡牌；不写剂量与方法。
-      </p>
+      <p className={p.kicker}>{tr('effects.kicker')}</p>
+      <h1 className={p.pageTitle}>{tr('effects.title')}</h1>
+      <p className={p.p}>{tr('effects.intro')}</p>
       <div className={p.searchRow}>
         <input
           className={p.searchBox}
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="搜索效果词条"
-          aria-label="搜索效果"
+          placeholder={tr('effects.placeholder')}
+          aria-label={tr('effects.searchAria')}
         />
       </div>
 
       <div className={p.effectsGrid}>
-        {filtered.map((name) => (
-          <Link key={name} className={p.effectCard} to={`/effects/${encodeURIComponent(name)}`}>
-            {name}
+        {filtered.map((entry) => (
+          <Link
+            key={entry.id}
+            className={p.effectCard}
+            to={`/effects/${encodeURIComponent(entry.id)}`}
+          >
+            {entry.title}
             <br />
-            <span className={p.deckMeta}>效果词条</span>
+            <span className={p.deckMeta}>{tr('effects.cardMeta')}</span>
           </Link>
         ))}
       </div>
-      {filtered.length === 0 && <p className={p.empty}>没有匹配的词条。</p>}
-      <p className={p.versionLine}>私有大包含 10 篇效果词条；公开 demo 使用脱敏索引。</p>
+      {filtered.length === 0 && <p className={p.empty}>{tr('effects.empty')}</p>}
+      <p className={p.versionLine}>{tr('effects.versionLine')}</p>
     </article>
   );
 }
 
 function EffectDetail({ name }: { name: string }) {
+  const tr = useT();
   const effect = use(effectPromise(name));
   const readEffect = useGameStore((state) => state.readEffect);
   useEffect(() => {
@@ -55,35 +66,39 @@ function EffectDetail({ name }: { name: string }) {
   if (!known) {
     return (
       <article className={p.page}>
-        <p className={p.kicker}>效果 / 404</p>
+        <p className={p.kicker}>{tr('effects.notFoundKicker')}</p>
         <h1 className={p.pageTitle}>{name}</h1>
-        <p className={p.noticeBox}>此词条尚未归档。返回效果索引继续阅读。</p>
+        <p className={p.noticeBox}>{tr('effects.notFoundText')}</p>
         <Link className={p.pixelButton} to="/effects">
-          返回效果索引
+          {tr('effects.backIndex')}
         </Link>
       </article>
     );
   }
   return (
     <article className={p.page}>
-      <p className={p.kicker}>效果 / 词条</p>
+      <p className={p.kicker}>{tr('effects.detailKicker')}</p>
       <div className={p.articleHeader}>
         <h1 className={p.pageTitle}>{effect?.title ?? name}</h1>
-        <span className={p.tag}>效果</span>
+        <span className={p.tag}>{tr('effects.tag')}</span>
       </div>
       <p className={p.articleMeta}>
-        标签：{effect?.tags.join(' / ') ?? '抑制型 / 解离 / 机制'}
+        {tr('effects.tagsLine', {
+          tags: effect?.tags.join(' / ') ?? tr('effects.tagsFallback'),
+        })}
       </p>
       {effect?.image && hasContent() && (
         <figure className={p.effectFigure}>
           <img
             className="pixelated"
             src={`${import.meta.env.BASE_URL}assets-private/effects/${effect.image}.png`}
-            alt={`${effect.title} 概念插图`}
+            alt={tr('effects.imageAlt', { title: effect.title })}
             width={352}
             height={198}
           />
-          <figcaption className={p.effectCaption}>档案插图 · {effect.title}</figcaption>
+          <figcaption className={p.effectCaption}>
+            {tr('effects.caption', { title: effect.title })}
+          </figcaption>
         </figure>
       )}
       {effect ? (
@@ -118,12 +133,13 @@ function EffectDetail({ name }: { name: string }) {
           );
         })
       ) : (
-        <p className={p.p}>词条正文将在 S1 接入。</p>
+        <p className={p.p}>{tr('effects.bodyPending')}</p>
       )}
-      <div className={p.toc}>关联：右美沙芬 · 金刚烷胺 · 苏糖酸镁 · 报告 7 · 报告 50</div>
+      <div className={p.toc}>{tr('effects.related')}</div>
       <p className={p.small}>
-        <Link to="/effects">← 效果索引</Link> · <Link to="/report/7">报告 7</Link> ·{' '}
-        <Link to="/deck">药箱</Link>
+        <Link to="/effects">{tr('effects.indexLink')}</Link> ·{' '}
+        <Link to="/report/7">{tr('effects.reportLink', { no: '7' })}</Link> ·{' '}
+        <Link to="/deck">{tr('effects.deckLink')}</Link>
       </p>
     </article>
   );

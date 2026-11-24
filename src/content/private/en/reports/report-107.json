@@ -1,0 +1,28 @@
+{
+  "id": "107",
+  "no": 107,
+  "title": "After the Record",
+  "reporter": "Super Goto-Goto-Gotō",
+  "handler": "Super Goto-Goto-Gotō",
+  "vitals": "—",
+  "drugs": "—",
+  "edited": "Internal archive",
+  "segments": [
+    { "id": "report-107-full", "label": "Full text", "date": "Internal", "summary": "A site-side document." }
+  ],
+  "body": [
+    { "type": "h", "text": "Why Keep Recording" },
+    { "type": "p", "text": "What odw and this work are meant to do is only to write it down. No glorifying, no condemning, no teaching abuse, no psychological help hotline thrown in. Writing down the story of the od circle, for us to look at, is enough." },
+    { "type": "p", "text": "A record isn't a verdict. It doesn't answer 'who was right', only 'what happened'. If a reader needs a moment after finishing, the text has arrived where it was supposed to." },
+    { "type": "h", "text": "A Note for the Player" },
+    {
+      "type": "list",
+      "items": [
+        "Documents required by chapter tasks can be reread on the archive page.",
+        "Reading a side document for the first time grants a pillbox; what it opens is a drug card, and won't appear in reality.",
+        "Read content can be reviewed any time from the chapter page, and won't be timed again."
+      ]
+    },
+    { "type": "p", "text": "The page ends here. The world outside the window keeps going." }
+  ]
+}

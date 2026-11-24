@@ -1,56 +1,101 @@
 import type { CardOp, DrugEntry } from '../../content/types';
-import { CLASS_LABEL, DrugBadge } from './DrugBadge';
+import { useT } from '../../i18n';
+import { DrugBadge } from './DrugBadge';
+import {
+  drugAliases,
+  drugClassLabel,
+  drugClassNote,
+  drugCourseName,
+  drugDescription,
+  drugName,
+  drugSummary,
+  drugWithdrawalLog,
+  effectLabel,
+  neuroLabel,
+  statusLabel,
+  tagLabel,
+} from './drugText';
 import s from './drugs.module.css';
+
+type Tr = ReturnType<typeof useT>;
 
 function signed(value: number): string {
   return value > 0 ? `+${value}` : `${value}`;
 }
 
-function opText(op: CardOp): string {
+function opText(op: CardOp, tr: Tr): string {
   if (op.op === 'damage' || op.op === 'heal') {
-    return `${op.op === 'damage' ? '扣' : '回复'}${op.track === 'phys' ? '生理' : '心理'} ${signed(
-      op.op === 'damage' ? -op.amount : op.amount,
-    )}`;
+    const track = op.track === 'phys' ? tr('drug.track.phys') : tr('drug.track.psy');
+    const amount = signed(op.op === 'damage' ? -op.amount : op.amount);
+    return op.op === 'damage'
+      ? tr('drug.op.damage', { track, n: amount })
+      : tr('drug.op.heal', { track, n: amount });
   }
-  if (op.op === 'neuro') return `${op.neuro} ${signed(op.amount)}`;
-  if (op.op === 'status') return `施加「${op.status}」${op.stacks ?? 1} 层`;
-  if (op.op === 'clearStatus') return `清除「${op.status}」${op.stacks ?? 1} 层`;
+  if (op.op === 'neuro') return `${neuroLabel(op.neuro)} ${signed(op.amount)}`;
+  if (op.op === 'status') {
+    return tr('drug.op.status', { status: statusLabel(op.status), n: op.stacks ?? 1 });
+  }
+  if (op.op === 'clearStatus') {
+    return tr('drug.op.clearStatus', { status: statusLabel(op.status), n: op.stacks ?? 1 });
+  }
   if (op.op === 'enzyme') {
-    const strength = op.strength === 'strong' ? '强' : op.strength === 'moderate' ? '中' : '弱';
-    return `${op.mode === 'inhibit' ? '抑制' : '诱导'} ${op.enzyme}（${strength}）`;
+    const strength =
+      op.strength === 'strong'
+        ? tr('drug.strength.strong')
+        : op.strength === 'moderate'
+          ? tr('drug.strength.moderate')
+          : tr('drug.strength.weak');
+    return tr('drug.op.enzyme', {
+      mode: op.mode === 'inhibit' ? tr('drug.enzyme.inhibit') : tr('drug.enzyme.induce'),
+      enzyme: op.enzyme,
+      strength,
+    });
   }
-  if (op.op === 'ap') return `行动点 +${op.amount}`;
-  if (op.op === 'draw') return `抽 ${op.amount} 张牌`;
-  if (op.op === 'delayed') return `延迟 ${op.turns} 回合`;
-  return '未知效果';
+  if (op.op === 'ap') return tr('drug.op.ap', { n: op.amount });
+  if (op.op === 'draw') return tr('drug.op.draw', { n: op.amount });
+  if (op.op === 'delayed') return tr('drug.op.delayed', { n: op.turns });
+  return tr('drug.op.unknown');
 }
 
-function opList(ops: CardOp[]): string[] {
-  return ops.map(opText);
+function opList(ops: CardOp[], tr: Tr): string[] {
+  return ops.map((op) => opText(op, tr));
 }
 
-const SEVERITY_LABEL = { light: '轻', medium: '中', heavy: '重' } as const;
-const VALENCE_LABEL = { positive: '正面', negative: '负面', neutral: '中立' } as const;
-const UNIT_LABEL = { g: '克', mg: '毫克', mcg: '微克' } as const;
+const SEVERITY_KEY = { light: 'drug.severity.light', medium: 'drug.severity.medium', heavy: 'drug.severity.heavy' } as const;
+const VALENCE_KEY = {
+  positive: 'drug.valence.positive',
+  negative: 'drug.valence.negative',
+  neutral: 'drug.valence.neutral',
+} as const;
+const UNIT_KEY = { g: 'drug.unit.g', mg: 'drug.unit.mg', mcg: 'drug.unit.mcg' } as const;
 
 export function DrugDetail({ drug }: { drug: DrugEntry }) {
-  const proper = opList(drug.card.proper);
-  const over = drug.card.over ? opList(drug.card.over) : [];
+  const tr = useT();
+  const proper = opList(drug.card.proper, tr);
+  const over = drug.card.over ? opList(drug.card.over, tr) : [];
   const effects = drug.concentrationEffects ?? [];
+  const aliases = drugAliases(drug);
+  const courseName = drugCourseName(drug);
+  const withdr = drugWithdrawalLog(drug);
+  const classNote = drugClassNote(drug);
   return (
     <div className={s.detail}>
-      <p className={s.kicker}>药品档案 / {CLASS_LABEL[drug.klass]}</p>
+      <p className={s.kicker}>
+        {tr('drugs.detailKicker')} / {drugClassLabel(drug.klass)}
+      </p>
       <h2>
-        <DrugBadge klass={drug.klass} /> {drug.name}
+        <DrugBadge klass={drug.klass} /> {drugName(drug)}
       </h2>
-      {drug.aliases.length > 0 && <p className={s.kicker}>别名：{drug.aliases.join(' / ')}</p>}
-      <p className={s.kicker}>标签：{drug.tags.length ? drug.tags.join(' / ') : '未标注'}</p>
-      <p>{drug.summary}</p>
-      <p>{drug.description}</p>
+      {aliases.length > 0 && <p className={s.kicker}>{tr('drug.aliases', { list: aliases.join(' / ') })}</p>}
+      <p className={s.kicker}>
+        {tr('drug.tags', { list: drug.tags.length ? drug.tags.map(tagLabel).join(' / ') : tr('drug.untagged') })}
+      </p>
+      <p>{drugSummary(drug)}</p>
+      <p>{drugDescription(drug)}</p>
 
       <div className={s.columns}>
         <div>
-          <h3>单次使用</h3>
+          <h3>{tr('drug.singleUse')}</h3>
           <ul className={`${s.list} ${s.proper}`}>
             {proper.map((line) => (
               <li key={line}>{line}</li>
@@ -58,7 +103,7 @@ export function DrugDetail({ drug }: { drug: DrugEntry }) {
           </ul>
         </div>
         <div>
-          <h3>越过效应线</h3>
+          <h3>{tr('drug.overLine')}</h3>
           {over.length ? (
             <ul className={`${s.list} ${s.over}`}>
               {over.map((line) => (
@@ -66,73 +111,78 @@ export function DrugDetail({ drug }: { drug: DrugEntry }) {
               ))}
             </ul>
           ) : (
-            <p className={s.kicker}>没有额外效应；重复使用仍按单次处理。</p>
+            <p className={s.kicker}>{tr('drug.noExtra')}</p>
           )}
         </div>
       </div>
-      <p className={s.kicker}>
-        效应线：每回合第 {drug.effectLine ?? 1} 次使用为单次；再使用同一药品进入追加效应。
-      </p>
+      <p className={s.kicker}>{tr('drug.effectLineDetail', { n: drug.effectLine ?? 1 })}</p>
 
       {drug.card.course && (
         <>
-          <h3>疗程</h3>
+          <h3>{tr('drug.course')}</h3>
           <p>
-            连续 {drug.card.course.turns} 回合单次使用后建立「{drug.card.course.name}」；
-            停药 {drug.card.course.grace} 回合后失效。每回合：
-            {opList(drug.card.course.ops).join('；')}
+            {tr('drug.courseInfo', {
+              turns: drug.card.course.turns,
+              name: courseName ?? drug.card.course.name,
+              grace: drug.card.course.grace,
+              ops: opList(drug.card.course.ops, tr).join(tr('drug.listSep')),
+            })}
           </p>
         </>
       )}
 
-      <h3>药代动力学</h3>
+      <h3>{tr('drug.kinetics')}</h3>
       <p>
-        半衰期（设定）：{drug.halfLife}h；生物利用度（设定）：
-        {Math.round((drug.bioavailability ?? 0.6) * 100)}%；耐受倾向：{drug.tolerance}/3。
+        {tr('drug.kineticsInfo', {
+          half: drug.halfLife,
+          bio: Math.round((drug.bioavailability ?? 0.6) * 100),
+          tol: drug.tolerance,
+        })}
       </p>
 
-      <h3>酶</h3>
+      <h3>{tr('drug.enzymes')}</h3>
       <p>
-        底物：{drug.substrates.length ? drug.substrates.join(' / ') : '未标注'}；
-        抑制：
+        {tr('drug.substrates')}: {drug.substrates.length ? drug.substrates.join(' / ') : tr('drug.untagged')}
+        {' · '}
+        {tr('drug.inhibitors')}:{' '}
         {Object.keys(drug.inhibitors).length
           ? Object.entries(drug.inhibitors)
               .map(([enzyme, strength]) => `${enzyme}(${strength})`)
               .join(' / ')
-          : '无'}
-        ；诱导：{drug.inducers.length ? drug.inducers.join(' / ') : '无'}
+          : tr('drug.none')}
+        {' · '}
+        {tr('drug.inducers')}: {drug.inducers.length ? drug.inducers.join(' / ') : tr('drug.none')}
       </p>
 
-      <h3>血药浓度效应</h3>
+      <h3>{tr('drug.concentration')}</h3>
       {effects.length ? (
         <div className={s.effectTable}>
-          <div className={s.effectHead}>阈值</div>
-          <div className={s.effectHead}>效应</div>
-          <div className={s.effectHead}>权重</div>
-          <div className={s.effectHead}>性质</div>
+          <div className={s.effectHead}>{tr('drug.threshold')}</div>
+          <div className={s.effectHead}>{tr('drug.effect')}</div>
+          <div className={s.effectHead}>{tr('drug.weight')}</div>
+          <div className={s.effectHead}>{tr('drug.nature')}</div>
           {effects.map((effect) => (
             <div className={s.effectLine} key={`${effect.name}-${effect.threshold}`} data-valence={effect.valence}>
               <span>
-                ≥ {effect.threshold}{UNIT_LABEL[effect.unit]}
+                ≥ {effect.threshold}
+                {tr(UNIT_KEY[effect.unit])}
               </span>
-              <span>{effect.name}</span>
+              <span>{effectLabel(effect.name)}</span>
               <span>
-                {SEVERITY_LABEL[effect.severity]} · {effect.weight}
+                {tr(SEVERITY_KEY[effect.severity])} · {effect.weight}
               </span>
-              <span>{VALENCE_LABEL[effect.valence]}</span>
+              <span>{tr(VALENCE_KEY[effect.valence])}</span>
             </div>
           ))}
         </div>
       ) : (
-        <p className={s.kicker}>未标注浓度效应。</p>
+        <p className={s.kicker}>{tr('drug.noEffects')}</p>
       )}
 
-      {drug.withdrawal && <p>停药：{drug.withdrawal.log}</p>}
-      {drug.classNote && <p className={s.kicker}>{drug.classNote}</p>}
+      {withdr && <p>{tr('drug.withdrawal', { log: withdr })}</p>}
+      {classNote && <p className={s.kicker}>{classNote}</p>}
 
-      <p className={s.attribution}>
-        药品分类与机制参考 Function Manual（MIT, linear function）。
-      </p>
+      <p className={s.attribution}>{tr('drug.attribution')}</p>
     </div>
   );
 }

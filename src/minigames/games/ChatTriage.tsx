@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ChatTriageGame } from '../../content/types';
 import { shuffleOptions } from '../shuffle';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 type Line = { who: 'them' | 'me' | 'sys'; text: string };
 
@@ -14,6 +15,7 @@ export function ChatTriage({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [index, setIndex] = useState(0);
   const [history, setHistory] = useState<Line[]>([]);
   const [answered, setAnswered] = useState(false);
@@ -45,7 +47,7 @@ export function ChatTriage({
     if (answered) return;
     if (!reply.ok) {
       setWrong((current) => (current.includes(reply.id) ? current : [...current, reply.id]));
-      setFeedback(reply.followUp ?? '群里安静了一下。');
+      setFeedback(reply.followUp ?? tr('chat.quiet'));
       onCaption(reply.reply + (reply.followUp ? ` ${reply.followUp}` : ''));
       return;
     }
@@ -89,7 +91,7 @@ export function ChatTriage({
             style={{ animationDelay: `${Math.min(lineIndex, 5) * 45}ms` }}
           >
             {line.who !== 'sys' ? (
-              <span className={s.bubbleWho}>{line.who === 'me' ? '后藤' : '群友'}</span>
+              <span className={s.bubbleWho}>{line.who === 'me' ? tr('chat.me') : tr('chat.member')}</span>
             ) : null}
             {line.text}
           </div>
@@ -105,7 +107,7 @@ export function ChatTriage({
           </div>
         ) : null}
         {typing ? (
-          <div className={s.chatTyping} data-testid="chat-typing" aria-label="对方正在输入">
+          <div className={s.chatTyping} data-testid="chat-typing" aria-label={tr('chat.typingAria')}>
             <span />
             <span />
             <span />
@@ -119,7 +121,7 @@ export function ChatTriage({
       </div>
       <div className={s.chatOptions} data-typing={typing}>
         <span className={s.hint}>
-          {index + 1} / {data.questions.length} · 选择回复
+          {tr('chat.pickReply', { a: index + 1, b: data.questions.length })}
         </span>
         {!answered ? (
           replies.map((reply) => (
@@ -137,7 +139,7 @@ export function ChatTriage({
           ))
         ) : (
           <span className={s.chatWaiting}>
-            {last ? '把手机扣下……' : '下一条马上浮上来……'}
+            {last ? tr('chat.last') : tr('chat.next')}
           </span>
         )}
       </div>

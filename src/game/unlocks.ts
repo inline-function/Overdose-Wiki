@@ -1,4 +1,5 @@
 import { getChapterMeta, getReportMeta } from '../content/registry';
+import { t } from '../i18n';
 import type { ChapterMeta, ReportMeta, SceneMeta } from '../content/types';
 import type { Save } from './types';
 import { isQuestComplete, questFor } from './quests';
@@ -44,26 +45,26 @@ export function isSceneUnlocked(meta: SceneMeta, save: Save): boolean {
 export function chapterUnlockHint(id: string): string {
   switch (id) {
     case 'ch02':
-      return '完成 ch01 与任务「第一批归档」（三份文档）后解锁';
+      return t('unlock.afterDocs', { chapter: 'ch01', quest: t('quest.ch01.title') });
     case 'ch03':
-      return '完成 ch02 与任务「第二次校订」（三份文档）后解锁';
+      return t('unlock.afterDocs', { chapter: 'ch02', quest: t('quest.ch02.title') });
     case 'ch04':
-      return '完成 ch03 与任务「消失前的索引」（三份文档）后解锁';
+      return t('unlock.afterDocs', { chapter: 'ch03', quest: t('quest.ch03.title') });
     case 'dlc':
-      return '完成 ch01.s14 后解锁';
+      return t('unlock.afterScene', { id: 'ch01.s14' });
     default:
-      return '已归档';
+      return t('unlock.archived');
   }
 }
 
 export function questHint(id: string): string {
   const quest = questFor(id);
-  return quest ? `任务「${quest.title}」` : '';
+  return quest ? t('unlock.quest', { title: quest.title }) : '';
 }
 
 export function unlockHint(meta: ReportMeta): string {
   const rule = meta.unlock;
-  if (!rule) return '已归档';
+  if (!rule) return t('unlock.archived');
   const target = rule.ref ?? rule.scene;
-  return target ? `完成 ${target} 后解锁` : '未解锁';
+  return target ? t('unlock.afterTarget', { target }) : t('unlock.locked');
 }

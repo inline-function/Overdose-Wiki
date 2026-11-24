@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CameraWallGame } from '../../content/types';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -13,6 +14,7 @@ export function CameraWall({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [scanned, setScanned] = useState<string[]>([]);
   const [active, setActive] = useState<string | null>(null);
   const readyRef = useRef(false);
@@ -36,7 +38,7 @@ export function CameraWall({
 
   return (
     <div className={s.cameraWall} data-testid="camera-wall-stage" data-scanned={scanned.length}>
-      <div className={s.cameraWallGrid} role="group" aria-label="街道监控">
+      <div className={s.cameraWallGrid} role="group" aria-label={tr('camera.aria')}>
         {data.feeds.map((feed) => {
           const done = scanned.includes(feed.id);
           return (
@@ -59,18 +61,18 @@ export function CameraWall({
               <span className={s.cameraWallStatic} aria-hidden="true" />
               <span className={s.cameraWallTime}>{feed.time}</span>
               <span className={s.cameraWallLabel}>{feed.label}</span>
-              {done ? <span className={s.cameraWallNoSignal}>无信号</span> : null}
+              {done ? <span className={s.cameraWallNoSignal}>{tr('camera.noSignal')}</span> : null}
             </button>
           );
         })}
       </div>
       <div className={s.cameraWallReadout} aria-live="polite">
         <span className={s.cameraWallReadoutLabel}>
-          {activeFeed ? `${activeFeed.label} · ${activeFeed.time}` : '等待调取监控'}
+          {activeFeed ? `${activeFeed.label} · ${activeFeed.time}` : tr('camera.waiting')}
         </span>
-        <span>{activeFeed ? activeFeed.line : '点一格监控。'}</span>
+        <span>{activeFeed ? activeFeed.line : tr('camera.pick')}</span>
       </div>
-      <span className={s.cameraWallCount} aria-label={`已查看 ${scanned.length} 路，共 ${data.feeds.length} 路`}>
+      <span className={s.cameraWallCount} aria-label={tr('camera.countAria', { a: scanned.length, b: data.feeds.length })}>
         {scanned.length} / {data.feeds.length}
       </span>
     </div>

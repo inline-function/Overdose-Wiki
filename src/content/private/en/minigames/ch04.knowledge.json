@@ -1,0 +1,99 @@
+{
+  "id": "ch04.knowledge",
+  "kind": "knowledge-dossier",
+  "title": "Epistemology: knowledge with two faces",
+  "subtitle": "Policy tree · four cards",
+  "intro": "Every piece of knowledge carries a second face. Open it, then decide which face enters the public archive.",
+  "closing": "Four policies are nailed to the wall. Knowledge did not become one face; your choices just pressed it to one side.",
+  "doneLabel": "Nail the policies to the wall",
+  "background": "assets-private/bg/bg_knowledge_fracture.png",
+  "cards": [
+    {
+      "id": "help",
+      "title": "First aid and where to get help",
+      "faces": [
+        {
+          "text": "Let people know where to go for help.",
+          "tone": "help"
+        },
+        {
+          "text": "Screenshotted as shock material, turned into a new wound.",
+          "tone": "harm"
+        }
+      ]
+    },
+    {
+      "id": "interaction",
+      "title": "Drug interactions",
+      "faces": [
+        {
+          "text": "Avoid dangerous combinations.",
+          "tone": "help"
+        },
+        {
+          "text": "Spread as a recipe.",
+          "tone": "harm"
+        }
+      ]
+    },
+    {
+      "id": "schedule",
+      "title": "Scheduling timeline",
+      "faces": [
+        {
+          "text": "Know what changed.",
+          "tone": "help"
+        },
+        {
+          "text": "Treated as a buying guide.",
+          "tone": "harm"
+        }
+      ]
+    },
+    {
+      "id": "story",
+      "title": "Personal experience",
+      "faces": [
+        {
+          "text": "Make people feel less alone.",
+          "tone": "help"
+        },
+        {
+          "text": "Treated as an identity label.",
+          "tone": "harm"
+        }
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "id": "open",
+      "label": "Publish directly",
+      "line": "Send it out. Someone gets saved; someone learns to hurt people.",
+      "effects": {
+        "trust": 6,
+        "archive": 6,
+        "escalation": 1
+      }
+    },
+    {
+      "id": "context",
+      "label": "Publish with context",
+      "line": "Add a paragraph. It blocks some of it, but not reposts.",
+      "effects": {
+        "trust": 9,
+        "archive": 3
+      }
+    },
+    {
+      "id": "withhold",
+      "label": "Withhold the details",
+      "line": "Hide it. The people who need it may never find it.",
+      "effects": {
+        "trust": -4,
+        "archive": -7,
+        "escalation": -1
+      }
+    }
+  ]
+}

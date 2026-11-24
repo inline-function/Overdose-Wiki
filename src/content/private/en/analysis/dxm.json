@@ -1,0 +1,57 @@
+{
+  "dxm": {
+    "title": "Dextromethorphan neurosis · Gotō's self-case",
+    "subtitle": "Gotō's self-case",
+    "intro": "Gotō parks the cursor on his own record and leans back. \"Your turn this time. Don't rush to say I'm od-ing -- look first at what I wrote about myself.\"",
+    "report": {
+      "title": "\"Recovery Arts\" draft · Case two (Gotō)",
+      "paragraphs": [
+        "Back when I was taking dextromethorphan, I had headaches, a cough, vomiting, nausea. I told myself: this is the price of treatment, the drug doing its work.",
+        "But I knew perfectly well that I \"just wanted to od\". The moment the thought surfaced, something pushed it down: od is a sin, it's shameful, it would let everyone down. That is the superego's censorship.",
+        "So I changed the wording: taking Umi was making myself comfortable, treating an illness, not od. Thinking that way, the headaches, cough, vomiting and nausea all seemed to make sense.",
+        "Gotō wrote in the margin: this passage skips a lot of steps; it is an extremely crude account."
+      ]
+    },
+    "keywordTexts": [
+      "headaches",
+      "cough",
+      "vomiting",
+      "nausea",
+      "superego",
+      "censorship",
+      "making myself comfortable",
+      "Umi"
+    ],
+    "blocks": {
+      "symptom": "Headaches · cough · vomiting · nausea (somatised)",
+      "decoy-benefit-1": "Sleep through a whole night after taking it",
+      "cause": "The wish to od filtered out by superego censorship",
+      "decoy-cognition-1": "Just curiosity; trying once won't do anything",
+      "decoy-symptom-1": "Tremor · insomnia · palpitations (like withdrawal)",
+      "cognition": "Belief: od is a sin / bad (superego censorship)",
+      "decoy-cause-1": "Too much stress lately; nothing to do with od",
+      "benefit": "\"Taking Umi is treatment, making myself comfortable, not od\"",
+      "decoy-benefit-2": "Can forget grades and family for a while",
+      "decoy-cognition-2": "As long as I control it, it doesn't count as od",
+      "decoy-symptom-2": "Worse memory · slower · don't want to talk",
+      "decoy-cause-2": "All my friends are using it"
+    },
+    "slots": {
+      "main-symptom": "First pin down the bodily reaction that keeps returning.",
+      "main-cause": "What are these reactions covering for?",
+      "main-cognition": "What is the thing that pushes the thought down?",
+      "branch-benefit": "What story did he use to convince himself this wasn't od?"
+    },
+    "reveal": {
+      "quote": "I didn't get sick from od -- I fucking wanted to od. The headaches, cough, vomiting, all of it was useless.",
+      "paragraphs": [
+        "Once the repression is named, the somatisation has nothing left to protect.",
+        "Recovery: take hold of the cause, face the wish, instead of taking more pills to press the symptoms back down."
+      ]
+    },
+    "restore": {
+      "text": "The end point of recovery isn't \"getting high more happily\", it's \"no longer needing it\".",
+      "annotation": "Gotō's own note: this leans psychoanalytic, skips many steps, and is an extremely crude account. Pharmacological note: Umi should not cause these four symptoms; this is psychological. The above is Gotō's framework, not the truth."
+    }
+  }
+}

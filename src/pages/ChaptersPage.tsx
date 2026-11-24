@@ -4,19 +4,22 @@ import { CHAPTER_REPORT } from '../game/routing';
 import { useGameStore } from '../game/store';
 import { chapterUnlockHint, isChapterUnlocked } from '../game/unlocks';
 import { questFor, questTasks } from '../game/quests';
+import { useT } from '../i18n';
 import p from './pages.module.css';
 
 export function ChaptersPage() {
-  // DLC 在侧栏单独入口，散页归番外；剧情只列四章主线。
+  const tr = useT();
+  // DLC has its own sidebar entry and loose pages belong to extras; the story
+  // list only shows the four main chapters.
   const chapters = getChapterMetas().filter(
     (chapter) => chapter.id !== 'dlc' && chapter.id !== 'side',
   );
   const save = useGameStore((state) => state.save);
   return (
     <article className={p.page}>
-      <p className={p.kicker}>主线 / 章节</p>
-      <h1 className={p.pageTitle}>章节</h1>
-      <p className={p.p}>从任意章节的第一场开始；已经读过的内容可以随时回到报告。</p>
+      <p className={p.kicker}>{tr('chapters.kicker')}</p>
+      <h1 className={p.pageTitle}>{tr('chapters.title')}</h1>
+      <p className={p.p}>{tr('chapters.intro')}</p>
       <div className={p.archiveGrid}>
         {chapters.map((chapter) => {
           const reportId = CHAPTER_REPORT[chapter.id] ?? '7';
@@ -43,7 +46,10 @@ export function ChaptersPage() {
             >
               <span className={p.archiveTitle}>{chapter.title}</span>
               <span className={p.archiveMeta}>
-                {chapter.id} · {chapter.sceneCount} 场
+                {tr('chapters.sceneCount', {
+                  id: chapter.id,
+                  n: String(chapter.sceneCount),
+                })}
               </span>
             </Link>
           );
@@ -57,7 +63,7 @@ export function ChaptersPage() {
           return (
             <section key={chapter.id} className={p.questPanel}>
               <h2 className={p.effectH}>
-                任务 · {quest.title}
+                {tr('chapters.questPanel', { title: quest.title })}
                 <span className={p.small}>
                   {' '}
                   {tasks.filter((task) => task.done).length}/{tasks.length}
@@ -82,9 +88,7 @@ export function ChaptersPage() {
             </section>
           );
         })}
-      <p className={p.versionLine}>
-        章节解锁需要完成上一章与对应归档任务；支线可提前阅读。
-      </p>
+      <p className={p.versionLine}>{tr('chapters.versionLine')}</p>
     </article>
   );
 }

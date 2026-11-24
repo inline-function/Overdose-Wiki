@@ -1,5 +1,7 @@
 import type { EndingId } from '../afterstory/types';
 import { normalizeAfterstory } from '../afterstory/engine';
+import { isLocale } from '../i18n/types';
+import { t } from '../i18n';
 import {
   CONSENT_VERSION,
   SAVE_VERSION,
@@ -56,6 +58,9 @@ export function migrate(raw: unknown): Save | null {
     } else {
       save.ownedCards = Object.fromEntries(STARTER_CARDS.map((id) => [id, 1]));
     }
+    if (!isLocale((save.settings as { lang?: unknown }).lang)) {
+      (save.settings as { lang?: unknown }).lang = 'zh';
+    }
     if (typeof save.boxes !== 'number') save.boxes = 30;
     if (save.boxes === 0 && save.claimedDocs.length === 0 && save.claimedQuests.length === 0) {
       save.boxes = 30;
@@ -103,14 +108,14 @@ export function loadSave(): { save: Save | null; error?: string } {
     if (!save) {
       return {
         save: null,
-        error: '存档格式无法识别；已保留原档，可在设置中导出后重置。',
+        error: t('persist.badFormat'),
       };
     }
     return { save };
   } catch {
     return {
       save: null,
-      error: '存档读取失败；已保留原档，可在设置中导出后重置。',
+      error: t('persist.readFailed'),
     };
   }
 }

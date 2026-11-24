@@ -1,0 +1,81 @@
+{
+  "id": "ch01.wiki-sort",
+  "kind": "wiki-sort",
+  "title": "The first homepage",
+  "subtitle": "OverdoseWiki editorial group",
+  "intro": "Sakura pushes over a pile of unsorted articles. First give them somewhere to go.",
+  "closing": "Answering one by one wastes too much time. One site, and everyone can just look.",
+  "doneLabel": "Publish the homepage",
+  "categories": [
+    {
+      "id": "intro",
+      "label": "Introduction"
+    },
+    {
+      "id": "branch",
+      "label": "Branch"
+    },
+    {
+      "id": "effects",
+      "label": "Effects"
+    },
+    {
+      "id": "restore",
+      "label": "Recovery Arts"
+    },
+    {
+      "id": "reports",
+      "label": "Reports"
+    }
+  ],
+  "cards": [
+    {
+      "id": "w1",
+      "label": "od: An Introduction",
+      "note": "Start with \"why\"",
+      "category": "intro"
+    },
+    {
+      "id": "w2",
+      "label": "od: Branch Studies",
+      "note": "Take the symptoms apart",
+      "category": "branch"
+    },
+    {
+      "id": "w3",
+      "label": "Dissociation",
+      "note": "The five senses dissolve",
+      "category": "effects"
+    },
+    {
+      "id": "w4",
+      "label": "Anti-dissociation",
+      "note": "Pull the person back",
+      "category": "restore"
+    },
+    {
+      "id": "w5",
+      "label": "Hallucination",
+      "note": "Seeing what is not there",
+      "category": "effects"
+    },
+    {
+      "id": "w6",
+      "label": "Recovery Arts",
+      "note": "Three propositions",
+      "category": "restore"
+    },
+    {
+      "id": "w7",
+      "label": "Analysis of Plateau Demographics",
+      "note": "Who is on the plateau",
+      "category": "reports"
+    },
+    {
+      "id": "w8",
+      "label": "The od Non-proliferation Pact",
+      "note": "Set the rules first",
+      "category": "intro"
+    }
+  ]
+}

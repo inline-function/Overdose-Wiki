@@ -1,0 +1,33 @@
+{
+  "id": "ch02.archive",
+  "kind": "archive-envelope",
+  "title": "Archive: write the name on it",
+  "subtitle": "The last filing",
+  "intro": "Put the things she said into the envelope. Open your hand and let them fall in.",
+  "closing": "The file closes. The name is still there.",
+  "doneLabel": "Let the file close",
+  "background": "assets-private/bg/bg_ch02_archive.png",
+  "name": "Sakurazaki Ayaka",
+  "cards": [
+    {
+      "id": "a1",
+      "text": "I won't die."
+    },
+    {
+      "id": "a2",
+      "text": "You're not useless. You're Pharmacist Bocchi, and you saved me."
+    },
+    {
+      "id": "a3",
+      "text": "I've made up my mind to take my meds properly and never od again."
+    },
+    {
+      "id": "a4",
+      "text": "Bocchi, is it still in time for me to turn back?"
+    },
+    {
+      "id": "a5",
+      "text": "I won't die, I won't die, I won't die..."
+    }
+  ]
+}

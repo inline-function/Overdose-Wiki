@@ -1,0 +1,14 @@
+{
+  "id": "谵妄",
+  "title": "Delirium",
+  "tags": ["effect", "delirium", "hallucinogenic"],
+  "blocks": [
+    { "type": "quote", "text": "There is no present anymore; dimenhydrinate is trapped in the past." },
+    { "type": "p", "text": "Can you imagine a consciousness with no short-term memory at all — unable to hold onto any present moment, so it can only fall back into the past? But it can't even think. Dimenhydrinate can only go over the old memories again and again: the first time on that motorboat, the first time in that helicopter, the first time... These memories keep draining out painfully through the eyes." },
+    { "type": "p", "text": "You reach out to grab the present; the present leaks through your fingers. You open your mouth to say this moment; this moment is already gone from your mouth. You have only the past left, and the past is a room with no door: you walk in again and again, and again and again find yourself inside." },
+    { "type": "quote", "text": "Hot as a hare, blind as a bat, dry as a bone, red as a beet, mad as a hatter." },
+    { "type": "p", "text": "The body burns but doesn't sweat, the eyes see nothing but stay open, the mouth is dry as a bone, the skin red as a beet, the mind mad as a hatter. These aren't metaphors; this is what the anticholinergic load looks like on flesh. The shadow person stands at the edge of your vision: turn your head and he's gone, don't turn and he's always there. You know he isn't real — but the 'knowing' itself also needs short-term memory, and you don't have it." },
+    { "type": "p", "text": "Delirium isn't a dream. A dream at least has a dreamer. In delirium even the thought 'I'm dreaming' can't be held. You've had the present stripped off you, so you've had yourself stripped off you." },
+    { "type": "p", "text": "This is why deliriant drugs are called abuse: they don't give you pleasure, they give you a past with no door. The strong may be able to make something out of it; the weak are only trapped." }
+  ]
+}

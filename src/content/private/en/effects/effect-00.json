@@ -1,0 +1,41 @@
+{
+  "id": "SRI",
+  "title": "SRI",
+  "tags": ["effect", "SRI", "antidepressant"],
+  "blocks": [
+    { "type": "quote", "text": "Depression leaves a person with no drive. Sure, being bullied at school is cruel, sure, domestic violence is cruel, but at least there should be a little drive left to live normally, right? To keep yourself from one day starving to death and being cursed as 'that dumbass is just plain lazy!', here comes Zoloft.\nSertraline~ Sertraline~ You're my Rescuer~" },
+    { "type": "p", "text": "SRI is serotonin reuptake inhibition. SSRI is selective serotonin reuptake inhibition, a subset of SRI; SNRI inhibits the reuptake of both serotonin and noradrenaline. All of them are antidepressants and anxiolytics, not 'happy pills'." },
+    { "type": "h", "text": "Mechanism: Slow the Recycling Down" },
+    { "type": "p", "text": "After a nerve cell releases serotonin, it takes it back up through a transporter. SRI inhibits that reuptake, so serotonin stays longer in the synaptic cleft." },
+    { "type": "p", "text": "But this doesn't make a person happy right away. The receptors need time to adapt, and the antidepressant effect usually takes a few weeks; during those weeks the side effects tend to arrive first and the benefit later. That's the black humour in the line 'here comes Zoloft': it does come, just very slowly." },
+    { "type": "h", "text": "Effects" },
+    { "type": "list", "items": [
+      "Main effects: antidepressant, anxiolytic.",
+      "Main side effects: sexual inhibition, SSRI withdrawal, insomnia or drowsiness, nausea, sweating.",
+      "Acute side effects: serotonin syndrome, sexual inhibition, anxiety."
+    ] },
+    { "type": "p", "text": "The source text's precautions consisted of one sentence: 'Sertraline can't be o'd.' That isn't a moral judgment but a pharmacological one: an SSRI overdose won't give you the 'high' you want, but will push serotonin to a dangerous place." },
+    { "type": "h", "text": "The Five Golden Flowers" },
+    { "type": "p", "text": "The circle calls the classic SSRIs the 'five golden flowers': fluoxetine, sertraline, paroxetine, fluvoxamine, citalopram/escitalopram. Their mechanisms are similar; they differ mainly in metabolism speed, degree of sedation and withdrawal reactions." },
+    { "type": "p", "text": "In ODW's cards, 'five golden flowers' is no longer one card but the collective name of five SSRI cards: fluoxetine, sertraline, paroxetine, fluvoxamine, citalopram. All five carry the 'five golden flowers' tag and all stack a layer of serotonin load; the specific effects differ slightly (delay, sedation, withdrawal, stacking with dextro in the same round). Take sertraline: mind +5, +3 two rounds later, serotonin load +1." },
+    { "type": "h", "text": "Serotonin Syndrome" },
+    { "type": "p", "text": "When there's too much serotonin, a person gets fever, sweating, tremor, myoclonus, hyperreflexia, altered consciousness and a racing heart; in severe cases it can be fatal. This isn't 'the effect being too strong', it's the system going beyond its regulatory range." },
+    { "type": "p", "text": "Stack two serotonergic drugs and the risk isn't additive, it's multiplicative. Dextromethorphan itself has SRI action; stacked with an SSRI, it's a common combination for serotonin syndrome. The source text left only one cautious reminder about combining dextro with antidepressants and gave no protocol — this piece won't give one either." },
+    { "type": "h", "text": "Withdrawal" },
+    { "type": "p", "text": "SSRIs need to be tapered down slowly, dose by dose. After a sudden stop there can be dizziness, nausea, anxiety, insomnia, electric-shock sensations; these symptoms disguise themselves as 'the illness coming back', making people think they can't stop." },
+    { "type": "p", "text": "Recovery technique files it under 'discontinuation reaction': not a new illness, just a withdrawal that happened too fast." },
+    { "type": "h", "text": "It Isn't a Stimulant" },
+    { "type": "p", "text": "The specific entries separate 'stimulation' from 'antidepressant' very clearly:" },
+    { "type": "quote", "text": "Stimulation lifts normal to high; antidepressant lifts low to high." },
+    { "type": "p", "text": "An SSRI pulls a low person back to normal, and won't push a normal person toward high. So it shouldn't be used as a stimulant; for someone without depression it brings mostly side effects rather than happiness." },
+    { "type": "h", "text": "Closing" },
+    { "type": "quote", "text": "It pulls a low person back to normal, but it won't push a normal person toward high." },
+    { "type": "h", "text": "Effect Classification Mapping" },
+    { "type": "h", "text": "Related" },
+    { "type": "list", "items": [
+      "Related entries: dissociation, recovery techniques, delirium, afterglow",
+      "Related reports: report-049, report-050, report-020",
+      "Related cards: fluoxetine, sertraline, paroxetine, fluvoxamine, citalopram, dextromethorphan"
+    ] }
+  ]
+}

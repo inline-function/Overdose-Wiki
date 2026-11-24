@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import type { FindObjectGame } from '../../content/types';
 import { shuffleArray } from '../shuffle';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 const BG = `${import.meta.env.BASE_URL}assets-private/bg/bg_goto_room.png`;
 
@@ -14,6 +15,7 @@ export function FindObjectGame({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [promptIndex, setPromptIndex] = useState(0);
   const [found, setFound] = useState<string[]>([]);
   const [wrong, setWrong] = useState<string | null>(null);
@@ -77,7 +79,7 @@ export function FindObjectGame({
       const nextFound = found.includes(id) ? found : [...found, id];
       setFound(nextFound);
       setWrong(null);
-      onCaption(`找到了。${prompt.text}。`);
+      onCaption(tr('find.found', { prompt: prompt.text }));
       if (last) {
         onReady();
         onCaption(data.closing);
@@ -87,7 +89,7 @@ export function FindObjectGame({
       return;
     }
     setWrong(id);
-    onCaption('不是这个。标签在换，东西也在换。信号不稳。');
+    onCaption(tr('find.wrong'));
     kickGlitch(500);
     if (wrongTimer.current !== null) window.clearTimeout(wrongTimer.current);
     wrongTimer.current = window.setTimeout(() => setWrong(null), 650);
@@ -119,10 +121,10 @@ export function FindObjectGame({
         {prompt?.text ?? data.closing}
       </div>
       <span className={s.findSignal} aria-hidden="true">
-        谵妄 / 信号不稳
+        {tr('find.delirium')}
       </span>
       <div className={s.findProgress}>
-        找到 {found.length} / {data.prompts.length}
+        {tr('find.progress', { a: found.length, b: data.prompts.length })}
       </div>
       {data.objects.map((object, index) => (
         <button
@@ -132,7 +134,7 @@ export function FindObjectGame({
           data-testid="find-object"
           data-object={object.id}
           data-wrong={wrong === object.id}
-          aria-label={`物体：${object.label}`}
+          aria-label={tr('find.objectAria', { label: object.label })}
           onClick={() => clickObject(object.id)}
           style={
             {

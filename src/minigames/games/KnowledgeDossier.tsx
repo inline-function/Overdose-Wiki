@@ -3,6 +3,7 @@ import type { KnowledgeDossierGame } from '../../content/types';
 import type { WarTable } from '../../game/types';
 import { applyWarDecision, effectSummary } from '../../game/warTable';
 import s from '../minigame.module.css';
+import { useT } from '../../i18n';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -19,13 +20,14 @@ export function KnowledgeDossier({
   onReady: () => void;
   onCaption: (text: string) => void;
 }) {
+  const tr = useT();
   const [flipped, setFlipped] = useState<string[]>([]);
   const [choices, setChoices] = useState<Record<string, string>>({});
   const [note, setNote] = useState(() => {
     const prior = Object.keys(warTable.decisions).length;
     return prior
-      ? `战局已经记下 ${prior} 次行动。四份知识会决定它们被怎么使用。`
-      : '四份知识，都还没翻开。';
+      ? tr('knowledge.prior', { n: prior })
+      : tr('knowledge.fresh');
   });
   const [compiled, setCompiled] = useState(false);
   const allFlipped = flipped.length >= data.cards.length;
@@ -35,7 +37,7 @@ export function KnowledgeDossier({
     if (flipped.includes(cardId)) return;
     const next = [...flipped, cardId];
     setFlipped(next);
-    setNote(next.length >= data.cards.length ? '四面都翻开了。现在决定让哪一面进入公共档案。' : '还有档案没翻开。');
+    setNote(next.length >= data.cards.length ? tr('knowledge.allFlipped') : tr('knowledge.someLeft'));
   }
 
   function choosePolicy(cardId: string, policyId: string) {
@@ -70,8 +72,8 @@ export function KnowledgeDossier({
     >
       <div className={s.knowledgeVeil} aria-hidden="true" />
       <div className={s.knowledgeTop}>
-        <span className={s.knowledgeKicker}>政策树 · 不设标准答案</span>
-        <span className={s.knowledgeCount}>{flipped.length} / {data.cards.length} 已翻开</span>
+        <span className={s.knowledgeKicker}>{tr('knowledge.kicker')}</span>
+        <span className={s.knowledgeCount}>{tr('knowledge.reviewed', { a: flipped.length, b: data.cards.length })}</span>
       </div>
       <div className={s.knowledgeGrid}>
         {data.cards.map((card) => {
@@ -95,19 +97,19 @@ export function KnowledgeDossier({
                 aria-pressed={isFlipped}
               >
                 <span className={s.knowledgeCardTitle}>{card.title}</span>
-                <span className={s.knowledgeCardHint}>{isFlipped ? '已翻开' : '翻开'}</span>
+                <span className={s.knowledgeCardHint}>{isFlipped ? tr('knowledge.flipped') : tr('knowledge.flip')}</span>
               </button>
-              {!isFlipped ? <span className={s.knowledgeSeal} aria-hidden="true">两面</span> : null}
+              {!isFlipped ? <span className={s.knowledgeSeal} aria-hidden="true">{tr('knowledge.twoFaces')}</span> : null}
               {isFlipped ? (
                 <>
                   <div className={s.knowledgeFaces}>
                     {card.faces.map((face) => (
                       <p key={face.text} className={s.knowledgeFace} data-tone={face.tone}>
-                        {face.tone === 'help' ? '救' : '害'} · {face.text}
+                        {face.tone === 'help' ? tr('knowledge.help') : tr('knowledge.harm')} · {face.text}
                       </p>
                     ))}
                   </div>
-                  <div className={s.knowledgePolicies} role="group" aria-label={`${card.title}的发布方式`}>
+                  <div className={s.knowledgePolicies} role="group" aria-label={tr('knowledge.policiesAria', { title: card.title })}>
                     {data.policies.map((policy) => (
                       <button
                         key={policy.id}
@@ -143,7 +145,7 @@ export function KnowledgeDossier({
           disabled={!allFlipped || !allChosen || compiled}
           onClick={compile}
         >
-          把方针钉上墙
+          {tr('knowledge.pin')}
         </button>
       </div>
     </div>

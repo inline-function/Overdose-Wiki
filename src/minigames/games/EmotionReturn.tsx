@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { EmotionReturnGame } from '../../content/types';
+import { useT } from '../../i18n';
 import { shuffleArray } from '../shuffle';
 import s from '../minigame.module.css';
 
@@ -15,7 +16,8 @@ export function EmotionReturn({
   const [sources] = useState(() => shuffleArray(data.emotions));
   const [selected, setSelected] = useState<string | null>(null);
   const [matched, setMatched] = useState<string[]>([]);
-  const [note, setNote] = useState('先点一团情绪。');
+  const tr = useT();
+  const [note, setNote] = useState(() => tr('emotionReturn.start'));
   const readyRef = useRef(false);
   const all = matched.length >= data.emotions.length;
 
@@ -29,32 +31,32 @@ export function EmotionReturn({
   function chooseEmotion(emotion: (typeof data.emotions)[number]) {
     if (matched.includes(emotion.id)) return;
     setSelected(emotion.id);
-    setNote(`这是「${emotion.label}」。它从哪条消息来？`);
-    onCaption(`先看这一团：${emotion.label}。`);
+    setNote(tr('emotionReturn.picked', { label: emotion.label }));
+    onCaption(tr('emotionReturn.pickedCaption', { label: emotion.label }));
   }
 
   function chooseSource(source: (typeof data.emotions)[number]) {
     if (matched.includes(source.id)) return;
     if (!selected) {
-      setNote('先点左边的一团情绪。');
-      onCaption('先点左边的一团情绪，再找它来的那条消息。');
+      setNote(tr('emotionReturn.pickFirst'));
+      onCaption(tr('emotionReturn.pickFirstCaption'));
       return;
     }
     if (selected === source.id) {
       setMatched((current) => [...current, source.id]);
       setSelected(null);
-      setNote('放回去了。手机轻了一点。');
+      setNote(tr('emotionReturn.putBack'));
       onCaption(source.line);
       return;
     }
-    setNote('不是这一条。再看一眼。');
-    onCaption('不是这一条。再看一眼。');
+    setNote(tr('emotionReturn.wrong'));
+    onCaption(tr('emotionReturn.wrong'));
   }
 
   return (
     <div className={s.emotionReturn} data-testid="emotion-return-stage">
-      <div className={s.emotionReturnChips} role="group" aria-label="不属于她的情绪">
-        <p className={s.emotionReturnHead}>压在她身上的</p>
+      <div className={s.emotionReturnChips} role="group" aria-label={tr('emotionReturn.chipsAria')}>
+        <p className={s.emotionReturnHead}>{tr('emotionReturn.chipsHead')}</p>
         {data.emotions.map((emotion) => (
           <button
             key={emotion.id}
@@ -73,8 +75,8 @@ export function EmotionReturn({
           </button>
         ))}
       </div>
-      <div className={s.emotionReturnSources} role="group" aria-label="这些情绪从哪里来">
-        <p className={s.emotionReturnHead}>消息里</p>
+      <div className={s.emotionReturnSources} role="group" aria-label={tr('emotionReturn.sourcesAria')}>
+        <p className={s.emotionReturnHead}>{tr('emotionReturn.sourcesHead')}</p>
         {sources.map((source) => (
           <button
             key={source.id}
@@ -92,9 +94,9 @@ export function EmotionReturn({
         ))}
       </div>
       <p className={s.emotionReturnNote} aria-live="polite">
-        {all ? '手机还亮着。她还没有放下。' : note}
+        {all ? tr('emotionReturn.all') : note}
       </p>
-      <span className={s.emotionReturnCount} aria-label={`已放回 ${matched.length} 组，共 ${data.emotions.length} 组`}>
+      <span className={s.emotionReturnCount} aria-label={tr('emotionReturn.countAria', { a: matched.length, b: data.emotions.length })}>
         {matched.length} / {data.emotions.length}
       </span>
     </div>

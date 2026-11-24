@@ -4,14 +4,20 @@ import { ConsentGate } from './ConsentGate';
 import { LoginScreen } from './LoginScreen';
 import g from './gates.module.css';
 import { useCue } from '../../audio/useCue';
+import { useT } from '../../i18n';
 
 export function GateStage() {
   const { pathname } = useLocation();
+  const t = useT();
   useCue(pathname === '/welcome' ? undefined : 'title');
   return (
-    <main className={g.gateMain} aria-label="ODW 入口">
+    <main className={g.gateMain} aria-label={t('gate.srMainLabel')}>
       <h1 className="sr-only">
-        {pathname === '/welcome' ? '载入 ODW' : pathname === '/consent' ? '事先声明' : 'ODW 登录'}
+        {pathname === '/welcome'
+          ? t('gate.srWelcome')
+          : pathname === '/consent'
+            ? t('gate.srConsent')
+            : t('gate.srLogin')}
       </h1>
       {pathname === '/welcome' ? (
         <BootScreen />

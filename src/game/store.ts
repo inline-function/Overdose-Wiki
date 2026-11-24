@@ -1,5 +1,6 @@
 import type { AfterstoryRun, EndingId } from '../afterstory/types';
 import { create } from 'zustand';
+import { t } from '../i18n';
 import {
   clearStoredSave,
   downloadSave,
@@ -17,6 +18,7 @@ import {
   type Save,
   type Settings,
 } from './types';
+import { applyLocale } from '../i18n/locale';
 
 type GameStore = {
   save: Save;
@@ -50,7 +52,7 @@ type GameStore = {
 
 const loaded = loadSave();
 const initial = loaded.save ?? defaultSave();
-const DEFAULT_STATUS = '[1–5] 标签 · [V] 复演 · [F] 报告';
+export const DEFAULT_STATUS = '[1–5] 标签 · [V] 复演 · [F] 报告';
 
 let statusTimer: number | undefined;
 
@@ -88,11 +90,11 @@ export const useGameStore = create<GameStore>()((set, get) => {
           acceptedAt: new Date().toISOString(),
         },
         history: [
-          makeHistory('settings', '已同意事先声明', '#/', 'consent'),
+          makeHistory('settings', t('status.consent'), '#/', 'consent'),
           ...save.history,
         ].slice(0, 200),
       }));
-      get().setStatus('已记录同意；可在设置中重读说明。');
+      get().setStatus(t('status.consentSaved'));
     },
 
     setSettings: (patch) => {
@@ -100,6 +102,7 @@ export const useGameStore = create<GameStore>()((set, get) => {
         ...save,
         settings: mergeSettings(save.settings, patch),
       }));
+      if (patch.lang) applyLocale(patch.lang);
     },
 
     setProgress: (patch) => {
@@ -255,25 +258,33 @@ export const useGameStore = create<GameStore>()((set, get) => {
     resetSave: () => {
       flushSave();
       clearStoredSave();
+      // Language is a reading preference, not progress: clearing the save keeps it.
+      const { lang } = get().save.settings;
       const next = defaultSave();
-      set({ save: next, status: '存档已清除。' });
+      next.settings = { ...next.settings, lang };
+      applyLocale(lang);
+      set({ save: next, status: t('status.cleared') });
       scheduleSave(next);
     },
 
     exportSave: () => {
       downloadSave(get().save);
-      get().setStatus('存档已导出。');
+      get().setStatus(t('status.exported'));
     },
 
     importSave: (text) => {
       const parsed = parseImport(text);
       if (!parsed) {
-        get().setStatus('导入失败：文件不是有效的 ODW 存档。');
+        get().setStatus(t('status.importFailed'));
         return false;
       }
+      // An imported save must not drag the reader back to the save's language.
+      const { lang } = get().save.settings;
+      parsed.settings = { ...parsed.settings, lang };
+      applyLocale(lang);
       set({ save: parsed });
       scheduleSave(parsed);
-      get().setStatus('存档已导入。');
+      get().setStatus(t('status.imported'));
       return true;
     },
   };

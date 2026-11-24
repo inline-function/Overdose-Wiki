@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { nextGuide } from '../game/guide';
 import { useGameStore } from '../game/store';
 import { useGuideSuppressed } from './guideState';
+import { useT } from '../i18n';
 import g from './QuestGuide.module.css';
 
 export function QuestGuide({ compact = false }: { compact?: boolean }) {
+  const tr = useT();
   const save = useGameStore((state) => state.save);
   const [open, setOpen] = useState(!compact);
   const guide = nextGuide(save);
@@ -22,23 +24,23 @@ export function QuestGuide({ compact = false }: { compact?: boolean }) {
         type="button"
         className={g.collapsed}
         onClick={() => setOpen(true)}
-        title="展开任务指引"
+        title={tr('guide.expandAria')}
       >
-        <span className={g.collapsedTag}>任务</span>
+        <span className={g.collapsedTag}>{tr('guide.collapsed')}</span>
         <span className={g.collapsedStep}>{guide.step}</span>
       </button>
     );
   }
 
   return (
-    <aside className={g.guide} aria-label="任务指引" data-testid="quest-guide">
+    <aside className={g.guide} aria-label={tr('guide.aria')} data-testid="quest-guide">
       <header className={g.head}>
-        <span className={g.kicker}>任务指引</span>
+        <span className={g.kicker}>{tr('guide.kicker')}</span>
         <button
           type="button"
           className={g.toggle}
           onClick={() => setOpen(false)}
-          aria-label="收起任务指引"
+          aria-label={tr('guide.collapseAria')}
         >
           ×
         </button>

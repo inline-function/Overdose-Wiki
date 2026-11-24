@@ -174,6 +174,12 @@
   gap: calc(4 * var(--u));
 }
 
+.homeDlcRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(4 * var(--u));
+}
+
 .homeCard {
   width: 100%;
   font: inherit;
@@ -255,6 +261,66 @@
 
 .homeDlcCard .homeCardMeta {
   color: var(--c-sky);
+}
+
+.homeAfterstoryCard {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(50 * var(--u));
+  border-color: var(--c-yellow);
+  background-color: var(--c-ink);
+  background-image: url('/assets/afterstory/entry_card.png');
+  background-position: 38% center;
+  background-size: cover;
+  box-shadow: calc(2 * var(--u)) calc(2 * var(--u)) 0 var(--c-red-deep);
+  padding: calc(3 * var(--u));
+}
+
+.homeAfterstoryCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(11, 10, 16, 0.04) 0%, rgba(11, 10, 16, 0.84) 100%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.16) 0 calc(1 * var(--u)),
+      transparent calc(1 * var(--u)) calc(4 * var(--u))
+    );
+  pointer-events: none;
+}
+
+.homeAfterstoryCard > span {
+  position: relative;
+  z-index: 1;
+}
+
+.homeAfterstoryCard:hover {
+  border-color: var(--c-yellow2);
+  background-color: var(--c-ink);
+  transform: translate(calc(-1 * var(--u)), calc(-1 * var(--u)));
+  box-shadow: calc(3 * var(--u)) calc(3 * var(--u)) 0 var(--c-red-deep);
+}
+
+.homeAfterstoryCard:active {
+  transform: translate(calc(1 * var(--u)), calc(1 * var(--u)));
+  box-shadow: calc(1 * var(--u)) calc(1 * var(--u)) 0 var(--c-red-deep);
+}
+
+.homeAfterstoryCard .homeCardKicker {
+  color: var(--c-yellow2);
+  text-shadow: 0 calc(1 * var(--u)) 0 var(--c-ink);
+}
+
+.homeAfterstoryCard .homeCardTitle {
+  color: var(--c-paper3);
+  font-size: var(--fs-10);
+  line-height: var(--lh-10);
+  text-shadow: calc(1 * var(--u)) calc(1 * var(--u)) 0 var(--c-red-deep);
+}
+
+.homeAfterstoryCard .homeCardMeta {
+  color: var(--c-paper2);
 }
 
 .manifesto {
@@ -1802,11 +1868,25 @@
   line-height: var(--lh-8);
 }
 
+.extrasFeature {
+  margin-top: calc(5 * var(--u));
+}
+
 .extrasGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: calc(4 * var(--u));
   margin-top: calc(4 * var(--u));
+}
+
+.extraCardWide {
+  min-height: calc(46 * var(--u));
+  border-color: var(--c-red);
+  background: var(--c-paper3);
+}
+
+.extraCardWide:hover {
+  background: var(--c-red-wash);
 }
 
 .extraCard {
@@ -2679,4 +2759,9 @@
   fill: var(--c-muted);
   font-family: var(--font-8);
   font-size: 8px;
+}
+
+.homeAfterstoryCard:focus-visible {
+  outline: calc(2 * var(--u)) solid var(--c-yellow2);
+  outline-offset: calc(1 * var(--u));
 }

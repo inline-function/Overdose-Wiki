@@ -9,6 +9,7 @@ await writeFile(
   ContentManifest,
   DrugEntry,
   Effect,
+  ExtraStory,
   Report,
 } from './types';
 import {
@@ -56,6 +57,7 @@ export const manifest: ContentManifest = {
     },
   ],
   effects: [],
+  extras: [],
 };
 
 export const drugs: DrugEntry[] = SAMPLE_DRUGS;
@@ -69,6 +71,7 @@ export const reportLoaders: Record<string, () => Promise<Report>> = {
   [SAMPLE_REPORT_DATA.id]: async () => SAMPLE_REPORT_DATA,
 };
 export const effectLoaders: Record<string, () => Promise<Effect>> = {};
+export const extraStoryLoaders: Record<string, () => Promise<ExtraStory>> = {};
 `,
   'utf8',
 );

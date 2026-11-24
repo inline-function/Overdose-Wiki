@@ -89,19 +89,30 @@ export function HomePage() {
             <span className={p.homeCardTitle}>ch01–04</span>
             <span className={p.homeCardMeta}>92 场 · 从虚数根到废墟</span>
           </Link>
-          <button
-            type="button"
-            className={`${p.homeCard} ${p.homeDlcCard} ${dlcShake ? p.homeCardShake : ''}`}
-            aria-label="DLC 稍尽春风 8 场 · 番外（暂不可进入）"
-            data-locked="true"
-            title="暂不可进入"
-            onClick={() => setDlcShake(true)}
-            onAnimationEnd={() => setDlcShake(false)}
-          >
-            <span className={p.homeCardKicker}>DLC</span>
-            <span className={p.homeCardTitle}>稍尽春风</span>
-            <span className={p.homeCardMeta}>8 场 · 番外</span>
-          </button>
+          <div className={p.homeDlcRow}>
+            <button
+              type="button"
+              className={`${p.homeCard} ${p.homeDlcCard} ${dlcShake ? p.homeCardShake : ''}`}
+              aria-label="DLC 稍尽春风 8 场 · 番外（暂不可进入）"
+              data-locked="true"
+              title="暂不可进入"
+              onClick={() => setDlcShake(true)}
+              onAnimationEnd={() => setDlcShake(false)}
+            >
+              <span className={p.homeCardKicker}>DLC</span>
+              <span className={p.homeCardTitle}>稍尽春风</span>
+              <span className={p.homeCardMeta}>8 场 · 番外</span>
+            </button>
+            <Link
+              className={`${p.homeCard} ${p.homeAfterstoryCard}`}
+              to="/afterstory"
+              aria-label="DLC 在漫长岁月之后 8 回合"
+            >
+              <span className={p.homeCardKicker}>DLC</span>
+              <span className={p.homeCardTitle}>在漫长岁月<br />之后</span>
+              <span className={p.homeCardMeta}>8 回合</span>
+            </Link>
+          </div>
         </div>
       </div>
 

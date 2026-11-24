@@ -4,7 +4,7 @@ import { fakeUrl } from '../../game/routing';
 import { useGameStore } from '../../game/store';
 import styles from './WikiWindow.module.css';
 
-type Mode = 'consent' | 'battle' | 'wiki';
+type Mode = 'consent' | 'battle' | 'wiki' | 'afterstory';
 
 const scrollPositions = new Map<string, number>();
 
@@ -58,6 +58,16 @@ export function WikiWindow({ mode, showAddress, showStatus, children }: Props) {
     };
   }, [scrollKey]);
 
+  if (mode === 'afterstory') {
+    return (
+      <div className={styles.afterstoryWindow} data-mode={mode}>
+        <main className={styles.afterstoryView} data-testid="view">
+          {children}
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.window} data-mode={mode}>
       <TitleBar />
@@ -76,7 +86,8 @@ export function WikiWindow({ mode, showAddress, showStatus, children }: Props) {
             className={styles.view}
             data-reading={
               location.pathname.startsWith('/report/') ||
-              location.pathname.startsWith('/effects')
+              location.pathname.startsWith('/effects') ||
+              location.pathname.startsWith('/extras/')
             }
           >
             {children}
@@ -152,6 +163,7 @@ function Sidebar() {
       <span className={styles.sideRule} role="separator" aria-hidden="true" />
       <SideLink to="/chapters" label="剧情" icon="book" />
       <SideLink to="/docs" label="文档" icon="page" />
+      <SideLink to="/extras" label="番外" icon="star" />
       <SideLink to="/settings" label="设置" icon="gear" />
     </aside>
   );

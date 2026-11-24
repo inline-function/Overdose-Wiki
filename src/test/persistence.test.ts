@@ -7,6 +7,7 @@ import {
   parseImport,
 } from '../game/persistence';
 import { defaultSave } from '../game/types';
+import { createRun } from '../afterstory/engine';
 
 describe('save schema', () => {
   beforeEach(() => localStorage.clear());
@@ -57,6 +58,31 @@ describe('save schema', () => {
     expect(save).not.toBeNull();
     expect(save?.warTable.goto).toBe(50);
     expect(save?.warTable.flags).toEqual([]);
+  });
+
+  it('keeps a valid afterstory active run and filters ending ids', () => {
+    const save = defaultSave();
+    save.afterstory = {
+      active: createRun(11),
+      seenEndings: ['new-circle', 'not-an-ending' as never],
+    };
+    const migrated = migrate(save);
+    expect(migrated?.afterstory?.active?.turn).toBe(1);
+    expect(migrated?.afterstory?.active?.cells).toHaveLength(100);
+    expect(migrated?.afterstory?.seenEndings).toEqual(['new-circle']);
+  });
+
+  it('drops a broken afterstory run without dropping the save', () => {
+    const save = defaultSave();
+    const broken = createRun(12);
+    save.afterstory = {
+      active: { ...broken, cells: broken.cells.slice(0, 3) },
+      seenEndings: ['clinic'],
+    };
+    const migrated = migrate(save);
+    expect(migrated).not.toBeNull();
+    expect(migrated?.afterstory?.active).toBeUndefined();
+    expect(migrated?.afterstory?.seenEndings).toEqual(['clinic']);
   });
 
   it('rejects non-JSON import', () => {

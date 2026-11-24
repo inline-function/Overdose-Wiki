@@ -1,3 +1,4 @@
+import type { AfterstoryRun, EndingId } from '../afterstory/types';
 import { create } from 'zustand';
 import {
   clearStoredSave,
@@ -35,6 +36,8 @@ type GameStore = {
   completeAnalysis: (caseId: string) => void;
   completeMinigame: (id: string) => void;
   setWarTable: (table: Save['warTable']) => void;
+  setAfterstory: (active?: AfterstoryRun) => void;
+  markAfterstoryEnding: (ending: EndingId) => void;
   readDoc: (reportId: string, segmentId: string) => void;
   claimQuest: (questId: string) => void;
   claimBox: (cardId: string) => void;
@@ -153,6 +156,29 @@ export const useGameStore = create<GameStore>()((set, get) => {
       commit((save) => ({ ...save, warTable: table }));
     },
 
+
+    setAfterstory: (active) => {
+      commit((save) => ({
+        ...save,
+        afterstory: {
+          seenEndings: save.afterstory?.seenEndings ?? [],
+          ...(active ? { active } : {}),
+        },
+      }));
+    },
+
+    markAfterstoryEnding: (ending) => {
+      commit((save) => {
+        const seen = save.afterstory?.seenEndings ?? [];
+        return {
+          ...save,
+          afterstory: {
+            ...(save.afterstory ?? {}),
+            seenEndings: seen.includes(ending) ? seen : [...seen, ending],
+          },
+        };
+      });
+    },
     completeMinigame: (id) => {
       commit((save) =>
         save.completedMinigames.includes(id)

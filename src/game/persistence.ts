@@ -1,3 +1,5 @@
+import type { EndingId } from '../afterstory/types';
+import { normalizeAfterstory } from '../afterstory/engine';
 import {
   CONSENT_VERSION,
   SAVE_VERSION,
@@ -64,6 +66,16 @@ export function migrate(raw: unknown): Save | null {
     save.seenIntros ??= [];
     save.analysis ??= [];
     save.completedMinigames ??= [];
+    if (save.afterstory && typeof save.afterstory === 'object') {
+      const active = normalizeAfterstory(save.afterstory.active);
+      const validEndings: EndingId[] = ['new-circle', 'clinic', 'old-circle', 'ebb', 'chaos', 'market', 'long-night'];
+      const seen = Array.isArray(save.afterstory.seenEndings)
+        ? save.afterstory.seenEndings.filter((id): id is EndingId => validEndings.includes(id as EndingId))
+        : [];
+      save.afterstory = { seenEndings: seen, ...(active ? { active } : {}) };
+    } else {
+      delete save.afterstory;
+    }
     if (
       !isObject(save.warTable) ||
       !isObject(save.warTable.decisions) ||

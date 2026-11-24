@@ -81,7 +81,7 @@ export function GameShell() {
   }, [isGate, location.pathname]);
 
   useEffect(() => {
-    if (isGate) return;
+    if (isGate || mode === 'afterstory') return;
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       if (
@@ -107,7 +107,7 @@ export function GameShell() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [isGate, navigate, tabs]);
+  }, [isGate, mode, navigate, tabs]);
 
   return (
     <div
@@ -128,13 +128,17 @@ export function GameShell() {
         {isGate ? (
           <GateStage />
         ) : (
-          <WikiWindow mode={mode} showAddress={mode !== 'consent'} showStatus={mode !== 'battle'}>
+          <WikiWindow
+            mode={mode}
+            showAddress={mode !== 'consent' && mode !== 'afterstory'}
+            showStatus={mode !== 'battle' && mode !== 'afterstory'}
+          >
             <Suspense fallback={<div className={styles.loading}>载入档案…</div>}>
               <Outlet />
             </Suspense>
           </WikiWindow>
         )}
-        {!isGate && mode !== 'battle' && mode !== 'consent' ? (
+        {!isGate && mode !== 'battle' && mode !== 'consent' && mode !== 'afterstory' ? (
           <QuestGuide compact={location.pathname.includes('/replay/')} />
         ) : null}
         <div className={styles.scanlines} aria-hidden="true" />

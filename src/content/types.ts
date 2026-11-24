@@ -531,6 +531,20 @@ export type UnlockRule = {
   scene?: string;
 };
 
+export type ChatFrame =
+  | { kind: 'left'; name: string; text: string }
+  | { kind: 'right'; name: string; text: string }
+  | { kind: 'narration'; text: string }
+  | { kind: 'note'; label?: string; text: string };
+
+export type ChatStory = {
+  title: string;
+  owner: string;
+  contact: string;
+  period: string;
+  frames: ChatFrame[];
+};
+
 export type Report = {
   id: string;
   no: number;
@@ -543,7 +557,21 @@ export type Report = {
   unlock?: UnlockRule;
   segments: ReportSegment[];
   body?: ReportBlock[];
+  chat?: ChatStory;
 };
+
+export type ExtraStoryKind = 'contact' | 'interview' | 'story';
+
+export type ExtraStory = {
+  id: string;
+  title: string;
+  kind: ExtraStoryKind;
+  date: string;
+  summary: string;
+  chat: ChatStory;
+};
+
+export type ExtraStoryMeta = Omit<ExtraStory, 'chat'>;
 
 export type EffectBlock =
   | { type: 'p'; text: string }
@@ -791,6 +819,7 @@ export type ContentManifest = {
   chapters: ChapterMeta[];
   reports: ReportMeta[];
   effects: EffectMeta[];
+  extras: ExtraStoryMeta[];
 };
 
 export type ContentBundle = {

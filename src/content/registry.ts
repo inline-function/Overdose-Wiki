@@ -4,6 +4,7 @@ import {
   drugs,
   chapterLoaders,
   effectLoaders,
+  extraStoryLoaders,
   isPrivate,
   manifest,
   reportLoaders,
@@ -15,15 +16,21 @@ import type {
   DrugEntry,
   ChapterMeta,
   Effect,
+  ExtraStory,
+  ExtraStoryMeta,
   Report,
   ReportMeta,
   ReportSegmentMeta,
+  Scene,
   SceneMeta,
 } from './types';
 
 const chapterMetaMap = new Map(manifest.chapters.map((chapter) => [chapter.id, chapter]));
 const reportMetaMap = new Map(
   manifest.reports.map((report) => [normalizeReportId(report.id), report]),
+);
+const extraMetaMap = new Map<string, ExtraStoryMeta>(
+  manifest.extras.map((story) => [story.id, story]),
 );
 const effectMetaMap = new Map(manifest.effects.map((effect) => [effect.id, effect]));
 const sceneMetaMap = new Map<string, SceneMeta>();
@@ -36,6 +43,8 @@ const drugMap = new Map(drugs.map((drug) => [drug.id, drug]));
 
 const chapterCache = new Map<string, Promise<Chapter | undefined>>();
 const reportCache = new Map<string, Promise<Report | undefined>>();
+const extraStoryCache = new Map<string, Promise<ExtraStory | undefined>>();
+const sceneCache = new Map<string, Promise<Scene | undefined>>();
 const effectCache = new Map<string, Promise<Effect | undefined>>();
 
 export function normalizeReportId(id: string): string {
@@ -69,6 +78,14 @@ export function getReportMetas(): ReportMeta[] {
 
 export function getReportMeta(id: string): ReportMeta | undefined {
   return reportMetaMap.get(normalizeReportId(id));
+}
+
+export function getExtraStoryMetas(): ExtraStoryMeta[] {
+  return manifest.extras;
+}
+
+export function getExtraStoryMeta(id: string): ExtraStoryMeta | undefined {
+  return extraMetaMap.get(id);
 }
 
 export function getEffectMetas() {
@@ -122,6 +139,30 @@ export function reportPromise(id: string): Promise<Report | undefined> {
     ? loader().catch(() => undefined)
     : Promise.resolve(undefined);
   reportCache.set(normalized, promise);
+  return promise;
+}
+
+export function scenePromise(sceneId: string): Promise<Scene | undefined> {
+  const cached = sceneCache.get(sceneId);
+  if (cached) return cached;
+  const meta = getSceneMeta(sceneId);
+  const promise = meta
+    ? chapterPromise(meta.chapterId).then((chapter) =>
+        chapter?.scenes.find((scene) => scene.id === sceneId),
+      )
+    : Promise.resolve(undefined);
+  sceneCache.set(sceneId, promise);
+  return promise;
+}
+
+export function extraStoryPromise(id: string): Promise<ExtraStory | undefined> {
+  const cached = extraStoryCache.get(id);
+  if (cached) return cached;
+  const loader = extraStoryLoaders[id];
+  const promise = loader
+    ? loader().catch(() => undefined)
+    : Promise.resolve(undefined);
+  extraStoryCache.set(id, promise);
   return promise;
 }
 

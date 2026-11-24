@@ -12,6 +12,9 @@ import { useConsentStore } from '../game/consentStore';
 const HomePage = lazy(() =>
   import('../pages/HomePage').then((module) => ({ default: module.HomePage })),
 );
+const AfterstoryPage = lazy(() =>
+  import('../pages/AfterstoryPage').then((module) => ({ default: module.AfterstoryPage })),
+);
 const ReportPage = lazy(() =>
   import('../pages/ReportPage').then((module) => ({ default: module.ReportPage })),
 );
@@ -38,6 +41,9 @@ const DrugDetailPage = lazy(() =>
 );
 const ExtrasPage = lazy(() =>
   import('../pages/ExtrasPage').then((module) => ({ default: module.ExtrasPage })),
+);
+const ChatStoryPage = lazy(() =>
+  import('../pages/ChatStoryPage').then((module) => ({ default: module.ChatStoryPage })),
 );
 const DocsPage = lazy(() =>
   import('../pages/DocsPage').then((module) => ({ default: module.DocsPage })),
@@ -118,10 +124,13 @@ export const router = createHashRouter([
       { path: 'battle/:id', element: <Navigate to="/" replace /> },
       { path: 'settings', element: <SettingsPage /> },
       { path: 'extras', element: <ExtrasPage /> },
+      { path: 'extras/scene/:sceneId', element: <ChatStoryPage /> },
+      { path: 'extras/:id', element: <ChatStoryPage /> },
       { path: 'analysis', element: <AnalysisIndexPage /> },
       { path: 'analysis/:caseId', element: <AnalysisCasePage /> },
       { path: 'docs', element: <DocsPage /> },
       { path: 'chapters', element: <ChaptersPage /> },
+      { path: 'afterstory', element: <AfterstoryPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },

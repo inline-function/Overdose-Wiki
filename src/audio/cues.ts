@@ -117,7 +117,7 @@ export function cueForPath(pathname: string): CueId | undefined {
   if (pathname === '/consent') return undefined;
   if (pathname.startsWith('/report/') && pathname.includes('/replay/')) return undefined;
   if (pathname.startsWith('/battle/')) return undefined;
-  if (pathname === '/extras') return 'extras';
+  if (pathname === '/extras' || pathname.startsWith('/extras/')) return 'extras';
   if (pathname === '/') return 'title';
   if (pathname === '/settings') return 'archive';
   if (

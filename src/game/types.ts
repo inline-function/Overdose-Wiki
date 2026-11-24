@@ -1,4 +1,5 @@
 import type { WarEffectPatch } from '../content/types';
+import type { AfterstorySave } from '../afterstory/types';
 
 export const CONSENT_VERSION = 2;
 export const SAVE_VERSION = 1 as const;
@@ -83,6 +84,8 @@ export type Save = {
   completedMinigames: string[];
   /** 第四章战局：跨四个玩法保留的政治状态 */
   warTable: WarTable;
+  /** 非正史 DLC：入口、八回合存档与已见结局 */
+  afterstory?: AfterstorySave;
   settings: Settings;
   history: HistoryEntry[];
 };

@@ -2,6 +2,7 @@ import { CH01_DURATION, CH01_SFX, drawCh01 } from './ch01';
 import { CH02_DURATION, CH02_SFX, drawCh02 } from './ch02';
 import { CH03_DURATION, CH03_SFX, drawCh03 } from './ch03';
 import { CH04_DURATION, CH04_SFX, drawCh04 } from './ch04';
+import { DLC_DURATION, DLC_SFX, drawDlc } from './dlc';
 
 export type CanvasOpening = {
   chapterId: string;
@@ -10,6 +11,8 @@ export type CanvasOpening = {
   draw: (ctx: CanvasRenderingContext2D, time: number) => void;
   ariaLabel: string;
   caption: string;
+  /** 可选：开场期间播放的 BGM，淡入后交给场景继续使用。 */
+  bgm?: string;
 };
 
 // 有画布开场动画的章节。没有登记的章节继续走文字章节卡。
@@ -45,5 +48,14 @@ export const CANVAS_OPENINGS: Record<string, CanvasOpening> = {
     draw: drawCh04,
     ariaLabel: '第四章《人们将往何处去》开场动画',
     caption: '人们将往何处去 · WHERE DO WE GO?',
+  },
+  dlc: {
+    chapterId: 'dlc',
+    duration: DLC_DURATION,
+    sfx: DLC_SFX,
+    draw: drawDlc,
+    ariaLabel: 'DLC《稍尽春风》开场动画',
+    caption: '稍尽春风 · A GAME BY HARUKAZE',
+    bgm: 'dlc-summer',
   },
 };

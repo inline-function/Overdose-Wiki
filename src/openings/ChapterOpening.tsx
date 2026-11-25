@@ -108,14 +108,18 @@ export function ChapterOpening({
     if (!ctx) return;
     audio.stopBgm();
     gateAudio.unlock();
+    audio.unlock();
+    if (opening.bgm) audio.playCue(opening.bgm, { fadeMs: 1200 });
 
     let frame = 0;
     let time = 0;
     let started = 0;
+    let keepBgm = false;
     const fired = new Set<number>();
     const finish = (completed: boolean) => {
       if (done.current) return;
       done.current = true;
+      keepBgm = completed;
       if (frame) window.cancelAnimationFrame(frame);
       onDoneRef.current(completed);
     };
@@ -153,6 +157,7 @@ export function ChapterOpening({
     return () => {
       window.removeEventListener('keydown', onKey);
       if (frame) window.cancelAnimationFrame(frame);
+      if (!keepBgm) audio.stopBgm();
     };
   }, [opening]);
 

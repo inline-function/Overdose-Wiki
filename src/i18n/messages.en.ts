@@ -861,4 +861,11 @@ export const en: Record<MessageKey, string> = {
   'dlc.upgradeMax': 'Maxed',
   'dlc.upgradeLv': 'Lv.{n}/{max}',
   'dlc.currentStats': 'Current stats',
+  'dlc.gachaSingle': 'Single',
+  'dlc.gachaTen': '10-Pull',
+  'dlc.gachaConfirm': 'Confirm',
+  'dlc.gachaPity2': 'Class II pity {n}/10',
+  'dlc.gachaPity1': 'Class I pity {n}/30',
+  'dlc.gachaPityN': 'Narcotic pity {n}/30',
+  'dlc.gachaGuaranteed': 'Next is guaranteed pool',
 };

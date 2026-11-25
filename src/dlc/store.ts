@@ -1,36 +1,19 @@
 // DLC 存档的响应式封装（zustand）。
 import { create } from 'zustand';
-import { CARDS, CARD_MAP, RARITY_META, STARTER_DECK, UPGRADE_DEFS, DEFAULT_UPGRADES, upgradeCost } from './content';
-import type { Rarity, UpgradeTrack } from './types';
+import { CARD_MAP, RARITY_META, STARTER_DECK, UPGRADE_DEFS, DEFAULT_UPGRADES, upgradeCost } from './content';
+import { GACHA_POOLS, GACHA_POOL_MAP, rollOnce, type GachaResult } from './gacha';
+import { DEFAULT_PITY, type UpgradeTrack } from './types';
 import { loadDlcSave, persistDlcSave } from './save';
 import type { DlcSave } from './types';
 
 export const DECK_SIZE = 12;
 export const MAX_COPIES = 2;
-export const WIN_CURRENCY = 15;
+export const WIN_CURRENCY = 100;
+export const REPEAT_WIN_CURRENCY = 50;
+export const LAST_FIRST_CURRENCY = 300;
+export const LAST_REPEAT_CURRENCY = 200;
 export const DECOMPOSE_CURRENCY = 5;
 export const GACHA_COST = 10;
-
-/** 抽卡稀有度权重：精一/麻只能通过抽卡获得。 */
-const GACHA_WEIGHTS: [Rarity, number][] = [
-  ['none', 30], ['otc', 25], ['rx', 25], ['class2', 12], ['class1', 6], ['narcotic', 2],
-];
-
-function rollRarity(rng: number): Rarity {
-  const total = GACHA_WEIGHTS.reduce((acc, [, w]) => acc + w, 0);
-  let roll = rng * total;
-  for (const [rarity, weight] of GACHA_WEIGHTS) {
-    roll -= weight;
-    if (roll < 0) return rarity;
-  }
-  return 'none';
-}
-
-export function rollGacha(rng: number): string {
-  const rarity = rollRarity(rng);
-  const pool = CARDS.filter((card) => card.rarity === rarity);
-  return pool[Math.floor(rng * pool.length) % pool.length].id;
-}
 
 type DlcStore = {
   save: DlcSave;
@@ -40,7 +23,7 @@ type DlcStore = {
   chooseReward: (cardId: string) => void;
   buyCard: (cardId: string) => boolean;
   buyUpgrade: (track: UpgradeTrack) => boolean;
-  drawGacha: () => string | null;
+  drawGacha: (poolId: string, count: number) => GachaResult[] | null;
   decomposeCard: (cardId: string) => boolean;
   setDeck: (deck: string[]) => void;
   resetDlc: () => void;
@@ -60,13 +43,20 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
   markIntroSeen: () => commit(set, get, (save) => ({ ...save, seenIntro: true })),
 
   recordWin: (stageId, battleId) =>
-    commit(set, get, (save) => ({
-      ...save,
-      completed: save.completed.includes(stageId) ? save.completed : [...save.completed, stageId],
-      battleWins: save.battleWins.includes(battleId) ? save.battleWins : [...save.battleWins, battleId],
-      currency: save.currency + (save.battleWins.includes(battleId) ? 0 : WIN_CURRENCY),
-      stage: Math.min(8, Math.max(save.stage, Number(stageId.slice(-1)) + 1)),
-    })),
+    commit(set, get, (save) => {
+      const first = !save.battleWins.includes(battleId);
+      const isLast = stageId === 'dlc-8';
+      const reward = first
+        ? (isLast ? LAST_FIRST_CURRENCY : WIN_CURRENCY)
+        : (isLast ? LAST_REPEAT_CURRENCY : REPEAT_WIN_CURRENCY);
+      return {
+        ...save,
+        completed: save.completed.includes(stageId) ? save.completed : [...save.completed, stageId],
+        battleWins: first ? [...save.battleWins, battleId] : save.battleWins,
+        currency: save.currency + reward,
+        stage: Math.min(8, Math.max(save.stage, Number(stageId.slice(-1)) + 1)),
+      };
+    }),
 
   chooseReward: (cardId) =>
     commit(set, get, (save) => ({
@@ -103,16 +93,24 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
     return true;
   },
 
-  drawGacha: () => {
+  drawGacha: (poolId, count) => {
     const save = get().save;
-    if (save.currency < GACHA_COST) return null;
-    const cardId = rollGacha(Math.random());
-    commit(set, get, (s) => ({
-      ...s,
-      currency: s.currency - GACHA_COST,
-      collection: { ...s.collection, [cardId]: (s.collection[cardId] ?? 0) + 1 },
-    }));
-    return cardId;
+    const cost = count * GACHA_COST;
+    if (save.currency < cost || count <= 0) return null;
+    const pool = GACHA_POOL_MAP[poolId] ?? GACHA_POOLS[0];
+    let pity = save.gacha ?? DEFAULT_PITY;
+    const results: GachaResult[] = [];
+    for (let i = 0; i < count; i += 1) {
+      const r = rollOnce(pity, pool, Math.random);
+      pity = r.pity;
+      results.push(r);
+    }
+    commit(set, get, (s) => {
+      const collection = { ...s.collection };
+      for (const r of results) collection[r.cardId] = (collection[r.cardId] ?? 0) + 1;
+      return { ...s, currency: s.currency - cost, collection, gacha: pity };
+    });
+    return results;
   },
 
   decomposeCard: (cardId) => {
@@ -132,6 +130,7 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
 
   resetDlc: () => {
     const fresh = structuredClone({
+      gacha: { pity2: 0, pity1: 0, pityN: 0, guaranteed: false },
       upgrades: { ...DEFAULT_UPGRADES },
       stage: 1,
       completed: [],

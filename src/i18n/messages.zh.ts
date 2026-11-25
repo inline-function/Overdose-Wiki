@@ -854,6 +854,13 @@ export const zh = {
   'dlc.upgradeMax': '已满级',
   'dlc.upgradeLv': 'Lv.{n}/{max}',
   'dlc.currentStats': '当前属性',
+  'dlc.gachaSingle': '单抽',
+  'dlc.gachaTen': '十连抽',
+  'dlc.gachaConfirm': '确认',
+  'dlc.gachaPity2': '精二保底 {n}/10',
+  'dlc.gachaPity1': '精一保底 {n}/30',
+  'dlc.gachaPityN': '麻保底 {n}/30',
+  'dlc.gachaGuaranteed': '下次必得当前卡池',
 } as const;
 
 export type MessageKey = keyof typeof zh;

@@ -22,7 +22,11 @@ export function migrateDlc(raw: unknown): DlcSave | null {
       return [k, typeof v === 'number' && v >= 0 ? Math.floor(v) : 0];
     }),
   ) as Upgrades;
+  const rawG = isObject(raw.gacha) ? (raw.gacha as Record<string, unknown>) : {};
+  const num = (v: unknown) => (typeof v === 'number' && v >= 0 ? Math.floor(v) : 0);
+  const gacha = { pity2: num(rawG.pity2), pity1: num(rawG.pity1), pityN: num(rawG.pityN), guaranteed: rawG.guaranteed === true };
   return {
+    gacha,
     upgrades,
     stage: Math.max(1, Math.min(8, Math.floor(raw.stage))),
     completed: raw.completed.filter((id): id is string => typeof id === 'string'),

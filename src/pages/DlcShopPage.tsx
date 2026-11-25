@@ -1,25 +1,51 @@
-import { useState } from 'react';
+import { useState, type ComponentType } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocale, useT } from '../i18n';
-import { CARD_MAP, RARITY_META, STAGES } from '../dlc/content';
-import { categoryKey, categoryIcon } from '../dlc/icons';
+import { CARD_MAP, RARITY_META, STAGES, UPGRADE_DEFS, computeStats, upgradeCost } from '../dlc/content';
+import { categoryKey, categoryIcon, OpioidIcon, SedativeIcon, DissociativeIcon, StimulantIcon } from '../dlc/icons';
 import { categoryOf, pick } from '../dlc/format';
 import { DECK_SIZE, GACHA_COST, MAX_COPIES, deckValid, useDlcStore } from '../dlc/store';
-import { UPGRADE_DEFS, computeStats, upgradeCost } from '../dlc/content';
-import type { UpgradeTrack } from '../dlc/types';
-import type { Card } from '../dlc/types';
+import { GACHA_POOLS, type GachaResult } from '../dlc/gacha';
+import { CardDetailOverlay, useLongPress } from '../components/CardDetail';
+import type { Card, Rarity, UpgradeTrack } from '../dlc/types';
 import s from './Dlc.module.css';
+
+const POOL_ICON: Record<string, ComponentType<{ className?: string }>> = {
+  opioid: OpioidIcon, benzo: SedativeIcon, esketamine: DissociativeIcon, stimulant: StimulantIcon,
+};
+
+function revealClass(rarity: Rarity): string {
+  if (rarity === 'narcotic') return s.revealLegend;
+  if (rarity === 'class1') return s.revealEpic;
+  if (rarity === 'class2') return s.revealRare;
+  return s.revealCommon;
+}
 
 function CardFace({ card, small }: { card: Card; small?: boolean }) {
   const locale = useLocale();
+  const [detail, setDetail] = useState(false);
+  const press = useLongPress(() => setDetail(true));
   const Icon = categoryIcon(categoryKey(card.tags) as never);
   const name = pick(card.name, locale);
   return (
-    <div className={s.card} style={{ ['--rarity' as string]: RARITY_META[card.rarity].color, width: small ? 'calc(52 * var(--u))' : undefined, height: small ? 'calc(70 * var(--u))' : undefined }}>
-      <Icon className={s.cardIcon} />
-      <span className={`${s.cardName} ${name.length > 4 ? s.cardNameSmall : ''}`}>{name}</span>
-      <span className={s.cardCat}>{pick(categoryOf(card), locale)}</span>
-    </div>
+    <>
+      <button
+        type="button"
+        className={s.card}
+        style={{ ['--rarity' as string]: RARITY_META[card.rarity].color, width: small ? 'calc(52 * var(--u))' : undefined, height: small ? 'calc(70 * var(--u))' : undefined }}
+        onPointerDown={press.onPointerDown}
+        onPointerUp={press.onPointerUp}
+        onPointerCancel={press.onPointerCancel}
+        onPointerLeave={press.onPointerLeave}
+        onContextMenu={press.onContextMenu}
+        aria-label={name}
+      >
+        <Icon className={s.cardIcon} />
+        <span className={`${s.cardName} ${name.length > 4 ? s.cardNameSmall : ''}`}>{name}</span>
+        <span className={s.cardCat}>{pick(categoryOf(card), locale)}</span>
+      </button>
+      {detail && <CardDetailOverlay card={card} onClose={() => setDetail(false)} />}
+    </>
   );
 }
 
@@ -34,8 +60,8 @@ export function DlcShopPage() {
   const decomposeCard = useDlcStore((st) => st.decomposeCard);
   const setDeck = useDlcStore((st) => st.setDeck);
   const [tab, setTab] = useState<'shop' | 'deck' | 'gacha' | 'upgrade'>('shop');
-  const [lastDraw, setLastDraw] = useState<string | null>(null);
-  const [drawKey, setDrawKey] = useState(0);
+  const [pool, setPool] = useState('opioid');
+  const [results, setResults] = useState<GachaResult[] | null>(null);
   const stage = STAGES[Math.min(7, Math.max(0, save.stage - 1))];
 
   const inDeck = (id: string) => save.deck.filter((x) => x === id).length;
@@ -48,8 +74,14 @@ export function DlcShopPage() {
     if (i < 0) return;
     setDeck([...save.deck.slice(0, i), ...save.deck.slice(i + 1)]);
   };
+  const doDraw = (count: number) => {
+    const r = drawGacha(pool, count);
+    if (r) setResults(r);
+  };
 
   const collectionIds = Object.keys(save.collection).filter((id) => (save.collection[id] ?? 0) > 0 && CARD_MAP[id]);
+  const activePool = GACHA_POOLS.find((p) => p.id === pool) ?? GACHA_POOLS[0];
+  const pity = save.gacha;
 
   return (
     <div className={`${s.root} ${s.shop}`}>
@@ -113,30 +145,40 @@ export function DlcShopPage() {
             </div>
           </div>
         ) : tab === 'gacha' ? (
-          <div className={s.gacha}>
-            <div className={s.gachaHint}>{tr('dlc.gachaHint')}</div>
-            <div className={s.gachaStage}>
-              {lastDraw ? (
-                <div key={drawKey} className={s.gachaReveal}>
-                  <CardFace card={CARD_MAP[lastDraw]} />
-                  <div className={s.gachaResult} style={{ color: RARITY_META[CARD_MAP[lastDraw].rarity].color }}>
-                    {tr('dlc.gachaResult')} · {pick(RARITY_META[CARD_MAP[lastDraw].rarity].label, locale)}
-                  </div>
+          <div>
+            <div className={s.gachaLayout}>
+              <div className={s.gachaPools}>
+                {GACHA_POOLS.map((p) => {
+                  const PIcon = POOL_ICON[p.id];
+                  return (
+                    <button key={p.id} type="button" className={s.poolBtn} data-on={pool === p.id} onClick={() => setPool(p.id)}>
+                      <PIcon />
+                      <span>{pick(p.name, locale)}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              <div className={s.gachaFeatured}>
+                <div className={s.gachaFeaturedTitle}>{pick(activePool.name, locale)} · UP</div>
+                <div className={s.gachaFeaturedGrid}>
+                  {activePool.cardIds.map((id) => <CardFace key={id} card={CARD_MAP[id]} small />)}
                 </div>
-              ) : (
-                <div className={s.gachaBack}>?</div>
-              )}
+              </div>
             </div>
-            <button
-              type="button"
-              className={s.pixelBtn}
-              data-variant="amber"
-              disabled={save.currency < GACHA_COST}
-              onClick={() => { const id = drawGacha(); if (id) { setLastDraw(id); setDrawKey((k) => k + 1); } }}
-            >
-              {tr('dlc.gachaDraw')} · {tr('dlc.currency')} {GACHA_COST}
-            </button>
-            {save.currency < GACHA_COST && <div className={s.deckWarn}>{tr('dlc.gachaEmpty')}</div>}
+            <div className={s.gachaActions}>
+              <button type="button" className={s.pixelBtn} data-variant="dark" disabled={save.currency < GACHA_COST} onClick={() => doDraw(1)}>
+                {tr('dlc.gachaSingle')} · {GACHA_COST}
+              </button>
+              <button type="button" className={s.pixelBtn} data-variant="amber" disabled={save.currency < GACHA_COST * 10} onClick={() => doDraw(10)}>
+                {tr('dlc.gachaTen')} · {GACHA_COST * 10}
+              </button>
+            </div>
+            <div className={s.gachaPity}>
+              <span>{tr('dlc.gachaPity2', { n: String(pity.pity2) })}</span>
+              <span>{tr('dlc.gachaPity1', { n: String(pity.pity1) })}</span>
+              <span>{tr('dlc.gachaPityN', { n: String(pity.pityN) })}</span>
+              {pity.guaranteed && <b>{tr('dlc.gachaGuaranteed')}</b>}
+            </div>
           </div>
         ) : (
           <>
@@ -167,6 +209,18 @@ export function DlcShopPage() {
           </>
         )}
       </div>
+      {results && (
+        <div className={s.gachaResults}>
+          <div className={s.gachaResultsGrid}>
+            {results.map((r, i) => (
+              <div key={i} className={`${s.reveal} ${revealClass(r.rarity)}`} style={{ animationDelay: `${i * 90}ms` }}>
+                <CardFace card={CARD_MAP[r.cardId]} small />
+              </div>
+            ))}
+          </div>
+          <button type="button" className={s.pixelBtn} data-variant="amber" onClick={() => setResults(null)}>{tr('dlc.gachaConfirm')}</button>
+        </div>
+      )}
     </div>
   );
 }

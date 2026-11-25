@@ -76,6 +76,15 @@ export type Stage = {
   shop: string[];
 };
 
+/** 抽卡保底状态。 */
+export type GachaPity = {
+  pity2: number;
+  pity1: number;
+  pityN: number;
+  guaranteed: boolean;
+};
+export const DEFAULT_PITY: GachaPity = { pity2: 0, pity1: 0, pityN: 0, guaranteed: false };
+
 export type UpgradeTrack = 'phys' | 'mental' | 'ap' | 'apCap' | 'draw';
 export type Upgrades = Record<UpgradeTrack, number>;
 
@@ -89,6 +98,8 @@ export type PlayerStats = {
 };
 
 export type DlcSave = {
+  /** 抽卡保底 */
+  gacha: GachaPity;
   /** 属性强化等级 */
   upgrades: Upgrades;
   /** 当前关卡（1–8） */

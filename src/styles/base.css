@@ -76,6 +76,8 @@ a:hover {
 
 .scroll {
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--c-line) var(--c-paper2);
 }

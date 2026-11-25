@@ -842,8 +842,9 @@
 .collectionCount { font-size: var(--fs-8); color: var(--c-sky); }
 .inDeck { color: var(--c-yellow); }
 
-/* ---------- 抽卡：卡池布局 + 分级动画 ---------- */
-.gachaLayout { display: flex; gap: calc(5 * var(--u)); align-items: stretch; }
+/* ---------- 抽卡：单屏布局 + 分级动画 ---------- */
+.gachaWrap { display: flex; flex-direction: column; height: 100%; gap: calc(3 * var(--u)); }
+.gachaLayout { display: flex; gap: calc(5 * var(--u)); align-items: stretch; flex: 1; min-height: 0; }
 .gachaPools { display: flex; flex-direction: column; gap: calc(3 * var(--u)); flex: 0 0 auto; }
 .poolBtn {
   display: flex;
@@ -863,6 +864,7 @@
 .gachaFeatured {
   flex: 1;
   min-width: 0;
+  min-height: 0;
   border: calc(1 * var(--u)) solid rgba(232, 224, 204, 0.25);
   background: rgba(11, 10, 16, 0.6);
   padding: calc(4 * var(--u));
@@ -870,10 +872,10 @@
   flex-direction: column;
   gap: calc(3 * var(--u));
 }
-.gachaFeaturedTitle { font-size: var(--fs-10); color: var(--c-paper3); }
-.gachaFeaturedGrid { display: flex; flex-wrap: wrap; gap: calc(3 * var(--u)); overflow-y: auto; max-height: calc(120 * var(--u)); -webkit-overflow-scrolling: touch; }
-.gachaActions { display: flex; gap: calc(4 * var(--u)); justify-content: center; margin-top: calc(5 * var(--u)); }
-.gachaPity { display: flex; flex-wrap: wrap; gap: calc(4 * var(--u)); justify-content: center; font-size: var(--fs-8); color: var(--c-muted); margin-top: calc(3 * var(--u)); }
+.gachaFeaturedTitle { font-size: var(--fs-10); color: var(--c-paper3); flex: 0 0 auto; }
+.gachaFeaturedGrid { display: flex; flex-wrap: wrap; gap: calc(3 * var(--u)); align-content: flex-start; overflow-y: auto; flex: 1; min-height: 0; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.gachaActions { display: flex; gap: calc(4 * var(--u)); justify-content: center; flex: 0 0 auto; }
+.gachaPity { display: flex; flex-wrap: wrap; gap: calc(4 * var(--u)); justify-content: center; font-size: var(--fs-8); color: var(--c-muted); flex: 0 0 auto; }
 .gachaPity b { color: var(--c-yellow); }
 .gachaResults {
   position: absolute;

@@ -145,7 +145,7 @@ export function DlcShopPage() {
             </div>
           </div>
         ) : tab === 'gacha' ? (
-          <div>
+          <div className={s.gachaWrap}>
             <div className={s.gachaLayout}>
               <div className={s.gachaPools}>
                 {GACHA_POOLS.map((p) => {

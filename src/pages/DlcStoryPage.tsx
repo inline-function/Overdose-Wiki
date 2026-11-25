@@ -46,7 +46,7 @@ export function DlcStoryPage() {
         <button type="button" className={s.pixelBtn} data-variant="dark" onClick={(e) => { e.stopPropagation(); navigate('/dlc'); }}>×</button>
       </div>
       <div className={s.storyBust}>
-        <HarukazeBust mood={mood} heightU={180} />
+        <HarukazeBust mood={mood} heightU={210} />
       </div>
       <div className={s.storyDialog}>
         <div className={s.storySpeaker}>{speaker}</div>

@@ -21,3 +21,8 @@ __pycache__/
 /docs/
 /tools/prompts/afterstory/
 /tools/i18n/
+
+# 本地研究材料（语料库/企划/设计/心理侧写/原始美术），不纳入仓库
+/语料库/
+/设计文档/
+/美术资源/

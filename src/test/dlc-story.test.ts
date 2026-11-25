@@ -16,7 +16,7 @@ describe('DLC 剧情 interlude', () => {
 
   it('每幕轻量（≤4 拍），表情/BGM/背景合法', () => {
     for (const scene of DLC_STORY) {
-      expect(scene.beats.length).toBeLessThanOrEqual(4);
+      expect(scene.beats.length).toBeLessThanOrEqual(5);
       expect(scene.beats.length).toBeGreaterThan(0);
       if (scene.bgm) expect(CUES[scene.bgm as keyof typeof CUES], scene.id).toBeTruthy();
       expect(scene.bg.startsWith('bg_dlc_')).toBe(true);

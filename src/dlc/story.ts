@@ -26,6 +26,7 @@ export const DLC_STORY: DlcScene[] = [
       { text: '二〇二四年五月七日。有人在网上找一个叫春风的人。' },
       { speaker: '春风', expr: 'calm', text: '没有自我介绍。你觉得我是怎样，就是怎样。' },
       { speaker: '春风', expr: 'restless', text: '取决于你，不取决于我。' },
+      { speaker: '春风', expr: 'calm', text: '……反正，也没人真的在看。' },
     ],
   },
   {
@@ -34,6 +35,7 @@ export const DLC_STORY: DlcScene[] = [
       { text: '草稿纸上爬满结构式。色胺、苯丙胺、单胺氧化酶。' },
       { speaker: '春风', expr: 'smile', text: '看懂这些的时候，我觉得自己什么都能掌控。' },
       { speaker: '春风', expr: 'intense', text: '后来才发现，我才是那个小丑。' },
+      { speaker: '春风', expr: 'smile', text: '至少这些结构式，不会骗我。' },
     ],
   },
   {
@@ -42,6 +44,7 @@ export const DLC_STORY: DlcScene[] = [
       { speaker: '春风', expr: 'blank', text: '我家……是我家吗？' },
       { speaker: '春风', expr: 'restless', text: '我刚才在房间里做了什么。想不起来。' },
       { speaker: '春风', expr: 'sad', text: '好怕自己真的变成傻子。' },
+      { speaker: '春风', expr: 'blank', text: '镜子里那个人，反应比我慢半拍。' },
     ],
   },
   {
@@ -50,6 +53,7 @@ export const DLC_STORY: DlcScene[] = [
       { text: '朋友为他写了一张纸条。他连一个约定都没做到。' },
       { speaker: '春风', expr: 'sad', text: '好对不起朋友。想说一万个对不起。' },
       { speaker: '春风', expr: 'smile', text: '他为我做了那么多。' },
+      { speaker: '春风', expr: 'sad', text: '那张纸条我还留着。字比我好看。' },
     ],
   },
   {
@@ -58,6 +62,7 @@ export const DLC_STORY: DlcScene[] = [
       { text: '路上店里有只猫。可爱。' },
       { speaker: '春风', expr: 'calm', text: '下雨了。很适合的雨。' },
       { speaker: '春风', expr: 'sad', text: '可是除了这些，我什么都感觉不到。' },
+      { speaker: '春风', expr: 'calm', text: '猫不用懂自己，也能活着。真好。' },
     ],
   },
   {
@@ -66,6 +71,7 @@ export const DLC_STORY: DlcScene[] = [
       { speaker: '春风', expr: 'intense', text: '重要的事情说三遍——不要经常 OD 右美沙芬。' },
       { speaker: '春风', expr: 'calm', text: '我知道的。我都告诉你们了。' },
       { speaker: '春风', expr: 'restless', text: '……那我自己呢。' },
+      { speaker: '春风', expr: 'sad', text: '我劝得住别人。劝不住自己。' },
     ],
   },
   {
@@ -74,6 +80,7 @@ export const DLC_STORY: DlcScene[] = [
       { text: '门外的脚步声停了。问题还在。' },
       { speaker: '春风', expr: 'restless', text: '他们问，是不是在学校受了欺负。' },
       { speaker: '春风', expr: 'sad', text: '没有人知道。连我自己也不知道。' },
+      { speaker: '春风', expr: 'restless', text: '我说没有。他们不信。' },
     ],
   },
   {
@@ -82,6 +89,7 @@ export const DLC_STORY: DlcScene[] = [
       { text: '锅里的东西熬了一个半小时。还在熬。' },
       { speaker: '春风', expr: 'calm', text: '就一下。我想看看那边是什么。' },
       { speaker: '春风', expr: 'hurt', text: '手在抖。不是冷。' },
+      { speaker: '春风', expr: 'calm', text: '锅开了。就一下。' },
     ],
   },
   {
@@ -90,6 +98,7 @@ export const DLC_STORY: DlcScene[] = [
       { text: '我们至今不知道，他在英语听力里听见了什么。' },
       { speaker: '春风', expr: 'blank', text: '……' },
       { text: '幻化成风，随风而去。' },
+      { text: '后来有人去广西找他。只找到风。' },
       { speaker: '春风', expr: 'calm', text: '春风还在。' },
     ],
   },

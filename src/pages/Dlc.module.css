@@ -874,7 +874,8 @@
 }
 .gachaFeaturedTitle { font-size: var(--fs-10); color: var(--c-paper3); flex: 0 0 auto; }
 .gachaFeaturedGrid { display: flex; flex-wrap: wrap; gap: calc(3 * var(--u)); align-content: flex-start; overflow-y: auto; flex: 1; min-height: 0; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
-.gachaActions { display: flex; gap: calc(4 * var(--u)); justify-content: center; flex: 0 0 auto; }
+.gachaActions { display: flex; gap: calc(4 * var(--u)); flex: 0 0 auto; }
+.gachaActions .pixelBtn { flex: 1; }
 .gachaPity { display: flex; flex-wrap: wrap; gap: calc(4 * var(--u)); justify-content: center; font-size: var(--fs-8); color: var(--c-muted); flex: 0 0 auto; }
 .gachaPity b { color: var(--c-yellow); }
 .gachaResults {

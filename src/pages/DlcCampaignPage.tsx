@@ -1,9 +1,16 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocale, useT } from '../i18n';
 import { BATTLE_MAP, STAGES } from '../dlc/content';
 import { pick } from '../dlc/format';
 import { useDlcStore } from '../dlc/store';
+import { ChapterOpening } from '../openings/ChapterOpening';
+import { CANVAS_OPENINGS } from '../openings/registry';
 import s from './Dlc.module.css';
+
+function prefersReducedMotion(): boolean {
+  return typeof window !== 'undefined' && Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+}
 
 function asset(path: string): string { return `${import.meta.env.BASE_URL}${path}`; }
 
@@ -12,7 +19,9 @@ export function DlcCampaignPage() {
   const locale = useLocale();
   const navigate = useNavigate();
   const save = useDlcStore((st) => st.save);
+  const markIntroSeen = useDlcStore((st) => st.markIntroSeen);
   const current = STAGES[Math.min(7, Math.max(0, save.stage - 1))];
+  const [showOpening, setShowOpening] = useState(() => !save.seenIntro && !prefersReducedMotion());
 
   return (
     <div className={`${s.root} ${s.campaign}`}>
@@ -64,6 +73,12 @@ export function DlcCampaignPage() {
           <button type="button" className={s.pixelBtn} data-variant="amber" onClick={() => navigate('/dlc/battle')}>{tr('dlc.fight')}</button>
         </div>
       </div>
+      {showOpening && (
+        <ChapterOpening
+          opening={CANVAS_OPENINGS.dlc}
+          onDone={() => { markIntroSeen(); setShowOpening(false); }}
+        />
+      )}
     </div>
   );
 }

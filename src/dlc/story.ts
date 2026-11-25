@@ -15,6 +15,8 @@ export type DlcScene = {
   id: string;
   title: string;
   bg: string;
+  /** 场景 BGM cue（manifest CUES）。 */
+  bgm?: string;
   beats: DlcBeat[];
 };
 
@@ -24,6 +26,7 @@ export const DLC_STORY: DlcScene[] = [
     id: 'summer-street',
     title: '夏日街道',
     bg: 'bg_dlc_summer_street',
+    bgm: 'night-view',
     beats: [
       { text: '二〇二四年的夏天，街道被晒得发白。' },
       { speaker: '春风', expr: 'calm', text: '……又是一个人。也好。' },

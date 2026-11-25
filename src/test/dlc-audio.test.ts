@@ -11,11 +11,16 @@ describe('DLC 配乐', () => {
     expect(cueForPath('/dlc/battle')).toBeUndefined();
   });
 
-  it('8 关战斗统一用燃曲 battle（Start the battle）', () => {
+  it('8 关各配专属战斗曲，且全部存在于 manifest', () => {
+    const used = new Set<string>();
     for (const battle of BATTLES) {
-      expect(battle.bgm, battle.id).toBe('battle');
-      expect(CUES[battle.bgm as keyof typeof CUES]).toBeTruthy();
+      expect(CUES[battle.bgm as keyof typeof CUES], battle.id).toBeTruthy();
+      used.add(battle.bgm);
     }
+    expect(used.size).toBe(8); // 每关不同
+    expect(BATTLES[7].bgm).toBe('battle'); // b8 剧烈变形 = Start the battle
+    expect(used.has('battle-city')).toBe(true);
+    expect(used.has('battle-sewer')).toBe(true);
   });
 
   it('曾经闲置的 night-market 现在可达', () => {

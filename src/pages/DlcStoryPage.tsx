@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLocale, useT } from '../i18n';
+import { useCue } from '../audio/useCue';
 import { HarukazeBust } from '../components/HarukazeBust';
 import { DLC_STORY, DLC_STORY_MAP } from '../dlc/story';
 import s from './Dlc.module.css';
@@ -16,6 +17,7 @@ export function DlcStoryPage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id?: string }>();
   const scene = (id && DLC_STORY_MAP[id]) || DLC_STORY[0];
+  useCue(scene.bgm);
   const [beatIndex, setBeatIndex] = useState(0);
   const beat = scene.beats[Math.min(beatIndex, scene.beats.length - 1)];
 

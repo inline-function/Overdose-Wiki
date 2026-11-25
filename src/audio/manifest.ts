@@ -25,6 +25,20 @@ export const CUES = {
   'drug-war': { src: asset('assets-private/audio/drug-war.wav'), loop: false },
   credits: { src: asset('audio/bgm/credits.mp3'), loop: false },
   extras: { src: asset('audio/bgm/extras.mp3'), loop: true },
+  'battle-city': { src: asset('audio/bgm/battle-city.mp3'), loop: true },
+  'battle-desert': { src: asset('audio/bgm/battle-desert.mp3'), loop: true },
+  'battle-dj': { src: asset('audio/bgm/battle-dj.mp3'), loop: true },
+  'battle-fruit': { src: asset('audio/bgm/battle-fruit.mp3'), loop: true },
+  'battle-run': { src: asset('audio/bgm/battle-run.mp3'), loop: true },
+  'battle-pixel': { src: asset('audio/bgm/battle-pixel.mp3'), loop: true },
+  'battle-sewer': { src: asset('audio/bgm/battle-sewer.mp3'), loop: true },
+  'night-view': { src: asset('audio/bgm/night-view.mp3'), loop: true },
+  'rest-time': { src: asset('audio/bgm/rest-time.mp3'), loop: true },
+  waiting: { src: asset('audio/bgm/waiting.mp3'), loop: true },
+  circulation: { src: asset('audio/bgm/circulation.mp3'), loop: true },
+  longing: { src: asset('audio/bgm/longing.mp3'), loop: true },
+  campus: { src: asset('audio/bgm/campus.mp3'), loop: true },
+  eight: { src: asset('audio/bgm/eight.mp3'), loop: true },
 } satisfies Record<string, Cue>;
 
 export type CueId = keyof typeof CUES;

@@ -85,6 +85,20 @@
       "slug": "extras",
       "file": "皮卡皮卡.wav",
       "loop": false
-    }
+    },
+    { "slug": "battle-city", "file": "City of Night.wav", "loop": true },
+    { "slug": "battle-desert", "file": "Desert.wav", "loop": true },
+    { "slug": "battle-dj", "file": "DJ BO$$.wav", "loop": true },
+    { "slug": "battle-fruit", "file": "Fruit Machine.wav", "loop": true },
+    { "slug": "battle-run", "file": "Just Run.wav", "loop": true },
+    { "slug": "battle-pixel", "file": "Pixel Wars.wav", "loop": true },
+    { "slug": "battle-sewer", "file": "Sewer.wav", "loop": true },
+    { "slug": "night-view", "file": "Night View.wav", "loop": true },
+    { "slug": "rest-time", "file": "Rest time.wav", "loop": true },
+    { "slug": "waiting", "file": "Waiting.wav", "loop": true },
+    { "slug": "circulation", "file": "Circulation.wav", "loop": true },
+    { "slug": "longing", "file": "小 熊 貓 和 蘋 果.wav", "loop": true },
+    { "slug": "campus", "file": "Campus.wav", "loop": true },
+    { "slug": "eight", "file": "Eight.wav", "loop": true }
   ]
 }

@@ -217,7 +217,7 @@ const battle = (
   intro: { zh: introZh, en: introEn },
   win: { zh: winZh, en: winEn },
   lose: { zh: loseZh, en: loseEn },
-  ...(phase2At ? { phase2At, phase2Log: { zh: '星头开始膨胀。白大褂的边缘化成像素。', en: 'The star-head swells. The coat begins to dissolve into pixels.' } } : {}),
+  ...(phase2At ? { phase2At, phase2Log: { zh: '死藤水在血管里展开。星头膨胀，白大褂的边缘化成像素。', en: 'The ayahuasca unfolds in the veins. The star-head swells; the coat dissolves into pixels.' } } : {}),
   bgm,
 });
 
@@ -243,9 +243,9 @@ export const BATTLES: BattleDef[] = [
   battle('dlc-b7', '父亲的质问', 'The Father\'s Question', '父亲的质问', 'The Father\'s Question', '你为什么不回家', 'Why don\'t you come home', 'shadow', 'bg_dlc_school_gate',
     ['phenobarbital', 'secobarbital', 'morphine', 'fentanyl', 'methadone', 'trihexyphenidyl', 'scopolamine', 'diazepam', 'clonazepam', 'naloxone'],
     80, 40, '门口站着一个不肯走的人。', 'Someone at the door refuses to leave.', '你让那阵风过去了。', 'You let the wind pass.', '你被那阵风压垮了。', 'The wind presses you down.', undefined, 'battle'),
-  battle('dlc-b8', '死亡冲动', 'Death Drive', '死亡冲动', 'Death Drive', '只要一下就好', 'Just once would be enough', 'harukaze', 'bg_dlc_summer_street',
+  battle('dlc-b8', '剧烈变形', 'Violent Metamorphosis', '剧烈变形', 'Violent Metamorphosis', '死藤水在血管里展开', 'The ayahuasca unfolds in the veins', 'harukaze', 'bg_dlc_summer_street',
     ['phenelzine', 'tranylcypromine', 'escitalopram', 'fentanyl', 'morphine', 'memantine', 'scopolamine', 'trihexyphenidyl', 'diazepam', 'naloxone', 'vitamin_b6', 'magnesium'],
-    92, 46, '它用你的声音说话。', 'It speaks with your voice.', '风终于轻了。', 'The wind finally lightens.', '风把你留在原地。', 'The wind keeps you here.', 46, 'battle'),
+    160, 80, '你喝下了死藤水。身体开始不属于你。', 'You drank the ayahuasca. Your body stops belonging to you.', '变形停了。你还认得自己。', 'The deformation stops. You still recognize yourself.', '你在幻觉里散开了。', 'You come apart inside the hallucination.', 50, 'battle'),
 ];
 
 export const STAGES: Stage[] = [
@@ -285,8 +285,8 @@ export const STAGES: Stage[] = [
     battleId: 'dlc-b7', bg: 'bg_dlc_school_gate', rewards: ['lorazepam', 'estazolam', 'clonazepam'], shop: ['clonazepam', 'lorazepam', 'trihexyphenidyl', 'naloxone'],
   },
   {
-    id: 'dlc-8', no: 8, title: { zh: '死亡冲动', en: 'Death Drive' },
-    blurb: { zh: '它用你的声音说话，像在商量一件小事。', en: 'It speaks in your voice, as if discussing a small thing.' },
+    id: 'dlc-8', no: 8, title: { zh: '剧烈变形', en: 'Violent Metamorphosis' },
+    blurb: { zh: '死藤水下去，世界开始折叠。在幻觉把你拆散之前，认出你自己。', en: 'The ayahuasca goes down and the world starts to fold. Recognize yourself before the hallucination takes you apart.' },
     battleId: 'dlc-b8', bg: 'bg_dlc_summer_street', rewards: ['escitalopram', 'memantine', 'vitamin_b6'], shop: ['moclobemide', 'memantine', 'naloxone', 'magnesium'],
   },
 ];

@@ -254,14 +254,14 @@ describe('DLC 引擎 · 补剂与胜负', () => {
     expect(lose.outcome).toBe('lose');
   });
 
-  it('b8 二阶段：玩家生理≤46 触发，伤害 +25%', () => {
+  it('b8 二阶段：玩家生理≤50 触发，伤害 +25%', () => {
     const s = createBattle(BATTLE_MAP['dlc-b8'], [...STARTER_DECK], 3);
-    s.player.phys = 46;
+    s.player.phys = 50;
     setHand(s, ['caffeine', 'venlafaxine']);
     playerPlay(s, 0, 'enemy'); // 触发二阶段
     expect(s.phase2).toBe(true);
     playerPlay(s, 0, 'enemy'); // 此后伤害 +25%
-    expect(s.enemy.mental).toBe(46 - 3); // 2×1.25=2.5→3
+    expect(s.enemy.mental).toBe(s.enemy.maxMental - 3); // 2×1.25=2.5→3
   });
 });
 

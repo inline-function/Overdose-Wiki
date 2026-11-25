@@ -61,7 +61,7 @@ export const OPENING_HAND = 4;
 export const SEROTONIN_THRESHOLD = 30;
 export const BURST_PHYS = 10;
 export const BURST_MENTAL = 14;
-export const ENEMY_PLAYS = [1, 1, 2, 2, 2, 2, 3, 3];
+export const ENEMY_PLAYS = [1, 1, 2, 2, 2, 2, 3, 5];
 
 const ZERO_STATUSES = (): Record<StatusId, number> => ({
   serotonin: 0, sedation: 0, respiratory: 0, delirium: 0,

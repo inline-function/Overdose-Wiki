@@ -146,38 +146,38 @@ export function DlcShopPage() {
           </div>
         ) : tab === 'gacha' ? (
           <div className={s.gachaWrap}>
-            <div className={s.gachaLayout}>
-              <div className={s.gachaPools}>
-                {GACHA_POOLS.map((p) => {
-                  const PIcon = POOL_ICON[p.id];
-                  return (
-                    <button key={p.id} type="button" className={s.poolBtn} data-on={pool === p.id} onClick={() => setPool(p.id)}>
-                      <PIcon />
-                      <span>{pick(p.name, locale)}</span>
-                    </button>
-                  );
-                })}
-              </div>
+            <div className={s.gachaPools}>
+              {GACHA_POOLS.map((p) => {
+                const PIcon = POOL_ICON[p.id];
+                return (
+                  <button key={p.id} type="button" className={s.poolBtn} data-on={pool === p.id} onClick={() => setPool(p.id)}>
+                    <PIcon />
+                    <span>{pick(p.name, locale)}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className={s.gachaRight}>
               <div className={s.gachaFeatured}>
                 <div className={s.gachaFeaturedTitle}>{pick(activePool.name, locale)} · UP</div>
                 <div className={s.gachaFeaturedGrid}>
                   {activePool.cardIds.map((id) => <CardFace key={id} card={CARD_MAP[id]} small />)}
                 </div>
               </div>
-            </div>
-            <div className={s.gachaActions}>
-              <button type="button" className={s.pixelBtn} data-variant="dark" disabled={save.currency < GACHA_COST} onClick={() => doDraw(1)}>
-                {tr('dlc.gachaSingle')} · {GACHA_COST}
-              </button>
-              <button type="button" className={s.pixelBtn} data-variant="amber" disabled={save.currency < GACHA_COST * 10} onClick={() => doDraw(10)}>
-                {tr('dlc.gachaTen')} · {GACHA_COST * 10}
-              </button>
-            </div>
-            <div className={s.gachaPity}>
-              <span>{tr('dlc.gachaPity2', { n: String(pity.pity2) })}</span>
-              <span>{tr('dlc.gachaPity1', { n: String(pity.pity1) })}</span>
-              <span>{tr('dlc.gachaPityN', { n: String(pity.pityN) })}</span>
-              {pity.guaranteed && <b>{tr('dlc.gachaGuaranteed')}</b>}
+              <div className={s.gachaActions}>
+                <button type="button" className={s.pixelBtn} data-variant="dark" disabled={save.currency < GACHA_COST} onClick={() => doDraw(1)}>
+                  {tr('dlc.gachaSingle')} · {GACHA_COST}
+                </button>
+                <button type="button" className={s.pixelBtn} data-variant="amber" disabled={save.currency < GACHA_COST * 10} onClick={() => doDraw(10)}>
+                  {tr('dlc.gachaTen')} · {GACHA_COST * 10}
+                </button>
+              </div>
+              <div className={s.gachaPity}>
+                <span>{tr('dlc.gachaPity2', { n: String(pity.pity2) })}</span>
+                <span>{tr('dlc.gachaPity1', { n: String(pity.pity1) })}</span>
+                <span>{tr('dlc.gachaPityN', { n: String(pity.pityN) })}</span>
+                {pity.guaranteed && <b>{tr('dlc.gachaGuaranteed')}</b>}
+              </div>
             </div>
           </div>
         ) : (

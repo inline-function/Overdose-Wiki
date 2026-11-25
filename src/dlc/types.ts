@@ -98,6 +98,8 @@ export type PlayerStats = {
 };
 
 export type DlcSave = {
+  /** 无尽模式最高存活波次 */
+  endlessBest: number;
   /** 抽卡保底 */
   gacha: GachaPity;
   /** 属性强化等级 */

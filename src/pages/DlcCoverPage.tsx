@@ -22,6 +22,7 @@ export function DlcCoverPage() {
             <span>{tr('dlc.coverEnter')}</span>
             <span aria-hidden="true">→</span>
           </button>
+          <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc/endless')}>{tr('dlc.endless')}</button>
         </div>
         <button type="button" className={`${s.pixelBtn} ${s.coverBack}`} data-variant="dark" onClick={() => navigate('/')}>×</button>
       </div>

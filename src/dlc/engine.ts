@@ -51,6 +51,8 @@ export type BattleState = {
   rng: () => number;
   serial: number;
   stats: PlayerStats;
+  /** 无尽模式：覆盖敌方每回合出牌数。 */
+  enemyPlays?: number;
 };
 
 export const PLAYER_MAX_PHYS = 60;
@@ -102,6 +104,7 @@ export function createBattle(
   playerDeck: string[],
   seed: number,
   stats?: Partial<PlayerStats>,
+  enemyPlays?: number,
 ): BattleState {
   const rng = mulberry32(seed);
   const s: PlayerStats = {
@@ -123,6 +126,7 @@ export function createBattle(
     rng,
     serial: 0,
     stats: s,
+    enemyPlays,
   };
   for (let i = 0; i < OPENING_HAND; i += 1) drawCard(state, 'player');
   for (let i = 0; i < s.drawPerTurn; i += 1) drawCard(state, 'player'); // 第一回合免费抽
@@ -441,7 +445,7 @@ function scoreTarget(state: BattleState, card: Card, target: Side): number {
 
 function enemyPlay(state: BattleState, events: BattleEvent[]): void {
   const stageIndex = Math.max(0, Math.min(7, state.def.id.charCodeAt(state.def.id.length - 1) - 49));
-  const plays = ENEMY_PLAYS[stageIndex];
+  const plays = state.enemyPlays ?? ENEMY_PLAYS[stageIndex];
   for (let i = 0; i < plays; i += 1) {
     if (state.outcome !== 'ongoing' || state.enemy.hand.length === 0) break;
     let best: { index: number; target: Side; score: number } | null = null;

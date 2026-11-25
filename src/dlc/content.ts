@@ -334,6 +334,7 @@ export function computeStats(upgrades: Record<string, number>): import('./types'
 }
 
 export const DEFAULT_DLC_SAVE: DlcSave = {
+  endlessBest: 0,
   gacha: { pity2: 0, pity1: 0, pityN: 0, guaranteed: false },
   upgrades: { ...DEFAULT_UPGRADES },
   stage: 1,

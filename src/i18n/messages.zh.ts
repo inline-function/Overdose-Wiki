@@ -865,6 +865,14 @@ export const zh = {
   'dlc.coverSubtitle': '八关 · 卡牌战役 · 2023',
   'dlc.coverBlurb': '一个早慧、骄傲、鲁莽又温柔的化学少年指路人。八种症状，八场战斗。春风还在。',
   'dlc.coverEnter': '进入战役',
+  'dlc.endless': '无尽模式',
+  'dlc.endlessWave': '波次 {n}',
+  'dlc.endlessOver': '无尽结束',
+  'dlc.endlessNext': '下一波',
+  'dlc.endlessNextHint': '症状更强了。继续。',
+  'dlc.endlessSurvived': '存活 {n} 波',
+  'dlc.endlessBest': '最高 {n} 波',
+  'dlc.endlessExit': '退出',
 } as const;
 
 export type MessageKey = keyof typeof zh;

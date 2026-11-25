@@ -4,7 +4,7 @@ import { useLocale, useT } from '../i18n';
 import { audio } from '../audio/AudioManager';
 import { AUDIO_MANIFEST } from '../audio/manifest';
 import { useCue } from '../audio/useCue';
-import { BATTLE_MAP, CARD_MAP, RARITY_META, STAGES, STATUS_INFO, computeStats } from '../dlc/content';
+import { BATTLES, BATTLE_MAP, CARD_MAP, RARITY_META, STAGES, STATUS_INFO, computeStats } from '../dlc/content';
 import { categoryKey, categoryIcon, StatusIcon } from '../dlc/icons';
 import { cardEffectLines, categoryOf, effectStatuses, pick, statusLabel } from '../dlc/format';
 import { createBattle, endPlayerTurn, playerDraw, playerPlay, type BattleEvent, type BattleState, type Side } from '../dlc/engine';
@@ -42,7 +42,7 @@ function asset(path: string): string {
   return `${import.meta.env.BASE_URL}${path}`;
 }
 
-export function DlcBattlePage() {
+export function DlcBattlePage({ endless = false }: { endless?: boolean }) {
   const tr = useT();
   const locale = useLocale();
   const navigate = useNavigate();
@@ -54,12 +54,29 @@ export function DlcBattlePage() {
   const requested = Number.parseInt(searchParams.get('stage') ?? '', 10);
   const stageNo = Math.min(save.stage, Math.max(1, Number.isFinite(requested) ? requested : save.stage));
   const stage = STAGES[stageNo - 1];
-  const def = BATTLE_MAP[stage.battleId];
+  const [wave, setWave] = useState(1);
+  const baseDef = endless ? BATTLES[(wave - 1) % BATTLES.length] : BATTLE_MAP[stage.battleId];
+  const scale = endless ? 1 + 0.2 * (wave - 1) : 1;
+  const scaledMental = Math.round(baseDef.maxMental * scale);
+  const def = endless
+    ? { ...baseDef, maxMental: scaledMental, maxPhys: scaledMental * 2 }
+    : baseDef;
   useCue(def.bgm);
 
+  const carryRef = useRef<{ phys: number; mental: number } | null>(null);
+  const battleKey = endless ? `endless-${wave}` : def.id;
+  const keyRef = useRef('');
   const stateRef = useRef<BattleState | null>(null);
-  if (!stateRef.current || stateRef.current.def.id !== def.id) {
-    stateRef.current = createBattle(def, save.deck, Math.floor(Math.random() * 1e9), computeStats(save.upgrades));
+  if (!stateRef.current || keyRef.current !== battleKey) {
+    stateRef.current = createBattle(
+      def, save.deck, Math.floor(Math.random() * 1e9), computeStats(save.upgrades),
+      endless ? Math.min(2 + Math.floor((wave - 1) / 2), 6) : undefined,
+    );
+    if (endless && carryRef.current) {
+      stateRef.current.player.phys = carryRef.current.phys;
+      stateRef.current.player.mental = carryRef.current.mental;
+    }
+    keyRef.current = battleKey;
   }
   const state = stateRef.current;
   const [, setTick] = useState(0);
@@ -187,10 +204,36 @@ export function DlcBattlePage() {
   useEffect(() => {
     if (state.outcome === 'win' && !recordedRef.current) {
       recordedRef.current = true;
-      recordWin(stage.id, def.id);
+      if (!endless) recordWin(stage.id, def.id);
       audio.playSfx(AUDIO_MANIFEST.sfx.stamp);
     }
-  }, [state.outcome, recordWin, stage.id, def.id]);
+    if (endless && state.outcome === 'lose' && !recordedRef.current) {
+      recordedRef.current = true;
+      const survived = wave - 1;
+      useDlcStore.getState().patch((s) => ({ ...s, endlessBest: Math.max(s.endlessBest ?? 0, survived) }));
+    }
+  }, [state.outcome, recordWin, stage.id, def.id, endless, wave]);
+
+  const nextWave = () => {
+    carryRef.current = {
+      phys: Math.min(state.player.maxPhys, state.player.phys + Math.round(state.player.maxPhys * 0.15)),
+      mental: Math.min(state.player.maxMental, state.player.mental + Math.round(state.player.maxMental * 0.15)),
+    };
+    recordedRef.current = false;
+    setSelected(null);
+    setFx([]);
+    setWave((w) => w + 1);
+    refresh();
+  };
+  const endlessRetry = () => {
+    carryRef.current = null;
+    recordedRef.current = false;
+    keyRef.current = '';
+    setSelected(null);
+    setFx([]);
+    setWave(1);
+    refresh();
+  };
 
   const canAct = state.outcome === 'ongoing' && state.active === 'player' && !busy;
   const ap = state.player.ap;
@@ -378,7 +421,7 @@ export function DlcBattlePage() {
         </div>
       </div>
       <div className={s.turnBadge}>
-        {tr('dlc.turn', { n: String(state.turn) })}
+        {endless ? tr('dlc.endlessWave', { n: String(wave) }) : tr('dlc.turn', { n: String(state.turn) })}
         <div className={s.apRow}>
           {Array.from({ length: state.stats.apCap }, (_, i) => <span key={i} className={s.apPip} data-on={i < ap} />)}
         </div>
@@ -489,9 +532,16 @@ export function DlcBattlePage() {
       {state.outcome !== 'ongoing' && (
         <div className={s.overlay}>
           <div className={s.resultBox}>
-            <div className={s.resultStamp} data-lose={state.outcome === 'lose'}>{state.outcome === 'win' ? tr('dlc.win') : tr('dlc.lose')}</div>
-            <div className={s.resultLine}>{pick(state.outcome === 'win' ? def.win : def.lose, locale)}</div>
-            {state.outcome === 'win' ? (
+            <div className={s.resultStamp} data-lose={state.outcome === 'lose'}>{endless ? (state.outcome === 'win' ? tr('dlc.endlessWave', { n: String(wave) }) : tr('dlc.endlessOver')) : (state.outcome === 'win' ? tr('dlc.win') : tr('dlc.lose'))}</div>
+            <div className={s.resultLine}>{endless ? (state.outcome === 'win' ? tr('dlc.endlessNextHint') : `${tr('dlc.endlessSurvived', { n: String(wave - 1) })} · ${tr('dlc.endlessBest', { n: String(save.endlessBest ?? 0) })}`) : pick(state.outcome === 'win' ? def.win : def.lose, locale)}</div>
+            {endless ? (
+              <div className={s.shopActions}>
+                {state.outcome === 'win'
+                  ? <button type="button" className={s.pixelBtn} data-variant="amber" onClick={nextWave}>{tr('dlc.endlessNext')}</button>
+                  : <button type="button" className={s.pixelBtn} data-variant="amber" onClick={endlessRetry}>{tr('dlc.retry')}</button>}
+                <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc')}>{tr('dlc.endlessExit')}</button>
+              </div>
+            ) : state.outcome === 'win' ? (
               <>
                 <div className={s.detailCat}>{tr('dlc.rewardHint')}</div>
                 <div className={s.rewardRow}>

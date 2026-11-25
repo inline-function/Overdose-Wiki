@@ -157,6 +157,7 @@ export const router = createHashRouter([
       { path: 'dlc/cover', element: <DlcGuard><DlcCoverPage /></DlcGuard> },
       { path: 'dlc', element: <DlcGuard><DlcCampaignPage /></DlcGuard> },
       { path: 'dlc/battle', element: <DlcGuard><DlcBattlePage /></DlcGuard> },
+      { path: 'dlc/endless', element: <DlcGuard><DlcBattlePage endless /></DlcGuard> },
       { path: 'dlc/shop', element: <DlcGuard><DlcShopPage /></DlcGuard> },
       { path: 'dlc/ending', element: <DlcGuard><DlcEndingPage /></DlcGuard> },
       { path: 'dlc/story', element: <DlcGuard><DlcStoryPage /></DlcGuard> },

@@ -26,6 +26,7 @@ export function migrateDlc(raw: unknown): DlcSave | null {
   const num = (v: unknown) => (typeof v === 'number' && v >= 0 ? Math.floor(v) : 0);
   const gacha = { pity2: num(rawG.pity2), pity1: num(rawG.pity1), pityN: num(rawG.pityN), guaranteed: rawG.guaranteed === true };
   return {
+    endlessBest: typeof raw.endlessBest === 'number' && raw.endlessBest >= 0 ? Math.floor(raw.endlessBest) : 0,
     gacha,
     upgrades,
     stage: Math.max(1, Math.min(8, Math.floor(raw.stage))),

@@ -841,6 +841,31 @@
 .collectionCount { font-size: var(--fs-8); color: var(--c-sky); }
 .inDeck { color: var(--c-yellow); }
 
+/* ---------- 强化面板 ---------- */
+.upgradeStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(4 * var(--u));
+  justify-content: center;
+  font-size: var(--fs-8);
+  color: var(--c-sky);
+  margin-bottom: calc(5 * var(--u));
+}
+.upgradeStats b { color: var(--c-paper3); }
+.upgradeList { display: flex; flex-direction: column; gap: calc(3 * var(--u)); max-width: calc(300 * var(--u)); margin: 0 auto; }
+.upgradeRow {
+  display: flex;
+  align-items: center;
+  gap: calc(4 * var(--u));
+  background: rgba(23, 21, 31, 0.8);
+  border: calc(1 * var(--u)) solid rgba(232, 224, 204, 0.25);
+  padding: calc(3 * var(--u)) calc(4 * var(--u));
+}
+.upgradeInfo { flex: 1; min-width: 0; }
+.upgradeName { font-size: var(--fs-10); color: var(--c-paper3); }
+.upgradeLv { font-size: var(--fs-8); color: var(--c-yellow); }
+.upgradeBuy { flex: 0 0 auto; }
+
 /* ---------- 独立剧情引擎 ---------- */
 .storyHead {
   position: absolute;

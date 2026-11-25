@@ -299,7 +299,39 @@ export const BATTLE_MAP: Record<string, BattleDef> = Object.fromEntries(
   BATTLES.map((item) => [item.id, item]),
 );
 
+export const DEFAULT_UPGRADES = { phys: 0, mental: 0, ap: 0, apCap: 0, draw: 0 };
+
+/** 强化定义：每级增量、上限、费用（baseCost + costStep*当前级）。 */
+export const UPGRADE_DEFS: Record<
+  string,
+  { perLevel: number; maxLevel: number; baseCost: number; costStep: number }
+> = {
+  phys: { perLevel: 8, maxLevel: 5, baseCost: 12, costStep: 6 },
+  mental: { perLevel: 4, maxLevel: 5, baseCost: 12, costStep: 6 },
+  ap: { perLevel: 1, maxLevel: 2, baseCost: 20, costStep: 10 },
+  apCap: { perLevel: 1, maxLevel: 3, baseCost: 15, costStep: 8 },
+  draw: { perLevel: 1, maxLevel: 2, baseCost: 18, costStep: 10 },
+};
+
+export function upgradeCost(track: string, level: number): number {
+  const def = UPGRADE_DEFS[track];
+  return def.baseCost + def.costStep * level;
+}
+
+/** 由强化等级算出战斗属性（生理/心理增量保持 ×2）。 */
+export function computeStats(upgrades: Record<string, number>): import('./types').PlayerStats {
+  const u = { ...DEFAULT_UPGRADES, ...upgrades };
+  return {
+    maxPhys: 60 + UPGRADE_DEFS.phys.perLevel * u.phys,
+    maxMental: 30 + UPGRADE_DEFS.mental.perLevel * u.mental,
+    apPerTurn: 3 + u.ap,
+    apCap: 5 + u.apCap,
+    drawPerTurn: 1 + u.draw,
+  };
+}
+
 export const DEFAULT_DLC_SAVE: DlcSave = {
+  upgrades: { ...DEFAULT_UPGRADES },
   stage: 1,
   completed: [],
   deck: [...STARTER_DECK],

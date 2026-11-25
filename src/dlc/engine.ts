@@ -1,5 +1,5 @@
 // DLC 战斗引擎：纯逻辑 + 事件流。规则见 DLC_DESIGN_NOTES.md（已确认版）。
-import type { BattleDef, Card, LocaleText, StatusId, Track } from './types';
+import type { BattleDef, Card, LocaleText, PlayerStats, StatusId, Track } from './types';
 import { CARD_MAP } from './content';
 
 export type Side = 'player' | 'enemy';
@@ -50,6 +50,7 @@ export type BattleState = {
   outcome: 'ongoing' | 'win' | 'lose';
   rng: () => number;
   serial: number;
+  stats: PlayerStats;
 };
 
 export const PLAYER_MAX_PHYS = 60;
@@ -96,21 +97,35 @@ function makeCombatant(maxPhys: number, maxMental: number, deck: string[], rng: 
   };
 }
 
-export function createBattle(def: BattleDef, playerDeck: string[], seed: number): BattleState {
+export function createBattle(
+  def: BattleDef,
+  playerDeck: string[],
+  seed: number,
+  stats?: Partial<PlayerStats>,
+): BattleState {
   const rng = mulberry32(seed);
+  const s: PlayerStats = {
+    maxPhys: PLAYER_MAX_PHYS,
+    maxMental: PLAYER_MAX_MENTAL,
+    apPerTurn: AP_PER_TURN,
+    apCap: AP_CAP,
+    drawPerTurn: 1,
+    ...stats,
+  };
   const state: BattleState = {
     def,
     turn: 1,
     active: 'player',
-    player: { ...makeCombatant(PLAYER_MAX_PHYS, PLAYER_MAX_MENTAL, playerDeck, rng), ap: 3 },
+    player: { ...makeCombatant(s.maxPhys, s.maxMental, playerDeck, rng), ap: s.apPerTurn },
     enemy: makeCombatant(def.maxPhys, def.maxMental, def.deck, rng),
     phase2: false,
     outcome: 'ongoing',
     rng,
     serial: 0,
+    stats: s,
   };
   for (let i = 0; i < OPENING_HAND; i += 1) drawCard(state, 'player');
-  drawCard(state, 'player'); // 第一回合免费抽
+  for (let i = 0; i < s.drawPerTurn; i += 1) drawCard(state, 'player'); // 第一回合免费抽
   for (let i = 0; i < 3; i += 1) drawCard(state, 'enemy');
   return state;
 }
@@ -262,7 +277,7 @@ function applyEffects(state: BattleState, user: Side, card: Card, target: Side, 
         break;
       case 'ap':
         if (user === 'player') {
-          state.player.ap = Math.max(0, Math.min(AP_CAP, state.player.ap + effect.amount));
+          state.player.ap = Math.max(0, Math.min(state.stats.apCap, state.player.ap + effect.amount));
           events.push(emit(state, { kind: 'ap', side: 'player', amount: effect.amount }));
         }
         break;
@@ -357,7 +372,7 @@ function startTurn(state: BattleState, side: Side, events: BattleEvent[]): void 
     return;
   }
   if (side === 'player') {
-    state.player.ap = Math.min(AP_CAP, state.player.ap + AP_PER_TURN);
+    state.player.ap = Math.min(state.stats.apCap, state.player.ap + state.stats.apPerTurn);
     const sed = c.statuses.sedation;
     const penalty = sed >= 30 ? 3 : sed >= 20 ? 2 : sed >= 10 ? 1 : 0;
     if (penalty > 0) {
@@ -366,8 +381,11 @@ function startTurn(state: BattleState, side: Side, events: BattleEvent[]): void 
     }
   }
   decay(state, side); // 上一回合的状态在此减半
-  const drawn = drawCard(state, side, events);
-  if (drawn) events.push(drawn);
+  const draws = side === 'player' ? state.stats.drawPerTurn : 1;
+  for (let i = 0; i < draws; i += 1) {
+    const drawn = drawCard(state, side, events);
+    if (drawn) events.push(drawn);
+  }
   events.push(emit(state, { kind: 'turn', side, turn: state.turn }));
 }
 

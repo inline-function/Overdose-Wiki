@@ -852,4 +852,13 @@ export const en: Record<MessageKey, string> = {
   'dlc.narrator': 'Narration',
   'dlc.storyContinue': 'Click to continue',
   'dlc.storyTitle': 'Story',
+  'dlc.upgrade': 'Upgrade',
+  'dlc.upgradePhys': 'Max Phys',
+  'dlc.upgradeMental': 'Max Mental',
+  'dlc.upgradeAp': 'AP / turn',
+  'dlc.upgradeApCap': 'AP cap',
+  'dlc.upgradeDraw': 'Free draw / turn',
+  'dlc.upgradeMax': 'Maxed',
+  'dlc.upgradeLv': 'Lv.{n}/{max}',
+  'dlc.currentStats': 'Current stats',
 };

@@ -1,6 +1,6 @@
 // DLC 独立存档：localStorage odw.dlc.v1，与主存档管线隔离。
-import { DEFAULT_DLC_SAVE } from './content';
-import type { DlcSave } from './types';
+import { DEFAULT_DLC_SAVE, DEFAULT_UPGRADES } from './content';
+import type { DlcSave, Upgrades } from './types';
 
 export const DLC_STORAGE_KEY = 'odw.dlc.v1';
 export const DLC_SAVE_VERSION = 1 as const;
@@ -15,7 +15,15 @@ export function migrateDlc(raw: unknown): DlcSave | null {
   if (!Array.isArray(raw.deck) || !isObject(raw.collection)) return null;
   if (typeof raw.currency !== 'number') return null;
   const base = structuredClone(DEFAULT_DLC_SAVE);
+  const rawUp = isObject(raw.upgrades) ? (raw.upgrades as Record<string, unknown>) : {};
+  const upgrades = Object.fromEntries(
+    Object.keys(DEFAULT_UPGRADES).map((k) => {
+      const v = rawUp[k];
+      return [k, typeof v === 'number' && v >= 0 ? Math.floor(v) : 0];
+    }),
+  ) as Upgrades;
   return {
+    upgrades,
     stage: Math.max(1, Math.min(8, Math.floor(raw.stage))),
     completed: raw.completed.filter((id): id is string => typeof id === 'string'),
     deck: raw.deck.filter((id): id is string => typeof id === 'string'),

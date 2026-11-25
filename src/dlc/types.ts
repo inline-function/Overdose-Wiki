@@ -75,7 +75,21 @@ export type Stage = {
   shop: string[];
 };
 
+export type UpgradeTrack = 'phys' | 'mental' | 'ap' | 'apCap' | 'draw';
+export type Upgrades = Record<UpgradeTrack, number>;
+
+/** 战斗可用的强化后属性。 */
+export type PlayerStats = {
+  maxPhys: number;
+  maxMental: number;
+  apPerTurn: number;
+  apCap: number;
+  drawPerTurn: number;
+};
+
 export type DlcSave = {
+  /** 属性强化等级 */
+  upgrades: Upgrades;
   /** 当前关卡（1–8） */
   stage: number;
   /** 已通关的 stage id */

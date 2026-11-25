@@ -4,7 +4,7 @@ import { useLocale, useT } from '../i18n';
 import { audio } from '../audio/AudioManager';
 import { AUDIO_MANIFEST } from '../audio/manifest';
 import { useCue } from '../audio/useCue';
-import { BATTLE_MAP, CARD_MAP, RARITY_META, STAGES, STATUS_INFO } from '../dlc/content';
+import { BATTLE_MAP, CARD_MAP, RARITY_META, STAGES, STATUS_INFO, computeStats } from '../dlc/content';
 import { categoryKey, categoryIcon, StatusIcon } from '../dlc/icons';
 import { cardEffectLines, categoryOf, effectStatuses, pick, statusLabel } from '../dlc/format';
 import { createBattle, endPlayerTurn, playerDraw, playerPlay, type BattleEvent, type BattleState, type Side } from '../dlc/engine';
@@ -59,7 +59,7 @@ export function DlcBattlePage() {
 
   const stateRef = useRef<BattleState | null>(null);
   if (!stateRef.current || stateRef.current.def.id !== def.id) {
-    stateRef.current = createBattle(def, save.deck, Math.floor(Math.random() * 1e9));
+    stateRef.current = createBattle(def, save.deck, Math.floor(Math.random() * 1e9), computeStats(save.upgrades));
   }
   const state = stateRef.current;
   const [, setTick] = useState(0);
@@ -257,7 +257,7 @@ export function DlcBattlePage() {
   };
 
   const restart = () => {
-    stateRef.current = createBattle(def, useDlcStore.getState().save.deck, Math.floor(Math.random() * 1e9));
+    stateRef.current = createBattle(def, useDlcStore.getState().save.deck, Math.floor(Math.random() * 1e9), computeStats(useDlcStore.getState().save.upgrades));
     recordedRef.current = false;
     setRewardDone(false);
     setSelected(null);
@@ -379,7 +379,7 @@ export function DlcBattlePage() {
       <div className={s.turnBadge}>
         {tr('dlc.turn', { n: String(state.turn) })}
         <div className={s.apRow}>
-          {[0, 1, 2, 3, 4].map((i) => <span key={i} className={s.apPip} data-on={i < ap} />)}
+          {Array.from({ length: state.stats.apCap }, (_, i) => <span key={i} className={s.apPip} data-on={i < ap} />)}
         </div>
       </div>
       {log && <div className={s.log}>{log}</div>}

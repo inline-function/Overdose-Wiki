@@ -5,6 +5,8 @@ import { CARD_MAP, RARITY_META, STAGES } from '../dlc/content';
 import { categoryKey, categoryIcon } from '../dlc/icons';
 import { categoryOf, pick } from '../dlc/format';
 import { DECK_SIZE, GACHA_COST, MAX_COPIES, deckValid, useDlcStore } from '../dlc/store';
+import { UPGRADE_DEFS, computeStats, upgradeCost } from '../dlc/content';
+import type { UpgradeTrack } from '../dlc/types';
 import type { Card } from '../dlc/types';
 import s from './Dlc.module.css';
 
@@ -27,10 +29,11 @@ export function DlcShopPage() {
   const navigate = useNavigate();
   const save = useDlcStore((st) => st.save);
   const buyCard = useDlcStore((st) => st.buyCard);
+  const buyUpgrade = useDlcStore((st) => st.buyUpgrade);
   const drawGacha = useDlcStore((st) => st.drawGacha);
   const decomposeCard = useDlcStore((st) => st.decomposeCard);
   const setDeck = useDlcStore((st) => st.setDeck);
-  const [tab, setTab] = useState<'shop' | 'deck' | 'gacha'>('shop');
+  const [tab, setTab] = useState<'shop' | 'deck' | 'gacha' | 'upgrade'>('shop');
   const [lastDraw, setLastDraw] = useState<string | null>(null);
   const [drawKey, setDrawKey] = useState(0);
   const stage = STAGES[Math.min(7, Math.max(0, save.stage - 1))];
@@ -57,6 +60,7 @@ export function DlcShopPage() {
         <button type="button" className={s.shopTab} data-on={tab === 'shop'} onClick={() => setTab('shop')}>{tr('dlc.shop')}</button>
         <button type="button" className={s.shopTab} data-on={tab === 'deck'} onClick={() => setTab('deck')}>{tr('dlc.deck')}</button>
         <button type="button" className={s.shopTab} data-on={tab === 'gacha'} onClick={() => setTab('gacha')}>{tr('dlc.gacha')}</button>
+        <button type="button" className={s.shopTab} data-on={tab === 'upgrade'} onClick={() => setTab('upgrade')}>{tr('dlc.upgrade')}</button>
         <span className={s.shopCurrency}>{tr('dlc.currency')} {save.currency}</span>
         <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc')}>{tr('dlc.back')}</button>
       </div>
@@ -74,6 +78,39 @@ export function DlcShopPage() {
                 </div>
               );
             })}
+          </div>
+        ) : tab === 'upgrade' ? (
+          <div>
+            <div className={s.upgradeStats}>
+              {(() => { const st = computeStats(save.upgrades); return (
+                <>
+                  <span>{tr('dlc.phys')} <b>{st.maxPhys}</b></span>
+                  <span>{tr('dlc.mental')} <b>{st.maxMental}</b></span>
+                  <span>AP <b>{st.apPerTurn}</b>/{st.apCap}</span>
+                  <span>{tr('dlc.draw')} <b>{st.drawPerTurn}</b></span>
+                </>
+              ); })()}
+            </div>
+            <div className={s.upgradeList}>
+              {(['phys', 'mental', 'ap', 'apCap', 'draw'] as UpgradeTrack[]).map((track) => {
+                const def = UPGRADE_DEFS[track];
+                const level = save.upgrades?.[track] ?? 0;
+                const maxed = level >= def.maxLevel;
+                const cost = upgradeCost(track, level);
+                const labelKey = `dlc.upgrade${track.charAt(0).toUpperCase()}${track.slice(1)}` as 'dlc.upgradePhys';
+                return (
+                  <div key={track} className={s.upgradeRow}>
+                    <div className={s.upgradeInfo}>
+                      <div className={s.upgradeName}>{tr(labelKey)} +{def.perLevel}</div>
+                      <div className={s.upgradeLv}>{tr('dlc.upgradeLv', { n: String(level), max: String(def.maxLevel) })}</div>
+                    </div>
+                    <button type="button" className={`${s.miniBtn} ${s.upgradeBuy}`} disabled={maxed || save.currency < cost} onClick={() => buyUpgrade(track)}>
+                      {maxed ? tr('dlc.upgradeMax') : `${tr('dlc.currency')} ${cost}`}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ) : tab === 'gacha' ? (
           <div className={s.gacha}>

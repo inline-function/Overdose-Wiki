@@ -845,6 +845,15 @@ export const zh = {
   'dlc.narrator': '旁白',
   'dlc.storyContinue': '点击继续',
   'dlc.storyTitle': '剧情',
+  'dlc.upgrade': '强化',
+  'dlc.upgradePhys': '生理上限',
+  'dlc.upgradeMental': '心理上限',
+  'dlc.upgradeAp': '行动点 / 回合',
+  'dlc.upgradeApCap': '行动点上限',
+  'dlc.upgradeDraw': '免费抽牌 / 回合',
+  'dlc.upgradeMax': '已满级',
+  'dlc.upgradeLv': 'Lv.{n}/{max}',
+  'dlc.currentStats': '当前属性',
 } as const;
 
 export type MessageKey = keyof typeof zh;

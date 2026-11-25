@@ -1,7 +1,7 @@
 // DLC 存档的响应式封装（zustand）。
 import { create } from 'zustand';
-import { CARDS, CARD_MAP, RARITY_META, STARTER_DECK } from './content';
-import type { Rarity } from './types';
+import { CARDS, CARD_MAP, RARITY_META, STARTER_DECK, UPGRADE_DEFS, DEFAULT_UPGRADES, upgradeCost } from './content';
+import type { Rarity, UpgradeTrack } from './types';
 import { loadDlcSave, persistDlcSave } from './save';
 import type { DlcSave } from './types';
 
@@ -39,6 +39,7 @@ type DlcStore = {
   recordWin: (stageId: string, battleId: string) => void;
   chooseReward: (cardId: string) => void;
   buyCard: (cardId: string) => boolean;
+  buyUpgrade: (track: UpgradeTrack) => boolean;
   drawGacha: () => string | null;
   decomposeCard: (cardId: string) => boolean;
   setDeck: (deck: string[]) => void;
@@ -87,6 +88,21 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
     return true;
   },
 
+  buyUpgrade: (track) => {
+    const save = get().save;
+    const def = UPGRADE_DEFS[track];
+    const level = save.upgrades?.[track] ?? 0;
+    if (!def || level >= def.maxLevel) return false;
+    const cost = upgradeCost(track, level);
+    if (save.currency < cost) return false;
+    commit(set, get, (s) => ({
+      ...s,
+      currency: s.currency - cost,
+      upgrades: { ...s.upgrades, [track]: level + 1 },
+    }));
+    return true;
+  },
+
   drawGacha: () => {
     const save = get().save;
     if (save.currency < GACHA_COST) return null;
@@ -116,6 +132,7 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
 
   resetDlc: () => {
     const fresh = structuredClone({
+      upgrades: { ...DEFAULT_UPGRADES },
       stage: 1,
       completed: [],
       deck: [...STARTER_DECK],

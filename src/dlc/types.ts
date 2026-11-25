@@ -11,7 +11,8 @@ export type StatusId =
   | 'dissociation'
   | 'counter'
   | 'analgesia'
-  | 'painkiller';
+  | 'painkiller'
+  | 'motivation';
 
 export type Tag =
   | 'serotonin'

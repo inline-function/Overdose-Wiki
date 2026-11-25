@@ -66,7 +66,7 @@ export const ENEMY_PLAYS = [1, 1, 2, 2, 2, 2, 3, 5];
 
 const ZERO_STATUSES = (): Record<StatusId, number> => ({
   serotonin: 0, sedation: 0, respiratory: 0, delirium: 0,
-  dissociation: 0, counter: 0, analgesia: 0, painkiller: 0,
+  dissociation: 0, counter: 0, analgesia: 0, painkiller: 0, motivation: 0,
 });
 
 function mulberry32(seed: number): () => number {
@@ -217,6 +217,7 @@ function applyStatus(state: BattleState, side: Side, status: StatusId, amount: n
     c.statuses[status] = Math.min(3, c.statuses[status]);
   }
   if (status === 'painkiller') c.statuses.painkiller = Math.min(1, c.statuses.painkiller);
+  if (status === 'motivation') c.statuses.motivation = Math.min(6, c.statuses.motivation);
   if (status === 'analgesia') {
     while (c.statuses.analgesia >= 3) {
       c.statuses.analgesia -= 3;
@@ -457,12 +458,25 @@ function enemyPlay(state: BattleState, events: BattleEvent[]): void {
 }
 
 /** 结束玩家回合：玩家衰减 → 敌方回合（抽牌+出牌+衰减）→ 玩家回合开始。 */
+/** 动机增强：回合结束额外 +1 AP，持续回合 -1。 */
+function tickMotivation(state: BattleState, side: Side, events: BattleEvent[]): void {
+  const c = combatant(state, side);
+  if (c.statuses.motivation <= 0) return;
+  if (side === 'player') {
+    state.player.ap = Math.min(state.stats.apCap, state.player.ap + 1);
+    events.push(emit(state, { kind: 'ap', side: 'player', amount: 1 }));
+  }
+  c.statuses.motivation -= 1;
+}
+
 export function endPlayerTurn(state: BattleState): BattleEvent[] {
   const events: BattleEvent[] = [];
   if (state.outcome !== 'ongoing' || state.active !== 'player') return events;
+  tickMotivation(state, 'player', events);
   const enemySlept = state.enemy.asleep;
   startTurn(state, 'enemy', events);
   if (!enemySlept && state.outcome === 'ongoing') enemyPlay(state, events);
+  tickMotivation(state, 'enemy', events);
   if (state.outcome !== 'ongoing') return events;
   state.turn += 1;
   startTurn(state, 'player', events);

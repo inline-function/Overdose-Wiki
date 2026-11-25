@@ -16,7 +16,6 @@ import type {
 const dmg = (track: Track, amount: number): Effect => ({ kind: 'damage', track, amount });
 const heal = (track: Track, amount: number): Effect => ({ kind: 'heal', track, amount });
 const st = (status: StatusId, amount: number, percent?: number): Effect => ({ kind: 'status', status, amount, percent });
-const ap = (amount: number): Effect => ({ kind: 'ap', amount });
 const clear = (status: StatusId, amount = 99): Effect => ({ kind: 'clear', status, amount });
 
 const card = (
@@ -81,11 +80,11 @@ export const CARDS: Card[] = [
   card('pramipexole', '普拉克索', 'Pramipexole', 'rx', ['dopamine'], [heal('mental', 6)]),
 
   // 动机 / AP
-  card('caffeine', '咖啡因', 'Caffeine', 'otc', ['motivation'], [ap(1)]),
-  card('ephedrine', '麻黄碱', 'Ephedrine', 'class1', ['motivation'], [ap(2)]),
-  card('amphetamine', '安非他命', 'Amphetamine', 'class1', ['motivation'], [ap(2)]),
-  card('methylphenidate', '哌甲酯', 'Methylphenidate', 'class1', ['motivation'], [ap(2)]),
-  card('nicotine', '尼古丁', 'Nicotine', 'otc', ['motivation'], [ap(1)]),
+  card('caffeine', '咖啡因', 'Caffeine', 'otc', ['motivation'], [st('motivation', 2)]),
+  card('ephedrine', '麻黄碱', 'Ephedrine', 'class1', ['motivation'], [st('motivation', 2)]),
+  card('amphetamine', '安非他命', 'Amphetamine', 'class1', ['motivation'], [st('motivation', 2)]),
+  card('methylphenidate', '哌甲酯', 'Methylphenidate', 'class1', ['motivation'], [st('motivation', 2)]),
+  card('nicotine', '尼古丁', 'Nicotine', 'otc', ['motivation'], [st('motivation', 2)]),
 
   // 镇痛
   card('magnesium', '苏糖酸镁', 'Magnesium Threonate', 'none', ['analgesia'], [st('analgesia', 1)]),
@@ -130,6 +129,10 @@ export const RARITY_META: Record<Rarity, { label: LocaleText; cost: number; colo
 };
 
 export const STATUS_INFO: Record<StatusId, { label: LocaleText; short: string; description: LocaleText }> = {
+  motivation: {
+    label: { zh: '动机增强', en: 'Motivation Boost' }, short: 'MOT',
+    description: { zh: '持续 2 回合：每回合结束额外 +1 行动点。重复使用叠加持续时间。', en: 'Lasts 2 turns: +1 extra AP at the end of each turn. Reuse stacks duration.' },
+  },
   serotonin: {
     label: { zh: '血清素', en: 'Serotonin' }, short: '5-HT',
     description: { zh: '达到 30 时立刻触发一次：造成中量生理伤害与大量心理伤害，然后清零。每回合最多触发一次。', en: 'At 30 it triggers once: medium physical damage and heavy mental damage, then resets. Once per turn.' },

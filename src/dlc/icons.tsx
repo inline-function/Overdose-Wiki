@@ -103,5 +103,6 @@ export function StatusIcon({ status, className }: { status: StatusId; className?
     case 'counter': return <StimulantIcon className={className} />;
     case 'analgesia': return <AnalgesicIcon className={className} />;
     case 'painkiller': return <HarmIcon className={className} />;
+    case 'motivation': return <StimulantIcon className={className} />;
   }
 }

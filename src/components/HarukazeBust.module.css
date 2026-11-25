@@ -1,0 +1,62 @@
+/* 春风剧情大立绘：共享 rig 动画 + 按情绪调色的星头 FX。
+   一套动画系统复用给所有差分皮肤，不是每套绑骨骼。 */
+.bust {
+  position: relative;
+  pointer-events: none;
+}
+.rig {
+  position: absolute;
+  inset: 0;
+  transform-origin: bottom center;
+  animation: bustFloat 3.2s steps(4, end) infinite;
+}
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  transform-origin: bottom center;
+  animation: bustBreathe 3.2s steps(3, end) infinite;
+}
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(circle, var(--star-hot) 0%, var(--star-color) 42%, transparent 72%);
+  animation: bustCorona 2.2s steps(4, end) infinite;
+}
+.lava {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.8;
+  background:
+    radial-gradient(circle at 30% 30%, var(--star-hot) 0 7%, transparent 13%),
+    radial-gradient(circle at 66% 56%, var(--star-hot) 0 9%, transparent 17%),
+    radial-gradient(circle at 46% 76%, var(--star-color) 0 6%, transparent 12%);
+  background-size: 220% 220%;
+  animation: bustLava 2.6s steps(8, end) infinite;
+}
+@keyframes bustFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(calc(-1 * var(--u))); }
+}
+@keyframes bustBreathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.012); }
+}
+@keyframes bustCorona {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.15); }
+}
+@keyframes bustLava {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 70% 50%; }
+  100% { background-position: 0% 0%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rig, .img, .glow, .lava { animation: none; }
+}

@@ -454,6 +454,30 @@
 }
 
 /* ---------- report ---------- */
+.springPage {
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+}
+
+.springHero {
+  margin: 0 0 calc(4 * var(--u));
+  border: var(--bw-2) solid var(--c-ink);
+  background: var(--c-night);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.springHero img {
+  display: block;
+  width: 100%;
+  height: clamp(150px, 26vw, 220px);
+  object-fit: cover;
+  object-position: center 58%;
+  image-rendering: pixelated;
+}
+
 .articleHeader {
   display: flex;
   align-items: baseline;
@@ -679,6 +703,13 @@
   align-items: center;
 }
 
+.sceneBust {
+  position: absolute;
+  left: calc(14 * var(--u));
+  bottom: calc(6 * var(--u));
+  z-index: 2;
+  pointer-events: none;
+}
 .sceneWrap {
   position: relative;
   flex: 0 0 calc(198 * var(--u));

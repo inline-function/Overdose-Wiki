@@ -17,6 +17,7 @@ import { useSuppressGuide } from '../ui/guideState';
 import { useCue } from '../audio/useCue';
 import { audio } from '../audio/AudioManager';
 import { ChapterOpening } from '../openings/ChapterOpening';
+import { HarukazeBust } from '../components/HarukazeBust';
 import { makeHistory } from '../game/persistence';
 import { CHAPTER_INTROS } from '../game/intros';
 import { CANVAS_OPENINGS } from '../openings/registry';
@@ -144,10 +145,12 @@ const HARUKAZE_STATES: Record<string, string> = {
   calm: 'calm',
   smile: 'smile',
   intense: 'intense',
-  restless: 'intense',
-  tired: 'calm',
-  blank: 'calm',
-  fade: 'calm',
+  tired: 'tired',
+  sad: 'sad',
+  restless: 'restless',
+  blank: 'blank',
+  hurt: 'hurt',
+  fade: 'blank',
 };
 const PROP_BY_EN_NAME: Record<string, string> = {};
 for (const [zh, prop] of Object.entries(PROP_BY_SPEAKER)) {
@@ -744,6 +747,12 @@ function ScenePlayer({
           role="img"
           aria-label={tr('replay.canvasAria', { bg: bgLabel(scene.stage.bg) })}
         />
+
+        {propId === 'harukaze' && !showIntro && !canvasIntro ? (
+          <div className={p.sceneBust}>
+            <HarukazeBust mood={mood} heightU={150} />
+          </div>
+        ) : null}
 
         {fxId && !reduce ? (
           <span ref={fxLayerRef} className={p.fxLayer} data-fx={fxId} aria-hidden="true" />

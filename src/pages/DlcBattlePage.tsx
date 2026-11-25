@@ -270,7 +270,8 @@ export function DlcBattlePage() {
     chooseReward(cardId);
     setRewardDone(true);
     audio.playSfx(AUDIO_MANIFEST.sfx.click);
-    window.setTimeout(() => navigate(save.stage >= 8 ? '/dlc/story/tail' : '/dlc'), 500);
+    // 用实际游玩的关卡判定结局，避免通关后回顾旧关误弹结局
+    window.setTimeout(() => navigate(stage.no >= 8 ? '/dlc/story/tail' : '/dlc'), 500);
   };
 
   const player = state.player;

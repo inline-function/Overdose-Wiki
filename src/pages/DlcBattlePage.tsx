@@ -218,7 +218,7 @@ export function DlcBattlePage() {
   const longPressed = useRef(false);
   const pressRef = useRef<{ index: number; x: number; y: number; moved: boolean } | null>(null);
   const onCardDown = (e: RPointerEvent<HTMLButtonElement>, index: number) => {
-    e.currentTarget.setPointerCapture?.(e.pointerId);
+    try { e.currentTarget.setPointerCapture?.(e.pointerId); } catch { /* webview 可能不支持 */ }
     pressRef.current = { index, x: e.clientX, y: e.clientY, moved: false };
     longPressed.current = false;
     pressTimer.current = window.setTimeout(() => {
@@ -302,6 +302,7 @@ export function DlcBattlePage() {
         onPointerDown={(ev) => onCardDown(ev, i)}
         onPointerMove={onCardMove}
         onPointerUp={(ev) => onCardUp(ev, i)}
+        onPointerCancel={() => { window.clearTimeout(pressTimer.current); pressRef.current = null; setDrag(null); }}
         onContextMenu={(ev) => { ev.preventDefault(); setDetail(card); }}
         aria-label={name}
       >

@@ -1,13 +1,40 @@
-// DLC 封面展示页：仿《在漫长岁月之后》cover，点进入才正式进战役。
+// DLC 封面展示页：仿《在漫长岁月之后》cover，点「进入战役」时播开场再进战役。
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useT } from '../i18n';
+import { useDlcStore } from '../dlc/store';
+import { ChapterOpening } from '../openings/ChapterOpening';
+import { CANVAS_OPENINGS } from '../openings/registry';
 import s from './Dlc.module.css';
 
 function asset(path: string): string { return `${import.meta.env.BASE_URL}${path}`; }
+function prefersReducedMotion(): boolean {
+  return typeof window !== 'undefined' && Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+}
 
 export function DlcCoverPage() {
   const tr = useT();
   const navigate = useNavigate();
+  const save = useDlcStore((st) => st.save);
+  const markIntroSeen = useDlcStore((st) => st.markIntroSeen);
+  const [showOpening, setShowOpening] = useState(false);
+
+  const enter = () => {
+    if (!save.seenIntro && !prefersReducedMotion()) setShowOpening(true);
+    else navigate('/dlc');
+  };
+
+  if (showOpening) {
+    return (
+      <div className={s.root}>
+        <ChapterOpening
+          opening={CANVAS_OPENINGS.dlc}
+          onDone={() => { markIntroSeen(); navigate('/dlc'); }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={s.root}>
       <div className={s.cover}>
@@ -19,7 +46,7 @@ export function DlcCoverPage() {
           <h1 className={s.coverTitle} data-text={tr('dlc.title')}>{tr('dlc.title')}</h1>
           <p className={s.coverSubtitle}>{tr('dlc.coverSubtitle')}</p>
           <p className={s.coverBlurb}>{tr('dlc.coverBlurb')}</p>
-          <button type="button" className={s.coverEnter} onClick={() => navigate('/dlc')}>
+          <button type="button" className={s.coverEnter} onClick={enter}>
             <span>{tr('dlc.coverEnter')}</span>
             <span aria-hidden="true">→</span>
           </button>

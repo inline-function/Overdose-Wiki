@@ -1,6 +1,7 @@
 // DLC 存档的响应式封装（zustand）。
 import { create } from 'zustand';
-import { CARD_MAP, RARITY_META, STARTER_DECK } from './content';
+import { CARDS, CARD_MAP, RARITY_META, STARTER_DECK } from './content';
+import type { Rarity } from './types';
 import { loadDlcSave, persistDlcSave } from './save';
 import type { DlcSave } from './types';
 
@@ -8,6 +9,28 @@ export const DECK_SIZE = 12;
 export const MAX_COPIES = 2;
 export const WIN_CURRENCY = 15;
 export const DECOMPOSE_CURRENCY = 5;
+export const GACHA_COST = 10;
+
+/** 抽卡稀有度权重：精一/麻只能通过抽卡获得。 */
+const GACHA_WEIGHTS: [Rarity, number][] = [
+  ['none', 30], ['otc', 25], ['rx', 25], ['class2', 12], ['class1', 6], ['narcotic', 2],
+];
+
+function rollRarity(rng: number): Rarity {
+  const total = GACHA_WEIGHTS.reduce((acc, [, w]) => acc + w, 0);
+  let roll = rng * total;
+  for (const [rarity, weight] of GACHA_WEIGHTS) {
+    roll -= weight;
+    if (roll < 0) return rarity;
+  }
+  return 'none';
+}
+
+export function rollGacha(rng: number): string {
+  const rarity = rollRarity(rng);
+  const pool = CARDS.filter((card) => card.rarity === rarity);
+  return pool[Math.floor(rng * pool.length) % pool.length].id;
+}
 
 type DlcStore = {
   save: DlcSave;
@@ -16,6 +39,7 @@ type DlcStore = {
   recordWin: (stageId: string, battleId: string) => void;
   chooseReward: (cardId: string) => void;
   buyCard: (cardId: string) => boolean;
+  drawGacha: () => string | null;
   decomposeCard: (cardId: string) => boolean;
   setDeck: (deck: string[]) => void;
   resetDlc: () => void;
@@ -61,6 +85,18 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
       collection: { ...s.collection, [cardId]: (s.collection[cardId] ?? 0) + 1 },
     }));
     return true;
+  },
+
+  drawGacha: () => {
+    const save = get().save;
+    if (save.currency < GACHA_COST) return null;
+    const cardId = rollGacha(Math.random());
+    commit(set, get, (s) => ({
+      ...s,
+      currency: s.currency - GACHA_COST,
+      collection: { ...s.collection, [cardId]: (s.collection[cardId] ?? 0) + 1 },
+    }));
+    return cardId;
   },
 
   decomposeCard: (cardId) => {

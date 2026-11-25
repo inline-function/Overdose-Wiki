@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type PointerEvent as RPointerEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocale, useT } from '../i18n';
 import { audio } from '../audio/AudioManager';
@@ -18,7 +18,7 @@ const HAND = { x: 238, y: 182 };
 
 type Fx = {
   id: number;
-  kind: 'float' | 'fly' | 'flash';
+  kind: 'float' | 'fly' | 'flash' | 'spark';
   side?: Side;
   text?: string;
   tone?: string;
@@ -63,6 +63,9 @@ export function DlcBattlePage() {
   const refresh = useCallback(() => setTick((t) => t + 1), []);
 
   const [selected, setSelected] = useState<number | null>(null);
+  const [drag, setDrag] = useState<{ index: number; x: number; y: number } | null>(null);
+  const [banner, setBanner] = useState<{ text: string; enemy: boolean; key: number } | null>(null);
+  const bannerKey = useRef(0);
   const [fx, setFx] = useState<Fx[]>([]);
   const fxId = useRef(0);
   const [heroHit, setHeroHit] = useState(false);
@@ -103,7 +106,8 @@ export function DlcBattlePage() {
         addFx({ kind: 'float', side: e.side, text: `-${e.amount}`, tone: e.heavy ? s.floatHeavy : '', x: p.x - 8 + Math.random() * 12, y: p.y - 20 });
         if (e.side === 'player') { setHeroHit(true); window.setTimeout(() => setHeroHit(false), 130); }
         else { setEnemyHit(true); window.setTimeout(() => setEnemyHit(false), 130); }
-        if (e.heavy) { setShake(true); window.setTimeout(() => setShake(false), 130); }
+        addFx({ kind: 'spark', x: p.x - 8, y: p.y - 8 }, 220);
+        if (e.amount >= 4) { setShake(true); window.setTimeout(() => setShake(false), 130); }
         audio.playSfx(AUDIO_MANIFEST.sfx.stamp);
         break;
       }
@@ -119,6 +123,7 @@ export function DlcBattlePage() {
       }
       case 'burst': {
         addFx({ kind: 'flash', x: 0, y: 0 }, 180);
+        addFx({ kind: 'float', text: tr('dlc.burst'), tone: s.floatHeavy, x: 200, y: 70 }, 700);
         setShake(true); window.setTimeout(() => setShake(false), 160);
         audio.playSfx(AUDIO_MANIFEST.sfx.stamp);
         audio.playSfx(AUDIO_MANIFEST.sfx.turn);
@@ -137,8 +142,21 @@ export function DlcBattlePage() {
       case 'log':
         setLog(pick(e.text, locale));
         break;
-      case 'turn':
-        setLog(e.side === 'player' ? tr('dlc.yourTurn') : tr('dlc.enemyTurn'));
+      case 'turn': {
+        const text = e.side === 'player' ? tr('dlc.yourTurn') : tr('dlc.enemyTurn');
+        setLog(text);
+        bannerKey.current += 1;
+        setBanner({ text, enemy: e.side === 'enemy', key: bannerKey.current });
+        window.setTimeout(() => setBanner((b) => (b && b.key === bannerKey.current ? null : b)), 720);
+        if (e.side === 'player') addFx({ kind: 'float', text: '+3 AP', tone: s.floatStatus, x: HERO.x - 10, y: HERO.y - 40 }, 600);
+        audio.playSfx(AUDIO_MANIFEST.sfx.turn);
+        break;
+      }
+      case 'draw':
+        if (e.side === 'player') addFx({ kind: 'float', text: tr('dlc.draw'), tone: s.floatStatus, x: HAND.x + 60, y: HAND.y - 30 }, 500);
+        break;
+      case 'ap':
+        if (e.amount > 0) addFx({ kind: 'float', text: `+${e.amount} AP`, tone: s.floatStatus, x: HERO.x - 10, y: HERO.y - 40 }, 600);
         break;
       default:
         break;
@@ -193,19 +211,45 @@ export function DlcBattlePage() {
   // 长按详情
   const pressTimer = useRef<number | undefined>(undefined);
   const longPressed = useRef(false);
-  const onCardDown = (index: number) => {
+  const pressRef = useRef<{ index: number; x: number; y: number; moved: boolean } | null>(null);
+  const onCardDown = (e: RPointerEvent<HTMLButtonElement>, index: number) => {
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+    pressRef.current = { index, x: e.clientX, y: e.clientY, moved: false };
     longPressed.current = false;
     pressTimer.current = window.setTimeout(() => {
       longPressed.current = true;
       setDetail(CARD_MAP[state.player.hand[index]] ?? null);
     }, 350);
   };
-  const onCardUp = (index: number) => {
+  const onCardMove = (e: RPointerEvent<HTMLButtonElement>) => {
+    const p = pressRef.current;
+    if (!p) return;
+    if (!p.moved && Math.hypot(e.clientX - p.x, e.clientY - p.y) > 6) {
+      p.moved = true;
+      window.clearTimeout(pressTimer.current);
+    }
+    if (p.moved) {
+      const rect = rootRef.current?.getBoundingClientRect();
+      if (rect) {
+        const u = rect.width / 476;
+        setDrag({ index: p.index, x: (e.clientX - rect.left) / u, y: (e.clientY - rect.top) / u });
+      }
+    }
+  };
+  const onCardUp = (e: RPointerEvent<HTMLButtonElement>, index: number) => {
     window.clearTimeout(pressTimer.current);
-    if (longPressed.current) return;
+    const p = pressRef.current;
+    pressRef.current = null;
+    if (longPressed.current) { setDrag(null); return; }
+    if (p?.moved) {
+      setDrag(null);
+      const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
+      const target: Side | null = el?.closest('[data-testid="dlc-enemy"]') ? 'enemy' : el?.closest('[data-testid="dlc-hero"]') ? 'player' : null;
+      if (target && canAct && ap > 0) runEvents(playerPlay(state, index, target));
+      return;
+    }
     if (canAct && ap > 0) setSelected((cur) => (cur === index ? null : index));
   };
-  const onCardLeave = () => window.clearTimeout(pressTimer.current);
 
   const restart = () => {
     stateRef.current = createBattle(def, useDlcStore.getState().save.deck, Math.floor(Math.random() * 1e9));
@@ -250,9 +294,9 @@ export function DlcBattlePage() {
         style={{ ['--rarity' as string]: rarity.color }}
         data-selected={selected === i}
         data-disabled={ap <= 0 || !canAct}
-        onPointerDown={() => onCardDown(i)}
-        onPointerUp={() => onCardUp(i)}
-        onPointerLeave={onCardLeave}
+        onPointerDown={(ev) => onCardDown(ev, i)}
+        onPointerMove={onCardMove}
+        onPointerUp={(ev) => onCardUp(ev, i)}
         onContextMenu={(ev) => { ev.preventDefault(); setDetail(card); }}
         aria-label={name}
       >
@@ -290,16 +334,16 @@ export function DlcBattlePage() {
       <div className={s.vignette} />
 
       {/* 立绘 */}
-      <div className={s.heroWrap} data-phase2={state.phase2} data-hit={heroHit} data-target={selected !== null} onClick={() => playAt('player')}>
+      <div className={s.heroWrap} data-testid="dlc-hero" data-phase2={state.phase2} data-hit={heroHit} data-target={selected !== null || drag !== null} onClick={() => playAt('player')}>
         <div className={s.shadow} />
         <img className={s.hero} src={asset('assets-private/dlc/harukaze_boss.png')} alt={tr('dlc.statusPlayer')} />
-        {selected !== null && <div className={s.reticle} />}
+        {(selected !== null || drag !== null) && <div className={s.reticle} />}
       </div>
-      <div className={s.enemyWrap} data-testid="dlc-enemy" style={{ ['--aura' as string]: AURA[def.sprite] }} data-hit={enemyHit} data-dead={state.outcome === 'win'} data-target={selected !== null} onClick={() => playAt('enemy')}>
+      <div className={s.enemyWrap} data-testid="dlc-enemy" style={{ ['--aura' as string]: AURA[def.sprite] }} data-hit={enemyHit} data-dead={state.outcome === 'win'} data-target={selected !== null || drag !== null} onClick={() => playAt('enemy')}>
         <div className={s.enemyAura} />
         <div className={s.shadow} />
         <img className={s.enemy} src={asset(`assets-private/dlc/${def.portrait}.png`)} alt={pick(def.enemyName, locale)} />
-        {selected !== null && <div className={s.reticle} />}
+        {(selected !== null || drag !== null) && <div className={s.reticle} />}
       </div>
 
       {/* HUD */}
@@ -336,7 +380,7 @@ export function DlcBattlePage() {
           <span className={s.drawLabel}>{tr('dlc.draw')}</span>
         </button>
       </div>
-      {selected !== null && <div className={s.hint}>{tr('dlc.targetSelf')} / {tr('dlc.targetEnemy')}</div>}
+      {(selected !== null || drag !== null) && <div className={s.hint}>{tr('dlc.targetSelf')} / {tr('dlc.targetEnemy')}</div>}
 
       <button type="button" className={`${s.pixelBtn} ${s.statusBtn}`} data-variant="dark" onClick={() => setShowStatus(true)}>
         {tr('dlc.status')}<span className={s.badge}>{statusCount('player') + statusCount('enemy')}</span>
@@ -348,6 +392,7 @@ export function DlcBattlePage() {
       {/* 反馈层 */}
       {fx.map((f) => {
         if (f.kind === 'flash') return <div key={f.id} className={s.burstFlash} />;
+        if (f.kind === 'spark') return <div key={f.id} className={s.spark} style={{ left: `calc(${f.x} * var(--u))`, top: `calc(${f.y} * var(--u))` }} />;
         if (f.kind === 'fly') {
           const card = f.cardId ? CARD_MAP[f.cardId] : null;
           const Icon = card ? categoryIcon(categoryKey(card.tags) as never) : null;
@@ -359,6 +404,19 @@ export function DlcBattlePage() {
         }
         return <div key={f.id} className={`${s.float} ${f.tone ?? ''}`} style={{ left: `calc(${f.x} * var(--u))`, top: `calc(${f.y} * var(--u))` }}>{f.text}</div>;
       })}
+
+      {drag && (() => {
+        const card = CARD_MAP[state.player.hand[drag.index]];
+        if (!card) return null;
+        const Icon = categoryIcon(categoryKey(card.tags) as never);
+        return (
+          <div className={s.dragGhost} style={{ left: `calc(${drag.x - 26} * var(--u))`, top: `calc(${drag.y - 34} * var(--u))`, ['--rarity' as string]: RARITY_META[card.rarity].color }}>
+            <Icon />
+            <span>{pick(card.name, locale)}</span>
+          </div>
+        );
+      })()}
+      {banner && <div key={banner.key} className={s.turnBanner} data-enemy={banner.enemy}>{banner.text}</div>}
 
       {/* 状态列表 */}
       {showStatus && (

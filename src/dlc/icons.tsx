@@ -7,9 +7,10 @@ type IconProps = { className?: string };
 const S = {
   fill: 'none',
   stroke: 'currentColor',
-  strokeWidth: 1.5,
+  strokeWidth: 2,
   strokeLinecap: 'square' as const,
   strokeLinejoin: 'miter' as const,
+  shapeRendering: 'crispEdges' as const,
 };
 
 function Svg({ className, children }: IconProps & { children: ReactNode }) {

@@ -843,4 +843,10 @@ export const en: Record<MessageKey, string> = {
   'dlc.current': 'Current',
   'dlc.lockedStage': 'Locked',
   'dlc.emptyDeck': 'Deck empty',
+  'dlc.gacha': 'Draw',
+  'dlc.gachaHint': 'Class I / Narcotic only from draws',
+  'dlc.gachaDraw': 'Draw once',
+  'dlc.gachaResult': 'Got',
+  'dlc.gachaEmpty': 'Not enough quota',
+  'dlc.burst': 'Serotonin burst',
 };

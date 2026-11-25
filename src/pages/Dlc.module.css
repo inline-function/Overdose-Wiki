@@ -294,6 +294,19 @@
   height: calc(4 * var(--u));
   background: var(--rarity, var(--c-line));
 }
+/* 像素切角 + 抖动纹理 */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(#07070c, #07070c) left top / calc(2 * var(--u)) calc(2 * var(--u)) no-repeat,
+    linear-gradient(#07070c, #07070c) right top / calc(2 * var(--u)) calc(2 * var(--u)) no-repeat,
+    linear-gradient(#07070c, #07070c) left bottom / calc(2 * var(--u)) calc(2 * var(--u)) no-repeat,
+    linear-gradient(#07070c, #07070c) right bottom / calc(2 * var(--u)) calc(2 * var(--u)) no-repeat,
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.035) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(2 * var(--u)));
+}
 .card:hover { transform: translateY(calc(-2 * var(--u))); }
 .card[data-selected="true"] {
   transform: translateY(calc(-6 * var(--u)));
@@ -369,6 +382,64 @@
   font-size: var(--fs-8);
   margin-left: calc(3 * var(--u));
   padding: 0 calc(2 * var(--u));
+}
+
+/* ---------- 拖拽 / 加强反馈 ---------- */
+.dragGhost {
+  position: absolute;
+  z-index: 35;
+  width: calc(52 * var(--u));
+  height: calc(68 * var(--u));
+  background: linear-gradient(160deg, #2b2735, #17151f);
+  border: calc(1 * var(--u)) solid var(--rarity, var(--c-line));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(2 * var(--u));
+  pointer-events: none;
+  opacity: 0.92;
+  box-shadow: 0 calc(4 * var(--u)) calc(8 * var(--u)) rgba(0, 0, 0, 0.6);
+}
+.dragGhost svg { width: calc(22 * var(--u)); height: calc(22 * var(--u)); color: var(--rarity, var(--c-line)); }
+.dragGhost span { font-size: var(--fs-8); color: var(--c-paper3); }
+.spark {
+  position: absolute;
+  z-index: 27;
+  width: calc(16 * var(--u));
+  height: calc(16 * var(--u));
+  pointer-events: none;
+  background:
+    linear-gradient(var(--c-yellow2), var(--c-yellow2)) center / calc(2 * var(--u)) 100% no-repeat,
+    linear-gradient(var(--c-yellow2), var(--c-yellow2)) center / 100% calc(2 * var(--u)) no-repeat;
+  animation: spark 200ms steps(3, end) forwards;
+}
+@keyframes spark {
+  0% { transform: scale(0.4) rotate(0deg); opacity: 1; }
+  100% { transform: scale(1.6) rotate(45deg); opacity: 0; }
+}
+.turnBanner {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 29;
+  font-family: var(--font-display);
+  font-size: var(--fs-16);
+  color: var(--c-paper3);
+  background: rgba(11, 10, 16, 0.82);
+  border: calc(2 * var(--u)) solid var(--c-yellow);
+  padding: calc(3 * var(--u)) calc(10 * var(--u));
+  pointer-events: none;
+  animation: banner 700ms steps(4, end) forwards;
+  white-space: nowrap;
+}
+.turnBanner[data-enemy="true"] { border-color: var(--c-red); color: var(--c-red-wash); }
+@keyframes banner {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
+  20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 /* ---------- 状态列表 ---------- */
@@ -634,6 +705,46 @@
 .collectionItem { display: flex; flex-direction: column; align-items: center; gap: calc(2 * var(--u)); width: calc(60 * var(--u)); }
 .collectionCount { font-size: var(--fs-8); color: var(--c-sky); }
 .inDeck { color: var(--c-yellow); }
+
+/* ---------- 抽卡 ---------- */
+.gacha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(6 * var(--u));
+  padding: calc(8 * var(--u));
+}
+.gachaHint { font-size: var(--fs-8); color: var(--c-sky); }
+.gachaStage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(96 * var(--u));
+}
+.gachaBack {
+  width: calc(52 * var(--u));
+  height: calc(68 * var(--u));
+  border: calc(2 * var(--u)) dashed var(--c-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-18);
+  color: var(--c-muted);
+  background: rgba(23, 21, 31, 0.6);
+}
+.gachaReveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4 * var(--u));
+  animation: gachaPop 320ms steps(4, end);
+}
+.gachaResult { font-size: var(--fs-10); }
+@keyframes gachaPop {
+  0% { transform: scale(0.4) rotate(-6deg); opacity: 0; }
+  60% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
 
 /* ---------- 结局 ---------- */
 .ending { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(6 * var(--u)); text-align: center; padding: calc(8 * var(--u)); }

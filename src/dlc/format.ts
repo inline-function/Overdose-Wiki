@@ -57,6 +57,9 @@ export function effectText(effect: Effect, locale: Locale): string {
         ? `造成 ${effect.amount} 点${TRACK[effect.track].zh}伤害`
         : `Deal ${effect.amount} ${TRACK[effect.track].en} damage`;
     case 'heal':
+      if (effect.amount >= 99) {
+        return zh ? `瞬间恢复全部${TRACK[effect.track].zh}` : `Instantly restore all ${TRACK[effect.track].en}`;
+      }
       return zh
         ? `恢复 ${effect.amount} 点${TRACK[effect.track].zh}`
         : `Restore ${effect.amount} ${TRACK[effect.track].en}`;

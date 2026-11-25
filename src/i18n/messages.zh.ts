@@ -836,6 +836,12 @@ export const zh = {
   'dlc.current': '当前',
   'dlc.lockedStage': '未解锁',
   'dlc.emptyDeck': '牌库已空',
+  'dlc.gacha': '抽卡',
+  'dlc.gachaHint': '精一 / 麻 只能通过抽卡获得',
+  'dlc.gachaDraw': '抽一次',
+  'dlc.gachaResult': '获得',
+  'dlc.gachaEmpty': '配额不足',
+  'dlc.burst': '血清素爆发',
 } as const;
 
 export type MessageKey = keyof typeof zh;

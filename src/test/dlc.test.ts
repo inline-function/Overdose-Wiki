@@ -16,6 +16,8 @@ function setHand(state: BattleState, ids: string[]): void {
 describe('DLC 引擎 · AP 与抽牌', () => {
   it('初始 3 AP，出牌耗 1，回合 +3 上限 5 且跨回合保留', () => {
     const s = fresh();
+    s.enemy.hand = []; s.enemy.deck = []; s.enemy.discard = []; // 隔离敌方，纯测 AP 经济
+    s.enemy.phys = 999; s.enemy.maxPhys = 999; s.enemy.mental = 999; s.enemy.maxMental = 999;
     expect(s.player.ap).toBe(3);
     playerPlay(s, 0, 'enemy');
     expect(s.player.ap).toBe(2);
@@ -73,8 +75,8 @@ describe('DLC 引擎 · 血清素', () => {
     expect(s.player.statuses.serotonin).toBe(0);
     expect(s.player.phys).toBe(50); // 60-10
     expect(s.player.mental).toBe(16); // 30-14
-    playerPlay(s, 0, 'player'); // 再 +8，不触发
-    expect(s.player.statuses.serotonin).toBe(8);
+    playerPlay(s, 0, 'player'); // 再 +12，不触发
+    expect(s.player.statuses.serotonin).toBe(12);
     expect(s.player.phys).toBe(50);
     endPlayerTurn(s);
     s.player.statuses.serotonin = 25;
@@ -181,9 +183,9 @@ describe('DLC 引擎 · 解离/反解离', () => {
     s.player.statuses.dissociation = 2;
     s.player.statuses.serotonin = 10;
     setHand(s, ['sertraline', 'memantine']);
-    playerPlay(s, 0, 'player'); // +8×0.6=5，不触发爆发
+    playerPlay(s, 0, 'player'); // +12×0.6=7，不触发爆发
     expect(s.player.phys).toBe(60);
-    expect(s.player.statuses.serotonin).toBe(15);
+    expect(s.player.statuses.serotonin).toBe(17);
     s.player.statuses.serotonin = 25;
     setHand(s, ['sertraline']);
     playerPlay(s, 0, 'player'); // 爆发 10×0.6=6

@@ -30,17 +30,17 @@ const card = (
 
 export const CARDS: Card[] = [
   // 血清素
-  card('sertraline', '舍曲林', 'Sertraline', 'rx', ['serotonin'], [st('serotonin', 8)]),
-  card('fluoxetine', '氟西汀', 'Fluoxetine', 'rx', ['serotonin'], [st('serotonin', 8)]),
-  card('paroxetine', '帕罗西汀', 'Paroxetine', 'rx', ['serotonin'], [st('serotonin', 7)]),
-  card('citalopram', '西酞普兰', 'Citalopram', 'rx', ['serotonin'], [st('serotonin', 6)]),
-  card('escitalopram', '艾司西酞普兰', 'Escitalopram', 'rx', ['serotonin'], [st('serotonin', 10)]),
-  card('fluvoxamine', '氟伏沙明', 'Fluvoxamine', 'rx', ['serotonin'], [st('serotonin', 7)]),
-  card('venlafaxine', '文拉法辛', 'Venlafaxine', 'rx', ['serotonin'], [st('serotonin', 8), dmg('mental', 2)]),
-  card('duloxetine', '度洛西汀', 'Duloxetine', 'rx', ['serotonin'], [st('serotonin', 8), heal('mental', 2)]),
-  card('phenelzine', '苯乙肼', 'Phenelzine', 'class1', ['serotonin'], [st('serotonin', 12)]),
-  card('tranylcypromine', '反苯环丙胺', 'Tranylcypromine', 'class1', ['serotonin'], [st('serotonin', 10)]),
-  card('moclobemide', '吗氯贝胺', 'Moclobemide', 'rx', ['serotonin'], [st('serotonin', 0, 0.5)]),
+  card('sertraline', '舍曲林', 'Sertraline', 'rx', ['serotonin'], [st('serotonin', 12)]),
+  card('fluoxetine', '氟西汀', 'Fluoxetine', 'rx', ['serotonin'], [st('serotonin', 12)]),
+  card('paroxetine', '帕罗西汀', 'Paroxetine', 'rx', ['serotonin'], [st('serotonin', 10)]),
+  card('citalopram', '西酞普兰', 'Citalopram', 'rx', ['serotonin'], [st('serotonin', 9)]),
+  card('escitalopram', '艾司西酞普兰', 'Escitalopram', 'rx', ['serotonin'], [st('serotonin', 15)]),
+  card('fluvoxamine', '氟伏沙明', 'Fluvoxamine', 'rx', ['serotonin'], [st('serotonin', 10)]),
+  card('venlafaxine', '文拉法辛', 'Venlafaxine', 'rx', ['serotonin'], [st('serotonin', 12), dmg('mental', 2)]),
+  card('duloxetine', '度洛西汀', 'Duloxetine', 'rx', ['serotonin'], [st('serotonin', 12), heal('mental', 2)]),
+  card('phenelzine', '苯乙肼', 'Phenelzine', 'class1', ['serotonin'], [st('serotonin', 18)]),
+  card('tranylcypromine', '反苯环丙胺', 'Tranylcypromine', 'class1', ['serotonin'], [st('serotonin', 15)]),
+  card('moclobemide', '吗氯贝胺', 'Moclobemide', 'rx', ['serotonin'], [st('serotonin', 0, 0.6)]),
 
   // 嗜睡 / 呼吸抑制
   card('diazepam', '地西泮', 'Diazepam', 'class2', ['sedation'], [st('sedation', 8), heal('mental', 2)]),
@@ -92,7 +92,7 @@ export const CARDS: Card[] = [
   card('pregabalin', '普瑞巴林', 'Pregabalin', 'class2', ['analgesia', 'sedation'], [st('analgesia', 1), st('sedation', 3)]),
   card('gabapentin', '加巴喷丁', 'Gabapentin', 'rx', ['analgesia'], [st('analgesia', 1)]),
   card('lidocaine', '利多卡因', 'Lidocaine', 'rx', ['analgesia'], [st('analgesia', 1)]),
-  card('ketamine', '氯胺酮', 'Ketamine', 'class1', ['analgesia', 'dissociation'], [st('analgesia', 1), st('dissociation', 1)]),
+  card('esketamine', '艾司氯胺酮', 'Esketamine', 'class1', ['dissociation'], [heal('mental', 99)]),
 
   // 营养
   card('vitamin_b6', '维生素 B6', 'Vitamin B6', 'none', ['nutrition'], [heal('phys', 2)]),
@@ -112,7 +112,7 @@ export const CARDS: Card[] = [
 
 export const STARTER_DECK = [
   'sertraline', 'sertraline', 'fluoxetine', 'fluoxetine', 'escitalopram', 'escitalopram',
-  'diazepam', 'zopiclone', 'morphine', 'magnesium', 'caffeine', 'vitamin_b6',
+  'diazepam', 'zopiclone', 'pregabalin', 'magnesium', 'caffeine', 'vitamin_b6',
 ];
 
 export const STARTING_COLLECTION: Record<string, number> = STARTER_DECK.reduce<Record<string, number>>(
@@ -229,22 +229,22 @@ export const BATTLES: BattleDef[] = [
     ['sertraline', 'paroxetine', 'venlafaxine', 'fluoxetine', 'escitalopram', 'diazepam', 'zopiclone', 'vitamin_b6', 'electrolyte', 'bupropion'],
     60, 30, '手在抖。不是冷。', 'Your hands are shaking. It is not the cold.', '这一阵过去了。', 'This wave passes.', '身体先一步垮了。', 'The body gives out first.'),
   battle('dlc-b3', '解离', 'Dissociation', '解离', 'Dissociation', '我不在身体里', 'I am not in my body', 'mirror', 'bg_dlc_summer_street',
-    ['ketamine', 'memantine', 'dextromethorphan', 'tiletamine', 'magnesium', 'morphine', 'naloxone', 'caffeine', 'sertraline', 'diazepam'],
+    ['memantine', 'memantine', 'dextromethorphan', 'tiletamine', 'magnesium', 'morphine', 'naloxone', 'caffeine', 'sertraline', 'diazepam'],
     64, 32, '你看见自己站在两步之外。', 'You see yourself standing two steps away.', '你回到了身体里。', 'You return to your body.', '你留在外面。', 'You stay outside.'),
   battle('dlc-b4', '自责', 'Self-Blame', '自责', 'Self-Blame', '都是你的错', 'It is all your fault', 'shadow', 'bg_dlc_classroom',
-    ['ketamine', 'memantine', 'dextromethorphan', 'tiletamine', 'flumazenil', 'naloxone', 'sertraline', 'diazepam', 'bupropion', 'caffeine'],
+    ['memantine', 'memantine', 'dextromethorphan', 'tiletamine', 'flumazenil', 'naloxone', 'sertraline', 'diazepam', 'bupropion', 'caffeine'],
     68, 34, '所有声音都在指你。', 'Every voice is pointing at you.', '你让那句话停下。', 'You make the sentence stop.', '你被它说中了。', 'It gets you.'),
   battle('dlc-b5', '空洞', 'Emptiness', '空洞', 'Emptiness', '什么都感觉不到', 'I feel nothing', 'soft', 'bg_dlc_noodle_shop',
     ['morphine', 'oxycodone', 'codeine', 'tramadol', 'magnesium', 'pregabalin', 'gabapentin', 'lidocaine', 'nutrition_iv', 'electrolyte'],
     72, 36, '没有痛，也没有别的东西。', 'No pain. Nothing else either.', '有一点感觉回来了。', 'Something comes back.', '你什么都没有抓住。', 'You catch nothing.'),
   battle('dlc-b6', '幻觉', 'Hallucination', '幻觉', 'Hallucination', '墙在呼吸', 'The walls are breathing', 'cup', 'bg_dlc_chunfeng_room',
-    ['phenelzine', 'tranylcypromine', 'moclobemide', 'trihexyphenidyl', 'scopolamine', 'benztropine', 'ketamine', 'dextromethorphan', 'morphine', 'naloxone'],
+    ['phenelzine', 'tranylcypromine', 'moclobemide', 'trihexyphenidyl', 'scopolamine', 'benztropine', 'memantine', 'dextromethorphan', 'morphine', 'naloxone'],
     76, 38, '墙在呼吸。你决定不眨眼。', 'The wall is breathing. You decide not to blink.', '墙安静下来。', 'The wall goes quiet.', '墙把你吞进去。', 'The wall swallows you.'),
   battle('dlc-b7', '父亲的质问', 'The Father\'s Question', '父亲的质问', 'The Father\'s Question', '你为什么不回家', 'Why don\'t you come home', 'shadow', 'bg_dlc_school_gate',
     ['phenobarbital', 'secobarbital', 'morphine', 'fentanyl', 'methadone', 'trihexyphenidyl', 'scopolamine', 'diazepam', 'clonazepam', 'naloxone'],
     80, 40, '门口站着一个不肯走的人。', 'Someone at the door refuses to leave.', '你让那阵风过去了。', 'You let the wind pass.', '你被那阵风压垮了。', 'The wind presses you down.'),
   battle('dlc-b8', '死亡冲动', 'Death Drive', '死亡冲动', 'Death Drive', '只要一下就好', 'Just once would be enough', 'harukaze', 'bg_dlc_summer_street',
-    ['phenelzine', 'tranylcypromine', 'escitalopram', 'fentanyl', 'morphine', 'ketamine', 'scopolamine', 'trihexyphenidyl', 'diazepam', 'naloxone', 'vitamin_b6', 'magnesium'],
+    ['phenelzine', 'tranylcypromine', 'escitalopram', 'fentanyl', 'morphine', 'memantine', 'scopolamine', 'trihexyphenidyl', 'diazepam', 'naloxone', 'vitamin_b6', 'magnesium'],
     92, 46, '它用你的声音说话。', 'It speaks with your voice.', '风终于轻了。', 'The wind finally lightens.', '风把你留在原地。', 'The wind keeps you here.', 46, 'dlc-summer'),
 ];
 
@@ -262,32 +262,32 @@ export const STAGES: Stage[] = [
   {
     id: 'dlc-3', no: 3, title: { zh: '解离', en: 'Dissociation' },
     blurb: { zh: '你看见自己在两步之外，像看一个陌生人。', en: 'You see yourself two steps away, like a stranger.' },
-    battleId: 'dlc-b3', bg: 'bg_dlc_summer_street', rewards: ['alprazolam', 'magnesium', 'morphine'], shop: ['lorazepam', 'pregabalin', 'magnesium', 'ketamine'],
+    battleId: 'dlc-b3', bg: 'bg_dlc_summer_street', rewards: ['alprazolam', 'magnesium', 'pregabalin'], shop: ['lorazepam', 'pregabalin', 'magnesium', 'memantine'],
   },
   {
     id: 'dlc-4', no: 4, title: { zh: '自责', en: 'Self-Blame' },
     blurb: { zh: '所有声音都长着同一张脸，说同一句话。', en: 'Every voice has the same face and says the same sentence.' },
-    battleId: 'dlc-b4', bg: 'bg_dlc_classroom', rewards: ['memantine', 'bupropion', 'flumazenil'], shop: ['dextromethorphan', 'tiletamine', 'naloxone', 'bupropion'],
+    battleId: 'dlc-b4', bg: 'bg_dlc_classroom', rewards: ['memantine', 'bupropion', 'flumazenil'], shop: ['dextromethorphan', 'memantine', 'naloxone', 'bupropion'],
   },
   {
     id: 'dlc-5', no: 5, title: { zh: '空洞', en: 'Emptiness' },
     blurb: { zh: '没有痛，也没有别的东西。你摸不到自己的底。', en: 'No pain, and nothing else. You cannot feel the bottom of yourself.' },
-    battleId: 'dlc-b5', bg: 'bg_dlc_noodle_shop', rewards: ['gabapentin', 'nutrition_iv', 'oxycodone'], shop: ['lidocaine', 'pregabalin', 'electrolyte', 'nutrition_iv'],
+    battleId: 'dlc-b5', bg: 'bg_dlc_noodle_shop', rewards: ['gabapentin', 'nutrition_iv', 'pregabalin'], shop: ['lidocaine', 'pregabalin', 'electrolyte', 'nutrition_iv'],
   },
   {
     id: 'dlc-6', no: 6, title: { zh: '幻觉', en: 'Hallucination' },
     blurb: { zh: '墙在呼吸。你决定不眨眼。', en: 'The wall is breathing. You decide not to blink.' },
-    battleId: 'dlc-b6', bg: 'bg_dlc_chunfeng_room', rewards: ['phenelzine', 'trihexyphenidyl', 'naloxone'], shop: ['moclobemide', 'scopolamine', 'benztropine', 'ketamine'],
+    battleId: 'dlc-b6', bg: 'bg_dlc_chunfeng_room', rewards: ['moclobemide', 'trihexyphenidyl', 'naloxone'], shop: ['moclobemide', 'trihexyphenidyl', 'benztropine', 'dextromethorphan'],
   },
   {
     id: 'dlc-7', no: 7, title: { zh: '父亲的质问', en: "The Father's Question" },
     blurb: { zh: '门外的脚步声停了。问题还在。', en: 'The footsteps stop. The question remains.' },
-    battleId: 'dlc-b7', bg: 'bg_dlc_school_gate', rewards: ['fentanyl', 'methadone', 'clonazepam'], shop: ['phenobarbital', 'secobarbital', 'scopolamine', 'naloxone'],
+    battleId: 'dlc-b7', bg: 'bg_dlc_school_gate', rewards: ['lorazepam', 'estazolam', 'clonazepam'], shop: ['clonazepam', 'lorazepam', 'trihexyphenidyl', 'naloxone'],
   },
   {
     id: 'dlc-8', no: 8, title: { zh: '死亡冲动', en: 'Death Drive' },
     blurb: { zh: '它用你的声音说话，像在商量一件小事。', en: 'It speaks in your voice, as if discussing a small thing.' },
-    battleId: 'dlc-b8', bg: 'bg_dlc_summer_street', rewards: ['escitalopram', 'fentanyl', 'vitamin_b6'], shop: ['phenelzine', 'ketamine', 'naloxone', 'magnesium'],
+    battleId: 'dlc-b8', bg: 'bg_dlc_summer_street', rewards: ['escitalopram', 'memantine', 'vitamin_b6'], shop: ['moclobemide', 'memantine', 'naloxone', 'magnesium'],
   },
 ];
 

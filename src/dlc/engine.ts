@@ -395,10 +395,10 @@ function scoreTarget(state: BattleState, card: Card, target: Side): number {
         const beneficial = !HARMFUL.has(effect.status);
         const gain = effect.amount + (effect.percent ? Math.ceil(me.statuses[effect.status] * effect.percent) : 0);
         if (beneficial) {
-          score += mine ? gain * 1.4 : -gain * 3;
+          score += mine ? -gain * 0.5 : -gain * 3; // 症状不龟缩：不主动叠增益状态
         } else {
           let value = gain * 0.9;
-          if (effect.status === 'serotonin' && !mine && me.statuses.serotonin + gain >= SEROTONIN_THRESHOLD) value += 6;
+          if (effect.status === 'serotonin' && !mine) value = gain * 0.5 + (me.statuses.serotonin + gain >= SEROTONIN_THRESHOLD ? 4 : 0);
           if (effect.status === 'sedation' && !mine && me.statuses.sedation + gain >= 40) value += 5;
           score += mine ? -gain * 0.7 : value;
         }

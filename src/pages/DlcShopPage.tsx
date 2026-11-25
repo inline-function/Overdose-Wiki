@@ -4,7 +4,7 @@ import { useLocale, useT } from '../i18n';
 import { CARD_MAP, RARITY_META, STAGES } from '../dlc/content';
 import { categoryKey, categoryIcon } from '../dlc/icons';
 import { categoryOf, pick } from '../dlc/format';
-import { DECK_SIZE, MAX_COPIES, deckValid, useDlcStore } from '../dlc/store';
+import { DECK_SIZE, GACHA_COST, MAX_COPIES, deckValid, useDlcStore } from '../dlc/store';
 import type { Card } from '../dlc/types';
 import s from './Dlc.module.css';
 
@@ -23,12 +23,16 @@ function CardFace({ card, small }: { card: Card; small?: boolean }) {
 
 export function DlcShopPage() {
   const tr = useT();
+  const locale = useLocale();
   const navigate = useNavigate();
   const save = useDlcStore((st) => st.save);
   const buyCard = useDlcStore((st) => st.buyCard);
+  const drawGacha = useDlcStore((st) => st.drawGacha);
   const decomposeCard = useDlcStore((st) => st.decomposeCard);
   const setDeck = useDlcStore((st) => st.setDeck);
-  const [tab, setTab] = useState<'shop' | 'deck'>('shop');
+  const [tab, setTab] = useState<'shop' | 'deck' | 'gacha'>('shop');
+  const [lastDraw, setLastDraw] = useState<string | null>(null);
+  const [drawKey, setDrawKey] = useState(0);
   const stage = STAGES[Math.min(7, Math.max(0, save.stage - 1))];
 
   const inDeck = (id: string) => save.deck.filter((x) => x === id).length;
@@ -52,6 +56,7 @@ export function DlcShopPage() {
       <div className={s.shopHead}>
         <button type="button" className={s.shopTab} data-on={tab === 'shop'} onClick={() => setTab('shop')}>{tr('dlc.shop')}</button>
         <button type="button" className={s.shopTab} data-on={tab === 'deck'} onClick={() => setTab('deck')}>{tr('dlc.deck')}</button>
+        <button type="button" className={s.shopTab} data-on={tab === 'gacha'} onClick={() => setTab('gacha')}>{tr('dlc.gacha')}</button>
         <span className={s.shopCurrency}>{tr('dlc.currency')} {save.currency}</span>
         <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc')}>{tr('dlc.back')}</button>
       </div>
@@ -69,6 +74,32 @@ export function DlcShopPage() {
                 </div>
               );
             })}
+          </div>
+        ) : tab === 'gacha' ? (
+          <div className={s.gacha}>
+            <div className={s.gachaHint}>{tr('dlc.gachaHint')}</div>
+            <div className={s.gachaStage}>
+              {lastDraw ? (
+                <div key={drawKey} className={s.gachaReveal}>
+                  <CardFace card={CARD_MAP[lastDraw]} />
+                  <div className={s.gachaResult} style={{ color: RARITY_META[CARD_MAP[lastDraw].rarity].color }}>
+                    {tr('dlc.gachaResult')} · {pick(RARITY_META[CARD_MAP[lastDraw].rarity].label, locale)}
+                  </div>
+                </div>
+              ) : (
+                <div className={s.gachaBack}>?</div>
+              )}
+            </div>
+            <button
+              type="button"
+              className={s.pixelBtn}
+              data-variant="amber"
+              disabled={save.currency < GACHA_COST}
+              onClick={() => { const id = drawGacha(); if (id) { setLastDraw(id); setDrawKey((k) => k + 1); } }}
+            >
+              {tr('dlc.gachaDraw')} · {tr('dlc.currency')} {GACHA_COST}
+            </button>
+            {save.currency < GACHA_COST && <div className={s.deckWarn}>{tr('dlc.gachaEmpty')}</div>}
           </div>
         ) : (
           <>

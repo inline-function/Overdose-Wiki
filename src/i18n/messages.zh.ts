@@ -842,6 +842,9 @@ export const zh = {
   'dlc.gachaResult': '获得',
   'dlc.gachaEmpty': '配额不足',
   'dlc.burst': '血清素爆发',
+  'dlc.narrator': '旁白',
+  'dlc.storyContinue': '点击继续',
+  'dlc.storyTitle': '剧情',
 } as const;
 
 export type MessageKey = keyof typeof zh;

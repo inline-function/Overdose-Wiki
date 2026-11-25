@@ -35,6 +35,7 @@ export function DlcCampaignPage() {
         </div>
         <div className={s.shopActions}>
           <span className={s.sideMeta}>{tr('dlc.currency')} {save.currency}</span>
+          <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc/story')}>{tr('dlc.storyTitle')}</button>
           <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc/shop')}>{tr('dlc.shop')}</button>
           <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/')}>×</button>
         </div>

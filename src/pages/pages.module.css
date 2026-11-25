@@ -703,13 +703,6 @@
   align-items: center;
 }
 
-.sceneBust {
-  position: absolute;
-  left: calc(14 * var(--u));
-  bottom: calc(6 * var(--u));
-  z-index: 2;
-  pointer-events: none;
-}
 .sceneWrap {
   position: relative;
   flex: 0 0 calc(198 * var(--u));

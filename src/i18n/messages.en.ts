@@ -849,4 +849,7 @@ export const en: Record<MessageKey, string> = {
   'dlc.gachaResult': 'Got',
   'dlc.gachaEmpty': 'Not enough quota',
   'dlc.burst': 'Serotonin burst',
+  'dlc.narrator': 'Narration',
+  'dlc.storyContinue': 'Click to continue',
+  'dlc.storyTitle': 'Story',
 };

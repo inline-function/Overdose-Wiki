@@ -841,6 +841,44 @@
 .collectionCount { font-size: var(--fs-8); color: var(--c-sky); }
 .inDeck { color: var(--c-yellow); }
 
+/* ---------- 独立剧情引擎 ---------- */
+.storyHead {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(3 * var(--u)) calc(5 * var(--u));
+  background: rgba(11, 10, 16, 0.8);
+  border-bottom: var(--bw-2) solid var(--c-line);
+}
+.storyTitle { font-size: var(--fs-10); color: var(--c-paper3); }
+.storyBust { position: absolute; left: calc(14 * var(--u)); bottom: calc(54 * var(--u)); z-index: 2; }
+.storyDialog {
+  position: absolute;
+  left: calc(6 * var(--u));
+  right: calc(6 * var(--u));
+  bottom: calc(6 * var(--u));
+  z-index: 3;
+  min-height: calc(46 * var(--u));
+  background: rgba(11, 10, 16, 0.88);
+  border: var(--bw-2) solid var(--c-line);
+  padding: calc(4 * var(--u)) calc(6 * var(--u));
+}
+.storySpeaker { font-size: var(--fs-10); color: var(--c-yellow); margin-bottom: calc(2 * var(--u)); }
+.storyText { font-size: var(--fs-12); line-height: var(--lh-12); color: var(--c-paper); }
+.storyHint {
+  position: absolute;
+  right: calc(8 * var(--u));
+  bottom: calc(2 * var(--u));
+  font-size: var(--fs-8);
+  color: var(--c-muted);
+  animation: reticlePulse 1s steps(2, end) infinite;
+}
+
 /* ---------- 抽卡 ---------- */
 .gacha {
   display: flex;

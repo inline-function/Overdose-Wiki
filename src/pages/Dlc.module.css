@@ -1078,3 +1078,79 @@
   pointer-events: none;
   white-space: nowrap;
 }
+
+/* ---------- 动效（参考《在漫长岁月之后》） ---------- */
+.coverHero { animation: dlc-hero-in 900ms ease-out both; }
+.coverScan {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.14) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(3 * var(--u)));
+  animation: dlc-crt-boot 720ms steps(6, end) both;
+}
+.coverCopy > * { animation: dlc-rise 520ms ease-out both; }
+.coverCopy > *:nth-child(1) { animation-delay: 80ms; }
+.coverCopy > *:nth-child(2) { animation-delay: 160ms; }
+.coverCopy > *:nth-child(3) { animation-delay: 240ms; }
+.coverCopy > *:nth-child(4) { animation-delay: 320ms; }
+.coverCopy > *:nth-child(5) { animation-delay: 400ms; }
+.coverTitle { position: relative; }
+.coverTitle::before, .coverTitle::after {
+  content: attr(data-text); position: absolute; inset: 0; pointer-events: none;
+}
+.coverTitle::before { color: var(--c-river); animation: dlc-glitch-cyan 7s steps(2, end) infinite; }
+.coverTitle::after { color: var(--c-red); animation: dlc-glitch-red 7s steps(2, end) infinite; }
+.campaign { animation: dlc-view-in 260ms steps(3, end) both; }
+.node { animation: dlc-cell-in 180ms steps(2, end) both; }
+.node:nth-child(2) { animation-delay: 40ms; }
+.node:nth-child(3) { animation-delay: 80ms; }
+.node:nth-child(4) { animation-delay: 120ms; }
+.node:nth-child(5) { animation-delay: 160ms; }
+.node:nth-child(6) { animation-delay: 200ms; }
+.node:nth-child(7) { animation-delay: 240ms; }
+.node:nth-child(8) { animation-delay: 280ms; }
+.storyDialog { animation: dlc-paper-in 460ms steps(3, end) both; }
+.storyBust { animation: dlc-hero-in 900ms ease-out both; }
+.resultStamp { animation: dlc-stamp-in 460ms 140ms steps(3, end) both; }
+@keyframes dlc-view-in {
+  from { opacity: 0; transform: translateY(calc(2 * var(--u))); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes dlc-hero-in {
+  from { opacity: 0; transform: scale(1.035); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes dlc-rise {
+  from { opacity: 0; transform: translateY(calc(3 * var(--u))); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes dlc-crt-boot {
+  0%, 32% { opacity: 1; transform: scaleY(1); }
+  52% { opacity: 0.92; transform: scaleY(0.045); }
+  68% { opacity: 0.55; transform: scaleY(0.012); }
+  82% { opacity: 0.2; transform: scaleY(1); }
+  100% { opacity: 0; transform: scaleY(1); }
+}
+@keyframes dlc-paper-in {
+  from { opacity: 0; transform: translateY(calc(4 * var(--u))) rotate(-0.8deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+@keyframes dlc-cell-in {
+  from { opacity: 0; transform: scale(0.62); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes dlc-stamp-in {
+  from { opacity: 0; transform: rotate(-24deg) scale(1.5); }
+  to { opacity: 1; transform: rotate(-4deg) scale(1); }
+}
+@keyframes dlc-glitch-cyan {
+  0%, 88%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+  89% { opacity: 0.7; transform: translate(calc(-2 * var(--u)), 0); clip-path: inset(12% 0 58% 0); }
+  91% { opacity: 0.55; transform: translate(calc(2 * var(--u)), calc(-1 * var(--u))); clip-path: inset(54% 0 18% 0); }
+  93% { opacity: 0; }
+}
+@keyframes dlc-glitch-red {
+  0%, 89%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+  90% { opacity: 0.65; transform: translate(calc(2 * var(--u)), calc(1 * var(--u))); clip-path: inset(38% 0 34% 0); }
+  92% { opacity: 0.45; transform: translate(calc(-1 * var(--u)), 0); clip-path: inset(68% 0 8% 0); }
+  94% { opacity: 0; }
+}
+

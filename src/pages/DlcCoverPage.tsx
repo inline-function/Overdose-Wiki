@@ -13,9 +13,10 @@ export function DlcCoverPage() {
       <div className={s.cover}>
         <img className={s.coverHero} src={asset('assets/dlc/entry_hero.png')} alt="" decoding="async" />
         <div className={s.coverShade} aria-hidden="true" />
+        <div className={s.coverScan} aria-hidden="true" />
         <div className={s.coverCopy}>
           <p className={s.coverEyebrow}>{tr('dlc.coverEyebrow')}</p>
-          <h1 className={s.coverTitle}>{tr('dlc.title')}</h1>
+          <h1 className={s.coverTitle} data-text={tr('dlc.title')}>{tr('dlc.title')}</h1>
           <p className={s.coverSubtitle}>{tr('dlc.coverSubtitle')}</p>
           <p className={s.coverBlurb}>{tr('dlc.coverBlurb')}</p>
           <button type="button" className={s.coverEnter} onClick={() => navigate('/dlc')}>

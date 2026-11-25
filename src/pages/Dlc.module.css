@@ -93,17 +93,58 @@
   object-fit: contain;
   image-rendering: pixelated;
   transform-origin: bottom center;
-  animation: idle 2.4s steps(2, end) infinite;
+  animation: heroIdle 3.2s steps(4, end) infinite;
+}
+/* 参宿四星头光晕：她是恒星，头部有辐射感 */
+.heroGlow {
+  position: absolute;
+  left: calc(28 * var(--u));
+  top: calc(2 * var(--u));
+  width: calc(40 * var(--u));
+  height: calc(40 * var(--u));
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(226, 80, 47, 0.55) 0%, rgba(240, 200, 102, 0.22) 42%, transparent 70%);
+  mix-blend-mode: screen;
+  animation: corona 2.2s steps(4, end) infinite;
+}
+.heroWrap[data-phase2="true"] .heroGlow {
+  left: calc(20 * var(--u));
+  top: calc(-6 * var(--u));
+  width: calc(56 * var(--u));
+  height: calc(56 * var(--u));
+  animation: corona 1s steps(3, end) infinite;
 }
 .heroWrap[data-phase2="true"] .hero {
   filter: drop-shadow(0 0 calc(5 * var(--u)) rgba(226, 80, 47, 0.85));
-  animation: idle 1.2s steps(2, end) infinite, phasePulse 1.6s steps(3, end) infinite;
+  animation: heroIdle 1.6s steps(4, end) infinite, phasePulse 1.2s steps(3, end) infinite;
 }
-.heroWrap[data-hit="true"] .hero { filter: brightness(2.6); }
+.heroWrap[data-hit="true"] .hero { filter: brightness(2.6); animation: heroHurt 180ms steps(2, end); }
+.heroWrap[data-attack="true"] .hero { animation: heroLunge 280ms steps(3, end); }
+.heroWrap[data-victory="true"] .hero { animation: heroHop 640ms steps(4, end) infinite; }
 .heroWrap[data-target="true"] { cursor: pointer; }
-@keyframes idle {
+@keyframes heroIdle {
+  0%, 100% { transform: translateY(0) scaleY(1) rotate(0deg); }
+  25% { transform: translateY(calc(-1 * var(--u))) scaleY(1.012) rotate(0.5deg); }
+  50% { transform: translateY(0) scaleY(1) rotate(0deg); }
+  75% { transform: translateY(calc(-1 * var(--u))) scaleY(1.012) rotate(-0.5deg); }
+}
+@keyframes corona {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.95; transform: scale(1.18); }
+}
+@keyframes heroLunge {
+  0% { transform: translateX(0); }
+  40% { transform: translateX(calc(8 * var(--u))) translateY(calc(-2 * var(--u))); }
+  100% { transform: translateX(0); }
+}
+@keyframes heroHurt {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(calc(-4 * var(--u))); }
+  100% { transform: translateX(0); }
+}
+@keyframes heroHop {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(calc(-1 * var(--u))); }
+  50% { transform: translateY(calc(-6 * var(--u))); }
 }
 @keyframes phasePulse {
   0%, 100% { transform: scale(1); }

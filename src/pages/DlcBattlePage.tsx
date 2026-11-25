@@ -69,6 +69,7 @@ export function DlcBattlePage() {
   const [fx, setFx] = useState<Fx[]>([]);
   const fxId = useRef(0);
   const [heroHit, setHeroHit] = useState(false);
+  const [heroAttack, setHeroAttack] = useState(false);
   const [enemyHit, setEnemyHit] = useState(false);
   const [shake, setShake] = useState(false);
   const [log, setLog] = useState('');
@@ -96,6 +97,7 @@ export function DlcBattlePage() {
         const from = e.side === 'player' ? HAND : ENEMY;
         const to = posOf(e.target);
         addFx({ kind: 'fly', x: from.x - 26, y: from.y - 35, dx: to.x - from.x, dy: to.y - from.y, cardId: e.cardId }, 260);
+        if (e.side === 'player') { setHeroAttack(true); window.setTimeout(() => setHeroAttack(false), 300); }
         audio.playSfx(AUDIO_MANIFEST.sfx.card);
         const card = CARD_MAP[e.cardId];
         if (card) setLog(`${pick(card.name, locale)} → ${e.target === 'player' ? tr('dlc.statusPlayer') : pick(def.enemyName, locale)}`);
@@ -334,9 +336,10 @@ export function DlcBattlePage() {
       <div className={s.vignette} />
 
       {/* 立绘 */}
-      <div className={s.heroWrap} data-testid="dlc-hero" data-phase2={state.phase2} data-hit={heroHit} data-target={selected !== null || drag !== null} onClick={() => playAt('player')}>
+      <div className={s.heroWrap} data-testid="dlc-hero" data-phase2={state.phase2} data-hit={heroHit} data-attack={heroAttack} data-victory={state.outcome === 'win'} data-target={selected !== null || drag !== null} onClick={() => playAt('player')}>
         <div className={s.shadow} />
         <img className={s.hero} src={asset('assets-private/dlc/harukaze_boss.png')} alt={tr('dlc.statusPlayer')} />
+        <div className={s.heroGlow} />
         {(selected !== null || drag !== null) && <div className={s.reticle} />}
       </div>
       <div className={s.enemyWrap} data-testid="dlc-enemy" style={{ ['--aura' as string]: AURA[def.sprite] }} data-hit={enemyHit} data-dead={state.outcome === 'win'} data-target={selected !== null || drag !== null} onClick={() => playAt('enemy')}>

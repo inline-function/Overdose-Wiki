@@ -105,17 +105,66 @@
 .heroBody { animation: breathe 3.2s steps(3, end) infinite; transform-origin: 50% 100%; }
 .heroCoat { animation: coatSway 3.6s steps(4, end) infinite; transform-origin: 50% 12%; }
 .heroArm { animation: armWave 4.2s steps(4, end) infinite; transform-origin: 72% 36%; }
-/* 参宿四星头光晕：她是恒星，头部有辐射感 */
+/* 参宿四星头：熔岩对流 + 发光日冕 */
+.heroLava {
+  position: absolute;
+  left: calc(36 * var(--u));
+  top: calc(6 * var(--u));
+  width: calc(24 * var(--u));
+  height: calc(24 * var(--u));
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 243, 208, 0.95) 0 7%, transparent 13%),
+    radial-gradient(circle at 66% 56%, rgba(240, 200, 102, 0.9) 0 9%, transparent 17%),
+    radial-gradient(circle at 46% 76%, rgba(255, 196, 106, 0.8) 0 6%, transparent 12%),
+    radial-gradient(circle at 76% 26%, rgba(240, 200, 102, 0.75) 0 5%, transparent 10%),
+    radial-gradient(circle at 20% 60%, rgba(226, 80, 47, 0.7) 0 8%, transparent 15%);
+  background-size: 220% 220%;
+  animation: lavaChurn 2.6s steps(8, end) infinite;
+}
+.heroFlare {
+  position: absolute;
+  left: calc(30 * var(--u));
+  top: 0;
+  width: calc(36 * var(--u));
+  height: calc(36 * var(--u));
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 14deg, rgba(240, 200, 102, 0.5) 14 17deg, transparent 17 60deg,
+    rgba(226, 80, 47, 0.45) 60 63deg, transparent 63 120deg,
+    rgba(240, 200, 102, 0.5) 120 123deg, transparent 123 180deg,
+    rgba(226, 80, 47, 0.45) 180 183deg, transparent 183 240deg,
+    rgba(240, 200, 102, 0.5) 240 243deg, transparent 243 300deg,
+    rgba(226, 80, 47, 0.45) 300 303deg, transparent 303 360deg
+  );
+  animation: flareSpin 5s steps(12, end) infinite;
+}
 .heroGlow {
   position: absolute;
-  left: calc(28 * var(--u));
-  top: calc(2 * var(--u));
-  width: calc(40 * var(--u));
-  height: calc(40 * var(--u));
+  left: calc(24 * var(--u));
+  top: calc(-2 * var(--u));
+  width: calc(48 * var(--u));
+  height: calc(48 * var(--u));
   pointer-events: none;
-  background: radial-gradient(circle, rgba(226, 80, 47, 0.55) 0%, rgba(240, 200, 102, 0.22) 42%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 196, 106, 0.6) 0%, rgba(226, 80, 47, 0.4) 38%, rgba(240, 200, 102, 0.18) 55%, transparent 72%);
   mix-blend-mode: screen;
   animation: corona 2.2s steps(4, end) infinite;
+}
+@keyframes lavaChurn {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 70% 50%; }
+  100% { background-position: 0% 0%; }
+}
+@keyframes flareSpin {
+  0% { transform: rotate(0deg); opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { transform: rotate(360deg); opacity: 0.7; }
 }
 .heroWrap[data-phase2="true"] .heroGlow {
   left: calc(20 * var(--u));
@@ -129,8 +178,13 @@
   animation: heroFloat 1.6s steps(4, end) infinite, phasePulse 1.2s steps(3, end) infinite;
 }
 .heroWrap[data-phase2="true"] .heroHead { animation: headBob 1.2s steps(3, end) infinite; }
-.heroWrap[data-hit="true"] .heroRig { filter: brightness(2.6); animation: heroHurt 180ms steps(2, end); }
-.heroWrap[data-attack="true"] .heroRig { animation: heroLunge 280ms steps(3, end); }
+.heroWrap[data-hit="true"] .heroRig { filter: brightness(2.4) drop-shadow(0 0 calc(4 * var(--u)) rgba(166, 43, 32, 0.9)); animation: heroHurt 220ms steps(3, end); }
+.heroWrap[data-hit="true"] .heroHead { animation: headShake 220ms steps(3, end); }
+.heroWrap[data-hit="true"] .heroLava { opacity: 0.3; }
+.heroWrap[data-attack="true"] .heroRig { animation: heroLunge 300ms steps(3, end); }
+.heroWrap[data-attack="true"] .heroHead { animation: headThrust 300ms steps(3, end); }
+.heroWrap[data-attack="true"] .heroLava { opacity: 1; animation-duration: 0.6s; }
+.heroWrap[data-attack="true"] .heroGlow { animation-duration: 0.6s; }
 .heroWrap[data-victory="true"] .heroRig { animation: heroHop 640ms steps(4, end) infinite; }
 .heroWrap[data-target="true"] { cursor: pointer; }
 @keyframes heroFloat {
@@ -159,13 +213,23 @@
   50% { opacity: 0.95; transform: scale(1.18); }
 }
 @keyframes heroLunge {
+  0% { transform: translateX(0) scale(1); }
+  35% { transform: translateX(calc(11 * var(--u))) translateY(calc(-3 * var(--u))) scale(1.04); }
+  100% { transform: translateX(0) scale(1); }
+}
+@keyframes headThrust {
   0% { transform: translateX(0); }
-  40% { transform: translateX(calc(8 * var(--u))) translateY(calc(-2 * var(--u))); }
+  35% { transform: translateX(calc(5 * var(--u))) translateY(calc(-1 * var(--u))); }
   100% { transform: translateX(0); }
+}
+@keyframes headShake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  33% { transform: translateX(calc(-2 * var(--u))) rotate(-3deg); }
+  66% { transform: translateX(calc(2 * var(--u))) rotate(3deg); }
 }
 @keyframes heroHurt {
   0% { transform: translateX(0); }
-  50% { transform: translateX(calc(-4 * var(--u))); }
+  40% { transform: translateX(calc(-6 * var(--u))); }
   100% { transform: translateX(0); }
 }
 @keyframes heroHop {

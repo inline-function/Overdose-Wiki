@@ -345,6 +345,8 @@ export function DlcBattlePage() {
         <div className={s.heroRig}>
           <img className={`${s.heroLayer} ${s.heroBody}`} src={asset('assets-private/dlc/harukaze_body.png')} alt="" aria-hidden="true" />
           <img className={`${s.heroLayer} ${s.heroHead}`} src={asset('assets-private/dlc/harukaze_head.png')} alt={tr('dlc.statusPlayer')} />
+          <div className={s.heroFlare} />
+          <div className={s.heroLava} />
           <div className={s.heroGlow} />
         </div>
         {(selected !== null || drag !== null) && <div className={s.reticle} />}

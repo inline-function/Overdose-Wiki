@@ -36,6 +36,7 @@ export function HomePage() {
   const readCount = save.read[report.id]?.length ?? 0;
   const progress = save.completedScenes.length > 0 ? '42%' : '0%';
   const [dlcShake, setDlcShake] = useState(false);
+  const dlcUnlocked = save.completedScenes.includes('ch01.s14');
   const manifesto = locale === 'en' ? manifestoEn : manifestoZh;
   const manifestoLines = manifesto.trim().split(/\r?\n/).filter(Boolean);
 
@@ -103,19 +104,32 @@ export function HomePage() {
             <span className={p.homeCardMeta}>{tr('home.mainMeta')}</span>
           </Link>
           <div className={p.homeDlcRow}>
-            <button
-              type="button"
-              className={`${p.homeCard} ${p.homeDlcCard} ${dlcShake ? p.homeCardShake : ''}`}
-              aria-label={tr('home.dlcAria')}
-              data-locked="true"
-              title={tr('home.dlcLockedTitle')}
-              onClick={() => setDlcShake(true)}
-              onAnimationEnd={() => setDlcShake(false)}
-            >
-              <span className={p.homeCardKicker}>DLC</span>
-              <span className={p.homeCardTitle}>{tr('home.dlcTitle')}</span>
-              <span className={p.homeCardMeta}>{tr('home.dlcMeta')}</span>
-            </button>
+            {dlcUnlocked ? (
+              <Link
+                className={`${p.homeCard} ${p.homeDlcCard}`}
+                to="/dlc"
+                aria-label={tr('home.dlcAria')}
+                data-locked="false"
+              >
+                <span className={p.homeCardKicker}>DLC</span>
+                <span className={p.homeCardTitle}>{tr('home.dlcTitle')}</span>
+                <span className={p.homeCardMeta}>{tr('home.dlcMeta')}</span>
+              </Link>
+            ) : (
+              <button
+                type="button"
+                className={`${p.homeCard} ${p.homeDlcCard} ${dlcShake ? p.homeCardShake : ''}`}
+                aria-label={tr('home.dlcAria')}
+                data-locked="true"
+                title={tr('home.dlcLockedTitle')}
+                onClick={() => setDlcShake(true)}
+                onAnimationEnd={() => setDlcShake(false)}
+              >
+                <span className={p.homeCardKicker}>DLC</span>
+                <span className={p.homeCardTitle}>{tr('home.dlcTitle')}</span>
+                <span className={p.homeCardMeta}>{tr('home.dlcMeta')}</span>
+              </button>
+            )}
             <Link
               className={`${p.homeCard} ${p.homeAfterstoryCard}`}
               to="/afterstory"

@@ -10,10 +10,10 @@ export function computeScale(
   viewportH = window.innerHeight,
 ): number {
   if (locked !== 'auto') return locked;
-  const fit = Math.floor(
-    Math.min(viewportW / LOGICAL_W, viewportH / LOGICAL_H),
-  );
-  return Math.max(1, Math.min(4, fit || 1));
+  const fit = Math.min(viewportW / LOGICAL_W, viewportH / LOGICAL_H);
+  // 视口放不下 1× 时用分数缩放整窗适配，而不是裁切（修 430 竖屏右边被裁的根因）。
+  if (fit < 1) return Math.max(0.5, fit);
+  return Math.max(1, Math.min(4, Math.floor(fit)));
 }
 
 export function useGameScale(locked: ScaleSetting): number {

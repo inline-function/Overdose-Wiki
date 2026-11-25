@@ -1,4 +1,4 @@
-import { lazy, useEffect } from 'react';
+import { lazy, useEffect, type ReactNode } from 'react';
 import { createHashRouter, Navigate, useLocation } from 'react-router-dom';
 import { GameShell } from './GameShell';
 import { ConsentPage } from '../pages/ConsentPage';
@@ -66,6 +66,24 @@ const AnalysisIndexPage = lazy(() =>
 const AnalysisCasePage = lazy(() =>
   import('../pages/AnalysisPage').then((module) => ({ default: module.AnalysisCasePage })),
 );
+const DlcCampaignPage = lazy(() =>
+  import('../pages/DlcCampaignPage').then((module) => ({ default: module.DlcCampaignPage })),
+);
+const DlcBattlePage = lazy(() =>
+  import('../pages/DlcBattlePage').then((module) => ({ default: module.DlcBattlePage })),
+);
+const DlcShopPage = lazy(() =>
+  import('../pages/DlcShopPage').then((module) => ({ default: module.DlcShopPage })),
+);
+const DlcEndingPage = lazy(() =>
+  import('../pages/DlcEndingPage').then((module) => ({ default: module.DlcEndingPage })),
+);
+
+function DlcGuard({ children }: { children: ReactNode }) {
+  const save = useGameStore((state) => state.save);
+  if (!save.completedScenes.includes('ch01.s14')) return <Navigate to="/" replace />;
+  return <>{children}</>;
+}
 
 const UTILITY_PATHS = new Set(['/consent', '/settings']);
 const GATE_PATHS = new Set(['/welcome', '/login']);
@@ -130,6 +148,10 @@ export const router = createHashRouter([
       { path: 'analysis/:caseId', element: <AnalysisCasePage /> },
       { path: 'docs', element: <DocsPage /> },
       { path: 'chapters', element: <ChaptersPage /> },
+      { path: 'dlc', element: <DlcGuard><DlcCampaignPage /></DlcGuard> },
+      { path: 'dlc/battle', element: <DlcGuard><DlcBattlePage /></DlcGuard> },
+      { path: 'dlc/shop', element: <DlcGuard><DlcShopPage /></DlcGuard> },
+      { path: 'dlc/ending', element: <DlcGuard><DlcEndingPage /></DlcGuard> },
       { path: 'afterstory', element: <AfterstoryPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],

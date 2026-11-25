@@ -7,7 +7,8 @@ describe('computeScale', () => {
     expect(computeScale('auto', 960, 540)).toBe(2);
     expect(computeScale('auto', 1440, 810)).toBe(3);
     expect(computeScale('auto', 1920, 1080)).toBe(4);
-    expect(computeScale('auto', 300, 200)).toBe(1);
+    expect(computeScale('auto', 300, 200)).toBeCloseTo(0.625);
+    expect(computeScale('auto', 430, 900)).toBeCloseTo(430 / 480);
   });
 
   it('honors a locked scale', () => {

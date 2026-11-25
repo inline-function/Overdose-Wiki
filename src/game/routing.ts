@@ -58,6 +58,7 @@ export function fakeUrl(pathname: string): string {
 export function modeForPath(pathname: string): 'consent' | 'battle' | 'wiki' | 'afterstory' {
   if (pathname === '/consent') return 'consent';
   if (pathname.startsWith('/battle/')) return 'battle';
+  if (pathname === '/dlc' || pathname.startsWith('/dlc/')) return 'battle';
   if (pathname === '/afterstory' || pathname.startsWith('/afterstory/')) return 'afterstory';
   return 'wiki';
 }

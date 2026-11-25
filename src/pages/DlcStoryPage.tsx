@@ -33,7 +33,7 @@ export function DlcStoryPage() {
 
   const advance = () => {
     if (beatIndex < scene.beats.length - 1) setBeatIndex((i) => i + 1);
-    else navigate('/dlc');
+    else navigate(scene.next ?? '/dlc');
   };
 
   const speaker = beat.speaker ?? tr('dlc.narrator');

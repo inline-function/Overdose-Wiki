@@ -55,7 +55,7 @@ export function DlcCampaignPage() {
                 className={s.node}
                 data-state={state}
                 disabled={locked}
-                onClick={() => navigate(`/dlc/battle?stage=${stage.no}`)}
+                onClick={() => navigate(`/dlc/story/interlude-${stage.no}`)}
                 aria-label={pick(stage.title, locale)}
               >
                 <img className={s.nodeIcon} src={asset(`assets-private/dlc/${battle.portrait}.png`)} alt="" />
@@ -71,7 +71,7 @@ export function DlcCampaignPage() {
           <div className={s.sideTitle}>{pick(current.title, locale)}</div>
           <div className={s.sideBlurb}>{pick(current.blurb, locale)}</div>
           <div className={s.sideMeta}>{tr('dlc.deck')} {save.deck.length}/12</div>
-          <button type="button" className={s.pixelBtn} data-variant="amber" onClick={() => navigate(`/dlc/battle?stage=${save.stage}`)}>{tr('dlc.fight')}</button>
+          <button type="button" className={s.pixelBtn} data-variant="amber" onClick={() => navigate(`/dlc/story/interlude-${save.stage}`)}>{tr('dlc.fight')}</button>
         </div>
       </div>
       {showOpening && (

@@ -270,7 +270,7 @@ export function DlcBattlePage() {
     chooseReward(cardId);
     setRewardDone(true);
     audio.playSfx(AUDIO_MANIFEST.sfx.click);
-    window.setTimeout(() => navigate(save.stage >= 8 ? '/dlc/ending' : '/dlc'), 500);
+    window.setTimeout(() => navigate(save.stage >= 8 ? '/dlc/story/tail' : '/dlc'), 500);
   };
 
   const player = state.player;

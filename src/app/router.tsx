@@ -81,6 +81,9 @@ const DlcEndingPage = lazy(() =>
 const DlcStoryPage = lazy(() =>
   import('../pages/DlcStoryPage').then((module) => ({ default: module.DlcStoryPage })),
 );
+const DlcCoverPage = lazy(() =>
+  import('../pages/DlcCoverPage').then((module) => ({ default: module.DlcCoverPage })),
+);
 
 function DlcGuard({ children }: { children: ReactNode }) {
   const save = useGameStore((state) => state.save);
@@ -151,6 +154,7 @@ export const router = createHashRouter([
       { path: 'analysis/:caseId', element: <AnalysisCasePage /> },
       { path: 'docs', element: <DocsPage /> },
       { path: 'chapters', element: <ChaptersPage /> },
+      { path: 'dlc/cover', element: <DlcGuard><DlcCoverPage /></DlcGuard> },
       { path: 'dlc', element: <DlcGuard><DlcCampaignPage /></DlcGuard> },
       { path: 'dlc/battle', element: <DlcGuard><DlcBattlePage /></DlcGuard> },
       { path: 'dlc/shop', element: <DlcGuard><DlcShopPage /></DlcGuard> },

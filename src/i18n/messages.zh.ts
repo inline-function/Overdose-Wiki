@@ -861,6 +861,10 @@ export const zh = {
   'dlc.gachaPity1': '精一保底 {n}/30',
   'dlc.gachaPityN': '麻保底 {n}/30',
   'dlc.gachaGuaranteed': '下次必得当前卡池',
+  'dlc.coverEyebrow': 'DLC // 稍尽春风',
+  'dlc.coverSubtitle': '八关 · 卡牌战役 · 2023',
+  'dlc.coverBlurb': '一个早慧、骄傲、鲁莽又温柔的化学少年指路人。八种症状，八场战斗。春风还在。',
+  'dlc.coverEnter': '进入战役',
 } as const;
 
 export type MessageKey = keyof typeof zh;

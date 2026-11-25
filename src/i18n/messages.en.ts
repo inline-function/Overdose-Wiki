@@ -868,4 +868,8 @@ export const en: Record<MessageKey, string> = {
   'dlc.gachaPity1': 'Class I pity {n}/30',
   'dlc.gachaPityN': 'Narcotic pity {n}/30',
   'dlc.gachaGuaranteed': 'Next is guaranteed pool',
+  'dlc.coverEyebrow': 'DLC // Spring, Just Enough',
+  'dlc.coverSubtitle': '8 stages · card campaign · 2023',
+  'dlc.coverBlurb': 'A precocious, proud, reckless yet tender young pharmacist guide. Eight symptoms, eight battles. Harukaze remains.',
+  'dlc.coverEnter': 'Enter campaign',
 };

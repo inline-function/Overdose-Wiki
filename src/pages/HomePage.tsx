@@ -107,7 +107,7 @@ export function HomePage() {
             {dlcUnlocked ? (
               <Link
                 className={`${p.homeCard} ${p.homeDlcCard}`}
-                to="/dlc"
+                to="/dlc/cover"
                 aria-label={tr('home.dlcAria')}
                 data-locked="false"
               >

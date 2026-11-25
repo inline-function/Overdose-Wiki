@@ -242,9 +242,21 @@
 }
 
 .homeDlcCard {
-  border-color: var(--c-ink);
-  background: var(--c-ink);
-  box-shadow: calc(2 * var(--u)) calc(2 * var(--u)) 0 var(--c-ink2);
+  position: relative;
+  overflow: hidden;
+  min-height: calc(50 * var(--u));
+  border-color: var(--c-yellow);
+  background-color: var(--c-ink);
+  background-image: url('/assets/dlc/entry_card.png');
+  background-position: 70% center;
+  background-size: cover;
+  box-shadow: calc(2 * var(--u)) calc(2 * var(--u)) 0 var(--c-red-deep);
+  padding: calc(3 * var(--u));
+}
+.homeDlcCard .homeCardKicker,
+.homeDlcCard .homeCardTitle,
+.homeDlcCard .homeCardMeta {
+  text-shadow: calc(1 * var(--u)) calc(1 * var(--u)) 0 var(--c-ink), 0 0 calc(4 * var(--u)) var(--c-ink);
 }
 
 .homeDlcCard:hover {

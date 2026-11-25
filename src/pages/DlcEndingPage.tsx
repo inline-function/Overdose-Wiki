@@ -15,7 +15,7 @@ export function DlcEndingPage() {
       <div className={s.bg} style={{ backgroundImage: `url(${import.meta.env.BASE_URL}assets-private/bg/bg_dlc_nebula.png)` }} />
       <div className={s.bgTint} />
       <div className={s.vignette} />
-      <img className={s.endingHero} src={`${import.meta.env.BASE_URL}assets-private/dlc/harukaze_boss.png`} alt={tr('dlc.statusPlayer')} />
+      <img className={s.endingHero} src={`${import.meta.env.BASE_URL}assets-private/dlc/harukaze_student.png`} alt={tr('dlc.statusPlayer')} />
       <div className={s.endingTitle}>{tr('dlc.title')}</div>
       <div className={s.endingSymptoms}>
         {STAGES.map((stage, i) => (

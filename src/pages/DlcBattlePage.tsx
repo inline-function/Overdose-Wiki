@@ -342,8 +342,14 @@ export function DlcBattlePage() {
       {/* 立绘 */}
       <div className={s.heroWrap} data-testid="dlc-hero" data-phase2={state.phase2} data-hit={heroHit} data-attack={heroAttack} data-victory={state.outcome === 'win'} data-target={selected !== null || drag !== null} onClick={() => playAt('player')}>
         <div className={s.shadow} />
-        <img className={s.hero} src={asset('assets-private/dlc/harukaze_boss.png')} alt={tr('dlc.statusPlayer')} />
-        <div className={s.heroGlow} />
+        <div className={s.heroRig}>
+          <img className={s.heroLayer} src={asset('assets-private/dlc/harukaze_legs.png')} alt="" aria-hidden="true" />
+          <img className={`${s.heroLayer} ${s.heroBody}`} src={asset('assets-private/dlc/harukaze_body.png')} alt="" aria-hidden="true" />
+          <img className={`${s.heroLayer} ${s.heroCoat}`} src={asset('assets-private/dlc/harukaze_coat.png')} alt="" aria-hidden="true" />
+          <img className={`${s.heroLayer} ${s.heroArm}`} src={asset('assets-private/dlc/harukaze_arm.png')} alt="" aria-hidden="true" />
+          <img className={`${s.heroLayer} ${s.heroHead}`} src={asset('assets-private/dlc/harukaze_head.png')} alt={tr('dlc.statusPlayer')} />
+          <div className={s.heroGlow} />
+        </div>
         {(selected !== null || drag !== null) && <div className={s.reticle} />}
       </div>
       <div className={s.enemyWrap} data-testid="dlc-enemy" style={{ ['--aura' as string]: AURA[def.sprite] }} data-hit={enemyHit} data-dead={state.outcome === 'win'} data-target={selected !== null || drag !== null} onClick={() => playAt('enemy')}>

@@ -87,14 +87,24 @@
   width: calc(96 * var(--u));
   height: calc(144 * var(--u));
 }
-.hero {
+/* 分层立绘 rig：整体动效 + 各层独立动画 */
+.heroRig {
+  position: absolute;
+  inset: 0;
+  transform-origin: bottom center;
+  animation: heroFloat 3.2s steps(4, end) infinite;
+}
+.heroLayer {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
   image-rendering: pixelated;
-  transform-origin: bottom center;
-  animation: heroIdle 3.2s steps(4, end) infinite;
 }
+.heroHead { animation: headBob 2.8s steps(3, end) infinite; transform-origin: 50% 28%; }
+.heroBody { animation: breathe 3.2s steps(3, end) infinite; transform-origin: 50% 100%; }
+.heroCoat { animation: coatSway 3.6s steps(4, end) infinite; transform-origin: 50% 12%; }
+.heroArm { animation: armWave 4.2s steps(4, end) infinite; transform-origin: 72% 36%; }
 /* 参宿四星头光晕：她是恒星，头部有辐射感 */
 .heroGlow {
   position: absolute;
@@ -114,19 +124,35 @@
   height: calc(56 * var(--u));
   animation: corona 1s steps(3, end) infinite;
 }
-.heroWrap[data-phase2="true"] .hero {
+.heroWrap[data-phase2="true"] .heroRig {
   filter: drop-shadow(0 0 calc(5 * var(--u)) rgba(226, 80, 47, 0.85));
-  animation: heroIdle 1.6s steps(4, end) infinite, phasePulse 1.2s steps(3, end) infinite;
+  animation: heroFloat 1.6s steps(4, end) infinite, phasePulse 1.2s steps(3, end) infinite;
 }
-.heroWrap[data-hit="true"] .hero { filter: brightness(2.6); animation: heroHurt 180ms steps(2, end); }
-.heroWrap[data-attack="true"] .hero { animation: heroLunge 280ms steps(3, end); }
-.heroWrap[data-victory="true"] .hero { animation: heroHop 640ms steps(4, end) infinite; }
+.heroWrap[data-phase2="true"] .heroHead { animation: headBob 1.2s steps(3, end) infinite; }
+.heroWrap[data-hit="true"] .heroRig { filter: brightness(2.6); animation: heroHurt 180ms steps(2, end); }
+.heroWrap[data-attack="true"] .heroRig { animation: heroLunge 280ms steps(3, end); }
+.heroWrap[data-victory="true"] .heroRig { animation: heroHop 640ms steps(4, end) infinite; }
 .heroWrap[data-target="true"] { cursor: pointer; }
-@keyframes heroIdle {
-  0%, 100% { transform: translateY(0) scaleY(1) rotate(0deg); }
-  25% { transform: translateY(calc(-1 * var(--u))) scaleY(1.012) rotate(0.5deg); }
-  50% { transform: translateY(0) scaleY(1) rotate(0deg); }
-  75% { transform: translateY(calc(-1 * var(--u))) scaleY(1.012) rotate(-0.5deg); }
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(calc(-1 * var(--u))); }
+}
+@keyframes headBob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(calc(-1 * var(--u))) rotate(1deg); }
+}
+@keyframes breathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.015); }
+}
+@keyframes coatSway {
+  0%, 100% { transform: skewX(0deg); }
+  25% { transform: skewX(2deg); }
+  75% { transform: skewX(-2deg); }
+}
+@keyframes armWave {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-7deg); }
 }
 @keyframes corona {
   0%, 100% { opacity: 0.55; transform: scale(1); }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type PointerEvent as RPointerEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useLocale, useT } from '../i18n';
 import { audio } from '../audio/AudioManager';
 import { AUDIO_MANIFEST } from '../audio/manifest';
@@ -50,12 +50,15 @@ export function DlcBattlePage() {
   const chooseReward = useDlcStore((st) => st.chooseReward);
   const recordWin = useDlcStore((st) => st.recordWin);
 
-  const stage = STAGES[Math.min(7, Math.max(0, save.stage - 1))];
+  const [searchParams] = useSearchParams();
+  const requested = Number.parseInt(searchParams.get('stage') ?? '', 10);
+  const stageNo = Math.min(save.stage, Math.max(1, Number.isFinite(requested) ? requested : save.stage));
+  const stage = STAGES[stageNo - 1];
   const def = BATTLE_MAP[stage.battleId];
   useCue(def.bgm);
 
   const stateRef = useRef<BattleState | null>(null);
-  if (!stateRef.current) {
+  if (!stateRef.current || stateRef.current.def.id !== def.id) {
     stateRef.current = createBattle(def, save.deck, Math.floor(Math.random() * 1e9));
   }
   const state = stateRef.current;

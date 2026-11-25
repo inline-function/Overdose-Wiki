@@ -11,17 +11,11 @@ describe('DLC 配乐', () => {
     expect(cueForPath('/dlc/battle')).toBeUndefined();
   });
 
-  it('8 关战斗配乐按情绪分配且全部存在于 manifest', () => {
-    const used = new Set<string>();
+  it('8 关战斗统一用燃曲 battle（Start the battle）', () => {
     for (const battle of BATTLES) {
-      expect(CUES[battle.bgm as keyof typeof CUES], battle.id).toBeTruthy();
-      used.add(battle.bgm);
+      expect(battle.bgm, battle.id).toBe('battle');
+      expect(CUES[battle.bgm as keyof typeof CUES]).toBeTruthy();
     }
-    // 不再只有 tension/dlc-summer 两首
-    expect(used.size).toBeGreaterThanOrEqual(5);
-    expect(used.has('battle')).toBe(true);
-    expect(used.has('separation')).toBe(true);
-    expect(used.has('tragedy')).toBe(true);
   });
 
   it('曾经闲置的 night-market 现在可达', () => {

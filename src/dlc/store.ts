@@ -63,7 +63,7 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
       ...save,
       completed: save.completed.includes(stageId) ? save.completed : [...save.completed, stageId],
       battleWins: save.battleWins.includes(battleId) ? save.battleWins : [...save.battleWins, battleId],
-      currency: save.currency + WIN_CURRENCY,
+      currency: save.currency + (save.battleWins.includes(battleId) ? 0 : WIN_CURRENCY),
       stage: Math.min(8, Math.max(save.stage, Number(stageId.slice(-1)) + 1)),
     })),
 

@@ -123,7 +123,7 @@ describe('DLC 引擎 · 嗜睡', () => {
 });
 
 describe('DLC 引擎 · 呼吸抑制', () => {
-  it('出牌后按层数 2/4/6，3 次/回合封顶，回合末减半', () => {
+  it('出牌后按层数 2/4/6，3 次/回合封顶，回合末折半（回合制）', () => {
     const s = fresh();
     s.player.statuses.respiratory = 12; // 档 4
     s.player.ap = 5;
@@ -135,7 +135,7 @@ describe('DLC 引擎 · 呼吸抑制', () => {
     playerPlay(s, 0, 'enemy'); // 第 4 次不再触发
     expect(s.player.phys).toBe(48);
     endPlayerTurn(s);
-    expect(s.player.statuses.respiratory).toBe(6);
+    expect(s.player.statuses.respiratory).toBe(6); // 12 折半
   });
 
   it('层数档位 <10→2, <20→4, ≥20→6', () => {

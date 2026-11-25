@@ -354,6 +354,7 @@ export function playerDraw(state: BattleState): BattleEvent[] {
 
 function decay(state: BattleState, side: Side): void {
   const c = combatant(state, side);
+  // 回合制（回合末折半）：嗜睡、呼吸抑制、谵妄。永留：血清素/解离/反解离/镇痛。
   c.statuses.sedation = Math.floor(c.statuses.sedation / 2);
   c.statuses.respiratory = Math.floor(c.statuses.respiratory / 2);
   c.statuses.delirium = Math.floor(c.statuses.delirium / 2);
@@ -468,6 +469,7 @@ function tickMotivation(state: BattleState, side: Side, events: BattleEvent[]): 
   }
   c.statuses.motivation -= 1;
 }
+
 
 export function endPlayerTurn(state: BattleState): BattleEvent[] {
   const events: BattleEvent[] = [];

@@ -117,6 +117,10 @@ export function cueForPath(pathname: string): CueId | undefined {
   if (pathname === '/consent') return undefined;
   if (pathname.startsWith('/report/') && pathname.includes('/replay/')) return undefined;
   if (pathname.startsWith('/battle/')) return undefined;
+  if (pathname === '/dlc/battle') return undefined; // 战斗页按关卡 def.bgm 控制
+  if (pathname === '/dlc/shop') return 'night-market';
+  if (pathname === '/dlc/ending') return 'morning';
+  if (pathname === '/dlc' || pathname.startsWith('/dlc/')) return 'dlc-summer';
   if (pathname === '/extras' || pathname.startsWith('/extras/')) return 'extras';
   if (pathname === '/') return 'title';
   if (pathname === '/settings') return 'archive';

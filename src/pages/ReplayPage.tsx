@@ -138,6 +138,17 @@ const HIGAN_STATES: Record<string, string> = {
   blank: 'blank',
   fade: 'fade',
 };
+// 春风星头无脸，情绪靠星头颜色/光晕/体态。已出 calm/smile/intense 三态，
+// 其余表情暂回退到现有差分，避免缺图；后续扩展时补文件并加映射。
+const HARUKAZE_STATES: Record<string, string> = {
+  calm: 'calm',
+  smile: 'smile',
+  intense: 'intense',
+  restless: 'intense',
+  tired: 'calm',
+  blank: 'calm',
+  fade: 'calm',
+};
 const PROP_BY_EN_NAME: Record<string, string> = {};
 for (const [zh, prop] of Object.entries(PROP_BY_SPEAKER)) {
   const en = EN_NAMES[zh];
@@ -149,7 +160,7 @@ function propFor(speaker: string | undefined): string | undefined {
   return PROP_BY_SPEAKER[speaker] ?? PROP_BY_EN_NAME[speaker];
 }
 
-const MULTI_STATE_PROPS = new Set(['caijia', 'goto', 'higan']);
+const MULTI_STATE_PROPS = new Set(['caijia', 'goto', 'higan', 'harukaze']);
 
 function assetUrl(path: string) {
   return `${import.meta.env.BASE_URL}${path}`;
@@ -177,7 +188,7 @@ function propMood(id: string, expr?: string) {
   if (id === 'caijia') return CAT_STATES[expr ?? 'smile'] ?? 'smile';
   if (id === 'goto') return GOTO_STATES[expr ?? 'calm'] ?? 'calm';
   if (id === 'higan') return HIGAN_STATES[expr ?? 'calm'] ?? 'calm';
-  if (id === 'harukaze' && expr === 'restless') return 'restless';
+  if (id === 'harukaze') return HARUKAZE_STATES[expr ?? 'calm'] ?? 'calm';
   return 'calm';
 }
 

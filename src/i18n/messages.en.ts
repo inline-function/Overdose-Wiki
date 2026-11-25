@@ -880,4 +880,5 @@ export const en: Record<MessageKey, string> = {
   'dlc.endlessSurvived': 'Survived {n} waves',
   'dlc.endlessBest': 'Best {n} waves',
   'dlc.endlessExit': 'Exit',
+  'dlc.replayOpening': 'Replay opening',
 };

@@ -868,6 +868,13 @@
 }
 .coverEnter:active { transform: translate(calc(1 * var(--u)), calc(1 * var(--u))); box-shadow: none; }
 .coverBack { position: absolute; top: calc(4 * var(--u)); right: calc(4 * var(--u)); }
+.replayBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: calc(18 * var(--u)); padding: 0 calc(6 * var(--u));
+  border: var(--bw-2) solid var(--c-yellow); background: rgba(11, 10, 16, 0.6);
+  color: var(--c-yellow); font-size: var(--fs-10); font-family: var(--font-10); cursor: pointer;
+}
+.replayBtn:hover { background: var(--c-yellow); color: var(--c-ink); }
 
 /* ---------- 抽卡：单屏布局 + 分级动画 ---------- */
 .gachaWrap { display: flex; height: 100%; gap: calc(4 * var(--u)); }

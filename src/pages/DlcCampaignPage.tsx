@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocale, useT } from '../i18n';
 import { BATTLE_MAP, STAGES } from '../dlc/content';
 import { pick } from '../dlc/format';
 import { useDlcStore } from '../dlc/store';
+import { ChapterOpening } from '../openings/ChapterOpening';
+import { CANVAS_OPENINGS } from '../openings/registry';
 import s from './Dlc.module.css';
 
 function asset(path: string): string { return `${import.meta.env.BASE_URL}${path}`; }
@@ -13,6 +16,7 @@ export function DlcCampaignPage() {
   const navigate = useNavigate();
   const save = useDlcStore((st) => st.save);
   const current = STAGES[Math.min(7, Math.max(0, save.stage - 1))];
+  const [replay, setReplay] = useState(false);
 
   return (
     <div className={`${s.root} ${s.campaign}`}>
@@ -26,6 +30,7 @@ export function DlcCampaignPage() {
         </div>
         <div className={s.shopActions}>
           <span className={s.sideMeta}>{tr('dlc.currency')} {save.currency}</span>
+          <button type="button" className={s.replayBtn} onClick={() => setReplay(true)}>{tr('dlc.replayOpening')}</button>
           <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc/endless')}>{tr('dlc.endless')}</button>
           <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc/story')}>{tr('dlc.storyTitle')}</button>
           <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc/shop')}>{tr('dlc.shop')}</button>
@@ -66,6 +71,9 @@ export function DlcCampaignPage() {
           <button type="button" className={s.pixelBtn} data-variant="amber" onClick={() => navigate(`/dlc/story/interlude-${save.stage}`)}>{tr('dlc.fight')}</button>
         </div>
       </div>
+      {replay && (
+        <ChapterOpening opening={CANVAS_OPENINGS.dlc} onDone={() => setReplay(false)} />
+      )}
     </div>
   );
 }

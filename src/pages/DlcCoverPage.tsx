@@ -17,19 +17,23 @@ export function DlcCoverPage() {
   const navigate = useNavigate();
   const save = useDlcStore((st) => st.save);
   const markIntroSeen = useDlcStore((st) => st.markIntroSeen);
-  const [showOpening, setShowOpening] = useState(false);
+  const [opening, setOpening] = useState<'enter' | 'replay' | null>(null);
 
   const enter = () => {
-    if (!save.seenIntro && !prefersReducedMotion()) setShowOpening(true);
+    if (!save.seenIntro && !prefersReducedMotion()) setOpening('enter');
     else navigate('/dlc');
   };
+  const replay = () => { if (!prefersReducedMotion()) setOpening('replay'); };
 
-  if (showOpening) {
+  if (opening) {
     return (
       <div className={s.root}>
         <ChapterOpening
           opening={CANVAS_OPENINGS.dlc}
-          onDone={() => { markIntroSeen(); navigate('/dlc'); }}
+          onDone={() => {
+            if (opening === 'enter') { markIntroSeen(); navigate('/dlc'); }
+            else setOpening(null);
+          }}
         />
       </div>
     );
@@ -51,6 +55,7 @@ export function DlcCoverPage() {
             <span aria-hidden="true">→</span>
           </button>
           <button type="button" className={s.pixelBtn} data-variant="dark" onClick={() => navigate('/dlc/endless')}>{tr('dlc.endless')}</button>
+          <button type="button" className={s.replayBtn} onClick={replay}>{tr('dlc.replayOpening')}</button>
         </div>
         <button type="button" className={`${s.pixelBtn} ${s.coverBack}`} data-variant="dark" onClick={() => navigate('/')}>×</button>
       </div>

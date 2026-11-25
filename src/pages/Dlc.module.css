@@ -856,7 +856,7 @@
   border-bottom: var(--bw-2) solid var(--c-line);
 }
 .storyTitle { font-size: var(--fs-10); color: var(--c-paper3); }
-.storyBust { position: absolute; left: calc(10 * var(--u)); bottom: calc(-40 * var(--u)); z-index: 2; }
+.storyBust { position: absolute; left: calc(10 * var(--u)); bottom: calc(-26 * var(--u)); z-index: 2; }
 .storyDialog {
   position: absolute;
   left: calc(6 * var(--u));

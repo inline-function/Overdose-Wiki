@@ -881,4 +881,7 @@ export const en: Record<MessageKey, string> = {
   'dlc.endlessBest': 'Best {n} waves',
   'dlc.endlessExit': 'Exit',
   'dlc.replayOpening': 'Replay opening',
+  'dlc.deckAdd': 'Add',
+  'dlc.deckRemove': 'Remove',
+  'dlc.deckFull': 'Deck full — remove one first',
 };

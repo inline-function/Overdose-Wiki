@@ -1,5 +1,6 @@
 // 共享卡牌详情浮层 + 长按 hook。战斗之外的场景（商店/收藏/抽卡）复用。
 import { useRef, useState, type PointerEvent as RPointerEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { useLocale } from '../i18n';
 import { RARITY_META, STATUS_INFO } from '../dlc/content';
 import { categoryKey, categoryIcon } from '../dlc/icons';
@@ -29,8 +30,8 @@ export function CardDetailOverlay({ card, onClose }: { card: Card; onClose: () =
   const [statusPop, setStatusPop] = useState<StatusId | null>(null);
   const Icon = categoryIcon(categoryKey(card.tags) as never);
   const statuses = effectStatuses(card);
-  return (
-    <div className={s.overlay} onClick={onClose}>
+  return createPortal(
+    <div className={s.overlayFixed} onClick={onClose}>
       <div className={s.detailCard} style={{ ['--rarity' as string]: RARITY_META[card.rarity].color }} onClick={(e) => e.stopPropagation()}>
         <div className={s.detailHead}>
           <Icon className={s.detailIcon} />
@@ -63,6 +64,7 @@ export function CardDetailOverlay({ card, onClose }: { card: Card; onClose: () =
           </div>
         </div>
       )}
-    </div>
+    </div>,
+    document.body,
   );
 }

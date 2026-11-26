@@ -628,6 +628,15 @@
 .statusEmpty { padding: calc(8 * var(--u)); font-size: var(--fs-8); color: var(--c-muted); }
 
 /* ---------- 浮层 ---------- */
+.overlayFixed {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(7, 7, 12, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .overlay {
   position: absolute;
   inset: 0;
@@ -827,7 +836,8 @@
 .shopActions { display: flex; gap: calc(2 * var(--u)); }
 .miniBtn {
   font-size: var(--fs-8);
-  padding: calc(1 * var(--u)) calc(3 * var(--u));
+  white-space: nowrap;
+  padding: calc(1 * var(--u)) calc(2 * var(--u));
   border: calc(1 * var(--u)) solid rgba(232, 224, 204, 0.4);
   color: var(--c-paper);
   cursor: pointer;
@@ -838,7 +848,7 @@
 .deckCount { font-size: var(--fs-10); color: var(--c-paper); }
 .deckWarn { font-size: var(--fs-8); color: var(--c-red); }
 .collectionGrid { display: flex; flex-wrap: wrap; gap: calc(5 * var(--u)); justify-content: center; }
-.collectionItem { display: flex; flex-direction: column; align-items: center; gap: calc(2 * var(--u)); width: calc(60 * var(--u)); }
+.collectionItem { display: flex; flex-direction: column; align-items: center; gap: calc(2 * var(--u)); width: calc(72 * var(--u)); }
 .collectionCount { font-size: var(--fs-8); color: var(--c-sky); }
 .inDeck { color: var(--c-yellow); }
 

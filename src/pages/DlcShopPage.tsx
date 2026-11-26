@@ -185,6 +185,7 @@ export function DlcShopPage() {
             <div className={s.deckBar}>
               <span className={s.deckCount}>{tr('dlc.deck')} {save.deck.length}/{DECK_SIZE}</span>
               {!deckValid(save.deck) && <span className={s.deckWarn}>{tr('dlc.deckInvalid')}</span>}
+              {save.deck.length >= DECK_SIZE && <span className={s.deckWarn}>{tr('dlc.deckFull')}</span>}
             </div>
             <div className={s.collectionGrid}>
               {collectionIds.map((id) => {
@@ -198,8 +199,8 @@ export function DlcShopPage() {
                       {tr('dlc.collection')} {owned} · <span className={s.inDeck}>{tr('dlc.deck')} {used}</span>
                     </span>
                     <div className={s.shopActions}>
-                      <button type="button" className={s.miniBtn} disabled={save.deck.length >= DECK_SIZE || used >= MAX_COPIES || used >= owned} onClick={() => addToDeck(id)}>+</button>
-                      <button type="button" className={s.miniBtn} disabled={used <= 0} onClick={() => removeFromDeck(id)}>−</button>
+                      <button type="button" className={s.miniBtn} title={tr('dlc.deckAdd')} disabled={save.deck.length >= DECK_SIZE || used >= MAX_COPIES || used >= owned} onClick={() => addToDeck(id)}>{tr('dlc.deckAdd')}</button>
+                      <button type="button" className={s.miniBtn} title={tr('dlc.deckRemove')} disabled={used <= 0} onClick={() => removeFromDeck(id)}>{tr('dlc.deckRemove')}</button>
                       <button type="button" className={s.miniBtn} disabled={owned <= used} onClick={() => decomposeCard(id)}>{tr('dlc.decompose')}</button>
                     </div>
                   </div>

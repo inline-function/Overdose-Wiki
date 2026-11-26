@@ -874,6 +874,9 @@ export const zh = {
   'dlc.endlessBest': '最高 {n} 波',
   'dlc.endlessExit': '退出',
   'dlc.replayOpening': '重播动画',
+  'dlc.deckAdd': '加入',
+  'dlc.deckRemove': '移出',
+  'dlc.deckFull': '牌组已满，先移出一张再加入',
 } as const;
 
 export type MessageKey = keyof typeof zh;

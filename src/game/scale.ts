@@ -11,9 +11,30 @@ export function computeScale(
 ): number {
   if (locked !== 'auto') return locked;
   const fit = Math.min(viewportW / LOGICAL_W, viewportH / LOGICAL_H);
-  // 视口放不下 1× 时用分数缩放整窗适配，而不是裁切（修 430 竖屏右边被裁的根因）。
-  if (fit < 1) return Math.max(0.5, fit);
-  return Math.max(1, Math.min(4, Math.floor(fit)));
+  // 分数自适应填充屏幕（不取整留黑边），横屏/全屏时尽量铺满。
+  return Math.min(8, Math.max(0.5, fit));
+}
+
+/** 全屏 + 横屏锁定（移动端）。返回 fullscreen 状态与切换函数。 */
+export function useFullscreen(): { fullscreen: boolean; toggle: () => void } {
+  const [fullscreen, setFullscreen] = useState(false);
+  useEffect(() => {
+    const onChange = () => setFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  }, []);
+  const toggle = () => {
+    if (document.fullscreenElement) {
+      void document.exitFullscreen().catch(() => {});
+      try { (screen.orientation as unknown as { unlock?: () => void })?.unlock?.(); } catch { /* noop */ }
+    } else {
+      void document.documentElement.requestFullscreen?.().then(() => {
+        const orient = screen.orientation as unknown as { lock?: (o: string) => Promise<void> };
+        orient?.lock?.('landscape').catch(() => {});
+      }).catch(() => {});
+    }
+  };
+  return { fullscreen, toggle };
 }
 
 export function useGameScale(locked: ScaleSetting): number {

@@ -1,6 +1,6 @@
 // DLC 战斗引擎：纯逻辑 + 事件流。规则见 DLC_DESIGN_NOTES.md（已确认版）。
-import type { BattleDef, Card, LocaleText, PlayerStats, StatusId, Track } from './types';
-import { CARD_MAP } from './content';
+import type { Abilities, BattleDef, Builds, Card, LocaleText, PlayerStats, StatusId, Track } from './types';
+import { CARD_MAP, DEFAULT_BUILDS } from './content';
 
 export type Side = 'player' | 'enemy';
 
@@ -53,6 +53,11 @@ export type BattleState = {
   stats: PlayerStats;
   /** 无尽模式：覆盖敌方每回合出牌数。 */
   enemyPlays?: number;
+  /** 流派增强等级。 */
+  builds: Builds;
+  /** 已激活局内功能。 */
+  abilities: Abilities;
+  deathSaveUsed: boolean;
 };
 
 export const PLAYER_MAX_PHYS = 60;
@@ -105,6 +110,8 @@ export function createBattle(
   seed: number,
   stats?: Partial<PlayerStats>,
   enemyPlays?: number,
+  builds?: Partial<Builds>,
+  abilities?: Partial<Abilities>,
 ): BattleState {
   const rng = mulberry32(seed);
   const s: PlayerStats = {
@@ -127,6 +134,9 @@ export function createBattle(
     serial: 0,
     stats: s,
     enemyPlays,
+    builds: { ...DEFAULT_BUILDS, ...builds },
+    abilities: { tutor: false, deathSave: false, apHealMental: false, apHealPhys: false, exhaust: false, extraDraw: false, ...abilities },
+    deathSaveUsed: false,
   };
   for (let i = 0; i < OPENING_HAND; i += 1) drawCard(state, 'player');
   for (let i = 0; i < s.drawPerTurn; i += 1) drawCard(state, 'player'); // 第一回合免费抽
@@ -171,8 +181,17 @@ function checkOutcome(state: BattleState, events: BattleEvent[]): void {
     state.outcome = 'win';
     events.push(emit(state, { kind: 'win' }));
   } else if (state.player.phys <= 0 || state.player.mental <= 0) {
-    state.outcome = 'lose';
-    events.push(emit(state, { kind: 'lose' }));
+    // 濒死代偿：心理归零时扣 30% 生理、恢复 80% 心理（每场一次）
+    if (state.player.mental <= 0 && state.abilities.deathSave && !state.deathSaveUsed) {
+      state.deathSaveUsed = true;
+      state.player.phys = Math.max(0, state.player.phys - Math.round(state.player.maxPhys * 0.3));
+      state.player.mental = Math.round(state.player.maxMental * 0.8);
+      events.push(emit(state, { kind: 'log', text: { zh: '濒死代偿：燃烧生理，换回心智。', en: 'Death save: burn physical to reclaim mind.' } }));
+    }
+    if (state.player.phys <= 0 || state.player.mental <= 0) {
+      state.outcome = 'lose';
+      events.push(emit(state, { kind: 'lose' }));
+    }
   }
 }
 
@@ -191,6 +210,7 @@ function dealDamage(state: BattleState, side: Side, track: Track, amount: number
   }
   const mod = 1 - 0.2 * c.statuses.dissociation + 0.2 * c.statuses.counter;
   dmg = Math.round(dmg * mod);
+  if (side === 'player') dmg = Math.round(dmg * (1 - 0.05 * (state.builds.dissociation ?? 0)));
   if (dmg <= 0) return;
   c[track] = Math.max(0, c[track] - dmg);
   events.push(emit(state, { kind: 'damage', side, track, amount: dmg, heavy: dmg >= 6 }));
@@ -221,7 +241,7 @@ function applyStatus(state: BattleState, side: Side, status: StatusId, amount: n
     c.statuses[status] = Math.min(3, c.statuses[status]);
   }
   if (status === 'painkiller') c.statuses.painkiller = Math.min(1, c.statuses.painkiller);
-  if (status === 'motivation') c.statuses.motivation = Math.min(6, c.statuses.motivation);
+  if (status === 'motivation') c.statuses.motivation = Math.min(6, c.statuses.motivation + (side === 'player' ? (state.builds.motivation ?? 0) : 0));
   if (status === 'analgesia') {
     while (c.statuses.analgesia >= 3) {
       c.statuses.analgesia -= 3;
@@ -277,9 +297,14 @@ function applyEffects(state: BattleState, user: Side, card: Card, target: Side, 
       case 'heal':
         heal(state, target, effect.track, effect.amount, events);
         break;
-      case 'status':
-        applyStatus(state, target, effect.status, effect.amount, effect.percent, events);
+      case 'status': {
+        let amt = effect.amount;
+        if (user === 'player' && (effect.status === 'serotonin' || effect.status === 'delirium' || effect.status === 'respiratory')) {
+          amt = Math.round(amt * (1 + 0.2 * (state.builds[effect.status] ?? 0)));
+        }
+        applyStatus(state, target, effect.status, amt, effect.percent, events);
         break;
+      }
       case 'ap':
         if (user === 'player') {
           state.player.ap = Math.max(0, Math.min(state.stats.apCap, state.player.ap + effect.amount));
@@ -387,7 +412,7 @@ function startTurn(state: BattleState, side: Side, events: BattleEvent[]): void 
     }
   }
   decay(state, side); // 上一回合的状态在此减半
-  const draws = side === 'player' ? state.stats.drawPerTurn : 1;
+  const draws = side === 'player' ? state.stats.drawPerTurn + (state.abilities.extraDraw ? 1 : 0) : 1;
   for (let i = 0; i < draws; i += 1) {
     const drawn = drawCard(state, side, events);
     if (drawn) events.push(drawn);
@@ -488,3 +513,44 @@ export function endPlayerTurn(state: BattleState): BattleEvent[] {
   startTurn(state, 'player', events);
   return events;
 }
+
+/** 指定抽牌：消耗 2 AP，从牌库选一张加入手牌。 */
+export function tutorDraw(state: BattleState, cardId: string): BattleEvent[] {
+  const events: BattleEvent[] = [];
+  if (state.outcome !== 'ongoing' || state.active !== 'player' || !state.abilities.tutor) return events;
+  if (state.player.ap < 2 || state.player.hand.length >= HAND_CAP) return events;
+  const i = state.player.deck.indexOf(cardId);
+  if (i < 0) return events;
+  state.player.ap -= 2;
+  state.player.deck.splice(i, 1);
+  state.player.hand.push(cardId);
+  events.push(emit(state, { kind: 'ap', side: 'player', amount: -2 }));
+  events.push(emit(state, { kind: 'draw', side: 'player', cardId }));
+  return events;
+}
+
+/** 行动换血：消耗 1 AP 恢复 8 点指定健康。 */
+export function spendHeal(state: BattleState, track: Track): BattleEvent[] {
+  const events: BattleEvent[] = [];
+  const unlocked = track === 'mental' ? state.abilities.apHealMental : state.abilities.apHealPhys;
+  if (state.outcome !== 'ongoing' || state.active !== 'player' || !unlocked) return events;
+  if (state.player.ap < 1) return events;
+  state.player.ap -= 1;
+  events.push(emit(state, { kind: 'ap', side: 'player', amount: -1 }));
+  heal(state, 'player', track, 8, events);
+  return events;
+}
+
+/** 销毁换行动：销毁一张手牌（移出战斗）+2 AP。 */
+export function exhaustCard(state: BattleState, handIndex: number): BattleEvent[] {
+  const events: BattleEvent[] = [];
+  if (state.outcome !== 'ongoing' || state.active !== 'player' || !state.abilities.exhaust) return events;
+  const cardId = state.player.hand[handIndex];
+  if (!cardId) return events;
+  state.player.hand.splice(handIndex, 1);
+  state.player.ap = Math.min(state.stats.apCap, state.player.ap + 2);
+  events.push(emit(state, { kind: 'ap', side: 'player', amount: 2 }));
+  events.push(emit(state, { kind: 'log', text: { zh: '销毁卡牌，换取行动。', en: 'Exhaust a card for AP.' } }));
+  return events;
+}
+

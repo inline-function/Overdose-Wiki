@@ -1,8 +1,8 @@
 // DLC 存档的响应式封装（zustand）。
 import { create } from 'zustand';
-import { CARD_MAP, RARITY_META, STARTER_DECK, UPGRADE_DEFS, DEFAULT_UPGRADES, upgradeCost } from './content';
+import { CARD_MAP, STARTER_DECK, UPGRADE_DEFS, DEFAULT_UPGRADES, DEFAULT_BUILDS, DEFAULT_ABILITIES, upgradeCost, buildCost, BUILD_DEFS, ABILITY_DEFS, shopPrice } from './content';
 import { GACHA_POOLS, GACHA_POOL_MAP, rollOnce, type GachaResult } from './gacha';
-import { DEFAULT_PITY, type UpgradeTrack } from './types';
+import { DEFAULT_PITY, type AbilityId, type BuildTrack, type UpgradeTrack } from './types';
 import { loadDlcSave, persistDlcSave } from './save';
 import type { DlcSave } from './types';
 
@@ -23,6 +23,8 @@ type DlcStore = {
   chooseReward: (cardId: string) => void;
   buyCard: (cardId: string) => boolean;
   buyUpgrade: (track: UpgradeTrack) => boolean;
+  buyBuild: (track: BuildTrack) => boolean;
+  activateAbility: (id: AbilityId) => boolean;
   drawGacha: (poolId: string, count: number) => GachaResult[] | null;
   decomposeCard: (cardId: string) => boolean;
   setDeck: (deck: string[]) => void;
@@ -68,7 +70,7 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
     const save = get().save;
     const card = CARD_MAP[cardId];
     if (!card) return false;
-    const cost = RARITY_META[card.rarity].cost;
+    const cost = shopPrice(card);
     if (save.currency < cost) return false;
     commit(set, get, (s) => ({
       ...s,
@@ -90,6 +92,26 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
       currency: s.currency - cost,
       upgrades: { ...s.upgrades, [track]: level + 1 },
     }));
+    return true;
+  },
+
+  buyBuild: (track) => {
+    const save = get().save;
+    const def = BUILD_DEFS[track];
+    const level = save.builds?.[track] ?? 0;
+    if (!def || level >= def.maxLevel) return false;
+    const cost = buildCost(track, level);
+    if (save.currency < cost) return false;
+    commit(set, get, (s) => ({ ...s, currency: s.currency - cost, builds: { ...s.builds, [track]: level + 1 } }));
+    return true;
+  },
+
+  activateAbility: (id) => {
+    const save = get().save;
+    const def = ABILITY_DEFS[id];
+    if (!def || save.abilities?.[id]) return false;
+    if (save.currency < def.cost) return false;
+    commit(set, get, (s) => ({ ...s, currency: s.currency - def.cost, abilities: { ...s.abilities, [id]: true } }));
     return true;
   },
 
@@ -130,6 +152,8 @@ export const useDlcStore = create<DlcStore>()((set, get) => ({
 
   resetDlc: () => {
     const fresh = structuredClone({
+      abilities: { ...DEFAULT_ABILITIES } as import('./types').Abilities,
+      builds: { ...DEFAULT_BUILDS },
       endlessBest: 0,
       gacha: { pity2: 0, pity1: 0, pityN: 0, guaranteed: false },
       upgrades: { ...DEFAULT_UPGRADES },

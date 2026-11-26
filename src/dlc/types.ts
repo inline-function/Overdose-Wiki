@@ -85,6 +85,12 @@ export type GachaPity = {
 };
 export const DEFAULT_PITY: GachaPity = { pity2: 0, pity1: 0, pityN: 0, guaranteed: false };
 
+export type BuildTrack = 'serotonin' | 'delirium' | 'respiratory' | 'dissociation' | 'motivation';
+export type Builds = Record<BuildTrack, number>;
+
+export type AbilityId = 'tutor' | 'deathSave' | 'apHealMental' | 'apHealPhys' | 'exhaust' | 'extraDraw';
+export type Abilities = Record<AbilityId, boolean>;
+
 export type UpgradeTrack = 'phys' | 'mental' | 'ap' | 'apCap' | 'draw';
 export type Upgrades = Record<UpgradeTrack, number>;
 
@@ -98,6 +104,10 @@ export type PlayerStats = {
 };
 
 export type DlcSave = {
+  /** 已激活的局内功能 */
+  abilities: Abilities;
+  /** 流派增强等级 */
+  builds: Builds;
   /** 无尽模式最高存活波次 */
   endlessBest: number;
   /** 抽卡保底 */

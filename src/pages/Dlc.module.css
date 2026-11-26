@@ -1171,3 +1171,13 @@
   94% { opacity: 0; }
 }
 
+.skillsBtn { position: absolute; left: calc(40 * var(--u)); bottom: calc(4 * var(--u)); }
+.skillsBtn[data-on="true"] { background: var(--c-yellow); color: var(--c-ink); }
+.exhaustHint { position: absolute; top: calc(40 * var(--u)); left: 50%; transform: translateX(-50%); z-index: 30; background: var(--c-yellow); color: var(--c-ink); font-size: var(--fs-10); padding: calc(2 * var(--u)) calc(5 * var(--u)); }
+.skillList { display: flex; flex-direction: column; gap: calc(3 * var(--u)); overflow-y: auto; max-height: calc(150 * var(--u)); }
+.skillBtn { display: flex; flex-direction: column; align-items: flex-start; gap: calc(1 * var(--u)); border: calc(1 * var(--u)) solid rgba(232,224,204,0.4); background: rgba(11,10,16,0.6); color: var(--c-paper); font-size: var(--fs-10); padding: calc(3 * var(--u)); cursor: pointer; text-align: left; }
+.skillBtn span { font-size: var(--fs-8); color: var(--c-muted); }
+.skillBtn:disabled { opacity: 0.4; }
+.skillPassive { display: flex; flex-direction: column; gap: calc(1 * var(--u)); color: var(--c-sky); font-size: var(--fs-10); padding: calc(3 * var(--u)); border: calc(1 * var(--u)) dashed rgba(232,224,204,0.3); }
+.skillPassive span { font-size: var(--fs-8); color: var(--c-muted); }
+.tutorGrid { display: flex; flex-wrap: wrap; gap: calc(3 * var(--u)); overflow-y: auto; max-height: calc(150 * var(--u)); }

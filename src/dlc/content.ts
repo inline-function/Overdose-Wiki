@@ -128,6 +128,18 @@ export const RARITY_META: Record<Rarity, { label: LocaleText; cost: number; colo
   narcotic: { label: { zh: '麻', en: 'Narcotic' }, cost: 5, color: '#a62b20' },
 };
 
+/** 商店售价：精二 200，精一/麻 300，其余按稀有度。 */
+export function shopPrice(card: Card): number {
+  if (card.rarity === 'class2') return 200;
+  if (card.rarity === 'class1' || card.rarity === 'narcotic') return 300;
+  return RARITY_META[card.rarity].cost;
+}
+
+/** 麻精专柜：所有精二/精一/麻。 */
+export const CONTROLLED_SHOP: string[] = CARDS
+  .filter((c) => c.rarity === 'class2' || c.rarity === 'class1' || c.rarity === 'narcotic')
+  .map((c) => c.id);
+
 export const STATUS_INFO: Record<StatusId, { label: LocaleText; short: string; description: LocaleText }> = {
   motivation: {
     label: { zh: '动机增强', en: 'Motivation Boost' }, short: 'MOT',
@@ -304,6 +316,33 @@ export const BATTLE_MAP: Record<string, BattleDef> = Object.fromEntries(
 
 export const DEFAULT_UPGRADES = { phys: 0, mental: 0, ap: 0, apCap: 0, draw: 0 };
 
+export const DEFAULT_BUILDS = { serotonin: 0, delirium: 0, respiratory: 0, dissociation: 0, motivation: 0 };
+
+export const DEFAULT_ABILITIES: Record<string, boolean> = { tutor: false, deathSave: false, apHealMental: false, apHealPhys: false, exhaust: false, extraDraw: false };
+
+/** 局外重金激活的局内功能。 */
+export const ABILITY_DEFS: Record<string, { cost: number }> = {
+  tutor: { cost: 400 },
+  deathSave: { cost: 600 },
+  apHealMental: { cost: 300 },
+  apHealPhys: { cost: 300 },
+  exhaust: { cost: 350 },
+  extraDraw: { cost: 450 },
+};
+
+/** 流派增强：每级效果与费用。 */
+export const BUILD_DEFS: Record<string, { maxLevel: number; baseCost: number; costStep: number }> = {
+  serotonin: { maxLevel: 5, baseCost: 50, costStep: 25 },
+  delirium: { maxLevel: 5, baseCost: 50, costStep: 25 },
+  respiratory: { maxLevel: 5, baseCost: 50, costStep: 25 },
+  dissociation: { maxLevel: 5, baseCost: 50, costStep: 25 },
+  motivation: { maxLevel: 3, baseCost: 60, costStep: 30 },
+};
+export function buildCost(track: string, level: number): number {
+  const d = BUILD_DEFS[track];
+  return d.baseCost + d.costStep * level;
+}
+
 /** 强化定义：每级增量、上限、费用（baseCost + costStep*当前级）。 */
 export const UPGRADE_DEFS: Record<
   string,
@@ -334,6 +373,8 @@ export function computeStats(upgrades: Record<string, number>): import('./types'
 }
 
 export const DEFAULT_DLC_SAVE: DlcSave = {
+  abilities: { ...DEFAULT_ABILITIES } as import('./types').Abilities,
+  builds: { ...DEFAULT_BUILDS },
   endlessBest: 0,
   gacha: { pity2: 0, pity1: 0, pityN: 0, guaranteed: false },
   upgrades: { ...DEFAULT_UPGRADES },

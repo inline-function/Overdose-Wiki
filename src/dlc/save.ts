@@ -1,5 +1,5 @@
 // DLC 独立存档：localStorage odw.dlc.v1，与主存档管线隔离。
-import { DEFAULT_DLC_SAVE, DEFAULT_UPGRADES } from './content';
+import { DEFAULT_DLC_SAVE, DEFAULT_UPGRADES, DEFAULT_BUILDS, DEFAULT_ABILITIES } from './content';
 import type { DlcSave, Upgrades } from './types';
 
 export const DLC_STORAGE_KEY = 'odw.dlc.v1';
@@ -25,7 +25,17 @@ export function migrateDlc(raw: unknown): DlcSave | null {
   const rawG = isObject(raw.gacha) ? (raw.gacha as Record<string, unknown>) : {};
   const num = (v: unknown) => (typeof v === 'number' && v >= 0 ? Math.floor(v) : 0);
   const gacha = { pity2: num(rawG.pity2), pity1: num(rawG.pity1), pityN: num(rawG.pityN), guaranteed: rawG.guaranteed === true };
+  const rawB = isObject(raw.builds) ? (raw.builds as Record<string, unknown>) : {};
+  const builds = Object.fromEntries(
+    Object.keys(DEFAULT_BUILDS).map((k) => [k, typeof rawB[k] === 'number' && (rawB[k] as number) >= 0 ? Math.floor(rawB[k] as number) : 0]),
+  ) as import('./types').Builds;
+  const rawA = isObject(raw.abilities) ? (raw.abilities as Record<string, unknown>) : {};
+  const abilities = Object.fromEntries(
+    Object.keys(DEFAULT_ABILITIES).map((k) => [k, rawA[k] === true]),
+  ) as import('./types').Abilities;
   return {
+    abilities,
+    builds,
     endlessBest: typeof raw.endlessBest === 'number' && raw.endlessBest >= 0 ? Math.floor(raw.endlessBest) : 0,
     gacha,
     upgrades,

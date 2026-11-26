@@ -7,7 +7,7 @@ import { useCue } from '../audio/useCue';
 import { BATTLES, BATTLE_MAP, CARD_MAP, RARITY_META, STAGES, STATUS_INFO, computeStats } from '../dlc/content';
 import { categoryKey, categoryIcon, StatusIcon } from '../dlc/icons';
 import { cardEffectLines, categoryOf, effectStatuses, pick, statusLabel } from '../dlc/format';
-import { createBattle, endPlayerTurn, playerDraw, playerPlay, type BattleEvent, type BattleState, type Side } from '../dlc/engine';
+import { createBattle, endPlayerTurn, exhaustCard, playerDraw, playerPlay, spendHeal, tutorDraw, type BattleEvent, type BattleState, type Side } from '../dlc/engine';
 import { useDlcStore } from '../dlc/store';
 import type { Card, StatusId } from '../dlc/types';
 import s from './Dlc.module.css';
@@ -56,7 +56,7 @@ export function DlcBattlePage({ endless = false }: { endless?: boolean }) {
   const stage = STAGES[stageNo - 1];
   const [wave, setWave] = useState(1);
   const baseDef = endless ? BATTLES[(wave - 1) % BATTLES.length] : BATTLE_MAP[stage.battleId];
-  const scale = endless ? 1 + 0.2 * (wave - 1) : 1;
+  const scale = endless ? 1 + 0.25 * (wave - 1) : 1;
   const scaledMental = Math.round(baseDef.maxMental * scale);
   const def = endless
     ? { ...baseDef, maxMental: scaledMental, maxPhys: scaledMental * 2 }
@@ -70,7 +70,9 @@ export function DlcBattlePage({ endless = false }: { endless?: boolean }) {
   if (!stateRef.current || keyRef.current !== battleKey) {
     stateRef.current = createBattle(
       def, save.deck, Math.floor(Math.random() * 1e9), computeStats(save.upgrades),
-      endless ? Math.min(2 + Math.floor((wave - 1) / 2), 6) : undefined,
+      endless ? Math.min(wave + 1, 8) : undefined,
+      save.builds,
+      save.abilities,
     );
     if (endless && carryRef.current) {
       stateRef.current.player.phys = carryRef.current.phys;
@@ -95,6 +97,9 @@ export function DlcBattlePage({ endless = false }: { endless?: boolean }) {
   const [log, setLog] = useState('');
   const [busy, setBusy] = useState(false);
   const [showStatus, setShowStatus] = useState(false);
+  const [showSkills, setShowSkills] = useState(false);
+  const [tutorOpen, setTutorOpen] = useState(false);
+  const [exhaustMode, setExhaustMode] = useState(false);
   const [statusTab, setStatusTab] = useState<Side>('player');
   const [detail, setDetail] = useState<Card | null>(null);
   const [detailStatus, setDetailStatus] = useState<StatusId | null>(null);
@@ -289,6 +294,7 @@ export function DlcBattlePage({ endless = false }: { endless?: boolean }) {
     const p = pressRef.current;
     pressRef.current = null;
     if (longPressed.current) { setDrag(null); return; }
+    if (exhaustMode && canAct) { runEvents(exhaustCard(state, index)); setExhaustMode(false); return; }
     if (p?.moved) {
       setDrag(null);
       const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
@@ -300,7 +306,7 @@ export function DlcBattlePage({ endless = false }: { endless?: boolean }) {
   };
 
   const restart = () => {
-    stateRef.current = createBattle(def, useDlcStore.getState().save.deck, Math.floor(Math.random() * 1e9), computeStats(useDlcStore.getState().save.upgrades));
+    stateRef.current = createBattle(def, useDlcStore.getState().save.deck, Math.floor(Math.random() * 1e9), computeStats(useDlcStore.getState().save.upgrades), undefined, useDlcStore.getState().save.builds, useDlcStore.getState().save.abilities);
     recordedRef.current = false;
     setRewardDone(false);
     setSelected(null);
@@ -441,6 +447,11 @@ export function DlcBattlePage({ endless = false }: { endless?: boolean }) {
       <button type="button" className={`${s.pixelBtn} ${s.statusBtn}`} data-variant="dark" onClick={() => setShowStatus(true)}>
         {tr('dlc.status')}<span className={s.badge}>{statusCount('player') + statusCount('enemy')}</span>
       </button>
+      {Object.values(state.abilities).some(Boolean) && (
+        <button type="button" className={`${s.pixelBtn} ${s.skillsBtn}`} data-variant="dark" data-on={exhaustMode} onClick={() => setShowSkills(true)}>
+          {tr('dlc.skills')}
+        </button>
+      )}
       <button type="button" className={`${s.pixelBtn} ${s.endTurn}`} data-variant="amber" data-pulse={ap === 0 && canAct} disabled={!canAct} onClick={onEndTurn}>
         {tr('dlc.endTurn')}
       </button>
@@ -529,6 +540,44 @@ export function DlcBattlePage({ endless = false }: { endless?: boolean }) {
       )}
 
       {/* 结果 */}
+      {exhaustMode && <div className={s.exhaustHint}>{tr('dlc.exhaustHint')}</div>}
+      {showSkills && (
+        <div className={s.overlay} onClick={() => setShowSkills(false)}>
+          <div className={s.statusPanel} onClick={(e) => e.stopPropagation()}>
+            <div className={s.detailCat}>{tr('dlc.skills')}</div>
+            <div className={s.skillList}>
+              {state.abilities.tutor && <button type="button" className={s.skillBtn} disabled={ap < 2} onClick={() => { setShowSkills(false); setTutorOpen(true); }}>{tr('dlc.abTutor')}<span>{tr('dlc.abTutorDesc')}</span></button>}
+              {state.abilities.apHealMental && <button type="button" className={s.skillBtn} disabled={ap < 1} onClick={() => { runEvents(spendHeal(state, 'mental')); setShowSkills(false); }}>{tr('dlc.abHealMental')}<span>{tr('dlc.abHealMentalDesc')}</span></button>}
+              {state.abilities.apHealPhys && <button type="button" className={s.skillBtn} disabled={ap < 1} onClick={() => { runEvents(spendHeal(state, 'phys')); setShowSkills(false); }}>{tr('dlc.abHealPhys')}<span>{tr('dlc.abHealPhysDesc')}</span></button>}
+              {state.abilities.exhaust && <button type="button" className={s.skillBtn} onClick={() => { setShowSkills(false); setExhaustMode(true); }}>{tr('dlc.abExhaust')}<span>{tr('dlc.abExhaustDesc')}</span></button>}
+              {state.abilities.deathSave && <div className={s.skillPassive}>{tr('dlc.abDeathSave')} · {state.deathSaveUsed ? '已用' : '就绪'}<span>{tr('dlc.abDeathSaveDesc')}</span></div>}
+              {state.abilities.extraDraw && <div className={s.skillPassive}>{tr('dlc.abExtraDraw')}<span>{tr('dlc.abExtraDrawDesc')}</span></div>}
+            </div>
+            <button type="button" className={`${s.pixelBtn} ${s.detailClose}`} data-variant="dark" onClick={() => setShowSkills(false)}>×</button>
+          </div>
+        </div>
+      )}
+      {tutorOpen && (
+        <div className={s.overlay} onClick={() => setTutorOpen(false)}>
+          <div className={s.statusPanel} onClick={(e) => e.stopPropagation()}>
+            <div className={s.detailCat}>{tr('dlc.tutorPick')}</div>
+            <div className={s.tutorGrid}>
+              {[...new Set(state.player.deck)].map((id) => {
+                const card = CARD_MAP[id];
+                if (!card) return null;
+                const Icon = categoryIcon(categoryKey(card.tags) as never);
+                return (
+                  <button key={id} type="button" className={s.card} style={{ ['--rarity' as string]: RARITY_META[card.rarity].color }} onClick={() => { runEvents(tutorDraw(state, id)); setTutorOpen(false); }}>
+                    <Icon className={s.cardIcon} />
+                    <span className={s.cardName}>{pick(card.name, locale)}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <button type="button" className={`${s.pixelBtn} ${s.detailClose}`} data-variant="dark" onClick={() => setTutorOpen(false)}>×</button>
+          </div>
+        </div>
+      )}
       {state.outcome !== 'ongoing' && (
         <div className={s.overlay}>
           <div className={s.resultBox}>

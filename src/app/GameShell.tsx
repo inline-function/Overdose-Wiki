@@ -5,7 +5,7 @@ import { AUDIO_MANIFEST } from '../audio/manifest';
 import { audio } from '../audio/AudioManager';
 import { gateAudio } from '../audio/gateAudio';
 import { hasContent } from '../content/registry';
-import { useGameScale } from '../game/scale';
+import { useFullscreen, useGameScale } from '../game/scale';
 import { useGameStore } from '../game/store';
 import { WikiWindow } from '../ui/window/WikiWindow';
 import { QuestGuide } from '../ui/QuestGuide';
@@ -27,6 +27,7 @@ export function GameShell() {
   const consentAccepted = useConsentStore((state) => state.accepted);
   const settings = save.settings;
   const scale = useGameScale(settings.scale);
+  const { fullscreen, toggle } = useFullscreen();
   const consentGate =
     location.pathname === '/consent' &&
     (!consentAccepted || save.consent.version < CONSENT_VERSION) &&
@@ -145,6 +146,9 @@ export function GameShell() {
         ) : null}
         <div className={styles.scanlines} aria-hidden="true" />
       </div>
+      <button type="button" className={styles.fsBtn} data-on={fullscreen} onClick={toggle} aria-label={tr('dlc.fullscreen')}>
+        {fullscreen ? '⤢' : '⛶'}
+      </button>
     </div>
   );
 }

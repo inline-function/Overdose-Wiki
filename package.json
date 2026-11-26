@@ -1,8 +1,9 @@
 {
   "name": "odw-game",
   "private": true,
-  "version": "0.1.0",
+  "version": "2.0.0",
   "type": "module",
+  "main": "electron/main.cjs",
   "scripts": {
     "dev": "vite",
     "build": "node tools/use-sample.mjs && tsc --noEmit && node tools/audio/check-audio.mjs && vite build && node tools/strip-private-assets.mjs",
@@ -26,7 +27,10 @@
     "audio:check": "node tools/audio/check-audio.mjs",
     "fonts:build": "python tools/subset-fonts.py && python tools/build-font-patch.py",
     "fonts:check": "python tools/check-font-coverage.py",
-    "deploy:check": "node tools/check-private-build.mjs"
+    "deploy:check": "node tools/check-private-build.mjs",
+    "cap:sync": "cap sync android",
+    "android:apk": "cd android && ./gradlew assembleRelease",
+    "electron:build": "electron-builder --win --config electron-builder.yml"
   },
   "dependencies": {
     "react": "^19.3.1",
@@ -36,6 +40,9 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
+    "@capacitor/android": "^6.2.4",
+    "@capacitor/cli": "^6.2.4",
+    "@capacitor/core": "^6.2.4",
     "@playwright/test": "^1.65.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
@@ -43,6 +50,8 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
     "jsdom": "^31.0.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.8",

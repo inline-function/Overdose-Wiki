@@ -1,0 +1,67 @@
+name: Release APK + EXE
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm run build:private
+      - uses: actions/upload-artifact@v4
+        with: { name: web-dist, path: dist, retention-days: 1 }
+
+  apk:
+    needs: web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with: { name: web-dist, path: dist }
+      - run: npx cap sync android
+      - run: cd android && ./gradlew assembleRelease --no-daemon
+      - uses: actions/upload-artifact@v4
+        with: { name: odw-apk, path: android/app/build/outputs/apk/release/*.apk }
+
+  exe:
+    needs: web
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with: { name: web-dist, path: dist }
+      - run: npx electron-builder --win --config electron-builder.yml
+      - uses: actions/upload-artifact@v4
+        with: { name: odw-exe, path: release-electron/*.exe }
+
+  release:
+    needs: [apk, exe]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: odw-apk, path: artifacts/apk }
+      - uses: actions/download-artifact@v4
+        with: { name: odw-exe, path: artifacts/exe }
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifacts/apk/*.apk
+            artifacts/exe/*.exe

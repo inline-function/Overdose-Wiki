@@ -1,0 +1,15 @@
+appId: com.odw.overdosewiki
+productName: Overdose Wiki
+directories:
+  output: release-electron
+files:
+  - dist/**/*
+  - electron/main.cjs
+  - package.json
+win:
+  target:
+    - target: portable
+      arch: [x64]
+  artifactName: ${productName}-${version}-win.${ext}
+portable:
+  artifactName: ${productName}-${version}-win.${ext}
